@@ -2,14 +2,17 @@ package model;
 
 import java.awt.image.BufferedImage;
 
-public class Material extends ShipPart {
-    private BufferedImage floor, wall;
-    private boolean isWall;
+public abstract class Material extends ShipPart {
+    private String imagePath;
     
-    public boolean isWall() {
-        return isWall;
+    public void setImage(String imagePath)
+    {
+        this.imagePath = imagePath;
     }
     
-    
-    
+    public String getImage()
+    {
+        return this.imagePath;
+    }
+       
 }

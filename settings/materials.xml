@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<materials>
+    <material type="wall" width="2" height="2">
+        <name>Weapon 1</name>
+        <image>wall.jpg</image>
+        <value>10</value>
+        <durability>30</durability>
+        <weight>20</weight>
+    </material>
+    <material type="floor" width="2" height="2">
+        <name>Floor 1</name>
+        <image>floor.jpg</image>
+        <value>10</value>
+        <durability>30</durability>
+        <weight>20</weight>
+    </material>    
+</materials>
