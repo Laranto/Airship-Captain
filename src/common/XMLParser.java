@@ -11,10 +11,9 @@ import org.w3c.dom.Document;
  */
 public class XMLParser {
 
-    public static Document parse(String filepath) {
+    public static Document parse(File stocks) {
         Document doc = null;
         try {
-            File stocks = new File(filepath);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             doc = dBuilder.parse(stocks);

@@ -7,13 +7,19 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class ImageLoader {
-    public static BufferedImage loadImage(File imgFile) {
+    /**
+     * Contained unit to load a Bufferedimage from a file 
+     * @param imgFile
+     * @return
+     * @throws IOException 
+     */
+    public static BufferedImage loadImage(File imgFile) throws IOException {
         BufferedImage img = null;
         try {
             img = ImageIO.read(imgFile);
         } catch (IOException e) {
-            System.err.println("Tried reading file " + imgFile.getAbsolutePath());
-            e.printStackTrace();
+            throw new IOException("Tried reading file " + imgFile.getAbsolutePath(),e);
+            
         }
         return img;
     }

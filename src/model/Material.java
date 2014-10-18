@@ -1,18 +1,22 @@
 package model;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import common.ImageLoader;
 
 public abstract class Material extends ShipPart {
-    private String imagePath;
+    private BufferedImage image;
     
-    public void setImage(String imagePath)
+    public void setImage(String imagePath) throws IOException
     {
-        this.imagePath = imagePath;
+        image = ImageLoader.loadImage(new File(imagePath));
     }
     
-    public String getImage()
+    public BufferedImage getImage()
     {
-        return this.imagePath;
+        return this.image;
     }
        
 }
