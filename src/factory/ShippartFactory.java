@@ -6,11 +6,18 @@
 
 package factory;
 
+import model.ShipPart;
+
 /**
  *
  * @author Hesyar Uzuner <info@hesyar.com>
  */
-public abstract class ShippartFactory {
-    public abstract void instanzise();
+public abstract class ShippartFactory<E extends ShipPart> {
+    
+    /**
+     * Creates a duplicate of the prototype. Must be something that the Factory creates.
+     * @param prototype
+     */
+    public abstract E instanzise(E prototype);
     public abstract void parse();
 }

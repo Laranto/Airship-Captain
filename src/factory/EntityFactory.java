@@ -1,21 +1,30 @@
 
 package factory;
 
+import model.ShipPart;
+
 /**
  *
- * @author Hesyar Uzuner <info@hesyar.com>
  */
 public class EntityFactory extends ShippartFactory{
 
-    @Override
-    public void instanzise() {
+    private EntityFactory(){
+        
+    };
     
-    
-    }
 
     @Override
     public void parse() {
         
     }
+
+
+    @Override
+    public ShipPart instanzise(ShipPart prototype) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+
     
 }

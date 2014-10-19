@@ -7,7 +7,11 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.management.RuntimeErrorException;
+
 import model.Material;
+import model.ShipPart;
 import model.material.Floor;
 import model.material.Wall;
 import org.w3c.dom.Document;
@@ -17,18 +21,17 @@ import org.w3c.dom.NodeList;
 /**
  *
  * @author Hesyar Uzuner <info@hesyar.com>
+ * @author Laranto
  */
 public class MaterialFactory extends ShippartFactory {
-
+    private static MaterialFactory instance;
     private ArrayList<Material> materials;
-
-    public MaterialFactory() {
+    
+    
+    private MaterialFactory() {
         materials = new ArrayList<Material>();
     }
 
-    @Override
-    public void instanzise() {
-    }
 
     @Override
     public void parse() {
@@ -141,6 +144,34 @@ public class MaterialFactory extends ShippartFactory {
             
         }
         
+    }
+
+    public static MaterialFactory getInstance() {
+        if(instance == null){
+            instance = new MaterialFactory();
+        }
+        return instance;
+    }
+
+
+    @Override
+    public ShipPart instanzise(ShipPart prototype) {
+        if(!(prototype instanceof Material)){
+            throw new RuntimeErrorException(new Error("Added prototype was not a Material." + prototype.toString()));
+        }
+        Material materialPrototype = (Material) prototype;
+        Material duplicate;
+        if(prototype instanceof Wall){
+            duplicate = new Wall();
+        }else{
+            duplicate = new Floor();
+        }
+        duplicate.setDurability(materialPrototype.getDurability());
+        duplicate.setImage(materialPrototype.getImage());
+        duplicate.setName(materialPrototype.getName());
+        duplicate.setValue(materialPrototype.getValue());
+        duplicate.setWeight(materialPrototype.getWeight());
+        return duplicate;
     }
 
 }

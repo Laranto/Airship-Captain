@@ -1,5 +1,7 @@
 package model;
 
-public abstract class Entity extends ShipPart {
+import view.Renderable;
+
+public abstract class Entity extends ShipPart implements Renderable{
 
 }
