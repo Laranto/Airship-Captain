@@ -1,5 +1,7 @@
 package view;
 
+import controller.ConstructionBrush;
+import controller.InputController;
 import javax.swing.JFrame;
 
 import factory.MaterialFactory;
@@ -21,10 +23,17 @@ public class ConstructionViewTest {
         for(int i = 0;i<10;i++){
             testship.placeMaterial(fac.getMaterials().get(0), 10, 4+i);
         }
+        
+        
         JFrame frame = new JFrame();
         frame.setContentPane(new ConstructionView(testship));
+        frame.addMouseListener(new InputController(testship));
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        
+        
+        
         frame.setVisible(true);
     }
 }
