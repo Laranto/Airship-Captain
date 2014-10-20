@@ -1,13 +1,11 @@
 package view;
 
-import controller.ConstructionBrush;
-import controller.InputController;
 import javax.swing.JFrame;
-
-import factory.MaterialFactory;
+import javax.swing.JPanel;
 
 import model.Airship;
-import model.Material;
+import controller.InputController;
+import factory.MaterialFactory;
 
 public class ConstructionViewTest {
     public static void main(String[] args) {
@@ -26,14 +24,19 @@ public class ConstructionViewTest {
         
         
         JFrame frame = new JFrame();
-        frame.setContentPane(new ConstructionView(testship));
-        frame.addMouseListener(new InputController(testship));
+        JPanel pane = new ConstructionView(testship);
+        frame.setContentPane(pane);
+        pane.addMouseListener(new InputController(testship));
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        
-        
-        
         frame.setVisible(true);
+        while(true){
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            frame.repaint();
+        }
     }
 }

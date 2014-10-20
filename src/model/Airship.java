@@ -20,11 +20,11 @@ public class Airship implements Renderable{
     
     
     public void placeMaterial(Material mat, int tileX, int tileY){
+        
         //Nothing on that tile yet
         if(shipBody[tileX][tileY] == null){
             if(isEmpty || hasAdjacentTile(tileX,tileY)){
                 shipBody[tileX][tileY] = (Material) MaterialFactory.getInstance().instanzise(mat);
-                System.out.println("Material added " + shipBody[tileX][tileY]);
             }
         }
     }

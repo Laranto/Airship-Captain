@@ -23,8 +23,9 @@ public class InputController implements MouseListener, KeyListener{
         {
             return;
         }
-        int tileX = Math.round(e.getX()/Constants.TILE_SIZE);
-        int tileY = Math.round(e.getY()/Constants.TILE_SIZE);
+        
+        int tileX = e.getX()/Constants.TILE_SIZE;
+        int tileY = e.getY()/Constants.TILE_SIZE;
         
         System.out.println(e.getX()+" "+e.getY()+" "+m+" "+tileX+" "+tileY);
         
