@@ -64,17 +64,4 @@ public class ConstructionView extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
         airship.render(g2);
     }
-
-    public static void main(String[] args) {
-        Airship airship = new Airship();
-        ConstructionView constructionView = new ConstructionView(airship);
-
-        JFrame frame = new JFrame();
-        frame.setSize(500, 500);
-        frame.add(constructionView);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-
-    }
-
 }
