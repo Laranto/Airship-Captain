@@ -28,6 +28,21 @@ public class Airship implements Renderable{
             }
         }
     }
+    
+    /**
+     * @return return ShipPart, could be an instance of a material or entity or
+     * null if the clicked place on the ship doesn't contain any object
+     */
+    public ShipPart getShipPartByPosition(int tileX, int tileY)
+    {
+        if(shipBody[tileX][tileY] == null){
+            if(isEmpty || hasAdjacentTile(tileX,tileY)){
+                return null;
+            }
+        }
+        
+        return this.shipBody[tileX][tileY];
+    }
 
 
     private boolean hasAdjacentTile(int tileX , int tileY) {
@@ -36,6 +51,8 @@ public class Airship implements Renderable{
                 || (tileY>0 && shipBody[tileX][tileY-1]!=null)
                 || (tileY<Constants.AIRSHIP_HEIGHT_TILES-1 && shipBody[tileX][tileY+1]!=null);
     }
+    
+    
 
 
     @Override

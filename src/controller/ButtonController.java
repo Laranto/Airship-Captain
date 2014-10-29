@@ -6,6 +6,7 @@
 
 package controller;
 
+import common.ConstructionBrush;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import model.Material;

@@ -1,5 +1,6 @@
 package controller;
 
+import common.ConstructionBrush;
 import common.Constants;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -24,44 +25,30 @@ public class InputController implements MouseListener, MouseMotionListener, KeyL
 
     @Override
     public void keyPressed(KeyEvent e) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
@@ -71,7 +58,6 @@ public class InputController implements MouseListener, MouseMotionListener, KeyL
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private void performMouseAction(MouseEvent e) {
@@ -84,6 +70,8 @@ public class InputController implements MouseListener, MouseMotionListener, KeyL
         int tileY = e.getY() / Constants.TILE_SIZE;
 
         System.out.println(e.getX() + " " + e.getY() + " " + m + " " + tileX + " " + tileY);
+        
+        System.out.println(this.airship.getShipPartByPosition(tileX, tileY));
 
         if (tileX < Constants.AIRSHIP_WIDTH_TILES && tileY < Constants.AIRSHIP_HEIGHT_TILES) {
             this.airship.placeMaterial(m, tileX, tileY);

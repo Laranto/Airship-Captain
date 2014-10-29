@@ -25,7 +25,7 @@ public class ConstructionView extends JPanel {
     private static final long serialVersionUID = 1L;
     private Airship airship;
     private MaterialFactory materialFactory;
-    private  final ArrayList<Material> materials;
+    private final ArrayList<Material> materials;
 
     public ConstructionView(Airship airship) {
         this.setPreferredSize(new Dimension(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
@@ -49,7 +49,7 @@ public class ConstructionView extends JPanel {
         materials = this.materialFactory.getMaterials();
 
         for (int i = 0; i < materials.size(); i++) {
-            
+
             JButton tileButton = new JButton(materials.get(i).getName());
             tileButton.setIcon(new ImageIcon(materials.get(i).getImage()));
             tileButton.addMouseListener(new ButtonController(materials.get(i)));
