@@ -8,12 +8,15 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/**
+ *  Controls which panel is being displayed.
+ */
 public class WindowController {
 
     
     private JFrame frame;
     
-    private JPanel menu;
+    private JPanel menu, constructionView;
     
     
     public WindowController(JFrame frame) {
@@ -60,6 +63,12 @@ public class WindowController {
 
     public void setMenu(){
         frame.setContentPane(menu);
+    }
+    
+    
+
+    public void repaint() {
+        frame.repaint();
     }
 
 }

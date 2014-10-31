@@ -1,5 +1,7 @@
 import javax.swing.JFrame;
 
+import common.Constants;
+
 import controller.WindowController;
 
 
@@ -10,7 +12,7 @@ public class Start {
      */
     public static void main(String[] args) {
         JFrame frame = new JFrame("Airship Captain");
-        frame.setSize(800,600);
+        frame.setSize(Constants.WINDOW_WIDTH,Constants.WINDOW_HEIGHT);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         
