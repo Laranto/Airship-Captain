@@ -26,6 +26,13 @@ import common.Constants;
  * @author Laranto
  */
 public class MaterialFactory extends ShippartFactory {
+    private static final String DOM_NODE_WEIGHT = "weight";
+    private static final String DOM_NODE_DURABILITY = "durability";
+    private static final String DOM_NODE_VALUE = "value";
+    private static final String DOM_NODE_IMAGE = "image";
+    private static final String DOM_NODE_MATERIAL = "material";
+    private static final String DOM_NODE_NAME = "name";
+    private static final String DOM_ATTR_TYPE = "type";
     private static MaterialFactory instance;
     private ArrayList<Material> materials;
     private static SAXBuilder builder = new SAXBuilder();
@@ -70,15 +77,15 @@ public class MaterialFactory extends ShippartFactory {
     private void loadMaterial(File xmlFile) throws IOException, JDOMException {
         
         Document doc = (Document) builder.build(xmlFile);
-        List<Element> materials = doc.getRootElement().getChildren("material");
+        List<Element> materials = doc.getRootElement().getChildren(DOM_NODE_MATERIAL);
         for (Element element : materials) {
             
-            String   type=element.getAttribute("type").getValue()
-                    ,name=element.getChildText("name")
-                    ,imagePath=xmlFile.getParent()+File.separator+element.getChildText("image");
-            int      value=Integer.parseInt(element.getChildText("value"))
-                    ,durability=Integer.parseInt(element.getChildText("durability"))
-                    ,weight=Integer.parseInt(element.getChildText("weight"));
+            String   type=element.getAttribute(DOM_ATTR_TYPE).getValue()
+                    ,name=element.getChildText(DOM_NODE_NAME)
+                    ,imagePath=xmlFile.getParent()+File.separator+element.getChildText(DOM_NODE_IMAGE);
+            int      value=Integer.parseInt(element.getChildText(DOM_NODE_VALUE))
+                    ,durability=Integer.parseInt(element.getChildText(DOM_NODE_DURABILITY))
+                    ,weight=Integer.parseInt(element.getChildText(DOM_NODE_WEIGHT));
             
             createInstance(type, imagePath, name, durability, value, weight);
         }
