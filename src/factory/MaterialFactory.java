@@ -1,12 +1,10 @@
 package factory;
 
-import common.Constants;
-import common.XMLParser;
-import java.awt.List;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.management.RuntimeErrorException;
 
@@ -14,9 +12,13 @@ import model.Material;
 import model.ShipPart;
 import model.material.Floor;
 import model.material.Wall;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
+
+import common.Constants;
 
 /**
  *
@@ -26,7 +28,7 @@ import org.w3c.dom.NodeList;
 public class MaterialFactory extends ShippartFactory {
     private static MaterialFactory instance;
     private ArrayList<Material> materials;
-    
+    private static SAXBuilder builder = new SAXBuilder();
     
     private MaterialFactory() {
         materials = new ArrayList<Material>();
@@ -48,7 +50,7 @@ public class MaterialFactory extends ShippartFactory {
                 if(xmlDefinitions.length>0)
                     try {
                         loadMaterial(xmlDefinitions[0]);
-                    } catch (IOException e) {
+                    } catch (IOException | JDOMException e) {
                         // TODO Catch the error properly. Write an error log or something like that.
                         e.printStackTrace();
                     }
@@ -63,33 +65,26 @@ public class MaterialFactory extends ShippartFactory {
      * Loads one XML with material definitions
      * @param filePath path of the xml file to be parsed and loaded.
      * @throws IOException 
+     * @throws JDOMException 
      */
-    private void loadMaterial(File xmlFile) throws IOException {
-        Document doc = XMLParser.parse(xmlFile);
-
-        NodeList nodeList = doc.getElementsByTagName("material");
-
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            Node node = nodeList.item(i);
-
-            //Getting the attributes
-            String type = node.getAttributes().getNamedItem("type").getNodeValue();
-            int width = Integer.parseInt(node.getAttributes().getNamedItem("width").getNodeValue());
-            int height = Integer.parseInt(node.getAttributes().getNamedItem("height").getNodeValue());
-
-            String name = node.getFirstChild().getNextSibling().getFirstChild().getNodeValue();
-            String imagePath = xmlFile.getParent() + File.separator + node.getFirstChild().getNextSibling().getNextSibling().getNextSibling().getFirstChild().getNodeValue();
-            int value = Integer.parseInt(node.getFirstChild().getNextSibling().getNextSibling().getNextSibling().getNextSibling().getNextSibling().getFirstChild().getNodeValue());
-            int durability = Integer.parseInt(node.getFirstChild().getNextSibling().getNextSibling().getNextSibling().getNextSibling().getNextSibling().getNextSibling().getNextSibling().getFirstChild().getNodeValue());
-            int weight = Integer.parseInt(node.getFirstChild().getNextSibling().getNextSibling().getNextSibling().getNextSibling().getNextSibling().getNextSibling().getNextSibling().getNextSibling().getNextSibling().getFirstChild().getNodeValue());
-
+    private void loadMaterial(File xmlFile) throws IOException, JDOMException {
+        
+        Document doc = (Document) builder.build(xmlFile);
+        List<Element> materials = doc.getRootElement().getChildren("material");
+        for (Element element : materials) {
+            
+            String   type=element.getAttribute("type").getValue()
+                    ,name=element.getChildText("name")
+                    ,imagePath=xmlFile.getParent()+File.separator+element.getChildText("image");
+            int      value=Integer.parseInt(element.getChildText("value"))
+                    ,durability=Integer.parseInt(element.getChildText("durability"))
+                    ,weight=Integer.parseInt(element.getChildText("weight"));
+            
             createInstance(type, imagePath, name, durability, value, weight);
         }
     }
-    
-    
-    
-    
+
+
     /**
      * Creating an instance of a material and adds it to the material list
      * @throws IOException 
@@ -125,25 +120,6 @@ public class MaterialFactory extends ShippartFactory {
             parse();
         }
         return materials;
-    }
-
-    /**
-     * Example usage
-     */
-    public static void main(String[] args) {
-        MaterialFactory mf = new MaterialFactory();
-        ArrayList<Material> materials = mf.getMaterials();
-        
-        for(int i=0; i<materials.size();i++)
-        {
-            Material m = materials.get(i);
-            
-            
-            
-            System.out.println(m.getName()+"  "+m.getImage()+" " +m.getClass());
-            
-        }
-        
     }
 
     public static MaterialFactory getInstance() {
