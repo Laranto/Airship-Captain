@@ -1,10 +1,13 @@
 package model;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
 import view.Renderable;
+
 import common.Constants;
+
 import factory.MaterialFactory;
 
 public class Airship implements Renderable{
@@ -25,6 +28,7 @@ public class Airship implements Renderable{
         if(shipBody[tileX][tileY] == null){
             if(isEmpty || hasAdjacentTile(tileX,tileY)){
                 shipBody[tileX][tileY] = (Material) MaterialFactory.getInstance().instanzise(mat);
+                isEmpty=false;
             }
         }
     }
@@ -36,9 +40,7 @@ public class Airship implements Renderable{
     public ShipPart getShipPartByPosition(int tileX, int tileY)
     {
         if(shipBody[tileX][tileY] == null){
-            if(isEmpty || hasAdjacentTile(tileX,tileY)){
-                return null;
-            }
+            return null;
         }
         
         return this.shipBody[tileX][tileY];
@@ -64,13 +66,22 @@ public class Airship implements Renderable{
                 g.translate(x*Constants.TILE_SIZE, y*Constants.TILE_SIZE);
                 if(shipBody[x][y]!=null){
                     shipBody[x][y].render(g);
+                    if(equipment[x][y]!=null){
+                        equipment[x][y].render(g);
+                    }
+                }else{
+                    renderEmptySpace(g);
                 }
-                if(equipment[x][y]!=null){
-                    equipment[x][y].render(g);
-                }
+                
             }
         }
         g.setTransform(originalCoordinates);
+    }
+
+
+    private void renderEmptySpace(Graphics2D g) {
+        g.setColor(Constants.COLOR_SKYBLUE);
+        g.fillRect(0, 0, Constants.TILE_SIZE,Constants.TILE_SIZE);
     }
     
 }

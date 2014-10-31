@@ -69,9 +69,6 @@ public class InputController implements MouseListener, MouseMotionListener, KeyL
         int tileX = e.getX() / Constants.TILE_SIZE;
         int tileY = e.getY() / Constants.TILE_SIZE;
 
-        System.out.println(e.getX() + " " + e.getY() + " " + m + " " + tileX + " " + tileY);
-        
-        System.out.println(this.airship.getShipPartByPosition(tileX, tileY));
 
         if (tileX < Constants.AIRSHIP_WIDTH_TILES && tileY < Constants.AIRSHIP_HEIGHT_TILES) {
             this.airship.placeMaterial(m, tileX, tileY);
