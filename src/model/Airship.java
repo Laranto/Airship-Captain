@@ -1,6 +1,5 @@
 package model;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
@@ -34,15 +33,14 @@ public class Airship implements Renderable{
     }
     
     /**
-     * @return return ShipPart, could be an instance of a material or entity or
-     * null if the clicked place on the ship doesn't contain any object
+     * @return return ShipPart. If there is an equipment piece on the tile it will be returned. Else the material will be returned.
+     * If nothing is there, null will be returned.
      */
     public ShipPart getShipPartByPosition(int tileX, int tileY)
     {
-        if(shipBody[tileX][tileY] == null){
-            return null;
+        if(this.equipment[tileX][tileY]!=null){
+            return this.equipment[tileX][tileY];
         }
-        
         return this.shipBody[tileX][tileY];
     }
 
@@ -62,6 +60,7 @@ public class Airship implements Renderable{
         AffineTransform originalCoordinates = g.getTransform();
         for(int x = 0;x<Constants.AIRSHIP_WIDTH_TILES;x++){
             for(int y = 0; y<Constants.AIRSHIP_HEIGHT_TILES;y++){
+                //Move the g to the according position so the materials and entities must only render their image.
                 g.setTransform(originalCoordinates);
                 g.translate(x*Constants.TILE_SIZE, y*Constants.TILE_SIZE);
                 if(shipBody[x][y]!=null){
@@ -72,13 +71,16 @@ public class Airship implements Renderable{
                 }else{
                     renderEmptySpace(g);
                 }
-                
             }
         }
         g.setTransform(originalCoordinates);
     }
 
 
+    /**
+     * Some dummy method to render empty space. Should be replaced with some nice graphical gimmiks that we have clouds and such.
+     * @param g Graphics
+     */
     private void renderEmptySpace(Graphics2D g) {
         g.setColor(Constants.COLOR_SKYBLUE);
         g.fillRect(0, 0, Constants.TILE_SIZE,Constants.TILE_SIZE);
