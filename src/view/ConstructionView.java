@@ -9,15 +9,14 @@ import javax.swing.JPanel;
 import model.Airship;
 
 import common.Constants;
+import common.ConstructionBrush;
 import controller.ButtonController;
 import factory.MaterialFactory;
+import java.awt.Button;
 import java.awt.GridLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import model.Material;
 
 public class ConstructionView extends JPanel {
@@ -39,12 +38,21 @@ public class ConstructionView extends JPanel {
         this.setLayout(mainLayout);
 
         JPanel shipView = new JPanel();
-
         this.add(shipView);
+        
+        GridLayout toolsGrid = new GridLayout(2, 1);
+        JPanel toolsGridPanel = new JPanel(toolsGrid);
+        add(toolsGridPanel);
+        
+        JButton removeTilesButton = new JButton("Entfernen");
+        removeTilesButton.putClientProperty("id", "removeMaterial");
+        removeTilesButton.addActionListener(new ButtonController());
+        toolsGridPanel.add(removeTilesButton);
+        
 
-        GridLayout tilesPicker = new GridLayout(5, 2);
-        JPanel tilesPickerPanel = new JPanel(tilesPicker);
-        add(tilesPickerPanel);
+        GridLayout tilesPickerGrid = new GridLayout(5, 2);
+        JPanel tilesPickerPanel = new JPanel(tilesPickerGrid);
+        toolsGridPanel.add(tilesPickerPanel);
 
         materials = this.materialFactory.getMaterials();
 
@@ -52,9 +60,13 @@ public class ConstructionView extends JPanel {
 
             JButton tileButton = new JButton(materials.get(i).getName());
             tileButton.setIcon(new ImageIcon(materials.get(i).getImage()));
+            tileButton.putClientProperty("id", "placeMaterial");
             tileButton.addMouseListener(new ButtonController(materials.get(i)));
-            add(tileButton);
+            tileButton.addActionListener(new ButtonController());
+            toolsGridPanel.add(tileButton);
         }
+        
+        
 
     }
 

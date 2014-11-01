@@ -61,18 +61,27 @@ public class InputController implements MouseListener, MouseMotionListener, KeyL
     }
 
     private void performMouseAction(MouseEvent e) {
-        Material m = ConstructionBrush.getMaterial();
-        if (m == null) {
-            return;
-        }
 
         int tileX = e.getX() / Constants.TILE_SIZE;
         int tileY = e.getY() / Constants.TILE_SIZE;
 
+        switch (ConstructionBrush.getConstructionState()) {
+            case 0:
+                Material m = ConstructionBrush.getMaterial();
 
-        if (tileX < Constants.AIRSHIP_WIDTH_TILES && tileY < Constants.AIRSHIP_HEIGHT_TILES) {
-            this.airship.placeMaterial(m, tileX, tileY);
+                if (m == null) {
+                    return;
+                }
+
+                if (tileX < Constants.AIRSHIP_WIDTH_TILES && tileY < Constants.AIRSHIP_HEIGHT_TILES) {
+                    this.airship.placeMaterial(m, tileX, tileY);
+                }
+                break;
+            case 1:
+                this.airship.removeMaterial(tileX, tileY);
+                break;
         }
+
     }
 
 }

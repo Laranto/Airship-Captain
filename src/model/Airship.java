@@ -43,6 +43,14 @@ public class Airship implements Renderable{
         }
         return this.shipBody[tileX][tileY];
     }
+    
+    /*
+    *   removes a material on the ship
+    */
+    public void removeMaterial(int tileX, int tileY)
+    {
+        shipBody[tileX][tileY] = null;
+    }
 
 
     private boolean hasAdjacentTile(int tileX , int tileY) {
