@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -17,6 +18,8 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
+
 import model.Material;
 
 public class ConstructionView extends JPanel {
@@ -40,19 +43,23 @@ public class ConstructionView extends JPanel {
         JPanel shipView = new JPanel();
         this.add(shipView);
         
-        GridLayout toolsGrid = new GridLayout(2, 1);
-        JPanel toolsGridPanel = new JPanel(toolsGrid);
-        add(toolsGridPanel);
+        JPanel selectionSide = new JPanel();
+        this.add(selectionSide);
+        
+        JPanel toolsGridPanel = new JPanel(new FlowLayout());
+        toolsGridPanel.setSize(Constants.WINDOW_WIDTH/2,Constants.WINDOW_HEIGHT/10);
+        selectionSide.add(toolsGridPanel);
         
         JButton removeTilesButton = new JButton("Entfernen");
         removeTilesButton.putClientProperty("id", "removeMaterial");
         removeTilesButton.addActionListener(new ButtonController());
+        removeTilesButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
         toolsGridPanel.add(removeTilesButton);
         
 
         GridLayout tilesPickerGrid = new GridLayout(5, 2);
         JPanel tilesPickerPanel = new JPanel(tilesPickerGrid);
-        toolsGridPanel.add(tilesPickerPanel);
+        selectionSide.add(tilesPickerPanel);
 
         materials = this.materialFactory.getMaterials();
 
@@ -63,9 +70,10 @@ public class ConstructionView extends JPanel {
             tileButton.putClientProperty("id", "placeMaterial");
             tileButton.addMouseListener(new ButtonController(materials.get(i)));
             tileButton.addActionListener(new ButtonController());
-            toolsGridPanel.add(tileButton);
+            tileButton.setHorizontalAlignment(SwingConstants.LEFT);
+            tileButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
+            tilesPickerPanel.add(tileButton);
         }
-        
         
 
     }
