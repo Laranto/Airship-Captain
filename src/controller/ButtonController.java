@@ -5,7 +5,6 @@
  */
 package controller;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -16,7 +15,6 @@ import javax.swing.JButton;
 import model.Material;
 
 import common.Constants;
-import common.ConstructionBrush;
 
 /**
  *
