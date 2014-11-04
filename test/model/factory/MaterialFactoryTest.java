@@ -1,4 +1,4 @@
-package factory;
+package model.factory;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
