@@ -7,16 +7,18 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import model.Airship;
-
 import common.Constants;
-import common.ConstructionBrush;
 import controller.ButtonController;
+import controller.BrushController;
 import factory.MaterialFactory;
+
 import java.awt.Button;
 import java.awt.GridLayout;
 import java.util.ArrayList;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+
 import model.Material;
 
 public class ConstructionView extends JPanel {

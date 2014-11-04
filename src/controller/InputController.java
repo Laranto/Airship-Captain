@@ -1,12 +1,13 @@
 package controller;
 
-import common.ConstructionBrush;
 import common.Constants;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+
 import model.Airship;
 import model.Material;
 
@@ -65,9 +66,9 @@ public class InputController implements MouseListener, MouseMotionListener, KeyL
         int tileX = e.getX() / Constants.TILE_SIZE;
         int tileY = e.getY() / Constants.TILE_SIZE;
 
-        switch (ConstructionBrush.getConstructionState()) {
+        switch (BrushController.getConstructionState()) {
             case 0:
-                Material m = ConstructionBrush.getMaterial();
+                Material m = BrushController.getMaterial();
 
                 if (m == null) {
                     return;

@@ -5,12 +5,13 @@
  */
 package controller;
 
-import common.ConstructionBrush;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JButton;
+
 import model.Material;
 
 /**
@@ -30,7 +31,7 @@ public class ButtonController extends MouseAdapter implements ActionListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        ConstructionBrush.setMaterial(materialPrototype);
+        BrushController.setMaterial(materialPrototype);
     }
 
     @Override
@@ -40,11 +41,11 @@ public class ButtonController extends MouseAdapter implements ActionListener {
 
         switch (command) {
             case "removeMaterial":
-                ConstructionBrush.setConstructionState(1);
+                BrushController.setConstructionState(1);
                 break;
 
             case "placeMaterial":
-                ConstructionBrush.setConstructionState(0);
+                BrushController.setConstructionState(0);
                 break;
         }
     }

@@ -1,4 +1,4 @@
-package common;
+package controller;
 
 import model.Material;
 
@@ -6,7 +6,7 @@ import model.Material;
  *
  * @author Hesyar Uzuner <info@hesyar.com>
  */
-public class ConstructionBrush  {
+public class BrushController  {
 
     /**
      * constructionState is the state in which the brush currently is. 0 would
@@ -16,19 +16,19 @@ public class ConstructionBrush  {
     private static Material material = null;
 
     public static void setMaterial(Material m) {
-        ConstructionBrush.material = m;
+        BrushController.material = m;
     }
 
     public static Material getMaterial() {
-        return ConstructionBrush.material;
+        return BrushController.material;
     }
 
     public static void setConstructionState(int state) {
-        ConstructionBrush.constructionState = state;
+        BrushController.constructionState = state;
     }
 
     public static int getConstructionState() {
-        return ConstructionBrush.constructionState;
+        return BrushController.constructionState;
     }
 
 

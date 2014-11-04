@@ -1,6 +1,6 @@
 package handler;
 
-import common.ConstructionBrush;
+import controller.BrushController;
 import model.Airship;
 
 public class ConstructionViewHandler extends Handler{
