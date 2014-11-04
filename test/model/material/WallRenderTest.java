@@ -6,9 +6,8 @@ import java.awt.Graphics2D;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import factory.MaterialFactory;
-
 import model.Material;
+import model.factory.MaterialFactory;
 
 public class WallRenderTest extends JPanel {
     public static void main(String[] args) {

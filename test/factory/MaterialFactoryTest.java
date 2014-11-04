@@ -1,18 +1,15 @@
 package factory;
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 
 import model.Material;
+import model.factory.MaterialFactory;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import sun.security.jca.GetInstance;
-
-import factory.MaterialFactory;
 
 
 public class MaterialFactoryTest {

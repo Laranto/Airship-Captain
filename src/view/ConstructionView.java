@@ -11,7 +11,6 @@ import model.Airship;
 import common.Constants;
 import controller.ButtonController;
 import controller.BrushController;
-import factory.MaterialFactory;
 
 import java.awt.Button;
 import java.awt.GridLayout;
@@ -22,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
 import model.Material;
+import model.factory.MaterialFactory;
 
 public class ConstructionView extends JPanel {
 

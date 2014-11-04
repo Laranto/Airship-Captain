@@ -4,8 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import model.Airship;
+import model.factory.MaterialFactory;
 import controller.InputController;
-import factory.MaterialFactory;
 
 public class ConstructionViewTest {
     public static void main(String[] args) {

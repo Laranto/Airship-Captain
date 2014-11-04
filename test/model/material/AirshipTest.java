@@ -1,14 +1,12 @@
 package model.material;
 
 import static org.junit.Assert.*;
-
 import model.Airship;
 import model.Material;
+import model.factory.MaterialFactory;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import factory.MaterialFactory;
 
 public class AirshipTest {
 

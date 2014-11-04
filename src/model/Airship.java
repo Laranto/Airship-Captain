@@ -3,9 +3,9 @@ package model;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
+import model.factory.MaterialFactory;
 import model.interfaces.Renderable;
 import common.Constants;
-import factory.MaterialFactory;
 
 public class Airship implements Renderable{
     private Material[][] shipBody;
