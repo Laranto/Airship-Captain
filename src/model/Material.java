@@ -4,8 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-import view.Renderable;
-
+import model.interfaces.Renderable;
 import common.ImageLoader;
 
 public abstract class Material extends ShipPart implements Renderable {
