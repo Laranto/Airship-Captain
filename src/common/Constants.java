@@ -18,5 +18,9 @@ public class Constants {
     public static final int AIRSHIP_HEIGHT_TILES = WINDOW_HEIGHT/TILE_SIZE;
     
     
-    public static final Color COLOR_SKYBLUE = new Color(128,218,235); 
+    public static final Color COLOR_SKYBLUE = new Color(128,218,235);
+    public static final Color BUTTON_BACKGROUND_INACTIVE = Color.LIGHT_GRAY.brighter();
+    public static final Color BUTTON_BACKGROUND_DELETE_ACTIVE = Color.RED;
+    public static final Color BUTTON_BACKGROUND_ACTIVE = Color.LIGHT_GRAY;
+    
 }

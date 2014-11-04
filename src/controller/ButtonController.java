@@ -5,6 +5,7 @@
  */
 package controller;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -14,12 +15,16 @@ import javax.swing.JButton;
 
 import model.Material;
 
+import common.Constants;
+import common.ConstructionBrush;
+
 /**
  *
  * @author Hesyar Uzuner <info@hesyar.com>
  */
 public class ButtonController extends MouseAdapter implements ActionListener {
 
+    private static JButton previousSelected;
     private Material materialPrototype;
 
     public ButtonController() {
@@ -36,16 +41,22 @@ public class ButtonController extends MouseAdapter implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(previousSelected!=null){
+            previousSelected.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
+        }
         JButton clickedButton = (JButton) e.getSource();
+        previousSelected=clickedButton;
         String command = String.valueOf(clickedButton.getClientProperty("id"));
 
         switch (command) {
             case "removeMaterial":
                 BrushController.setConstructionState(1);
+                clickedButton.setBackground(Constants.BUTTON_BACKGROUND_DELETE_ACTIVE);
                 break;
 
             case "placeMaterial":
                 BrushController.setConstructionState(0);
+                clickedButton.setBackground(Constants.BUTTON_BACKGROUND_ACTIVE);
                 break;
         }
     }

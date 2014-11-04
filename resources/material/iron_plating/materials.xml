@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<materials>
+    <material type="wall" width="2" height="2">
+        <name>Iron wall</name>
+        <image>img/iron_block.png</image>
+        <value>100</value>
+        <durability>120</durability>
+        <weight>60</weight>
+    </material>
+    <material type="floor" width="2" height="2">
+        <name>Iron planks</name>
+        <image>img/iron_trapdoor.png</image>
+        <value>100</value>
+        <durability>120</durability>
+        <weight>60</weight>
+    </material>    
+</materials>
