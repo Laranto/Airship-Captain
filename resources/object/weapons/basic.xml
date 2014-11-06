@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects>
+    <object type="weapon" width="2" height="2">
+        <name>AK 47</name>
+        <image>img/iron_block.png</image>
+        <weight>20</weight>
+        <ammunition>100</ammunition>
+        <damage>5</damage>
+        <value>10</value>
+    </object>   
+</objects>
