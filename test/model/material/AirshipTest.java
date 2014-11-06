@@ -27,5 +27,22 @@ public class AirshipTest {
         aship.placeMaterial(testMaterial, 8, 8);
         assertNull(aship.getShipPartByPosition(8, 8));
     }
+    
+    @Test
+    public void testJunction(){
+    	Material testMaterial = MaterialFactory.getInstance().getMaterials().get(0);
+        for(int i = 0;i<10;i++){
+        	aship.placeMaterial(testMaterial, 5, 5+i);	
+        }
+        assertTrue("Airship is in one piece", aship.isJoined());
+        for(int i = 0;i<10;i++){
+        	aship.placeMaterial(testMaterial, 6, 5+i);	
+        }
+        assertTrue("Airship is in one piece", aship.isJoined());
+        
+        aship.removeMaterial(5, 7);
+        aship.removeMaterial(6, 7);
+        assertFalse("Airship is split", aship.isJoined());
+    }
 
 }
