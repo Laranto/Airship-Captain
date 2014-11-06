@@ -1,7 +1,10 @@
 package model;
 
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.geom.AffineTransform;
+import java.util.Arrays;
+import java.util.LinkedList;
 
 import model.factory.MaterialFactory;
 import model.interfaces.Renderable;
@@ -81,6 +84,54 @@ public class Airship implements Renderable{
         }
         g.setTransform(originalCoordinates);
     }
+    
+    /**
+     * Calculates if the airship is in one piece of if it's split in parts with open space in between.
+     * <br>Use with caution, might take a bit when checking large ships
+     * @return true, if the airship is in one piece.
+     */
+    public boolean isJoined(){
+    	Material[][] checkBody = new Material[shipBody.length][shipBody[0].length];
+    	LinkedList<Point> uncheckedPositions = new LinkedList<>();
+    	findStartpoint(checkBody, uncheckedPositions);
+    	while(!uncheckedPositions.isEmpty()){
+    		checkFirstPosition(checkBody, uncheckedPositions);
+    	}
+    	return Arrays.deepEquals(shipBody, checkBody);
+    }
+
+
+	private void checkFirstPosition(Material[][] checkBody,
+			LinkedList<Point> uncheckedPositions) {
+		Point pos = uncheckedPositions.pollFirst();
+		for(int x = -1;x<=1;x++){
+			for(int y = -1;y<=1;y++){
+				if(Math.abs(x)+Math.abs(y)==1){
+					int newX = pos.x+x;
+					int newY = pos.y+y;
+					if(newX>=0 && newX<Constants.AIRSHIP_WIDTH_TILES 
+						&& newY>=0 && newY<Constants.AIRSHIP_HEIGHT_TILES 
+						&& shipBody[newX][newY]!=null 
+						&& checkBody[newX][newY]==null){
+						checkBody[newX][newY]=shipBody[newX][newY];
+						uncheckedPositions.push(new Point(newX,newY));
+					}
+				}
+			}
+		}
+	}
+
+
+	private void findStartpoint(Material[][] checkBody,
+			LinkedList<Point> uncheckedPositions) {
+		for(int x=0, y=0;x<Constants.AIRSHIP_WIDTH_TILES && y<Constants.AIRSHIP_HEIGHT_TILES;x++, y++){
+           	 if(shipBody[x][y]!=null){
+           		 checkBody[x][y]=shipBody[x][y];
+           		 uncheckedPositions.push(new Point(x, y));
+           		 break;
+           	 }
+          }
+	}
 
 
     /**
