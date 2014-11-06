@@ -24,10 +24,10 @@ public class ConstructionViewTest {
         
         
         JFrame frame = new JFrame();
-        JPanel pane = new ConstructionView(testship);
-        frame.setContentPane(pane);
+        JPanel pane = new ConstructionPanel(testship);
         pane.addMouseListener(new InputController(testship));
         pane.addMouseMotionListener(new InputController(testship));
+        frame.setContentPane(pane);
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);

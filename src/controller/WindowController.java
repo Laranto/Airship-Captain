@@ -1,74 +1,70 @@
 package controller;
 
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import model.Airship;
+import view.ConstructionPanel;
+import view.FightPanel;
+import view.HarborPanel;
+import view.MainMenuPanel;
+import view.NavigationPanel;
 
 /**
  *  Controls which panel is being displayed.
  */
-public class WindowController {
+public class WindowController{
 
+    private static JFrame container;
+    private static JPanel mainMenu;
+    private static JPanel constructionPanel;
+    private static JPanel fightPanel;
+    private static JPanel navigationPanel;
+    private static JPanel harborPanel;
     
-    private JFrame frame;
-    
-    private JPanel menu, constructionView;
-    
-    
-    public WindowController(JFrame frame) {
-        this.frame=frame;
-        menu=createMenu();
-        setMenu();
+    public static void setFrame(JFrame frame){
+    	container = frame;
     }
     
-    private JPanel createMenu() {
-        JPanel menuPane = new JPanel();
-        JButton start=new JButton("Start"), load = new JButton("Load"), exit = new JButton("Exit");
-        start.addActionListener(new ActionListener() {
-            
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                // TODO Auto-generated method stub                
-            }
-        });
-        load.addActionListener(new ActionListener() {
-            
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
-                
-            }
-        });
-        exit.addActionListener(new ActionListener() {
-            
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
-                System.exit(0);
-            }
-        });
-        
-        
-        menuPane.setLayout(new GridLayout(3, 1));
-        menuPane.add(start);
-        menuPane.add(load);
-        menuPane.add(exit);
-        
-        return menuPane;
-    }
-
-    public void setMenu(){
-        frame.setContentPane(menu);
+    public static void showMainMenu(){
+    	if(mainMenu == null){
+    		mainMenu = new MainMenuPanel();
+    	}
+    	showPanel(mainMenu);
     }
     
-    
-
-    public void repaint() {
-        frame.repaint();
+    public static void showConstruction(Airship airship){
+    	if(constructionPanel == null){
+    		constructionPanel = new ConstructionPanel(airship);
+    		constructionPanel.addMouseListener(new InputController(airship));
+    		constructionPanel.addMouseMotionListener(new InputController(airship));
+    	}
+    	showPanel(constructionPanel);
     }
-
+    
+    public static void showFight(){
+    	if(fightPanel == null){
+    		fightPanel = new FightPanel();
+    	}
+    	showPanel(fightPanel);
+    }
+    
+    public static void showNavigation(){
+    	if(navigationPanel == null){
+    		navigationPanel = new NavigationPanel();
+    	}
+    	showPanel(navigationPanel);
+    }
+    
+    public static void showHarbor(){
+    	if(harborPanel == null){
+    		harborPanel = new HarborPanel();
+    	}
+    	showPanel(harborPanel);
+    }
+    
+    private static void showPanel(JPanel panel) {
+		container.setContentPane(panel);
+		container.paintAll(container.getGraphics());
+	}
 }

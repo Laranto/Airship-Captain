@@ -2,6 +2,7 @@ package model;
 
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+import java.util.Observable;
 
 import model.factory.MaterialFactory;
 import model.interfaces.Renderable;
@@ -22,7 +23,7 @@ public class Airship implements Renderable{
     public void placeMaterial(Material mat, int tileX, int tileY){
         
         //Nothing on that tile yet
-        if(shipBody[tileX][tileY] == null){
+        if(shipBody[tileX][tileY] == null && mat!=null){
             if(isEmpty || hasAdjacentTile(tileX,tileY)){
                 shipBody[tileX][tileY] = (Material) MaterialFactory.getInstance().instanzise(mat);
                 isEmpty=false;

@@ -4,38 +4,34 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
-import javax.swing.JPanel;
-
-import model.Airship;
-import common.Constants;
-import controller.ButtonController;
-import controller.BrushController;
-
-import java.awt.Button;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import model.Airship;
 import model.Material;
 import model.factory.MaterialFactory;
+import common.Constants;
+import controller.ButtonController;
+import controller.InputController;
 
-public class ConstructionView extends JPanel {
+public class ConstructionPanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
     private Airship airship;
     private MaterialFactory materialFactory;
     private final ArrayList<Material> materials;
 
-    public ConstructionView(Airship airship) {
+    public ConstructionPanel(Airship airship) {
         this.setPreferredSize(new Dimension(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
         this.setDoubleBuffered(true);
         this.setFocusable(true);
         this.airship = airship;
-
+        
         this.materialFactory = MaterialFactory.getInstance();
 
         GridLayout mainLayout = new GridLayout(1, 2);
@@ -75,8 +71,6 @@ public class ConstructionView extends JPanel {
             tileButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
             tilesPickerPanel.add(tileButton);
         }
-        
-
     }
 
     @Override
