@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.awt.event.ActionEvent;
@@ -22,41 +17,43 @@ import common.Constants;
  */
 public class ButtonController extends MouseAdapter implements ActionListener {
 
-    private static JButton previousSelected;
-    private Material materialPrototype;
+	private static JButton previousSelected;
+	private Material materialPrototype;
 
-    public ButtonController() {
-    }
+	public ButtonController() {
+	}
 
-    public ButtonController(Material materialPrototype) {
-        this.materialPrototype = materialPrototype;
-    }
+	public ButtonController(Material materialPrototype) {
+		this.materialPrototype = materialPrototype;
+	}
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        BrushController.setMaterial(materialPrototype);
-    }
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		BrushController.setMaterial(materialPrototype);
+	}
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(previousSelected!=null){
-            previousSelected.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
-        }
-        JButton clickedButton = (JButton) e.getSource();
-        previousSelected=clickedButton;
-        String command = String.valueOf(clickedButton.getClientProperty("id"));
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (previousSelected != null) {
+			previousSelected
+					.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
+		}
+		JButton clickedButton = (JButton) e.getSource();
+		previousSelected = clickedButton;
+		String command = String.valueOf(clickedButton.getClientProperty("id"));
 
-        switch (command) {
-            case "removeMaterial":
-                BrushController.setConstructionState(1);
-                clickedButton.setBackground(Constants.BUTTON_BACKGROUND_DELETE_ACTIVE);
-                break;
+		switch (command) {
+		case "removeMaterial":
+			BrushController.setConstructionState(1);
+			clickedButton
+					.setBackground(Constants.BUTTON_BACKGROUND_DELETE_ACTIVE);
+			break;
 
-            case "placeMaterial":
-                BrushController.setConstructionState(0);
-                clickedButton.setBackground(Constants.BUTTON_BACKGROUND_ACTIVE);
-                break;
-        }
-    }
+		case "placeMaterial":
+			BrushController.setConstructionState(0);
+			clickedButton.setBackground(Constants.BUTTON_BACKGROUND_ACTIVE);
+			break;
+		}
+	}
 
 }

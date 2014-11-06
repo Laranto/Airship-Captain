@@ -50,7 +50,13 @@ public class Airship implements Renderable{
     */
     public void removeMaterial(int tileX, int tileY)
     {
-        shipBody[tileX][tileY] = null;
+        /**
+         * checking if the remove method has been called on the right
+         */
+        if(tileX >= 0 && tileX < Constants.AIRSHIP_WIDTH_TILES && tileY >= 0 && tileY < Constants.AIRSHIP_WIDTH_TILES)
+        {
+        	shipBody[tileX][tileY] = null;
+        }
     }
 
 
