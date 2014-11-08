@@ -36,8 +36,6 @@ public class WindowController{
     public static void showConstruction(Airship airship){
     	if(constructionPanel == null){
     		constructionPanel = new ConstructionPanel(airship);
-    		constructionPanel.addMouseListener(new InputController(airship));
-    		constructionPanel.addMouseMotionListener(new InputController(airship));
     	}
     	showPanel(constructionPanel);
     }

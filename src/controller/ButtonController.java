@@ -17,42 +17,32 @@ import common.Constants;
  */
 public class ButtonController extends MouseAdapter implements ActionListener {
 
-	private static JButton previousSelected;
-	private Material materialPrototype;
+	private JButton activeButton;
+	private Material activeMaterial;
 
 	public ButtonController() {
 	}
 
-	public ButtonController(Material materialPrototype) {
-		this.materialPrototype = materialPrototype;
-	}
-
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		BrushController.setMaterial(materialPrototype);
+		BrushController.setMaterial(activeMaterial);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (previousSelected != null) {
-			previousSelected
-					.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
+		if (activeButton != null) {
+			activeButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
 		}
 		JButton clickedButton = (JButton) e.getSource();
-		previousSelected = clickedButton;
-		String command = String.valueOf(clickedButton.getClientProperty("id"));
-
-		switch (command) {
-		case "removeMaterial":
+		activeButton = clickedButton;
+		activeMaterial = (Material) clickedButton.getClientProperty("id");
+		
+		if(activeMaterial == null){
 			BrushController.setConstructionState(1);
-			clickedButton
-					.setBackground(Constants.BUTTON_BACKGROUND_DELETE_ACTIVE);
-			break;
-
-		case "placeMaterial":
+			clickedButton.setBackground(Constants.BUTTON_BACKGROUND_DELETE_ACTIVE);
+	        }else{
 			BrushController.setConstructionState(0);
 			clickedButton.setBackground(Constants.BUTTON_BACKGROUND_ACTIVE);
-			break;
 		}
 	}
 

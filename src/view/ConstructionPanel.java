@@ -1,5 +1,7 @@
 package view;
 
+import handler.ConstructionStrategy;
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -23,16 +25,17 @@ public class ConstructionPanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
     private Airship airship;
-    private MaterialFactory materialFactory;
     private final ArrayList<Material> materials;
 
     public ConstructionPanel(Airship airship) {
+        addMouseListener(new InputController(new ConstructionStrategy(airship)));
+        addMouseMotionListener(new InputController(new ConstructionStrategy(airship)));
+        
         this.setPreferredSize(new Dimension(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
         this.setDoubleBuffered(true);
         this.setFocusable(true);
         this.airship = airship;
         
-        this.materialFactory = MaterialFactory.getInstance();
 
         GridLayout mainLayout = new GridLayout(1, 2);
         this.setLayout(mainLayout);
@@ -47,9 +50,10 @@ public class ConstructionPanel extends JPanel {
         toolsGridPanel.setSize(Constants.WINDOW_WIDTH/2,Constants.WINDOW_HEIGHT/10);
         selectionSide.add(toolsGridPanel);
         
+        ButtonController buttonController = new ButtonController();
         JButton removeTilesButton = new JButton("Entfernen");
-        removeTilesButton.putClientProperty("id", "removeMaterial");
-        removeTilesButton.addActionListener(new ButtonController());
+        removeTilesButton.putClientProperty("id", null);
+        removeTilesButton.addActionListener(buttonController);
         removeTilesButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
         toolsGridPanel.add(removeTilesButton);
         
@@ -58,15 +62,14 @@ public class ConstructionPanel extends JPanel {
         JPanel tilesPickerPanel = new JPanel(tilesPickerGrid);
         selectionSide.add(tilesPickerPanel);
 
-        materials = this.materialFactory.getMaterials();
-
+        materials = MaterialFactory.getInstance().getMaterials();
         for (int i = 0; i < materials.size(); i++) {
 
             JButton tileButton = new JButton(materials.get(i).getName());
             tileButton.setIcon(new ImageIcon(materials.get(i).getImage()));
-            tileButton.putClientProperty("id", "placeMaterial");
-            tileButton.addMouseListener(new ButtonController(materials.get(i)));
-            tileButton.addActionListener(new ButtonController());
+            tileButton.putClientProperty("id", materials.get(i));
+            tileButton.addMouseListener(buttonController);
+            tileButton.addActionListener(buttonController);
             tileButton.setHorizontalAlignment(SwingConstants.LEFT);
             tileButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
             tilesPickerPanel.add(tileButton);

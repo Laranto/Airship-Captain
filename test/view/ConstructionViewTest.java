@@ -1,5 +1,7 @@
 package view;
 
+import handler.ConstructionStrategy;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -25,8 +27,8 @@ public class ConstructionViewTest {
         
         JFrame frame = new JFrame();
         JPanel pane = new ConstructionPanel(testship);
-        pane.addMouseListener(new InputController(testship));
-        pane.addMouseMotionListener(new InputController(testship));
+        pane.addMouseListener(new InputController(new ConstructionStrategy(testship)));
+        pane.addMouseMotionListener(new InputController(new ConstructionStrategy(testship)));
         frame.setContentPane(pane);
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
