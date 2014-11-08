@@ -30,12 +30,16 @@ public class ButtonController extends MouseAdapter implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+	    
+	    
+	    
 		if (activeButton != null) {
 			activeButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
 		}
 		JButton clickedButton = (JButton) e.getSource();
 		activeButton = clickedButton;
 		activeMaterial = (Material) clickedButton.getClientProperty("id");
+		
 		
 		if(activeMaterial == null){
 			BrushController.setConstructionState(1);

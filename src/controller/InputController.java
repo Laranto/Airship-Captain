@@ -17,7 +17,7 @@ public class InputController extends MouseAdapter implements KeyListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        strategy.mousePressed(e);
+        strategy.mouseEvent(e);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class InputController extends MouseAdapter implements KeyListener {
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        strategy.mouseDragged(e);
+        strategy.mouseEvent(e);
     }
 
     @Override
