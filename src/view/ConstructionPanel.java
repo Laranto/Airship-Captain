@@ -28,8 +28,10 @@ public class ConstructionPanel extends JPanel {
     private final ArrayList<Material> materials;
 
     public ConstructionPanel(Airship airship) {
-        addMouseListener(new InputController(new ConstructionStrategy(airship)));
-        addMouseMotionListener(new InputController(new ConstructionStrategy(airship)));
+        ConstructionStrategy strategy = new ConstructionStrategy(airship);
+        addMouseListener(new InputController(strategy));
+        addMouseMotionListener(new InputController(strategy));
+        ButtonController buttonController = new ButtonController(strategy);
         
         this.setPreferredSize(new Dimension(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
         this.setDoubleBuffered(true);
@@ -50,9 +52,8 @@ public class ConstructionPanel extends JPanel {
         toolsGridPanel.setSize(Constants.WINDOW_WIDTH/2,Constants.WINDOW_HEIGHT/10);
         selectionSide.add(toolsGridPanel);
         
-        ButtonController buttonController = new ButtonController();
         JButton removeTilesButton = new JButton("Entfernen");
-        removeTilesButton.putClientProperty("id", null);
+        removeTilesButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, null);
         removeTilesButton.addActionListener(buttonController);
         removeTilesButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
         toolsGridPanel.add(removeTilesButton);
@@ -64,11 +65,9 @@ public class ConstructionPanel extends JPanel {
 
         materials = MaterialFactory.getInstance().getMaterials();
         for (int i = 0; i < materials.size(); i++) {
-
             JButton tileButton = new JButton(materials.get(i).getName());
             tileButton.setIcon(new ImageIcon(materials.get(i).getImage()));
-            tileButton.putClientProperty("id", materials.get(i));
-            tileButton.addMouseListener(buttonController);
+            tileButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, materials.get(i));
             tileButton.addActionListener(buttonController);
             tileButton.setHorizontalAlignment(SwingConstants.LEFT);
             tileButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);

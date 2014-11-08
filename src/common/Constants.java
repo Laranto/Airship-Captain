@@ -22,5 +22,6 @@ public class Constants {
     public static final Color BUTTON_BACKGROUND_INACTIVE = Color.LIGHT_GRAY.brighter();
     public static final Color BUTTON_BACKGROUND_DELETE_ACTIVE = Color.RED;
     public static final Color BUTTON_BACKGROUND_ACTIVE = Color.LIGHT_GRAY;
+    public static final Object BUTTON_PROPERTY_ID = "id";
     
 }
