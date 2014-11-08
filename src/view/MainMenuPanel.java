@@ -16,14 +16,14 @@ public class MainMenuPanel extends JPanel{
 	}
 	
 	private void createMenu() {
-        JButton start=new JButton("Start"), load = new JButton("Load"), exit = new JButton("Exit");
-        start.addActionListener(new StartGameListener());
-        load.addActionListener(new LoadGameListener());
-        exit.addActionListener(new ExitGameListener());
-        
-        setLayout(new GridLayout(3, 1));
-        add(start);
-        add(load);
-        add(exit);
-    }
+            JButton start=new JButton("Start"), load = new JButton("Load"), exit = new JButton("Exit");
+            start.addActionListener(new StartGameListener());
+            load.addActionListener(new LoadGameListener());
+            exit.addActionListener(new ExitGameListener());
+            
+            setLayout(new GridLayout(3, 1));
+            add(start);
+            add(load);
+            add(exit);
+        }
 }
