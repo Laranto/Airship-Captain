@@ -38,9 +38,7 @@ public class EntityFactory extends ShippartFactory {
 
     private EntityFactory() {
         entities = new ArrayList<Entity>();
-    }
-
-    ;
+    };
     
 
     @Override
@@ -74,8 +72,11 @@ public class EntityFactory extends ShippartFactory {
         List<Element> materials = doc.getRootElement().getChildren(DOM_NODE_OBJECT);
         for (Element element : materials) {
 
-            String type = element.getAttribute(DOM_ATTR_TYPE).getValue(), name = element.getChildText(DOM_NODE_NAME), imagePath = xmlFile.getParent() + File.separator + element.getChildText(DOM_NODE_IMAGE);
-            int value = Integer.parseInt(element.getChildText(DOM_NODE_VALUE)), weight = Integer.parseInt(element.getChildText(DOM_NODE_WEIGHT));
+            String type = element.getAttribute(DOM_ATTR_TYPE).getValue()
+                 , name = element.getChildText(DOM_NODE_NAME)
+                 , imagePath = xmlFile.getParent() + File.separator + element.getChildText(DOM_NODE_IMAGE);
+            int value = Integer.parseInt(element.getChildText(DOM_NODE_VALUE))
+              , weight = Integer.parseInt(element.getChildText(DOM_NODE_WEIGHT));
 
             createInstance(type, imagePath, name, value, weight);
         }
@@ -94,7 +95,7 @@ public class EntityFactory extends ShippartFactory {
         o.setName(name);
         o.setValue(value);
         o.setWeight(weight);
-
+        o.setImage(imagePath);
         entities.add(o);
     }
 

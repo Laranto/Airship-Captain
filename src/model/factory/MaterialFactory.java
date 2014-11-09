@@ -1,5 +1,6 @@
 package model.factory;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -26,6 +27,8 @@ import common.Constants;
  * @author Laranto
  */
 public class MaterialFactory extends ShippartFactory {
+    private static final String TYPE_FLOOR = "floor";
+    private static final String TYPE_WALL = "wall";
     private static final String DOM_NODE_WEIGHT = "weight";
     private static final String DOM_NODE_DURABILITY = "durability";
     private static final String DOM_NODE_VALUE = "value";
@@ -87,36 +90,56 @@ public class MaterialFactory extends ShippartFactory {
                     ,durability=Integer.parseInt(element.getChildText(DOM_NODE_DURABILITY))
                     ,weight=Integer.parseInt(element.getChildText(DOM_NODE_WEIGHT));
             
-            createInstance(type, imagePath, name, durability, value, weight);
+            this.materials.add(createInstance(type, imagePath, name, durability, value, weight));
         }
     }
 
 
     /**
-     * Creating an instance of a material and adds it to the material list
-     * @throws IOException 
+     * Creating an instance of a material. Do not use this when you have the image already loaded.
+     * @throws IOException when the image can not be loaded
      */
-    private void createInstance(String type, String imagePath, String name, int durability, int value, int weight) throws IOException {
+    private Material createInstance(String type, String imagePath, String name, int durability, int value, int weight) throws IOException {
 
+        Material m = createInstance(type,name,durability,value,weight);
+
+        m.setImage(imagePath);
+        return m;
+    }
+    /**
+     * Creating an instance of a material. Does not parse the image again. If the image has been loaded this should be used.
+     */
+    private Material createInstance(String type, BufferedImage image, String name, int durability, int value, int weight){
+        
+        Material m = createInstance(type,name,durability,value,weight);
+        
+        m.setImage(image);
+        return m;
+    }
+
+    /**
+     * Utility for createInstace Methods.
+     */
+    private Material createInstance(String type , String name , int durability , int value , int weight) {
         Material m = null;
         switch (type) {
             default:
-            case "wall":
+            case TYPE_WALL:
                 m = new Wall();
                 break;
-            case "floor":
+            case TYPE_FLOOR:
                 m = new Floor();
                 break;
         }
 
         m.setDurability(durability);
-        m.setImage(imagePath);
         m.setName(name);
         m.setValue(value);
         m.setWeight(weight);
 
-        materials.add(m);
+        return m;
     }
+
 
     /**
      * Return all the materials, parses if the materials have not been parsed before.
@@ -143,18 +166,17 @@ public class MaterialFactory extends ShippartFactory {
             throw new RuntimeErrorException(new Error("Added prototype was not a Material." + prototype.toString()));
         }
         Material materialPrototype = (Material) prototype;
-        Material duplicate;
+        String type = TYPE_FLOOR; 
         if(prototype instanceof Wall){
-            duplicate = new Wall();
-        }else{
-            duplicate = new Floor();
+            type = TYPE_WALL;
         }
-        duplicate.setDurability(materialPrototype.getDurability());
-        duplicate.setImage(materialPrototype.getImage());
-        duplicate.setName(materialPrototype.getName());
-        duplicate.setValue(materialPrototype.getValue());
-        duplicate.setWeight(materialPrototype.getWeight());
-        return duplicate;
+        
+        return createInstance(type
+                , materialPrototype.getImage()
+                , materialPrototype.getName()
+                , materialPrototype.getDurability()
+                , materialPrototype.getValue()
+                , materialPrototype.getWeight());
     }
 
 }

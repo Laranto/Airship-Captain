@@ -1,26 +1,16 @@
 package model;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.awt.Graphics2D;
 
-import model.interfaces.Renderable;
-import common.ImageLoader;
 
-public abstract class Material extends ShipPart implements Renderable {
-    private BufferedImage image;
+public abstract class Material extends ShipPart {
     
-    public void setImage(BufferedImage image){
-        this.image=image;
-    }
-    public void setImage(String imagePath) throws IOException
-    {
-        image = ImageLoader.loadImage(new File(imagePath));
+    public Material() {
     }
     
-    public BufferedImage getImage()
-    {
-        return this.image;
+    @Override
+    public void render(Graphics2D g) {
+        g.drawImage(getImage(), null, 0, 0);
     }
        
 }

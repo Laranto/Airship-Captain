@@ -3,8 +3,8 @@ package model;
 public abstract class GameObject {
     
     private String name;
-    private double value;
-    private double weight;
+    private int value;
+    private int weight;
     
     public String getName() {
         return name;
@@ -12,16 +12,16 @@ public abstract class GameObject {
     public void setName(String name) {
         this.name = name;
     }
-    public double getValue() {
+    public int getValue() {
         return value;
     }
-    public void setValue(double value) {
+    public void setValue(int value) {
         this.value = value;
     }
-    public double getWeight() {
+    public int getWeight() {
         return weight;
     }
-    public void setWeight(double weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
     
