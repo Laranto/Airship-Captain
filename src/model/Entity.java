@@ -4,6 +4,8 @@ import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.Vector;
 
+import model.entity.Blocker;
+
 
 public abstract class Entity extends ShipPart{
     /**

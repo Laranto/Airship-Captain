@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import model.entity.Blocker;
 import model.factory.EntityFactory;
 import model.factory.MaterialFactory;
 import model.interfaces.Renderable;
