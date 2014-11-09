@@ -5,9 +5,12 @@ import java.awt.Point;
 import java.awt.geom.AffineTransform;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
+import model.factory.EntityFactory;
 import model.factory.MaterialFactory;
 import model.interfaces.Renderable;
+import model.material.Floor;
 import common.Constants;
 
 public class Airship implements Renderable{
@@ -22,6 +25,9 @@ public class Airship implements Renderable{
     }
     
     
+    /**
+     * Places a new instance of the given material at the given location. Only possible if the location is empty space.
+     */
     public void placeMaterial(Material mat, int tileX, int tileY){
         
         //Nothing on that tile yet
@@ -33,9 +39,61 @@ public class Airship implements Renderable{
         }
     }
     
+    
+    /**
+     * Places an entity at the given position if possible. Checks the Airship body and other placed entities if there is space to place it.
+     * @param entity Entity in the state, in which it should be placed 
+
+     */
+    public void placeEntity(Entity entity, int tileX, int tileY){
+        if(entity!=null){
+            List<Point> checkedPoints = new LinkedList<>();
+            if(canPlaceEntity(entity,tileX,tileY,checkedPoints)){
+                Entity placedEntity = (Entity) EntityFactory.getInstance().instanzise(entity);
+                equipment[tileX][tileY] = placedEntity;
+                for (Point point : checkedPoints) {
+                    if(equipment[point.x][point.y]==null){
+                        Blocker blocker = new Blocker();
+                        placedEntity.addBlocker(blocker);
+                        equipment[point.x][point.y]=blocker;
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Checks if an entity can be placed at the given point judging on placed entities and shipBody.  
+     * @param checkedPoints an empty list that will be filled with points that have been checked. 
+     * Only completely filled when the object can be placed.
+     * @return true when there is sufficient space to place the entity with the given orientation
+     */
+    private boolean canPlaceEntity(Entity entity , int tileX , int tileY, List<Point> checkedPoints) {
+        
+        equipment[tileX][tileY] = (Entity) EntityFactory.getInstance().instanzise(entity);
+        
+        int xExtend = entity.getOrientation().get(0)
+                , yExtend = entity.getOrientation().get(1);
+        int fromX=Math.min(tileX,tileX+xExtend)
+                ,toX=Math.max(tileX,tileX+xExtend);
+        int fromY=Math.min(tileY,tileY+yExtend)
+                ,toY=Math.max(tileY,tileY+yExtend);
+        for(int x = fromX;x<toX;x++){
+            for(int y = fromY;y<toY;y++){
+                if(shipBody[x][y] instanceof Floor && equipment[x][y]==null){
+                    checkedPoints.add(new Point(x, y));
+                }
+            }
+        }
+        
+        return checkedPoints.size()==Math.abs(xExtend*yExtend);
+    }
+
+
     /**
      * @return return ShipPart. If there is an equipment piece on the tile it will be returned. Else the material will be returned.
-     * If nothing is there, null will be returned.
+     * If nothing is there, null will be returned.<br>
+     * It is possible that a blocker is returned.
      */
     public ShipPart getShipPartByPosition(int tileX, int tileY)
     {
@@ -46,20 +104,25 @@ public class Airship implements Renderable{
     }
     
     /*
-    *   removes a material on the ship
+    *   Removes a material from the ship. There may not be any entities (or blockers) in the way for this 
     */
     public void removeMaterial(int tileX, int tileY)
     {
         /**
          * checking if the remove method has been called on the right
          */
-        if(tileX >= 0 && tileX < Constants.AIRSHIP_WIDTH_TILES && tileY >= 0 && tileY < Constants.AIRSHIP_WIDTH_TILES)
+        if(tileX >= 0 && tileX < Constants.AIRSHIP_WIDTH_TILES 
+                && tileY >= 0 && tileY < Constants.AIRSHIP_WIDTH_TILES
+                && equipment[tileX][tileY]==null)
         {
         	shipBody[tileX][tileY] = null;
         }
     }
 
 
+    /**
+     * Checks if the tile at the given position has other Material tiles next to it
+     */
     private boolean hasAdjacentTile(int tileX , int tileY) {
         return (tileX>0 && shipBody[tileX-1][tileY]!=null) 
                 || (tileX<Constants.AIRSHIP_WIDTH_TILES-1 && shipBody[tileX+1][tileY]!=null) 

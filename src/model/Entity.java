@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.geom.Point2D;
+import java.util.List;
 import java.util.Vector;
 
 
@@ -16,6 +17,8 @@ public abstract class Entity extends ShipPart{
      */
     private Point2D position;
     
+    private List<Blocker> associatedBlockers;
+    
     
     public void rotateLeft(){
         Integer tmp = orientation.get(0);
@@ -27,4 +30,24 @@ public abstract class Entity extends ShipPart{
         orientation.set(0, orientation.get(1)*-1);
         orientation.set(1, tmp);
     }
+    public Vector<Integer> getOrientation() {
+        return orientation;
+    }
+    public void setOrientation(Vector<Integer> orientation) {
+        this.orientation = orientation;
+    }
+    public Point2D getPosition() {
+        return position;
+    }
+    public void setPosition(Point2D position) {
+        this.position = position;
+    }
+    public List<Blocker> getAssociatedBlockers() {
+        return associatedBlockers;
+    }
+    public void addBlocker(Blocker blocker) {
+        getAssociatedBlockers().add(blocker);
+    }
+    
+    
 }
