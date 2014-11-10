@@ -46,7 +46,7 @@ public class Airship implements Renderable{
      * @param entity Entity in the state, in which it should be placed 
 
      */
-    public void placeEntity(Entity entity, int tileX, int tileY){
+    public boolean placeEntity(Entity entity, int tileX, int tileY){
         if(entity!=null){
             List<Point> checkedPoints = new LinkedList<>();
             if(canPlaceEntity(entity,tileX,tileY,checkedPoints)){
@@ -59,8 +59,10 @@ public class Airship implements Renderable{
                         equipment[point.x][point.y]=blocker;
                     }
                 }
+                return true;
             }
         }
+        return false;
     }
     
     /**
@@ -107,7 +109,7 @@ public class Airship implements Renderable{
     /*
     *   Removes a material from the ship. There may not be any entities (or blockers) in the way for this 
     */
-    public void removeMaterial(int tileX, int tileY)
+    public boolean removeMaterial(int tileX, int tileY)
     {
         /**
          * checking if the remove method has been called on the right
@@ -117,7 +119,9 @@ public class Airship implements Renderable{
                 && equipment[tileX][tileY]==null)
         {
         	shipBody[tileX][tileY] = null;
+        	return true;
         }
+        return false;
     }
 
 
