@@ -13,6 +13,7 @@ public abstract class ShipPart extends GameObject implements Renderable {
      * The Shipparts health
      */
     private int durability;
+    
     /**
      * Graphical Representation of the Part
      */
