@@ -6,6 +6,8 @@ public abstract class GameObject {
     private int value;
     private int weight;
     
+    
+    
     public String getName() {
         return name;
     }

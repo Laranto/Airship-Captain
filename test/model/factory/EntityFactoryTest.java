@@ -35,7 +35,7 @@ public class EntityFactoryTest {
 
             Entity object = entities.get(0);
             assertNotNull(object.getName());
-            System.out.println(object.getName());
+
 
         } catch (Exception e) {
             e.printStackTrace();
