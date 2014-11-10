@@ -9,6 +9,19 @@ import model.Entity;
  */
 public class Blocker extends Entity{
 
+    private Entity referencedEntity;
+    
+    public Blocker(Entity referencedEntity) {
+        super();
+        this.referencedEntity = referencedEntity;
+    }
+
+
+    public Entity getReferencedEntity() {
+        return referencedEntity;
+    }
+
+
     @Override
     public void render(Graphics2D g) {
     }

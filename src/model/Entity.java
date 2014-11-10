@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.geom.Dimension2D;
 import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.Vector;
@@ -13,7 +14,14 @@ public abstract class Entity extends ShipPart{
      */
     private Vector<Integer> orientation;
     
+    private Dimension2D size;
     
+    public Dimension2D getSize() {
+        return size;
+    }
+    public void setSize(Dimension2D size) {
+        this.size = size;
+    }
     /**
      * Position where the Startposition of the entity is placed.
      */

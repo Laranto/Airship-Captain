@@ -54,7 +54,7 @@ public class Airship implements Renderable{
                 equipment[tileX][tileY] = placedEntity;
                 for (Point point : checkedPoints) {
                     if(equipment[point.x][point.y]==null){
-                        Blocker blocker = new Blocker();
+                        Blocker blocker = new Blocker(placedEntity);
                         placedEntity.addBlocker(blocker);
                         equipment[point.x][point.y]=blocker;
                     }
@@ -73,8 +73,8 @@ public class Airship implements Renderable{
         
         equipment[tileX][tileY] = (Entity) EntityFactory.getInstance().instanzise(entity);
         
-        int xExtend = entity.getOrientation().get(0)
-                , yExtend = entity.getOrientation().get(1);
+        int xExtend = (int) entity.getSize().getWidth()
+                , yExtend = (int) entity.getSize().getHeight();
         int fromX=Math.min(tileX,tileX+xExtend)
                 ,toX=Math.max(tileX,tileX+xExtend);
         int fromY=Math.min(tileY,tileY+yExtend)
