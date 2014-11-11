@@ -15,6 +15,7 @@ import view.NavigationPanel;
  */
 public class WindowController{
 
+	
     private static JFrame container;
     private static JPanel mainMenu;
     private static JPanel constructionPanel;
@@ -54,9 +55,9 @@ public class WindowController{
     	showPanel(navigationPanel);
     }
     
-    public static void showHarbor(){
+    public static void showHarbor(Airship airship){
     	if(harborPanel == null){
-    		harborPanel = new HarborPanel();
+    		harborPanel = new HarborPanel(airship);
     	}
     	showPanel(harborPanel);
     }
