@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import common.Constants;
+import controller.enumeration.PropertyEnum;
 
 public class ButtonController implements ActionListener {
 
@@ -27,7 +28,7 @@ public class ButtonController implements ActionListener {
 		activeButton = clickedButton;
 		Object idProperty = clickedButton.getClientProperty(Constants.BUTTON_PROPERTY_ID);
 		strategy.publishProperty(idProperty);
-		if(idProperty == null){
+		if(idProperty == PropertyEnum.DELETE){
 			clickedButton.setBackground(Constants.BUTTON_BACKGROUND_DELETE_ACTIVE);
 	        }else{
 			clickedButton.setBackground(Constants.BUTTON_BACKGROUND_ACTIVE);
