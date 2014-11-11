@@ -1,6 +1,8 @@
 package model.entity;
 
 import java.awt.Graphics2D;
+import java.awt.Point;
+
 import model.Entity;
 
 /**
@@ -10,13 +12,14 @@ import model.Entity;
 public class Weapon extends Entity{
     private int damage;
     private int ammunition;
+    private Point aim;
 
     @Override
     public void render(Graphics2D g) {
     }
     
-    public void aim(){
-    
+    public void aim(int tileX, int tileY){
+        aim = new Point(tileX, tileY);
     };
     public void fire(){
     

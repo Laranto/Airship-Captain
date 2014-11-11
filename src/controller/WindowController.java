@@ -40,9 +40,9 @@ public class WindowController{
     	showPanel(constructionPanel);
     }
     
-    public static void showFight(){
+    public static void showFight(Airship airship){
     	if(fightPanel == null){
-    		fightPanel = new FightPanel();
+    		fightPanel = new FightPanel(airship);
     	}
     	showPanel(fightPanel);
     }
@@ -54,9 +54,9 @@ public class WindowController{
     	showPanel(navigationPanel);
     }
     
-    public static void showHarbor(){
+    public static void showHarbor(Airship airship){
     	if(harborPanel == null){
-    		harborPanel = new HarborPanel();
+    		harborPanel = new HarborPanel(airship);
     	}
     	showPanel(harborPanel);
     }

@@ -212,5 +212,17 @@ public class Airship implements Renderable{
         g.setColor(Constants.COLOR_SKYBLUE);
         g.fillRect(0, 0, Constants.TILE_SIZE,Constants.TILE_SIZE);
     }
+
+
+    /**
+     * Get an entity at the given position if possible.
+     * @param tileX     x-Coordinate to be checked for entity
+     * @param tileY     y-Coordinate to be checked for entity
+     * @return entity   If an entity has been found or <code>null</code> if no entity has been found.
+     *                  
+     */
+    public Entity getEntity(int tileX, int tileY) {
+        return equipment[tileX][tileY];
+    }
     
 }
