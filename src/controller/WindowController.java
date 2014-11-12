@@ -15,6 +15,7 @@ import view.NavigationPanel;
  */
 public class WindowController{
 
+	
     private static JFrame container;
     private static JPanel mainMenu;
     private static JPanel constructionPanel;

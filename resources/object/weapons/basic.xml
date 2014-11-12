@@ -7,5 +7,6 @@
         <ammunition>100</ammunition>
         <damage>5</damage>
         <value>10</value>
+        <durability>20</durability>
     </object>   
 </objects>

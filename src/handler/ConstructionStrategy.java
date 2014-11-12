@@ -38,7 +38,12 @@ public class ConstructionStrategy extends HandlerStrategy {
 
     @Override
     public void publishProperty(Object activeMaterial) {
-        this.activeMaterial = (Material) activeMaterial;
+        if(activeMaterial instanceof Material){
+            this.activeMaterial = (Material) activeMaterial;
+        }
+        else{
+            this.activeMaterial=null;
+        }
         isActive = true;
     }
 }

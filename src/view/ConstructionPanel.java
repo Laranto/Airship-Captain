@@ -20,6 +20,7 @@ import model.factory.MaterialFactory;
 import common.Constants;
 import controller.ButtonController;
 import controller.InputController;
+import controller.enumeration.PropertyEnum;
 
 public class ConstructionPanel extends JPanel {
 
@@ -53,7 +54,7 @@ public class ConstructionPanel extends JPanel {
         selectionSide.add(toolsGridPanel);
         
         JButton removeTilesButton = new JButton("Entfernen");
-        removeTilesButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, null);
+        removeTilesButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, PropertyEnum.DELETE);
         removeTilesButton.addActionListener(buttonController);
         removeTilesButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
         toolsGridPanel.add(removeTilesButton);

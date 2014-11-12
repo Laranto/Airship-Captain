@@ -46,7 +46,7 @@ public class Airship implements Renderable{
      * @param entity Entity in the state, in which it should be placed 
 
      */
-    public void placeEntity(Entity entity, int tileX, int tileY){
+    public boolean placeEntity(Entity entity, int tileX, int tileY){
         if(entity!=null){
             List<Point> checkedPoints = new LinkedList<>();
             if(canPlaceEntity(entity,tileX,tileY,checkedPoints)){
@@ -54,13 +54,15 @@ public class Airship implements Renderable{
                 equipment[tileX][tileY] = placedEntity;
                 for (Point point : checkedPoints) {
                     if(equipment[point.x][point.y]==null){
-                        Blocker blocker = new Blocker();
+                        Blocker blocker = new Blocker(placedEntity);
                         placedEntity.addBlocker(blocker);
                         equipment[point.x][point.y]=blocker;
                     }
                 }
+                return true;
             }
         }
+        return false;
     }
     
     /**
@@ -73,8 +75,8 @@ public class Airship implements Renderable{
         
         equipment[tileX][tileY] = (Entity) EntityFactory.getInstance().instanzise(entity);
         
-        int xExtend = entity.getOrientation().get(0)
-                , yExtend = entity.getOrientation().get(1);
+        int xExtend = (int) entity.getSize().getWidth()
+                , yExtend = (int) entity.getSize().getHeight();
         int fromX=Math.min(tileX,tileX+xExtend)
                 ,toX=Math.max(tileX,tileX+xExtend);
         int fromY=Math.min(tileY,tileY+yExtend)
@@ -107,7 +109,7 @@ public class Airship implements Renderable{
     /*
     *   Removes a material from the ship. There may not be any entities (or blockers) in the way for this 
     */
-    public void removeMaterial(int tileX, int tileY)
+    public boolean removeMaterial(int tileX, int tileY)
     {
         /**
          * checking if the remove method has been called on the right
@@ -117,7 +119,9 @@ public class Airship implements Renderable{
                 && equipment[tileX][tileY]==null)
         {
         	shipBody[tileX][tileY] = null;
+        	return true;
         }
+        return false;
     }
 
 
