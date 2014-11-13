@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects>
-    <object type="weapon" width="2" height="2">
-        <name>AK 47</name>
-        <image>img/iron_block.png</image>
-        <weight>20</weight>
+    <object type="weapon" width="2" height="1">
+        <name>Cannon</name>
+        <image>img/cannon.png</image>
+        <weight>100</weight>
+        <ammunition>100</ammunition>
+        <damage>5</damage>
+        <value>10</value>
+        <durability>20</durability>
+    </object>   
+    <object type="weapon" width="2" height="1">
+        <name>Cannon</name>
+        <image>img/cannon.png</image>
+        <weight>100</weight>
+        <ammunition>100</ammunition>
+        <damage>5</damage>
+        <value>10</value>
+        <durability>20</durability>
+    </object>   
+    <object type="weapon" width="2" height="1">
+        <name>Cannon</name>
+        <image>img/cannon.png</image>
+        <weight>100</weight>
+        <ammunition>100</ammunition>
+        <damage>5</damage>
+        <value>10</value>
+        <durability>20</durability>
+    </object>   
+    <object type="weapon" width="2" height="1">
+        <name>Cannon</name>
+        <image>img/cannon.png</image>
+        <weight>100</weight>
         <ammunition>100</ammunition>
         <damage>5</damage>
         <value>10</value>

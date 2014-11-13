@@ -28,7 +28,7 @@ public class ButtonController implements ActionListener {
 		activeButton = clickedButton;
 		Object idProperty = clickedButton.getClientProperty(Constants.BUTTON_PROPERTY_ID);
 		strategy.publishProperty(idProperty);
-		if(idProperty == PropertyEnum.DELETE){
+		if(idProperty == PropertyEnum.DELETE_MATERIAL){
 			clickedButton.setBackground(Constants.BUTTON_BACKGROUND_DELETE_ACTIVE);
 	        }else{
 			clickedButton.setBackground(Constants.BUTTON_BACKGROUND_ACTIVE);

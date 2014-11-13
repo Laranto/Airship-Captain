@@ -1,5 +1,5 @@
 package controller.enumeration;
 
 public enum PropertyEnum {
-    DELETE
+    DELETE_MATERIAL,DELETE_ENTITY
 }
