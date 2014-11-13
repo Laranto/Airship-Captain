@@ -25,7 +25,7 @@ public class HarborStrategy extends HandlerStrategy {
 			WindowController.showConstruction(this.airship);
 			break;
 		case MARKET:
-			// TODO: implement market panel
+		    WindowController.showMarket(this.airship);
 			break;
 		case SAVE_GAME:
 			// TODO: implement save listener
