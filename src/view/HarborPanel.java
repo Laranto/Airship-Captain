@@ -2,7 +2,6 @@ package view;
 
 import handler.HarborStrategy;
 
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,23 +17,20 @@ import common.Constants;
 
 import controller.ButtonController;
 
-public class HarborPanel extends JPanel {
+public class HarborPanel extends GameDefaultPanel {
 
     private Airship airship;
 
     private List<MENU> navigationButtons;
 
     public HarborPanel(Airship airship) {
+        this.setLayout(null);
+        
         this.airship = airship;
 
         HarborStrategy harborStrategy = new HarborStrategy(this.airship);
         ButtonController buttonController = new ButtonController(harborStrategy);
 
-        this.setLayout(null);
-        this.setPreferredSize(new Dimension(Constants.WINDOW_WIDTH,
-                Constants.WINDOW_HEIGHT));
-        this.setDoubleBuffered(true);
-        this.setFocusable(true);
 
         navigationButtons = new ArrayList<MENU>();
         navigationButtons.add(MENU.SHIPYARD);
