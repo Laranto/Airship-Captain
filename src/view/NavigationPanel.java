@@ -2,6 +2,6 @@ package view;
 
 import javax.swing.JPanel;
 
-public class NavigationPanel extends JPanel {
+public class NavigationPanel extends GameDefaultPanel {
 
 }

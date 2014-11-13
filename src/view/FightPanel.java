@@ -17,7 +17,7 @@ import common.Constants;
 
 import controller.InputController;
 
-public class FightPanel extends JPanel {
+public class FightPanel extends GameDefaultPanel {
     private Airship airship;
     private Airship enemy;
     
@@ -32,9 +32,6 @@ public class FightPanel extends JPanel {
         addMouseListener(new InputController(strategy));
         addMouseMotionListener(new InputController(strategy));
         
-        this.setPreferredSize(new Dimension(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
-        this.setDoubleBuffered(true);
-        this.setFocusable(true);
         this.airship = airship;
         
 

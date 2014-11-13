@@ -26,7 +26,7 @@ import controller.ButtonController;
 import controller.InputController;
 import controller.enumeration.PropertyEnum;
 
-public class ConstructionPanel extends JPanel {
+public class ConstructionPanel extends GameDefaultPanel {
 
     private static final long serialVersionUID = 1L;
     private Airship airship;
@@ -37,9 +37,6 @@ public class ConstructionPanel extends JPanel {
         addMouseMotionListener(new InputController(strategy));
         ButtonController buttonController = new ButtonController(strategy);
         
-        this.setPreferredSize(new Dimension(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
-        this.setDoubleBuffered(true);
-        this.setFocusable(true);
         this.airship = airship;
         
 

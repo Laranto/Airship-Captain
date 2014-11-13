@@ -9,7 +9,7 @@ import controller.ExitGameListener;
 import controller.LoadGameListener;
 import controller.StartGameListener;
 
-public class MainMenuPanel extends JPanel{
+public class MainMenuPanel extends GameDefaultPanel{
 	
 	public MainMenuPanel(){
 		createMenu();
