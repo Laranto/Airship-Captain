@@ -8,6 +8,7 @@ import view.ConstructionPanel;
 import view.FightPanel;
 import view.HarborPanel;
 import view.MainMenuPanel;
+import view.MarketPanel;
 import view.NavigationPanel;
 
 /**
@@ -22,6 +23,7 @@ public class WindowController{
     private static JPanel fightPanel;
     private static JPanel navigationPanel;
     private static JPanel harborPanel;
+    private static JPanel marketPanel;
     
     public static void setFrame(JFrame frame){
     	container = frame;
@@ -60,6 +62,15 @@ public class WindowController{
     		harborPanel = new HarborPanel(airship);
     	}
     	showPanel(harborPanel);
+    }
+    
+    public static void showMarket(Airship airship)
+    {
+        if(marketPanel == null)
+        {
+            marketPanel = new MarketPanel(airship);
+        }
+        showPanel(marketPanel);
     }
     
     private static void showPanel(JPanel panel) {
