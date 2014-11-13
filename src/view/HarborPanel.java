@@ -2,7 +2,6 @@ package view;
 
 import handler.HarborStrategy;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
@@ -14,9 +13,10 @@ import javax.swing.SwingConstants;
 
 import model.Airship;
 import model.enums.MENU;
+
 import common.Constants;
+
 import controller.ButtonController;
-import controller.InputController;
 
 public class HarborPanel extends JPanel {
 
