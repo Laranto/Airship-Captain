@@ -66,7 +66,13 @@ public class ConstructionPanel extends GameDefaultPanel {
         
         addRemoveButton(buttonController, toolsGridPanel,PropertyEnum.DELETE_ENTITY);
         addSaveButton(buttonController,toolsGridPanel);
-
+        
+        JButton moveButton = new JButton("Gegenstand bewegen");
+        moveButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, PropertyEnum.MOVE);
+        moveButton.addActionListener(buttonController);
+        moveButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
+        toolsGridPanel.add(moveButton);
+        
         ArrayList<Entity> entities = EntityFactory.getInstance().getEntities();
         GridLayout tilesPickerGrid = new GridLayout(entities.size()/2, 2);
         JPanel tilesPickerPanel = new JPanel(tilesPickerGrid);
