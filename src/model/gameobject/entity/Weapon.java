@@ -22,10 +22,6 @@ public class Weapon extends Entity{
         super(name , value , weight , durability , image , orientation , size);
     }
 
-    @Override
-    public void render(Graphics2D g) {
-    }
-    
     public void aim(int tileX, int tileY){
         aim = new Point(tileX, tileY);
     };
