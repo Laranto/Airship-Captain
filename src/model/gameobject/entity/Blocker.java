@@ -1,8 +1,8 @@
-package model.entity;
+package model.gameobject.entity;
 
 import java.awt.Graphics2D;
 
-import model.Entity;
+import model.gameobject.Entity;
 
 /**
  * This is a blocking class. Its used to mark a tile on the airship as used by a large entity

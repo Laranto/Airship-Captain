@@ -2,9 +2,9 @@ package handler;
 
 import java.awt.event.MouseEvent;
 
-import model.Airship;
-import model.Entity;
-import model.entity.Weapon;
+import model.gameobject.Airship;
+import model.gameobject.Entity;
+import model.gameobject.entity.Weapon;
 import common.Constants;
 
 public class FightStrategy extends HandlerStrategy {

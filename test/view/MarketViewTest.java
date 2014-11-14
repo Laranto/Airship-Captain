@@ -6,8 +6,8 @@ import javax.swing.JPanel;
 import common.Constants;
 
 import controller.WindowController;
-import model.Airship;
 import model.factory.MaterialFactory;
+import model.gameobject.Airship;
 
 public class MarketViewTest {
 

@@ -10,10 +10,10 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import model.Airship;
-import model.enums.MENU;
+import model.gameobject.Airship;
 
 import common.Constants;
+import common.enums.MenuItemEnum;
 
 import controller.ButtonController;
 
@@ -21,7 +21,7 @@ public class HarborPanel extends GameDefaultPanel {
 
     private Airship airship;
 
-    private List<MENU> navigationButtons;
+    private List<MenuItemEnum> navigationButtons;
 
     public HarborPanel(Airship airship) {
         this.setLayout(null);
@@ -32,12 +32,12 @@ public class HarborPanel extends GameDefaultPanel {
         ButtonController buttonController = new ButtonController(harborStrategy);
 
 
-        navigationButtons = new ArrayList<MENU>();
-        navigationButtons.add(MENU.SHIPYARD);
-        navigationButtons.add(MENU.MARKET);
-        navigationButtons.add(MENU.SAVE_GAME);
-        navigationButtons.add(MENU.LOAD_GAME);
-        navigationButtons.add(MENU.EXIT_GAME);
+        navigationButtons = new ArrayList<MenuItemEnum>();
+        navigationButtons.add(MenuItemEnum.SHIPYARD);
+        navigationButtons.add(MenuItemEnum.MARKET);
+        navigationButtons.add(MenuItemEnum.SAVE_GAME);
+        navigationButtons.add(MenuItemEnum.LOAD_GAME);
+        navigationButtons.add(MenuItemEnum.EXIT_GAME);
 
         GridLayout mainGridLayout = new GridLayout(0, 1);
         mainGridLayout.setVgap(10);
@@ -48,7 +48,7 @@ public class HarborPanel extends GameDefaultPanel {
         navigationGridPanel.setLocation(Constants.WINDOW_WIDTH * 3 / 4, Constants.WINDOW_HEIGHT * 1 / 8);
         add(navigationGridPanel);
 
-        for (MENU navigationButton : navigationButtons) {
+        for (MenuItemEnum navigationButton : navigationButtons) {
 
             JButton harborButton = new JButton(navigationButton.text());
             harborButton.putClientProperty(Constants.BUTTON_PROPERTY_ID,

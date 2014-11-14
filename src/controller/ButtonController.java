@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import common.Constants;
-import controller.enumeration.PropertyEnum;
+import common.enums.PropertyEnum;
 
 public class ButtonController implements ActionListener {
 

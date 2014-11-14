@@ -3,8 +3,8 @@ package view;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import model.Airship;
 import model.factory.MaterialFactory;
+import model.gameobject.Airship;
 
 public class FightViewTest {
     public static void main(String[] args) {

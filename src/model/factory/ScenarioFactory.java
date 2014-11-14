@@ -1,7 +1,7 @@
 package model.factory;
 
-import model.Airship;
-import model.Scenario;
+import model.gameobject.Airship;
+import model.navigation.Scenario;
 
 public class ScenarioFactory {
 

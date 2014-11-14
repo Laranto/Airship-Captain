@@ -3,8 +3,8 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
-import model.Material;
 import model.factory.MaterialFactory;
+import model.gameobject.Material;
 
 import org.junit.Before;
 import org.junit.Test;

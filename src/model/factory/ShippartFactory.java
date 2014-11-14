@@ -6,7 +6,7 @@
 
 package model.factory;
 
-import model.ShipPart;
+import model.gameobject.ShipPart;
 
 /**
  *

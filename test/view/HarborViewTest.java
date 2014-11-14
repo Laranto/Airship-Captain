@@ -3,8 +3,8 @@ package view;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import model.Airship;
 import model.factory.MaterialFactory;
+import model.gameobject.Airship;
 
 import common.Constants;
 

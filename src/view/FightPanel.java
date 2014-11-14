@@ -9,9 +9,9 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
-import model.Airship;
-import model.Scenario;
 import model.factory.ScenarioFactory;
+import model.gameobject.Airship;
+import model.navigation.Scenario;
 
 import common.Constants;
 

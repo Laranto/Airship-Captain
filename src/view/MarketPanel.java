@@ -1,6 +1,5 @@
 package view;
 
-import handler.HarborStrategy;
 import handler.MarketStrategy;
 
 import java.awt.GridLayout;
@@ -11,10 +10,10 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import model.Airship;
-import model.enums.MARKET_BUTTONS;
+import model.gameobject.Airship;
 
 import common.Constants;
+import common.enums.MenuItemEnum;
 
 import controller.ButtonController;
 
@@ -22,7 +21,7 @@ public class MarketPanel extends GameDefaultPanel {
 
     private Airship airship;
     
-    private List<MARKET_BUTTONS> marketButtons;
+    private List<MenuItemEnum> marketButtons;
     
     public MarketPanel(Airship airship) {
         this.setLayout(null);
@@ -35,8 +34,8 @@ public class MarketPanel extends GameDefaultPanel {
         /**
          * For placing the harbor button
          */
-        JButton harborButton = new JButton(MARKET_BUTTONS.HARBOR.text());
-        harborButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, MARKET_BUTTONS.HARBOR);
+        JButton harborButton = new JButton(MenuItemEnum.HARBOR.text());
+        harborButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, MenuItemEnum.HARBOR);
         harborButton.setHorizontalAlignment(SwingConstants.CENTER);
         harborButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
         harborButton.addActionListener(buttonController);
@@ -47,9 +46,9 @@ public class MarketPanel extends GameDefaultPanel {
          * For placing buy and sell buttons
          */
         
-        marketButtons = new ArrayList<MARKET_BUTTONS>();
-        marketButtons.add(MARKET_BUTTONS.BUY);
-        marketButtons.add(MARKET_BUTTONS.SELL);
+        marketButtons = new ArrayList<MenuItemEnum>();
+        marketButtons.add(MenuItemEnum.BUY);
+        marketButtons.add(MenuItemEnum.SELL);
         
         GridLayout mainGridLayout = new GridLayout(0, 2);
         mainGridLayout.setHgap(10);
@@ -59,7 +58,7 @@ public class MarketPanel extends GameDefaultPanel {
         navigationGridPanel.setLocation(Constants.WINDOW_WIDTH * 3 / 5, Constants.WINDOW_HEIGHT * 6 / 7);
         add(navigationGridPanel);
 
-        for (MARKET_BUTTONS marketButtonItem : marketButtons) {
+        for (MenuItemEnum marketButtonItem : marketButtons) {
 
             JButton marketButton = new JButton(marketButtonItem.text());
             marketButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, marketButtonItem);

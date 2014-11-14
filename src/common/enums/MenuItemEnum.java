@@ -1,7 +1,16 @@
-package model.enums;
+package common.enums;
 
-public enum MENU {
+public enum MenuItemEnum {
 
+    /*
+     * Market
+     */
+    BUY("Kaufen"), 
+    SELL("Verkaufen"),
+    HARBOR("Hafen"),
+    /*
+     * Harbor
+     */
 	SHIPYARD("Werft"), 
 	MARKET("Markt"), 
 	SAVE_GAME("Speichern..."), 
@@ -10,7 +19,7 @@ public enum MENU {
 	
 	private String text;
 
-	private MENU(String text) {
+	private MenuItemEnum(String text) {
 		this.text = text;
 	}
 	

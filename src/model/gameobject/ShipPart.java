@@ -1,4 +1,4 @@
-package model;
+package model.gameobject;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -6,7 +6,6 @@ import java.io.IOException;
 
 import common.ImageLoader;
 
-import model.interfaces.Renderable;
 
 public abstract class ShipPart extends GameObject implements Renderable {
     /**

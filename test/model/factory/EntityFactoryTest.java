@@ -3,9 +3,9 @@ package model.factory;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import model.Entity;
 
-import model.Material;
+import model.gameobject.Entity;
+import model.gameobject.Material;
 
 import org.junit.Before;
 import org.junit.Test;

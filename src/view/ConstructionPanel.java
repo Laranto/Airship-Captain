@@ -16,15 +16,15 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 
-import model.Airship;
-import model.Entity;
-import model.Material;
 import model.factory.EntityFactory;
 import model.factory.MaterialFactory;
+import model.gameobject.Airship;
+import model.gameobject.Entity;
+import model.gameobject.Material;
 import common.Constants;
+import common.enums.PropertyEnum;
 import controller.ButtonController;
 import controller.InputController;
-import controller.enumeration.PropertyEnum;
 
 public class ConstructionPanel extends GameDefaultPanel {
 

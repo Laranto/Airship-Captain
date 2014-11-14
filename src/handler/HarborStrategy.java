@@ -2,15 +2,16 @@ package handler;
 
 import java.awt.event.MouseEvent;
 
+import common.enums.MenuItemEnum;
+
 import controller.ExitGameListener;
 import controller.LoadGameListener;
 import controller.WindowController;
-import model.Airship;
-import model.enums.MENU;
+import model.gameobject.Airship;
 
 public class HarborStrategy extends HandlerStrategy {
 
-	private MENU activeMenu;
+	private MenuItemEnum activeMenu;
 
 	private Airship airship;
 
@@ -44,7 +45,7 @@ public class HarborStrategy extends HandlerStrategy {
 
 	@Override
 	public void publishProperty(Object activeMenu) {
-		this.activeMenu = (MENU) activeMenu;
+		this.activeMenu = (MenuItemEnum) activeMenu;
 		this.mouseEvent(null);
 	}
 

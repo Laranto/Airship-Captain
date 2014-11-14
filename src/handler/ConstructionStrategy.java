@@ -2,8 +2,8 @@ package handler;
 
 import java.awt.event.MouseEvent;
 
-import model.Airship;
-import model.Material;
+import model.gameobject.Airship;
+import model.gameobject.Material;
 
 import common.Constants;
 

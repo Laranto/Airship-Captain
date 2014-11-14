@@ -9,10 +9,10 @@ import java.util.List;
 
 import javax.management.RuntimeErrorException;
 
-import model.Material;
-import model.ShipPart;
-import model.material.Floor;
-import model.material.Wall;
+import model.gameobject.Material;
+import model.gameobject.ShipPart;
+import model.gameobject.material.Floor;
+import model.gameobject.material.Wall;
 
 import org.jdom2.Document;
 import org.jdom2.Element;

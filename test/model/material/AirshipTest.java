@@ -1,9 +1,9 @@
 package model.material;
 
 import static org.junit.Assert.*;
-import model.Airship;
-import model.Material;
 import model.factory.MaterialFactory;
+import model.gameobject.Airship;
+import model.gameobject.Material;
 
 import org.junit.Before;
 import org.junit.Test;

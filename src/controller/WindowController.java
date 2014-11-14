@@ -3,7 +3,7 @@ package controller;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import model.Airship;
+import model.gameobject.Airship;
 import view.ConstructionPanel;
 import view.FightPanel;
 import view.HarborPanel;

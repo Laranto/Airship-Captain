@@ -2,14 +2,15 @@ package handler;
 
 import java.awt.event.MouseEvent;
 
-import model.Airship;
-import model.enums.MARKET_BUTTONS;
-import model.enums.MENU;
+import model.gameobject.Airship;
+
+import common.enums.MenuItemEnum;
+
 import controller.WindowController;
 
 public class MarketStrategy extends HandlerStrategy {
 
-    private MARKET_BUTTONS activeMenu;
+    private MenuItemEnum activeMenu;
     private Airship airship;
 
     public MarketStrategy(Airship airship) {
@@ -28,7 +29,6 @@ public class MarketStrategy extends HandlerStrategy {
         case HARBOR:
             WindowController.showHarbor(this.airship);
             break;
-
         default:
             break;
         }
@@ -36,7 +36,7 @@ public class MarketStrategy extends HandlerStrategy {
 
     @Override
     public void publishProperty(Object activeMenu) {
-        this.activeMenu = (MARKET_BUTTONS) activeMenu;
+        this.activeMenu = (MenuItemEnum) activeMenu;
         this.mouseEvent(null);
     }
 
