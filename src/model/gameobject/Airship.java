@@ -52,7 +52,6 @@ public class Airship extends GameObject implements Renderable{
         if(entity!=null){
             List<Point> checkedPoints = new LinkedList<>();
             if(canPlaceEntity(entity,tileX,tileY,checkedPoints)){
-                System.out.println("MEEEEEEEEEEEEEEEEP");
                 Entity placedEntity = (Entity) EntityFactory.getInstance().instanzise(entity);
                 equipment[tileX][tileY] = placedEntity;
                 for (Point point : checkedPoints) {

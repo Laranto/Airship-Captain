@@ -1,5 +1,6 @@
 package handler;
 
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 import model.gameobject.Airship;
@@ -39,5 +40,11 @@ public class FightStrategy extends HandlerStrategy {
     @Override
     public void publishProperty(Object activeEntity) {
         this.activeEntity = (Entity) activeEntity;
+    }
+
+    @Override
+    public void keyEvent(KeyEvent e) {
+        // TODO Auto-generated method stub
+        
     }
 }

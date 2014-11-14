@@ -1,6 +1,8 @@
 package common;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Vector;
 
 public class Constants {
     public static final String FOLDER_MATERIAL = "resources/material/";
@@ -23,5 +25,26 @@ public class Constants {
     public static final Color BUTTON_BACKGROUND_DELETE_ACTIVE = Color.RED;
     public static final Color BUTTON_BACKGROUND_ACTIVE = Color.LIGHT_GRAY;
     public static final Object BUTTON_PROPERTY_ID = "id";
+    
+    
+    /**
+     * Default Orientation pointing right
+     */
+    @SuppressWarnings("all") //Hush, everything is oke
+    public static final Vector<Integer> ENTITY_ORIENTATION_RIGHT=new Vector<>(new ArrayList(){{add(1);add(0);}}
+    );
+    
+    @SuppressWarnings("all") //Hush, everything is oke
+    public static final Vector<Integer> ENTITY_ORIENTATION_LEFT=new Vector<>(new ArrayList(){{add(-1);add(0);}}
+            );
+    
+    @SuppressWarnings("all") //Hush, everything is oke
+    public static final Vector<Integer> ENTITY_ORIENTATION_UP=new Vector<>(new ArrayList(){{add(0);add(-1);}}
+            );
+    
+    @SuppressWarnings("all") //Hush, everything is oke
+    public static final Vector<Integer> ENTITY_ORIENTATION_DOWN=new Vector<>(new ArrayList(){{add(0);add(1);}}
+            );
+    
     
 }
