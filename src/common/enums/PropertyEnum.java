@@ -1,5 +1,5 @@
 package common.enums;
 
 public enum PropertyEnum {
-    DELETE_MATERIAL,DELETE_ENTITY
+    DELETE_MATERIAL,DELETE_ENTITY, SAVE, MOVE;
 }
