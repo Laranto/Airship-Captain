@@ -2,6 +2,7 @@ package view;
 
 import handler.ConstructionStrategy;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -9,7 +10,7 @@ import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
-import javax.swing.BoxLayout;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -21,8 +22,10 @@ import model.factory.MaterialFactory;
 import model.gameobject.Airship;
 import model.gameobject.Entity;
 import model.gameobject.Material;
+
 import common.Constants;
 import common.enums.PropertyEnum;
+
 import controller.ButtonController;
 import controller.InputController;
 
@@ -57,22 +60,17 @@ public class ConstructionPanel extends GameDefaultPanel {
     }
 
 	private JPanel createEntityPanel(ButtonController buttonController) {
-		JPanel materialPanel = new JPanel();
+		JPanel entityPanel = new JPanel();
         JPanel toolsGridPanel = createToolGridPanel();
-        materialPanel.add(toolsGridPanel);
+        entityPanel.add(toolsGridPanel);
         
-        JButton removeTilesButton = new JButton("Entfernen");
-        removeTilesButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, PropertyEnum.DELETE_MATERIAL);
-        removeTilesButton.addActionListener(buttonController);
-        removeTilesButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
-        toolsGridPanel.add(removeTilesButton);
-        
-
-        GridLayout tilesPickerGrid = new GridLayout(5, 2);
-        JPanel tilesPickerPanel = new JPanel(tilesPickerGrid);
-        materialPanel.add(tilesPickerPanel);
+        addRemoveButton(buttonController, toolsGridPanel,PropertyEnum.DELETE_ENTITY);
+        addSaveButton(buttonController,toolsGridPanel);
 
         ArrayList<Entity> entities = EntityFactory.getInstance().getEntities();
+        GridLayout tilesPickerGrid = new GridLayout(entities.size()/2, 2);
+        JPanel tilesPickerPanel = new JPanel(tilesPickerGrid);
+        entityPanel.add(tilesPickerPanel);
         for (int i = 0; i < entities.size(); i++) {
             JButton tileButton = new JButton(entities.get(i).getName());
             tileButton.setIcon(new ImageIcon(entities.get(i).getImage()));
@@ -83,27 +81,24 @@ public class ConstructionPanel extends GameDefaultPanel {
             tilesPickerPanel.add(tileButton);
         }
         
-		return materialPanel;
+		return entityPanel;
 	}
 
-	private JPanel createMaterialPanel(ButtonController buttonController) {
+    private JPanel createMaterialPanel(ButtonController buttonController) {
 		
 		JPanel materialPanel = new JPanel();
         JPanel toolsGridPanel = createToolGridPanel();
         materialPanel.add(toolsGridPanel);
         
-        JButton removeTilesButton = new JButton("Entfernen");
-        removeTilesButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, PropertyEnum.DELETE_MATERIAL);
-        removeTilesButton.addActionListener(buttonController);
-        removeTilesButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
-        toolsGridPanel.add(removeTilesButton);
-        
+        addRemoveButton(buttonController, toolsGridPanel,PropertyEnum.DELETE_MATERIAL);
+        addSaveButton(buttonController,toolsGridPanel);
 
-        GridLayout tilesPickerGrid = new GridLayout(5, 2);
+        
+        ArrayList<Material> materials = MaterialFactory.getInstance().getMaterials();
+
+        GridLayout tilesPickerGrid = new GridLayout(materials.size()/2, 2);
         JPanel tilesPickerPanel = new JPanel(tilesPickerGrid);
         materialPanel.add(tilesPickerPanel);
-
-        ArrayList<Material> materials = MaterialFactory.getInstance().getMaterials();
         for (int i = 0; i < materials.size(); i++) {
             JButton tileButton = new JButton(materials.get(i).getName());
             tileButton.setIcon(new ImageIcon(materials.get(i).getImage()));
@@ -116,9 +111,26 @@ public class ConstructionPanel extends GameDefaultPanel {
 		return materialPanel;
 	}
 
+    private void addSaveButton(ButtonController buttonController , JPanel toolsGridPanel) {
+        JButton saveButton = new JButton("Speichern");
+        saveButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, PropertyEnum.SAVE);
+        saveButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
+        saveButton.addActionListener(buttonController);
+        toolsGridPanel.add(saveButton);
+    }
+    
+    public void addRemoveButton(ButtonController buttonController , JPanel toolsGridPanel, PropertyEnum removeType) {
+        JButton removeTilesButton = new JButton("Entfernen");
+        removeTilesButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, removeType);
+        removeTilesButton.addActionListener(buttonController);
+        removeTilesButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
+        toolsGridPanel.add(removeTilesButton);
+    }
+
 	private JPanel createToolGridPanel() {
-		JPanel toolsGridPanel = new JPanel(new FlowLayout());
-        toolsGridPanel.setSize(Constants.WINDOW_WIDTH/2,Constants.WINDOW_HEIGHT/10);
+		JPanel toolsGridPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		toolsGridPanel.setBorder(BorderFactory.createMatteBorder(0, 3, 1, 3, Color.BLACK));
+		toolsGridPanel.setPreferredSize(new Dimension(Constants.WINDOW_WIDTH/2, Constants.WINDOW_HEIGHT/16));
 		return toolsGridPanel;
 	}
 
