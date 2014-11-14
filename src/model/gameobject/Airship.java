@@ -246,7 +246,18 @@ public class Airship extends GameObject implements Renderable{
 
     @Override
     public int getValue() {
-        return super.getValue();
+        int value = 0;
+        for(int x = -1;x<=1;x++){
+            for(int y = -1;y<=1;y++){
+                if(shipBody[x][y]!=null){
+                    value+=shipBody[x][y].getValue();
+                }
+                if(equipment[x][y]!=null){
+                    value+=equipment[x][y].getValue();
+                }
+            }
+         }
+        return value;
     }
 
 
@@ -258,7 +269,18 @@ public class Airship extends GameObject implements Renderable{
 
     @Override
     public int getWeight() {
-        return super.getWeight();
+        int weight = 0;
+        for(int x = -1;x<=1;x++){
+            for(int y = -1;y<=1;y++){
+                if(shipBody[x][y]!=null){
+                    weight+=shipBody[x][y].getWeight();
+                }
+                if(equipment[x][y]!=null){
+                    weight+=equipment[x][y].getWeight();
+                }
+            }
+         }
+        return weight;
     }
 
 
