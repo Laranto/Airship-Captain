@@ -13,6 +13,14 @@ public abstract class ShipPart extends GameObject implements Renderable {
      */
     private int durability;
     
+    
+    
+    public ShipPart(String name , int value , int weight , int durability , BufferedImage image) {
+        super(name , value , weight);
+        this.durability = durability;
+        this.image = image;
+    }
+
     /**
      * Graphical Representation of the Part
      */

@@ -21,6 +21,7 @@ public class Airship extends GameObject implements Renderable{
     private boolean isEmpty;
     
     public Airship() {
+        super(null,0,0);
         shipBody    = new Material[Constants.AIRSHIP_WIDTH_TILES][Constants.AIRSHIP_HEIGHT_TILES];
         equipment   = new Entity[Constants.AIRSHIP_WIDTH_TILES][Constants.AIRSHIP_HEIGHT_TILES];
         isEmpty=true;

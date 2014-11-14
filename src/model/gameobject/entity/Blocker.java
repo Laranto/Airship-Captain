@@ -1,6 +1,10 @@
 package model.gameobject.entity;
 
 import java.awt.Graphics2D;
+import java.awt.geom.Dimension2D;
+import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
+import java.util.Vector;
 
 import model.gameobject.Entity;
 
@@ -11,8 +15,10 @@ public class Blocker extends Entity{
 
     private Entity referencedEntity;
     
+
+
     public Blocker(Entity referencedEntity) {
-        super();
+        super(null,0,0,0,null,null,null);
         this.referencedEntity = referencedEntity;
     }
 

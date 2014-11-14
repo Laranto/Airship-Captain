@@ -21,18 +21,24 @@ public class ButtonController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (activeButton != null) {
-			activeButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
-		}
 		JButton clickedButton = (JButton) e.getSource();
-		activeButton = clickedButton;
 		Object idProperty = clickedButton.getClientProperty(Constants.BUTTON_PROPERTY_ID);
 		strategy.publishProperty(idProperty);
-		if(idProperty == PropertyEnum.DELETE_MATERIAL){
-			clickedButton.setBackground(Constants.BUTTON_BACKGROUND_DELETE_ACTIVE);
-	        }else{
-			clickedButton.setBackground(Constants.BUTTON_BACKGROUND_ACTIVE);
-		}
+		manageButtonStyle(clickedButton, idProperty);
 	}
+
+    public void manageButtonStyle(JButton clickedButton , Object idProperty) {
+        if(idProperty!=PropertyEnum.SAVE){
+            if (activeButton != null) {
+                activeButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
+            }
+            if(idProperty == PropertyEnum.DELETE_MATERIAL||idProperty==PropertyEnum.DELETE_ENTITY){
+    			clickedButton.setBackground(Constants.BUTTON_BACKGROUND_DELETE_ACTIVE);
+    	        }else{
+    			clickedButton.setBackground(Constants.BUTTON_BACKGROUND_ACTIVE);
+    		}
+            activeButton = clickedButton;
+        }
+    }
 
 }

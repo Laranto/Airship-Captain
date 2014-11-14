@@ -2,6 +2,7 @@ package model.gameobject;
 
 import java.awt.geom.Dimension2D;
 import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.Vector;
 
@@ -16,6 +17,14 @@ public abstract class Entity extends ShipPart{
     
     private Dimension2D size;
     
+    private List<Blocker> associatedBlockers;
+    
+    
+    public Entity(String name , int value , int weight , int durability , BufferedImage image , Vector<Integer> orientation , Dimension2D size) {
+        super(name , value , weight , durability , image);
+        this.orientation = orientation;
+        this.size = size;
+    }
     public Dimension2D getSize() {
         return size;
     }
@@ -25,9 +34,7 @@ public abstract class Entity extends ShipPart{
     /**
      * Position where the Startposition of the entity is placed.
      */
-    private Point2D position;
     
-    private List<Blocker> associatedBlockers;
     
     
     public void rotateLeft(){
@@ -45,12 +52,6 @@ public abstract class Entity extends ShipPart{
     }
     public void setOrientation(Vector<Integer> orientation) {
         this.orientation = orientation;
-    }
-    public Point2D getPosition() {
-        return position;
-    }
-    public void setPosition(Point2D position) {
-        this.position = position;
     }
     public List<Blocker> getAssociatedBlockers() {
         return associatedBlockers;

@@ -3,14 +3,16 @@ package handler;
 import java.awt.event.MouseEvent;
 
 import model.gameobject.Airship;
+import model.gameobject.Entity;
 import model.gameobject.Material;
+import model.gameobject.ShipPart;
 
 import common.Constants;
 
 public class ConstructionStrategy extends HandlerStrategy {
 
     private Airship airship;
-    private Material activeMaterial;
+    private ShipPart activePlacement;
     private boolean isActive = false;
     
     public ConstructionStrategy(){
@@ -27,10 +29,15 @@ public class ConstructionStrategy extends HandlerStrategy {
             int tileX = e.getX() / Constants.TILE_SIZE;
             int tileY = e.getY() / Constants.TILE_SIZE;
             
-            if(activeMaterial == null){
+            if(activePlacement == null){
                 this.airship.removeMaterial(tileX, tileY);
             }else if (tileX < Constants.AIRSHIP_WIDTH_TILES && tileY < Constants.AIRSHIP_HEIGHT_TILES) {
-                this.airship.placeMaterial(activeMaterial, tileX, tileY);
+                if(activePlacement instanceof Material){
+                    this.airship.placeMaterial((Material)activePlacement, tileX, tileY);
+                }
+                if(activePlacement instanceof Entity){
+                    this.airship.placeEntity((Entity)activePlacement, tileX, tileY);
+                }
             }
         }
 
@@ -38,11 +45,11 @@ public class ConstructionStrategy extends HandlerStrategy {
 
     @Override
     public void publishProperty(Object activeMaterial) {
-        if(activeMaterial instanceof Material){
-            this.activeMaterial = (Material) activeMaterial;
+        if(activeMaterial instanceof ShipPart){
+            this.activePlacement = (ShipPart) activeMaterial;
         }
         else{
-            this.activeMaterial=null;
+            this.activePlacement=null;
         }
         isActive = true;
     }

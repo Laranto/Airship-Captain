@@ -1,11 +1,14 @@
 package model.factory;
 
+import java.awt.Dimension;
+import java.awt.geom.Dimension2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import javax.management.RuntimeErrorException;
 
@@ -32,8 +35,18 @@ public class EntityFactory extends ShippartFactory {
 	private static final String DOM_NODE_IMAGE = "image";
 	private static final String DOM_NODE_WEIGHT = "weight";
 	private static final String DOM_NODE_VALUE = "value";
-	private static final String DOM_NODE_DURABILITY = "value";
+	private static final String DOM_NODE_DURABILITY = "durability";
+    private static final String DOM_ATTR_WIDTH = "width";
+    private static final String DOM_ATTR_HEIGHT = "height";
 
+    /**
+     * Default Orientation pointing right
+     */
+    @SuppressWarnings("all") //Hush, everything is oke
+    private static final Vector<Integer> DEFAULT_ORIENTATION=new Vector<>(new ArrayList(){{add(1);add(0);}}
+    );
+    
+    
 	private static EntityFactory instance;
 
 	private static SAXBuilder builder = new SAXBuilder();
@@ -79,17 +92,17 @@ public class EntityFactory extends ShippartFactory {
 				DOM_NODE_OBJECT);
 		for (Element element : materials) {
 
-			String type = element.getAttribute(DOM_ATTR_TYPE).getValue(), name = element
-					.getChildText(DOM_NODE_NAME), imagePath = xmlFile
-					.getParent()
-					+ File.separator
-					+ element.getChildText(DOM_NODE_IMAGE);
-			int 	value = Integer.parseInt(element.getChildText(DOM_NODE_VALUE)), 
-					durability = Integer.parseInt(element.getChildText(DOM_NODE_VALUE)), 
-					weight = Integer.parseInt(element.getChildText(DOM_NODE_WEIGHT));
+			String type = element.getAttribute(DOM_ATTR_TYPE).getValue(), 
+			        name = element.getChildText(DOM_NODE_NAME), 
+					imagePath = xmlFile.getParent()+ File.separator+ element.getChildText(DOM_NODE_IMAGE);
+			int 	width        = Integer.parseInt(element.getAttribute(DOM_ATTR_WIDTH).getValue()),
+			        height       = Integer.parseInt(element.getAttribute(DOM_ATTR_HEIGHT).getValue()),
+			        value        = Integer.parseInt(element.getChildText(DOM_NODE_VALUE)), 
+					durability   = Integer.parseInt(element.getChildText(DOM_NODE_DURABILITY)), 
+					weight       = Integer.parseInt(element.getChildText(DOM_NODE_WEIGHT));
 			
 
-            this.entities.add(createInstance(type, imagePath, name, durability, value, weight));
+            this.entities.add(createInstance(type, imagePath, name, durability, value, weight,width,height));
 
 		}
 	}
@@ -98,9 +111,9 @@ public class EntityFactory extends ShippartFactory {
      * Creating an instance of a material. Do not use this when you have the image already loaded.
      * @throws IOException when the image can not be loaded
      */
-    private Entity createInstance(String type, String imagePath, String name, int durability, int value, int weight) throws IOException {
+    private Entity createInstance(String type, String imagePath, String name, int durability, int value, int weight,int width,int height) throws IOException {
 
-    	Entity m = createInstance(type,name,durability,value,weight);
+    	Entity m = createInstance(type,name,durability,value,weight,width,height,null);
 
         m.setImage(imagePath);
         return m;
@@ -108,28 +121,22 @@ public class EntityFactory extends ShippartFactory {
     /**
      * Creating an instance of a material. Does not parse the image again. If the image has been loaded this should be used.
      */
-    private Entity createInstance(String type, BufferedImage image, String name, int durability, int value, int weight){
+    private Entity createInstance(String type, BufferedImage image, String name, int durability, int value, int weight,int width,int height){
         
-    	Entity m = createInstance(type,name,durability,value,weight);
+    	Entity m = createInstance(type,name,durability,value,weight,width,height,image);
         m.setImage(image);
         return m;
     }
 
-	private Entity createInstance(String type, String name, int durability, int value, int weight) {
+	private Entity createInstance(String type, String name, int durability, int value, int weight,int width, int height,BufferedImage image) {
 
 		Entity o = null;
 		switch (type) {
 		default:
 		case "weapon":
-			o = new Weapon();
+			o = new Weapon(name,durability,value,weight,image, DEFAULT_ORIENTATION, new Dimension(width,height));
 			break;
 		}
-
-		o.setName(name);
-		o.setValue(value);
-		o.setWeight(weight);
-		o.setDurability(durability);
-
 		return o;
 	}
 
@@ -165,7 +172,9 @@ public class EntityFactory extends ShippartFactory {
 								entityPrototype.getName(), 
 								entityPrototype.getDurability(),
 								entityPrototype.getValue(),
-								entityPrototype.getWeight());
+								entityPrototype.getWeight(),
+								(int)entityPrototype.getSize().getWidth(),
+								(int)entityPrototype.getSize().getHeight());
 	}
 
 }

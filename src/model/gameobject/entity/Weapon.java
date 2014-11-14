@@ -2,6 +2,10 @@ package model.gameobject.entity;
 
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.geom.Dimension2D;
+import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
+import java.util.Vector;
 
 import model.gameobject.Entity;
 
@@ -13,6 +17,10 @@ public class Weapon extends Entity{
     private int damage;
     private int ammunition;
     private Point aim;
+
+    public Weapon(String name , int value , int weight , int durability , BufferedImage image , Vector<Integer> orientation , Dimension2D size) {
+        super(name , value , weight , durability , image , orientation , size);
+    }
 
     @Override
     public void render(Graphics2D g) {

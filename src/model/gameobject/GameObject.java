@@ -8,6 +8,13 @@ public abstract class GameObject {
     
     
     
+    
+    public GameObject(String name , int value , int weight) {
+        super();
+        this.name = name;
+        this.value = value;
+        this.weight = weight;
+    }
     public String getName() {
         return name;
     }

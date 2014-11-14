@@ -101,8 +101,7 @@ public class MaterialFactory extends ShippartFactory {
      */
     private Material createInstance(String type, String imagePath, String name, int durability, int value, int weight) throws IOException {
 
-        Material m = createInstance(type,name,durability,value,weight);
-
+        Material m = createInstance(type,name,durability,value,weight,null);
         m.setImage(imagePath);
         return m;
     }
@@ -111,32 +110,24 @@ public class MaterialFactory extends ShippartFactory {
      */
     private Material createInstance(String type, BufferedImage image, String name, int durability, int value, int weight){
         
-        Material m = createInstance(type,name,durability,value,weight);
-        
-        m.setImage(image);
+        Material m = createInstance(type,name,durability,value,weight,image);
         return m;
     }
 
     /**
      * Utility for createInstace Methods.
      */
-    private Material createInstance(String type , String name , int durability , int value , int weight) {
+    private Material createInstance(String type , String name , int durability , int value , int weight,BufferedImage image) {
         Material m = null;
         switch (type) {
             default:
             case TYPE_WALL:
-                m = new Wall();
+                m = new Wall(name,value,weight,durability,image);
                 break;
             case TYPE_FLOOR:
-                m = new Floor();
+                m = new Floor(name,value,weight,durability,image);
                 break;
         }
-
-        m.setDurability(durability);
-        m.setName(name);
-        m.setValue(value);
-        m.setWeight(weight);
-
         return m;
     }
 
