@@ -52,6 +52,7 @@ public class Airship extends GameObject implements Renderable{
         if(entity!=null){
             List<Point> checkedPoints = new LinkedList<>();
             if(canPlaceEntity(entity,tileX,tileY,checkedPoints)){
+                System.out.println("MEEEEEEEEEEEEEEEEP");
                 Entity placedEntity = (Entity) EntityFactory.getInstance().instanzise(entity);
                 equipment[tileX][tileY] = placedEntity;
                 for (Point point : checkedPoints) {
@@ -74,9 +75,6 @@ public class Airship extends GameObject implements Renderable{
      * @return true when there is sufficient space to place the entity with the given orientation
      */
     private boolean canPlaceEntity(Entity entity , int tileX , int tileY, List<Point> checkedPoints) {
-        
-        equipment[tileX][tileY] = (Entity) EntityFactory.getInstance().instanzise(entity);
-        
         int xExtend = (int) entity.getSize().getWidth()
                 , yExtend = (int) entity.getSize().getHeight();
         int fromX=Math.min(tileX,tileX+xExtend)
@@ -142,6 +140,28 @@ public class Airship extends GameObject implements Renderable{
 
     @Override
     public void render(Graphics2D g) {
+        renderMaterial(g);
+        renderEquipment(g);
+    }
+
+
+    public void renderEquipment(Graphics2D g) {
+        AffineTransform originalCoordinates = g.getTransform();
+        for(int x = 0;x<Constants.AIRSHIP_WIDTH_TILES;x++){
+            for(int y = 0; y<Constants.AIRSHIP_HEIGHT_TILES;y++){
+                //Move the g to the according position so the materials and entities must only render their image.
+                g.setTransform(originalCoordinates);
+                g.translate(x*Constants.TILE_SIZE, y*Constants.TILE_SIZE);
+                if(equipment[x][y]!=null){
+                    equipment[x][y].render(g);
+                }
+            }
+        }
+        g.setTransform(originalCoordinates);
+    }
+
+
+    public void renderMaterial(Graphics2D g) {
         AffineTransform originalCoordinates = g.getTransform();
         for(int x = 0;x<Constants.AIRSHIP_WIDTH_TILES;x++){
             for(int y = 0; y<Constants.AIRSHIP_HEIGHT_TILES;y++){
@@ -150,9 +170,6 @@ public class Airship extends GameObject implements Renderable{
                 g.translate(x*Constants.TILE_SIZE, y*Constants.TILE_SIZE);
                 if(shipBody[x][y]!=null){
                     shipBody[x][y].render(g);
-                    if(equipment[x][y]!=null){
-                        equipment[x][y].render(g);
-                    }
                 }else{
                     renderEmptySpace(g);
                 }

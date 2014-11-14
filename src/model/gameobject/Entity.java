@@ -1,8 +1,9 @@
 package model.gameobject;
 
+import java.awt.Graphics2D;
 import java.awt.geom.Dimension2D;
-import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -24,6 +25,7 @@ public abstract class Entity extends ShipPart{
         super(name , value , weight , durability , image);
         this.orientation = orientation;
         this.size = size;
+        associatedBlockers=new ArrayList<>();
     }
     public Dimension2D getSize() {
         return size;
@@ -31,11 +33,6 @@ public abstract class Entity extends ShipPart{
     public void setSize(Dimension2D size) {
         this.size = size;
     }
-    /**
-     * Position where the Startposition of the entity is placed.
-     */
-    
-    
     
     public void rotateLeft(){
         Integer tmp = orientation.get(0);
@@ -59,6 +56,13 @@ public abstract class Entity extends ShipPart{
     public void addBlocker(Blocker blocker) {
         getAssociatedBlockers().add(blocker);
     }
+    @Override
+    public void render(Graphics2D g) {
+        super.render(g);
+    }
+    
+    
+    
     
     
 }

@@ -1,5 +1,6 @@
 package model.gameobject;
 
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -47,4 +48,8 @@ public abstract class ShipPart extends GameObject implements Renderable {
         return this.image;
     }
     
+    @Override
+    public void render(Graphics2D g) {
+        g.drawImage(getImage(), null, 0, 0);
+    }
 }
