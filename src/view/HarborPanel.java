@@ -43,11 +43,9 @@ public class HarborPanel extends GameDefaultPanel {
         mainGridLayout.setVgap(10);
 
         JPanel navigationGridPanel = new JPanel(mainGridLayout);
-        navigationGridPanel.setSize(Constants.WINDOW_WIDTH / 6,
-                Constants.WINDOW_HEIGHT / 3);
+        navigationGridPanel.setSize(Constants.WINDOW_WIDTH / 6, Constants.WINDOW_HEIGHT / 3);
 
-        navigationGridPanel.setLocation(Constants.WINDOW_WIDTH * 3 / 4,
-                Constants.WINDOW_HEIGHT * 1 / 8);
+        navigationGridPanel.setLocation(Constants.WINDOW_WIDTH * 3 / 4, Constants.WINDOW_HEIGHT * 1 / 8);
         add(navigationGridPanel);
 
         for (MENU navigationButton : navigationButtons) {
