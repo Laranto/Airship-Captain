@@ -69,7 +69,6 @@ public class ConstructionStrategy extends HandlerStrategy {
 
     @Override
     public void keyEvent(KeyEvent e) {
-        System.out.println("AAAAAAAAAAAAAA");
         if(activePlacement instanceof Entity){
             Entity ent = (Entity) activePlacement;
             if(e.getKeyCode() == KeyEvent.VK_LEFT){

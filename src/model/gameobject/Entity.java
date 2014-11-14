@@ -23,8 +23,6 @@ public abstract class Entity extends ShipPart{
     
     private List<Blocker> associatedBlockers;
     
-    private boolean dynamicSize = false;
-    
     public Entity(String name , int value , int weight , int durability , BufferedImage image , Vector<Integer> orientation , Dimension2D size) {
         super(name , value , weight , durability , image);
         this.orientation = orientation;
@@ -32,34 +30,38 @@ public abstract class Entity extends ShipPart{
         associatedBlockers=new ArrayList<>();
     }
     public Dimension2D getSize() {
-        if(dynamicSize){
-            if(orientation.get(0)!=0){
-                //TODO get orientation correct
-            }
-        }
         return size;
     }
     public void setSize(Dimension2D size) {
-        dynamicSize=false;
         this.size = size;
     }
     
     public void rotateLeft(){
-        Integer tmp = orientation.get(0);
-        orientation.set(0, orientation.get(1));
-        orientation.set(1, tmp*-1);
+        Vector<Integer> rotatedOrientation = new Vector<>(2);
+        rotatedOrientation.add(orientation.get(1));
+        rotatedOrientation.add(orientation.get(0)-1);
+        this.orientation = rotatedOrientation;
+        size.setSize(size.getHeight(), size.getWidth()*-1);
     }
     public void rotateRight(){
-        Integer tmp = orientation.get(0);
-        orientation.set(0, orientation.get(1)*-1);
-        orientation.set(1, tmp);
+        Vector<Integer> rotatedOrientation = new Vector<>(2);
+        rotatedOrientation.add(orientation.get(1)*-1);
+        rotatedOrientation.add(orientation.get(0));
+        this.orientation = rotatedOrientation;
+        size.setSize(size.getHeight()*-1, size.getWidth());
     }
     public Vector<Integer> getOrientation() {
         return orientation;
     }
-    public void setOrientation(Vector<Integer> orientation) {
-        dynamicSize=true;
-        this.orientation = orientation;
+    public void setOrientation(Vector<Integer> targetOrientation) {
+        if(Math.abs(targetOrientation.get(0))+Math.abs(targetOrientation.get(1))!=1){
+            throw new IllegalArgumentException("Must have a sensible orientation");
+        }
+        
+        while(targetOrientation.get(0)!=this.orientation.get(0)
+                ||targetOrientation.get(1)!=this.orientation.get(1)){
+            rotateRight();
+        }
     }
     public List<Blocker> getAssociatedBlockers() {
         return associatedBlockers;
