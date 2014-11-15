@@ -1,20 +1,17 @@
 package model.gameobject.entity;
 
-import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.Dimension2D;
-import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.Vector;
 
 import model.gameobject.Entity;
-import model.gameobject.Tradeable;
 
 /**
  *
  * @author Hesyar Uzuner <info@hesyar.com>
  */
-public class Weapon extends Entity implements Tradeable{
+public class Weapon extends Entity {
     private int damage;
     private int ammunition;
     private Point aim;
