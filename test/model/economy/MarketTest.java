@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
-import junit.framework.Assert;
 import model.factory.WareFactory;
-import model.gameobject.Material;
-import model.gameobject.Tradeable;
+import model.gameobject.material.Wall;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,7 +47,7 @@ public class MarketTest {
             Tradeable material = (Tradeable) pairs.getKey();
             Integer amount = (Integer) pairs.getValue();
 
-            System.out.println(pairs.getKey().getClass());
+            System.out.println(pairs.getKey() instanceof Wall);
 
             System.out.println(material + " " + amount);
             it.remove();

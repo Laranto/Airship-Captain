@@ -1,4 +1,4 @@
-package model.gameobject;
+package model.economy;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -18,6 +18,7 @@ public class Stock {
     
     public void addTradeableWare(Tradeable ware, int amount)
     {
+        //TODO: control whether the ware already exist
         wareList.put(ware, amount);
     }
     
@@ -25,9 +26,4 @@ public class Stock {
     {
         return this.wareList;
     }
-    
-   
-
-    
-    
 }

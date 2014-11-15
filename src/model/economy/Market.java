@@ -7,9 +7,6 @@ import model.factory.MaterialFactory;
 import model.factory.WareFactory;
 import model.gameobject.Entity;
 import model.gameobject.Material;
-import model.gameobject.Stock;
-import model.gameobject.Tradeable;
-import model.gameobject.Ware;
 
 public class Market {
     

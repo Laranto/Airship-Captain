@@ -1,4 +1,6 @@
-package model.gameobject;
+package model.economy;
+
+import model.gameobject.GameObject;
 
 public class Ware extends GameObject {
 
