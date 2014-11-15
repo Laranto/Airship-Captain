@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wares>
+    <ware type="drink">
+        <name>Son Cavaller Tempranillo</name>
+        <image>img/Tempranillo_Navara.jpg</image><!-- currently unused -->
+        <value>10</value>
+        <weight>5</weight>
+    </ware>     
+    <ware type="drink">
+        <name>Kalant Cabernet Sauvignon 2012</name>
+        <image>img/cabernet-sauvignon.jpg</image>
+        <value>20</value>
+        <weight>5</weight>
+    </ware>         
+</wares>

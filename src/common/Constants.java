@@ -7,6 +7,7 @@ import java.util.Vector;
 public class Constants {
     public static final String FOLDER_MATERIAL = "resources/material/";
     public static final String FOLDER_OBJECTS = "resources/object/";
+    public static final String FOLDER_WARE = "resources/ware/";
     public static final String MAP = "resources/map/img/map.jpg";
     
     
