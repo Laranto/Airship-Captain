@@ -20,7 +20,6 @@ public class NavigationPanelTest {
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setVisible(true);
-        frame.setVisible(true);
         WindowController.setFrame(frame);
         WindowController.showNavigation(new Airship());
         while(true){

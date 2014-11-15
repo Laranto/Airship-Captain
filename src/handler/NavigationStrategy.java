@@ -1,28 +1,35 @@
-package model.navigation;
+package handler;
 
-import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.image.BufferedImage;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 import model.economy.Market;
-import model.gameobject.Renderable;
+import model.gameobject.Airship;
+import model.navigation.Harbor;
 
-import common.Constants;
+import common.enums.MenuItemEnum;
 
-public class NavigationMap implements Renderable{
+import controller.WindowController;
+
+public class NavigationStrategy extends HandlerStrategy {
+
+    private Airship airship;
     private Harbor currentHarbor;
     private List<Harbor> harbors;
-    private BufferedImage image;
     
-    public NavigationMap(Harbor currentHarbor, List<Harbor> harbors, BufferedImage image){
-        this.currentHarbor = currentHarbor;
-        this.harbors = harbors;
-        this.image = image;
+    public NavigationStrategy(){
+        this(new Airship());
     }
-
-    public NavigationMap(BufferedImage image) {
+    
+    public NavigationStrategy(Airship airship){
+        this.airship = airship;
+        parseHarbours();
+    }
+    
+    private void parseHarbours() {
         currentHarbor =  new Harbor(new Point(310, 340));
         harbors = new ArrayList<Harbor>();
         harbors.add(new Harbor(new Market(), new Point(110, 500), false));
@@ -44,34 +51,29 @@ public class NavigationMap implements Renderable{
         harbors.add(new Harbor(new Market(), new Point(610, 200), false));
         harbors.add(new Harbor(new Market(), new Point(720, 275), false));
         harbors.add(currentHarbor);
-        this.image = image;
     }
-
-    public List<Harbor> getHarbors(){
+    
+    public List<Harbor> getHarbors() {
         return harbors;
     }
-    
-    public Harbor getCurrentHarbor(){
-        return currentHarbor;
-    }
-    
-    public void setCurrentHarbor(Harbor harbor){
-        currentHarbor.setActive(false);
+
+    @Override
+    public void mouseEvent(MouseEvent e) {
         
     }
 
     @Override
-    public void render(Graphics2D g) {
-        g.drawImage(
-                image, 
-                0,                              /*start x position*/
-                0,                              /*start y position*/
-                Constants.WINDOW_WIDTH,
-                Constants.WINDOW_HEIGHT, 
-                null                            /*Image Observer*/
-        );
-        for(Harbor h: harbors){
-            h.render(g);
+    public void keyEvent(KeyEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void publishProperty(Object next) {
+        if(next instanceof MenuItemEnum){
+            if(MenuItemEnum.HARBOR == (MenuItemEnum)next){
+                WindowController.showHarbor(airship);
+            }
         }
     }
 }
