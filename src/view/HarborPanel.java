@@ -2,7 +2,12 @@ package view;
 
 import handler.HarborStrategy;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +18,7 @@ import javax.swing.SwingConstants;
 import model.gameobject.Airship;
 
 import common.Constants;
+import common.ImageLoader;
 import common.enums.MenuItemEnum;
 
 import controller.ButtonController;
@@ -20,13 +26,18 @@ import controller.ButtonController;
 public class HarborPanel extends GameDefaultPanel {
 
     private Airship airship;
-
+    private BufferedImage image;
     private List<MenuItemEnum> navigationButtons;
 
     public HarborPanel(Airship airship) {
         this.setLayout(null);
         
         this.airship = airship;
+        try {
+            this.image = ImageLoader.loadImage(new File(Constants.HARBOR_BACKGROUND_IMAGE));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         HarborStrategy harborStrategy = new HarborStrategy(this.airship);
         ButtonController buttonController = new ButtonController(harborStrategy);
@@ -43,8 +54,8 @@ public class HarborPanel extends GameDefaultPanel {
         mainGridLayout.setVgap(10);
 
         JPanel navigationGridPanel = new JPanel(mainGridLayout);
+        navigationGridPanel.setOpaque(false);
         navigationGridPanel.setSize(Constants.WINDOW_WIDTH / 6, Constants.WINDOW_HEIGHT / 3);
-
         navigationGridPanel.setLocation(Constants.WINDOW_WIDTH * 3 / 4, Constants.WINDOW_HEIGHT * 1 / 8);
         add(navigationGridPanel);
 
@@ -59,6 +70,19 @@ public class HarborPanel extends GameDefaultPanel {
             navigationGridPanel.add(harborButton);
         }
 
+    }
+    
+    @Override
+    public void paintComponent(Graphics g){
+        Graphics2D g2 = (Graphics2D) g;
+        g2.drawImage(
+                image, 
+                0,                              /*start x position*/
+                0,                              /*start y position*/
+                Constants.WINDOW_WIDTH,
+                Constants.WINDOW_HEIGHT, 
+                null                            /*Image Observer*/
+        );
     }
 
 }

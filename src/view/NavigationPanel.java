@@ -78,10 +78,4 @@ public class NavigationPanel extends GameDefaultPanel {
             h.render(g2);
         }
     }
-
-
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-    }
 }
