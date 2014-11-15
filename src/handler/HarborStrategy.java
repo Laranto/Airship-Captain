@@ -1,5 +1,6 @@
 package handler;
 
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 import common.enums.MenuItemEnum;
@@ -48,5 +49,11 @@ public class HarborStrategy extends HandlerStrategy {
 		this.activeMenu = (MenuItemEnum) activeMenu;
 		this.mouseEvent(null);
 	}
+
+    @Override
+    public void keyEvent(KeyEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
 
 }

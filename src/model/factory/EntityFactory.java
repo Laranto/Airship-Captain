@@ -39,13 +39,6 @@ public class EntityFactory extends ShippartFactory {
     private static final String DOM_ATTR_WIDTH = "width";
     private static final String DOM_ATTR_HEIGHT = "height";
 
-    /**
-     * Default Orientation pointing right
-     */
-    @SuppressWarnings("all") //Hush, everything is oke
-    private static final Vector<Integer> DEFAULT_ORIENTATION=new Vector<>(new ArrayList(){{add(1);add(0);}}
-    );
-    
     
 	private static EntityFactory instance;
 
@@ -121,10 +114,11 @@ public class EntityFactory extends ShippartFactory {
     /**
      * Creating an instance of a material. Does not parse the image again. If the image has been loaded this should be used.
      */
-    private Entity createInstance(String type, BufferedImage image, String name, int durability, int value, int weight,int width,int height){
+    private Entity createInstance(String type, BufferedImage image, String name, int durability, int value, int weight,int width,int height,Vector<Integer> orientation){
         
     	Entity m = createInstance(type,name,durability,value,weight,width,height,image);
         m.setImage(image);
+        m.setOrientation(orientation);
         return m;
     }
 
@@ -134,7 +128,7 @@ public class EntityFactory extends ShippartFactory {
 		switch (type) {
 		default:
 		case "weapon":
-			o = new Weapon(name,durability,value,weight,image, DEFAULT_ORIENTATION, new Dimension(width,height));
+			o = new Weapon(name,durability,value,weight,image, Constants.ENTITY_ORIENTATION_RIGHT, new Dimension(width,height));
 			break;
 		}
 		return o;
@@ -174,7 +168,8 @@ public class EntityFactory extends ShippartFactory {
 								entityPrototype.getValue(),
 								entityPrototype.getWeight(),
 								(int)entityPrototype.getSize().getWidth(),
-								(int)entityPrototype.getSize().getHeight());
+								(int)entityPrototype.getSize().getHeight(),
+								entityPrototype.getOrientation());
 	}
 
 }

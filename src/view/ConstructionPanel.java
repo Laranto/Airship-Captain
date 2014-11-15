@@ -36,9 +36,12 @@ public class ConstructionPanel extends GameDefaultPanel {
 
     public ConstructionPanel(Airship airship) {
         ConstructionStrategy strategy = new ConstructionStrategy(airship);
-        addMouseListener(new InputController(strategy));
-        addMouseMotionListener(new InputController(strategy));
+        InputController inputController = new InputController(strategy);
         ButtonController buttonController = new ButtonController(strategy);
+        addMouseListener(inputController);
+        addMouseMotionListener(inputController);
+        addKeyListener(inputController);
+        this.setFocusable(true);
         
         this.airship = airship;
         
@@ -71,6 +74,7 @@ public class ConstructionPanel extends GameDefaultPanel {
         moveButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, PropertyEnum.MOVE);
         moveButton.addActionListener(buttonController);
         moveButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
+        moveButton.setFocusable(false);
         toolsGridPanel.add(moveButton);
         
         ArrayList<Entity> entities = EntityFactory.getInstance().getEntities();
@@ -84,6 +88,7 @@ public class ConstructionPanel extends GameDefaultPanel {
             tileButton.addActionListener(buttonController);
             tileButton.setHorizontalAlignment(SwingConstants.LEFT);
             tileButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
+            tileButton.setFocusable(false);
             tilesPickerPanel.add(tileButton);
         }
         
@@ -112,6 +117,7 @@ public class ConstructionPanel extends GameDefaultPanel {
             tileButton.addActionListener(buttonController);
             tileButton.setHorizontalAlignment(SwingConstants.LEFT);
             tileButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
+            tileButton.setFocusable(false);
             tilesPickerPanel.add(tileButton);
         }
 		return materialPanel;
@@ -122,6 +128,7 @@ public class ConstructionPanel extends GameDefaultPanel {
         saveButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, PropertyEnum.SAVE);
         saveButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
         saveButton.addActionListener(buttonController);
+        saveButton.setFocusable(false);
         toolsGridPanel.add(saveButton);
     }
     
@@ -130,6 +137,7 @@ public class ConstructionPanel extends GameDefaultPanel {
         removeTilesButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, removeType);
         removeTilesButton.addActionListener(buttonController);
         removeTilesButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
+        removeTilesButton.setFocusable(false);
         toolsGridPanel.add(removeTilesButton);
     }
 

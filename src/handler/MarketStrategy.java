@@ -1,5 +1,6 @@
 package handler;
 
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 import model.gameobject.Airship;
@@ -38,6 +39,12 @@ public class MarketStrategy extends HandlerStrategy {
     public void publishProperty(Object activeMenu) {
         this.activeMenu = (MenuItemEnum) activeMenu;
         this.mouseEvent(null);
+    }
+
+    @Override
+    public void keyEvent(KeyEvent e) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

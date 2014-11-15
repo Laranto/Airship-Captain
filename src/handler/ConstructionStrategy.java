@@ -1,5 +1,6 @@
 package handler;
 
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 import model.gameobject.Airship;
@@ -14,6 +15,10 @@ public class ConstructionStrategy extends HandlerStrategy {
     private Airship airship;
     private ShipPart activePlacement;
     private boolean isActive = false;
+    /**
+     * Flag if the user is moving an entity
+     */
+    private boolean isMoveAction = false;
     
     public ConstructionStrategy(){
         this(new Airship());
@@ -36,6 +41,7 @@ public class ConstructionStrategy extends HandlerStrategy {
                     this.airship.placeMaterial((Material)activePlacement, tileX, tileY);
                 }
                 if(activePlacement instanceof Entity){
+                    System.out.println(((Entity)activePlacement).getOrientation());
                     this.airship.placeEntity((Entity)activePlacement, tileX, tileY);
                 }
             }
@@ -47,10 +53,34 @@ public class ConstructionStrategy extends HandlerStrategy {
     public void publishProperty(Object activeMaterial) {
         if(activeMaterial instanceof ShipPart){
             this.activePlacement = (ShipPart) activeMaterial;
+            if(activePlacement instanceof Entity){
+                resetOrientation((Entity)activePlacement);
+            }
         }
         else{
             this.activePlacement=null;
         }
         isActive = true;
+    }
+
+    private void resetOrientation(Entity ent) {
+        ent.setOrientation(Constants.ENTITY_ORIENTATION_RIGHT);
+    }
+
+    @Override
+    public void keyEvent(KeyEvent e) {
+        if(activePlacement instanceof Entity){
+            Entity ent = (Entity) activePlacement;
+            if(e.getKeyCode() == KeyEvent.VK_LEFT){
+                ent.setOrientation(Constants.ENTITY_ORIENTATION_LEFT);
+            }else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+                ent.setOrientation(Constants.ENTITY_ORIENTATION_RIGHT);
+            }else if(e.getKeyCode() == KeyEvent.VK_UP){
+                ent.setOrientation(Constants.ENTITY_ORIENTATION_UP);
+            }else if(e.getKeyCode() == KeyEvent.VK_DOWN){
+                ent.setOrientation(Constants.ENTITY_ORIENTATION_DOWN);
+            }
+            System.out.println(((Entity)activePlacement).getOrientation());
+        }
     }
 }
