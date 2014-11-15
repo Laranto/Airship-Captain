@@ -7,24 +7,33 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.naming.OperationNotSupportedException;
-
 import model.factory.EntityFactory;
 import model.factory.MaterialFactory;
 import model.gameobject.entity.Blocker;
 import model.gameobject.material.Floor;
+
 import common.Constants;
 
 public class Airship extends GameObject implements Renderable{
     private Material[][] shipBody;
     private Entity[][] equipment;
     private boolean isEmpty;
+    private Captain captain;
     
     public Airship() {
         super(null,0,0);
         shipBody    = new Material[Constants.AIRSHIP_WIDTH_TILES][Constants.AIRSHIP_HEIGHT_TILES];
         equipment   = new Entity[Constants.AIRSHIP_WIDTH_TILES][Constants.AIRSHIP_HEIGHT_TILES];
         isEmpty=true;
+        captain = new Captain();
+    }
+    
+    /**
+     * Returns the Captain of the airship
+     * @return  Captain
+     */
+    public Captain getCaptain() {
+        return captain;
     }
     
     
@@ -306,8 +315,4 @@ public class Airship extends GameObject implements Renderable{
     public void setWeight(int weight) {
         throw new NoSuchMethodError();
     }
-    
-    
-    
-    
 }

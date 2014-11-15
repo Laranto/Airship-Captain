@@ -2,7 +2,6 @@ package view;
 
 import handler.FightStrategy;
 
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
@@ -25,7 +24,7 @@ public class FightPanel extends GameDefaultPanel {
     
     public FightPanel(Airship airship) {
         this.airship = airship;
-        Scenario szenario = ScenarioFactory.build();
+        Scenario szenario = ScenarioFactory.build(airship.getCaptain());
         enemy = szenario.getEnemy();
         
         FightStrategy strategy = new FightStrategy(airship);
@@ -50,6 +49,7 @@ public class FightPanel extends GameDefaultPanel {
         super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
         airship.render(g2);
-        g2.translate(Constants.WINDOW_WIDTH/2, 0);;
+        g2.translate(Constants.WINDOW_WIDTH/2, 0);
+        enemy.render(g2);
     }
 }
