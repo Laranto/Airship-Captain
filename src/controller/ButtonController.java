@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import common.Constants;
+import common.enums.MenuItemEnum;
 import common.enums.PropertyEnum;
 
 public class ButtonController implements ActionListener {
@@ -35,7 +36,10 @@ public class ButtonController implements ActionListener {
             if(idProperty == PropertyEnum.DELETE_MATERIAL||idProperty==PropertyEnum.DELETE_ENTITY){
     			clickedButton.setBackground(Constants.BUTTON_BACKGROUND_DELETE_ACTIVE);
     	        }else{
+    	            if(idProperty instanceof MenuItemEnum){
+    	            }else{
     			clickedButton.setBackground(Constants.BUTTON_BACKGROUND_ACTIVE);
+    	            }
     		}
             activeButton = clickedButton;
         }

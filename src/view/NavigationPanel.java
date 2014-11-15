@@ -55,9 +55,9 @@ public class NavigationPanel extends GameDefaultPanel {
         harbor.addActionListener(buttonController);
         harbor.setHorizontalAlignment(SwingConstants.CENTER);
         harbor.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
-        int width = (int)harbor.getPreferredSize().getWidth(),
+        int width = Constants.WINDOW_WIDTH / 6,
             height = (int)harbor.getPreferredSize().getHeight(),
-            x = Constants.WINDOW_WIDTH-width-20,
+            x = Constants.WINDOW_WIDTH * 3 / 4,
             y = Constants.WINDOW_HEIGHT-height-40;
         harbor.setBounds(x, y, width, height);
         add(harbor);

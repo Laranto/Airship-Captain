@@ -11,22 +11,22 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import model.gameobject.Airship;
-
 import common.Constants;
 import common.ImageLoader;
 import common.enums.MenuItemEnum;
-
 import controller.ButtonController;
 
 public class HarborPanel extends GameDefaultPanel {
 
     private Airship airship;
     private BufferedImage image;
+    private ImageIcon icon;
     private List<MenuItemEnum> navigationButtons;
 
     public HarborPanel(Airship airship) {
@@ -35,6 +35,7 @@ public class HarborPanel extends GameDefaultPanel {
         this.airship = airship;
         try {
             this.image = ImageLoader.loadImage(new File(Constants.HARBOR_BACKGROUND_IMAGE));
+            this.icon = new ImageIcon(ImageLoader.loadImage(new File(Constants.COMPASS_IMAGE)));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -69,7 +70,24 @@ public class HarborPanel extends GameDefaultPanel {
             harborButton.addActionListener(buttonController);
             navigationGridPanel.add(harborButton);
         }
+        
+        addNavigationButton(buttonController);
+    }
 
+    public void addNavigationButton(ButtonController buttonController) {
+        JButton compassButton = new JButton(MenuItemEnum.NAVIGATION_MAP.text());
+        compassButton.setIcon(icon);
+        int width = Constants.WINDOW_WIDTH / 6,
+            height = (int)compassButton.getPreferredSize().getHeight(),
+            x = Constants.WINDOW_WIDTH * 3 / 4,
+            y = Constants.WINDOW_HEIGHT-height-40;
+        compassButton.setHorizontalAlignment(SwingConstants.CENTER);
+        compassButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
+        compassButton.putClientProperty(Constants.BUTTON_PROPERTY_ID,
+                MenuItemEnum.NAVIGATION_MAP);
+        compassButton.addActionListener(buttonController);
+        compassButton.setBounds(x, y, width, height);
+        add(compassButton);
     }
     
     @Override
