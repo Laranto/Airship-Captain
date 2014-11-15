@@ -8,12 +8,13 @@ import java.awt.image.BufferedImage;
 import java.util.Vector;
 
 import model.gameobject.Entity;
+import model.gameobject.Tradeable;
 
 /**
  *
  * @author Hesyar Uzuner <info@hesyar.com>
  */
-public class Weapon extends Entity{
+public class Weapon extends Entity implements Tradeable{
     private int damage;
     private int ammunition;
     private Point aim;
