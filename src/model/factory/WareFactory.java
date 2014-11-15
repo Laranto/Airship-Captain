@@ -2,9 +2,9 @@ package model.factory;
 
 import java.util.ArrayList;
 
+import model.economy.Tradeable;
 import model.gameobject.Entity;
 import model.gameobject.Material;
-import model.gameobject.Tradeable;
 
 public class WareFactory {
 

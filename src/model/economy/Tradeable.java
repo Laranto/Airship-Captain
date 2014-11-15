@@ -1,4 +1,4 @@
-package model.gameobject;
+package model.economy;
 
 public interface Tradeable {
 
