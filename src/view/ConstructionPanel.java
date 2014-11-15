@@ -2,6 +2,7 @@ package view;
 
 import handler.ConstructionStrategy;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -14,6 +15,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 
@@ -33,9 +35,10 @@ public class ConstructionPanel extends GameDefaultPanel {
 
     private static final long serialVersionUID = 1L;
     private Airship airship;
-
+    private ConstructionStrategy strategy;
+    
     public ConstructionPanel(Airship airship) {
-        ConstructionStrategy strategy = new ConstructionStrategy(airship);
+        strategy = new ConstructionStrategy(airship);
         InputController inputController = new InputController(strategy);
         ButtonController buttonController = new ButtonController(strategy);
         addMouseListener(inputController);
@@ -64,11 +67,20 @@ public class ConstructionPanel extends GameDefaultPanel {
 
 	private JPanel createEntityPanel(ButtonController buttonController) {
 		JPanel entityPanel = new JPanel();
+		entityPanel.setLayout(new BorderLayout());
         JPanel toolsGridPanel = createToolGridPanel();
         entityPanel.add(toolsGridPanel);
+        entityPanel.add(toolsGridPanel,BorderLayout.NORTH);
         
         addRemoveButton(buttonController, toolsGridPanel,PropertyEnum.DELETE_ENTITY);
-        addSaveButton(buttonController,toolsGridPanel);
+        JPanel southPanel = createSouthPanel();
+        addSaveButton(buttonController,southPanel);
+        JPanel previewPanel = new PreviewPanel();
+        previewPanel.setPreferredSize(new Dimension(Constants.TILE_SIZE*3, Constants.TILE_SIZE*3));
+        //TODO Add Tooltip
+        southPanel.add(previewPanel);
+        
+        entityPanel.add(southPanel,BorderLayout.SOUTH);
         
         JButton moveButton = new JButton("Gegenstand bewegen");
         moveButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, PropertyEnum.MOVE);
@@ -80,7 +92,6 @@ public class ConstructionPanel extends GameDefaultPanel {
         ArrayList<Entity> entities = EntityFactory.getInstance().getEntities();
         GridLayout tilesPickerGrid = new GridLayout(entities.size()/2, 2);
         JPanel tilesPickerPanel = new JPanel(tilesPickerGrid);
-        entityPanel.add(tilesPickerPanel);
         for (int i = 0; i < entities.size(); i++) {
             JButton tileButton = new JButton(entities.get(i).getName());
             tileButton.setIcon(new ImageIcon(entities.get(i).getImage()));
@@ -91,6 +102,8 @@ public class ConstructionPanel extends GameDefaultPanel {
             tileButton.setFocusable(false);
             tilesPickerPanel.add(tileButton);
         }
+        JScrollPane scroll = new JScrollPane(tilesPickerPanel);
+        entityPanel.add(scroll,BorderLayout.CENTER);
         
 		return entityPanel;
 	}
@@ -98,18 +111,21 @@ public class ConstructionPanel extends GameDefaultPanel {
     private JPanel createMaterialPanel(ButtonController buttonController) {
 		
 		JPanel materialPanel = new JPanel();
+		materialPanel.setLayout(new BorderLayout());
         JPanel toolsGridPanel = createToolGridPanel();
-        materialPanel.add(toolsGridPanel);
+        materialPanel.add(toolsGridPanel,BorderLayout.NORTH);
         
         addRemoveButton(buttonController, toolsGridPanel,PropertyEnum.DELETE_MATERIAL);
-        addSaveButton(buttonController,toolsGridPanel);
+        JPanel southPanel = createSouthPanel();
+        addSaveButton(buttonController,southPanel);
+        materialPanel.add(southPanel,BorderLayout.SOUTH);
 
         
         ArrayList<Material> materials = MaterialFactory.getInstance().getMaterials();
 
         GridLayout tilesPickerGrid = new GridLayout(materials.size()/2, 2);
         JPanel tilesPickerPanel = new JPanel(tilesPickerGrid);
-        materialPanel.add(tilesPickerPanel);
+        
         for (int i = 0; i < materials.size(); i++) {
             JButton tileButton = new JButton(materials.get(i).getName());
             tileButton.setIcon(new ImageIcon(materials.get(i).getImage()));
@@ -120,6 +136,10 @@ public class ConstructionPanel extends GameDefaultPanel {
             tileButton.setFocusable(false);
             tilesPickerPanel.add(tileButton);
         }
+        
+        JScrollPane scroll = new JScrollPane(tilesPickerPanel);
+        materialPanel.add(scroll,BorderLayout.CENTER);
+        
 		return materialPanel;
 	}
 
@@ -143,9 +163,16 @@ public class ConstructionPanel extends GameDefaultPanel {
 
 	private JPanel createToolGridPanel() {
 		JPanel toolsGridPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		toolsGridPanel.setBorder(BorderFactory.createMatteBorder(0, 3, 1, 3, Color.BLACK));
+		toolsGridPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
 		toolsGridPanel.setPreferredSize(new Dimension(Constants.WINDOW_WIDTH/2, Constants.WINDOW_HEIGHT/16));
 		return toolsGridPanel;
+	}
+	
+	private JPanel createSouthPanel(){
+	    JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+	    southPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
+	    
+	    return southPanel;
 	}
 
     @Override
@@ -153,5 +180,16 @@ public class ConstructionPanel extends GameDefaultPanel {
         super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
         airship.render(g2);
+    }
+    
+    private class PreviewPanel extends JPanel{
+        @Override
+        public void paint(Graphics g) {
+            if(strategy.getActivePlacement()!=null){
+            super.paint(g);
+            g.translate(getSize().width/2, getSize().height/2);
+            strategy.getActivePlacement().render((Graphics2D) g);
+            }
+        }
     }
 }

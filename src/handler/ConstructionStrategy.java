@@ -83,4 +83,8 @@ public class ConstructionStrategy extends HandlerStrategy {
             System.out.println(((Entity)activePlacement).getOrientation());
         }
     }
+
+    public ShipPart getActivePlacement() {
+        return activePlacement;
+    }
 }
