@@ -3,7 +3,7 @@
     <ware type="drink">
         <name>Son Cavaller Tempranillo</name>
         <image>img/Tempranillo_Navara.jpg</image><!-- currently unused -->
-        <value>10</value>
+        <value>10</value><!-- Value(price) for 100 pieces -->
         <weight>5</weight>
     </ware>     
     <ware type="drink">
@@ -15,7 +15,7 @@
         <ware type="drink">
         <name>Son Cavaller Tempranillo 1999</name>
         <image>img/Tempranillo_Navara.jpg</image><!-- currently unused -->
-        <value>10</value>
+        <value>10</value><!-- Value(price) for 100 pieces -->
         <weight>5</weight>
     </ware>     
     <ware type="drink">
