@@ -50,9 +50,9 @@ public class WindowController{
     	showPanel(fightPanel);
     }
     
-    public static void showNavigation(){
+    public static void showNavigation(Airship airship){
     	if(navigationPanel == null){
-    		navigationPanel = new NavigationPanel();
+    		navigationPanel = new NavigationPanel(airship);
     	}
     	showPanel(navigationPanel);
     }

@@ -1,7 +1,6 @@
 package model.factory;
 
 import java.awt.Dimension;
-import java.awt.geom.Dimension2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FilenameFilter;
@@ -13,7 +12,6 @@ import java.util.Vector;
 import javax.management.RuntimeErrorException;
 
 import model.gameobject.Entity;
-import model.gameobject.Material;
 import model.gameobject.ShipPart;
 import model.gameobject.entity.Weapon;
 

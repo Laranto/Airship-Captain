@@ -7,6 +7,8 @@ import java.util.Vector;
 public class Constants {
     public static final String FOLDER_MATERIAL = "resources/material/";
     public static final String FOLDER_OBJECTS = "resources/object/";
+    public static final String FOLDER_WARE = "resources/ware/";
+    public static final String MAP = "resources/map/img/map.jpg";
     
     
     public static final String XML_FILE_ENDING = ".xml";
@@ -25,6 +27,16 @@ public class Constants {
     public static final Color BUTTON_BACKGROUND_DELETE_ACTIVE = Color.RED;
     public static final Color BUTTON_BACKGROUND_ACTIVE = Color.LIGHT_GRAY;
     public static final Object BUTTON_PROPERTY_ID = "id";
+    
+    public static final Color HARBOR_CIRCLE_BACKGROUND_ACTIVE = Color.RED;
+    public static final Color HARBOR_CIRCLE_BACKGROUND = Color.WHITE;
+    public static final Color HARBOR_CIRCLE_BORDER = Color.BLACK;
+    public static final int HARBOR_CIRCLE_DIAMETER = 20;
+
+    public static final float WARE_STANDARD_AMOUNT = 100;
+    public static final float WARE_MAX_INFLATION_FACTOR = 5;
+    
+    
     
     
     /**
