@@ -1,6 +1,9 @@
 package common.enums;
 
 public enum MenuItemEnum {
+    
+    START_GAME("Spiel starten"),
+    SETTINGS("Optionen..."),
 
     /*
      * Market

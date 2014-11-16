@@ -11,6 +11,7 @@ public class Constants {
     
     public static final String NAVIGATION_BACKGROUND_IMAGE = "resources/panels/img/map.jpg";
     public static final String HARBOR_BACKGROUND_IMAGE = "resources/panels/img/zeppelin.jpg";
+    public static final String ZEPPLIN_COCKPIT_BACKGROUND_IMAGE = "resources/panels/img/zepplin_cockpit.png";
     public static final String COMPASS_IMAGE = "resources/panels/img/compass.png";
     
     
