@@ -1,19 +1,13 @@
 package model.factory;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.management.RuntimeErrorException;
-
 import model.economy.Ware;
 import model.economy.ware.Food;
-import model.gameobject.Material;
-import model.gameobject.ShipPart;
-import model.gameobject.material.Wall;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -32,7 +26,6 @@ public class WareFactory {
     private static final String DOM_NODE_WARE = "ware";
     private static final String DOM_NODE_WEIGHT = "weight";
     private static final String DOM_NODE_VALUE = "value";
-    private static final String DOM_NODE_IMAGE = "image";
     private static final String DOM_NODE_NAME = "name";
     private static final String DOM_ATTR_TYPE = "type";
     
@@ -78,8 +71,8 @@ public class WareFactory {
         for (Element element : materials) {
             
             String   type=element.getAttribute(DOM_ATTR_TYPE).getValue()
-                    ,name=element.getChildText(DOM_NODE_NAME)
-                    ,imagePath=xmlFile.getParent()+File.separator+element.getChildText(DOM_NODE_IMAGE);
+                    ,name=element.getChildText(DOM_NODE_NAME);
+            
             int      value=Integer.parseInt(element.getChildText(DOM_NODE_VALUE))
                     ,weight=Integer.parseInt(element.getChildText(DOM_NODE_WEIGHT));
             
@@ -96,7 +89,7 @@ public class WareFactory {
         switch (type) {
             default:
             case TYPE_DRINK:
-                ware = new Food(name,value,weight);
+                ware = new Food(name,value,weight, 0);
                 break;
         }
         return ware;

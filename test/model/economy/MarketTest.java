@@ -1,58 +1,41 @@
 package model.economy;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
 
+import junit.framework.Assert;
 import model.factory.WareFactory;
-import model.gameobject.material.Wall;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class MarketTest {
 
-    private Market market;
 
-    @Before
-    public void init() {
-        market = new Market();
-    }
+
 
     @Test
     public void testStockList() {
-        /**
-         * this market contains all ware and 10 of each item
-         */
+        Market market = new Market();
+        Assert.assertEquals(false, market.getStock().getWarelist().isEmpty());
+    }
+    
+
+    
+    @Test
+    public void testMarketPrice()
+    {
+        Market market = new Market();
+        ArrayList<Ware> wares = WareFactory.getInstance().getWares();
+        Ware ware = wares.get(1);
         
-        ArrayList<Tradeable> ware = WareFactory.getInstance().getWare();
-        
-        for(Tradeable tradeableWare : ware)
-        {
-            market.getStock().addTradeableWare(tradeableWare, 10);
+        try {
+            float oldPrice = ware.getPrice();
+            System.out.println(oldPrice);
+            Assert.assertTrue(ware.getPrice() > oldPrice);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        
-
-        /**
-         * printing the list of items in this stock (just for testing purpose)
-         */
-        Iterator it = market.getStock().getWarelist().entrySet().iterator();
-        System.out.println(market.getStock().getWarelist().size());
-        
-        
-        while (it.hasNext()) {
-            Map.Entry pairs = (Map.Entry) it.next();
-            
-            
-            Tradeable material = (Tradeable) pairs.getKey();
-            Integer amount = (Integer) pairs.getValue();
-
-            System.out.println(pairs.getKey() instanceof Wall);
-
-            System.out.println(material + " " + amount);
-            it.remove();
-        }
-
+        market.printMarketItems();
+       
     }
 
 }

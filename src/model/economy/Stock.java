@@ -1,28 +1,24 @@
 package model.economy;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
-import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
 
 public class Stock {
     
-    private HashMap<Tradeable, Integer> wareList;
+    private HashMap<Ware, Integer> wareList;
 
     
     public Stock() {
-        wareList = new HashMap<Tradeable, Integer>();
+        wareList = new HashMap<Ware, Integer>();
     }
     
-    
-    public void addTradeableWare(Tradeable ware, int amount)
+    public void addTradeableWare(Ware ware, int amount)
     {
-        //TODO: control whether the ware already exist
-        wareList.put(ware, amount);
+            wareList.put(ware, amount);
+        
     }
     
-    public HashMap<Tradeable, Integer> getWarelist()
+    
+    public HashMap<Ware, Integer> getWarelist()
     {
         return this.wareList;
     }

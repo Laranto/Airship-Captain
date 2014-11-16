@@ -12,4 +12,28 @@
         <value>20</value>
         <weight>5</weight>
     </ware>         
+        <ware type="drink">
+        <name>Son Cavaller Tempranillo 1999</name>
+        <image>img/Tempranillo_Navara.jpg</image><!-- currently unused -->
+        <value>10</value>
+        <weight>5</weight>
+    </ware>     
+    <ware type="drink">
+        <name>Kalant Cabernet Sauvignon 1965</name>
+        <image>img/cabernet-sauvignon.jpg</image>
+        <value>20</value>
+        <weight>5</weight>
+    </ware>    
+        <ware type="drink">
+        <name>Son Cavaller Tempranillo 1500</name>
+        <image>img/Tempranillo_Navara.jpg</image><!-- currently unused -->
+        <value>10</value>
+        <weight>5</weight>
+    </ware>     
+    <ware type="drink">
+        <name>Kalant Cabernet Sauvignon 1992</name>
+        <image>img/cabernet-sauvignon.jpg</image>
+        <value>20</value>
+        <weight>5</weight>
+    </ware>    
 </wares>

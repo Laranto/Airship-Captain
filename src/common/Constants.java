@@ -32,6 +32,11 @@ public class Constants {
     public static final Color HARBOR_CIRCLE_BACKGROUND = Color.WHITE;
     public static final Color HARBOR_CIRCLE_BORDER = Color.BLACK;
     public static final int HARBOR_CIRCLE_DIAMETER = 20;
+
+    public static final float WARE_STANDARD_AMOUNT = 100;
+    public static final float WARE_MAX_INFLATION_FACTOR = 5;
+    
+    
     
     
     /**
