@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 import model.factory.WareFactory;
+import model.gameobject.Airship;
 
 import common.Constants;
 import common.Utils;
@@ -52,27 +53,69 @@ public class Market {
     }
 
     /**
+     * This method buys an item for an airship from a market
+     * @param Airship the airship which wants to buy an item
      * @param Ware ist the ware you want to buy
      * @param amount is the amount you want to buy
      * @return returns the item itself the the bought was succesfull, otherwise it throws an exception
      * @throws Exception
      */
-    public Ware buyItem(Ware ware, int amount) throws Exception {
+    public void buyItem(Airship airship, Ware ware, int amount) throws Exception {
         if (this.getStock().getWarelist().containsKey(ware)) {
             int value = this.getStock().getWarelist().get(ware);
             
             if(value - amount < 0)
             {
-                throw new Exception("There are only : "+(int) value+" items left.");
+                throw new Exception("There are only : "+(int) value+" items this kind left.");
             }else{
                 this.getStock().getWarelist().put(ware, value - amount);
+                
+                if(airship.getStock().getWarelist().containsKey(ware))
+                {
+                    airship.getStock().getWarelist().put(ware, airship.getStock().getWarelist().get(ware)+ amount);
+                }else{
+                    airship.getStock().getWarelist().put(ware, amount);
+                }
+                
                 initMarketPrice();
             }
         }else{
             throw new Exception("Resource doesn't exist.");
         }
 
-        return null;
+    }
+    
+    /**
+     * This method sells an item from an airship to a market
+     * @param airship the airship which wants to sell something
+     * @param ware the ware which is been traden
+     * @param amount the amount of this ware
+     * @throws Exception throws an exception if the resource which wants to be
+     * traden doesn't exists or is not enoug
+     */
+    public void sellItem(Airship airship, Ware ware, int amount) throws Exception {
+        if (airship.getStock().getWarelist().containsKey(ware)) {
+            int value = airship.getStock().getWarelist().get(ware);
+            
+            if(value - amount < 0)
+            {
+                throw new Exception("Your ship has only: "+(int) value+" items this kind left.");
+            }else{
+                airship.getStock().getWarelist().put(ware, value-amount);
+                
+                if(this.getStock().getWarelist().containsKey(ware))
+                {
+                    this.getStock().getWarelist().put(ware, this.getStock().getWarelist().get(ware)+amount);
+                }else{
+                    this.getStock().getWarelist().put(ware, amount);
+                }
+                
+                initMarketPrice();
+            }
+        }else{
+            throw new Exception("Resource doesn't exist.");
+        }
+
     }
 
     
@@ -97,21 +140,7 @@ public class Market {
     }
     
     
-    /**
-     * Printing the state of the market in the console
-     */
-    public void printMarketItems()
-    {
-        System.out.println("Name\t\t\t\tReferenz\t\t\t\t\t\t\t\tAnzahl\t\t\tPreis");
-        
-        Iterator<Entry<Ware, Integer>> it = this.getStock().getWarelist().entrySet().iterator();
-        while (it.hasNext()) {
-            Entry<Ware, Integer> pairs = it.next();
-            Ware ware = pairs.getKey();
-            Integer amount = pairs.getValue();
-            System.out.println(ware.getName()+"\t"+ware +"\t"+amount+"\t\t\t"+ware.getPrice());
-        }
-    }
+
 
     public Stock getStock() {
         return this.stock;

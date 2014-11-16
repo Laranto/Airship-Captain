@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import model.economy.Stock;
 import model.factory.EntityFactory;
 import model.factory.MaterialFactory;
 import model.gameobject.entity.Blocker;
@@ -19,6 +20,7 @@ public class Airship extends GameObject implements Renderable{
     private Entity[][] equipment;
     private boolean isEmpty;
     private Captain captain;
+    private Stock stock;
     
     public Airship() {
         super(null,0,0);
@@ -26,6 +28,7 @@ public class Airship extends GameObject implements Renderable{
         equipment   = new Entity[Constants.AIRSHIP_WIDTH_TILES][Constants.AIRSHIP_HEIGHT_TILES];
         isEmpty=true;
         captain = new Captain();
+        this.stock = new Stock();
     }
     
     /**
@@ -313,5 +316,10 @@ public class Airship extends GameObject implements Renderable{
     @Override
     public void setWeight(int weight) {
         throw new NoSuchMethodError();
+    }
+    
+    public Stock getStock()
+    {
+        return this.stock;
     }
 }
