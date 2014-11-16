@@ -41,7 +41,6 @@ public class MainMenuPanel extends GameDefaultPanel{
 	    
             menuItems = new ArrayList<MenuItemEnum>();
             menuItems.add(MenuItemEnum.START_GAME);
-            menuItems.add(MenuItemEnum.SAVE_GAME);
             menuItems.add(MenuItemEnum.LOAD_GAME);
             menuItems.add(MenuItemEnum.SETTINGS);
             menuItems.add(MenuItemEnum.EXIT_GAME);

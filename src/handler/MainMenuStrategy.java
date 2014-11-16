@@ -23,9 +23,6 @@ public class MainMenuStrategy extends HandlerStrategy {
             case START_GAME:
                     WindowController.showConstruction(airship);
                     break;
-            case SAVE_GAME:
-                    // TODO: implement save listener
-                    break;
             case LOAD_GAME:
                     new LoadGameListener().actionPerformed(null);
                     break;
