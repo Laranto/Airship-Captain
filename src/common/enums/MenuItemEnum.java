@@ -15,7 +15,10 @@ public enum MenuItemEnum {
 	MARKET("Markt"), 
 	SAVE_GAME("Speichern..."), 
 	LOAD_GAME("Laden..."), 
-	EXIT_GAME("Spiel verlassen") ;
+	EXIT_GAME("Spiel verlassen"),
+	
+	NAVIGATION_MAP("Karte")
+	;
 	
 	private String text;
 

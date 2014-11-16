@@ -16,6 +16,7 @@ public class Harbor implements Renderable{
     private Market market;
     private Point position;
     private boolean isActive;
+    private boolean nextDestination;
     
     public Harbor(Point position){
         this(new Market(), position, true);
@@ -37,7 +38,10 @@ public class Harbor implements Renderable{
     
     public void setActive(boolean active) {
         this.isActive = active;
-        
+    }
+
+    public void setNextDestination(boolean nextDestination) {
+        this.nextDestination = nextDestination;
     }
 
     @Override
@@ -46,6 +50,10 @@ public class Harbor implements Renderable{
         g.setColor(Constants.HARBOR_CIRCLE_BACKGROUND);
         if(isActive){
             g.setColor(Constants.HARBOR_CIRCLE_BACKGROUND_ACTIVE);
+        }else if(nextDestination){
+            g.setColor(Constants.HARBOR_CIRCLE_BACKGROUND_NEXT_DESTINATION);
+        }else{
+            g.setColor(Constants.HARBOR_CIRCLE_BACKGROUND);
         }
         g.fillOval(
                 (int)position.getX(), 

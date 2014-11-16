@@ -84,6 +84,10 @@ public class ConstructionStrategy extends HandlerStrategy {
         }
     }
 
+    @Override
+    public void mouseMoved(MouseEvent e) {
+    }
+
     public ShipPart getActivePlacement() {
         return activePlacement;
     }

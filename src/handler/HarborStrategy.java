@@ -56,4 +56,8 @@ public class HarborStrategy extends HandlerStrategy {
         
     }
 
+    @Override
+    public void mouseMoved(MouseEvent e) {
+    }
+
 }

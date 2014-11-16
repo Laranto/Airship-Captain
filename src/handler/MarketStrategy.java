@@ -47,4 +47,8 @@ public class MarketStrategy extends HandlerStrategy {
         
     }
 
+    @Override
+    public void mouseMoved(MouseEvent e) {
+    }
+
 }
