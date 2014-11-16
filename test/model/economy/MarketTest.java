@@ -26,10 +26,11 @@ public class MarketTest {
         Market market = new Market();
         ArrayList<Ware> wares = WareFactory.getInstance().getWares();
         Ware ware = wares.get(1);
-        
+        market.printMarketItems();
         try {
             float oldPrice = ware.getPrice();
             System.out.println(oldPrice);
+            market.buyItem(ware, 10);
             Assert.assertTrue(ware.getPrice() > oldPrice);
         } catch (Exception e) {
             e.printStackTrace();
