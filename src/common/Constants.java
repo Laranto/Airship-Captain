@@ -32,6 +32,7 @@ public class Constants {
     public static final Object BUTTON_PROPERTY_ID = "id";
     
     public static final Color HARBOR_CIRCLE_BACKGROUND_ACTIVE = Color.RED;
+    public static final Color HARBOR_CIRCLE_BACKGROUND_NEXT_DESTINATION = Color.BLUE;
     public static final Color HARBOR_CIRCLE_BACKGROUND = Color.WHITE;
     public static final Color HARBOR_CIRCLE_BORDER = Color.BLACK;
     public static final int HARBOR_CIRCLE_DIAMETER = 20;

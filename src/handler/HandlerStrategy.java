@@ -9,5 +9,5 @@ public abstract class HandlerStrategy {
     public abstract void keyEvent(KeyEvent e);
 
     public abstract void publishProperty(Object activeMaterial);
-    
+    public abstract void mouseMoved(MouseEvent e);
 }

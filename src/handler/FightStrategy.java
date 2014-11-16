@@ -44,7 +44,9 @@ public class FightStrategy extends HandlerStrategy {
 
     @Override
     public void keyEvent(KeyEvent e) {
-        // TODO Auto-generated method stub
-        
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
     }
 }

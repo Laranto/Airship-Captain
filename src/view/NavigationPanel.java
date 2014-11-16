@@ -15,9 +15,11 @@ import javax.swing.SwingConstants;
 
 import model.gameobject.Airship;
 import model.navigation.Harbor;
+
 import common.Constants;
 import common.ImageLoader;
 import common.enums.MenuItemEnum;
+
 import controller.ButtonController;
 import controller.InputController;
 
@@ -66,6 +68,7 @@ public class NavigationPanel extends GameDefaultPanel {
     @Override
     public void paintComponent(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
+        ((NavigationStrategy)strategy).getRoute().removeLines(g2);
         g2.drawImage(
                 image, 
                 0,                              /*start x position*/
@@ -77,5 +80,6 @@ public class NavigationPanel extends GameDefaultPanel {
         for(Harbor h: ((NavigationStrategy)strategy).getHarbors()){
             h.render(g2);
         }
+        ((NavigationStrategy)strategy).getRoute().render(g2);
     }
 }

@@ -83,4 +83,8 @@ public class ConstructionStrategy extends HandlerStrategy {
             System.out.println(((Entity)activePlacement).getOrientation());
         }
     }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+    }
 }
