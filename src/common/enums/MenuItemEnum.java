@@ -10,6 +10,9 @@ public enum MenuItemEnum {
      */
     BUY("Kaufen"), 
     SELL("Verkaufen"),
+    MARKET_ITEM("Market Item"),
+    SHIP_ITEM("Ship Item"),
+    
     HARBOR("Hafen"),
     /*
      * Harbor

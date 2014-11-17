@@ -3,6 +3,7 @@ package controller;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import model.economy.Market;
 import model.gameobject.Airship;
 import view.ConstructionPanel;
 import view.FightPanel;
@@ -64,11 +65,13 @@ public class WindowController{
     	showPanel(harborPanel);
     }
     
+    
+    //TODO: Market should be passed as parameter from harbor
     public static void showMarket(Airship airship)
     {
         if(marketPanel == null)
         {
-            marketPanel = new MarketPanel(airship);
+            marketPanel = new MarketPanel(airship, new Market());
         }
         showPanel(marketPanel);
     }

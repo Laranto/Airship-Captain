@@ -1,20 +1,33 @@
 package view;
 
+import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import model.economy.Market;
+import model.economy.Ware;
+import model.factory.MaterialFactory;
+import model.factory.WareFactory;
+import model.gameobject.Airship;
 
 import common.Constants;
 
 import controller.WindowController;
-import model.factory.MaterialFactory;
-import model.gameobject.Airship;
 
 public class MarketViewTest {
 
     public static void main(String[] args) {
 
         MaterialFactory fac = MaterialFactory.getInstance();
+        List<Ware> wares = WareFactory.getInstance().getWares();
         Airship testship = new Airship();
+        testship.getStock().addTradeableWare(wares.get(0), 20);
+        testship.getStock().addTradeableWare(wares.get(1), 10);
+        
+        
+        Market market = new Market();
+        
         for (int i = 0; i < 10; i++) {
             testship.placeMaterial(fac.getMaterials().get(0), 4, 4 + i);
         }
@@ -27,7 +40,7 @@ public class MarketViewTest {
         }
         
         JFrame frame = new JFrame("Market view");
-        JPanel pane = new MarketPanel(testship);
+        JPanel pane = new MarketPanel(testship, market);
         frame.setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
         frame.setResizable(false);
 

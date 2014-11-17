@@ -20,4 +20,10 @@ public class Ware extends GameObject implements Tradeable{
     public void setPrice(float price) {
         this.price = price;
     }
+    
+    @Override
+    public String toString()
+    {
+        return this.getName();
+    }
 }

@@ -3,6 +3,11 @@ package handler;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+
+import model.economy.Market;
+import model.economy.Ware;
 import model.gameobject.Airship;
 
 import common.enums.MenuItemEnum;
@@ -13,25 +18,34 @@ public class MarketStrategy extends HandlerStrategy {
 
     private MenuItemEnum activeMenu;
     private Airship airship;
+    private Market market;
 
-    public MarketStrategy(Airship airship) {
+    public MarketStrategy(Airship airship, Market market) {
         this.airship = airship;
+        this.market = market;
     }
 
     @Override
     public void mouseEvent(MouseEvent e) {
-        switch (this.activeMenu) {
-        case BUY:
-            // TODO set market mode to buy (like the brush constructer)
-            break;
-        case SELL:
-            // TODO set market mode to sell
-            break;
-        case HARBOR:
-            WindowController.showHarbor(this.airship);
-            break;
-        default:
-            break;
+ 
+        
+        if(this.activeMenu != null)
+        {
+            switch (this.activeMenu) {
+            case BUY:
+                // TODO set market mode to buy (like the brush constructer)
+                break;
+            case SELL:
+                // TODO set market mode to sell
+                break;
+            case HARBOR:
+                WindowController.showHarbor(this.airship);
+                break;
+            default:
+                break;
+            }
+            
+            this.activeMenu = null;
         }
     }
 
