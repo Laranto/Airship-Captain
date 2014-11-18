@@ -90,12 +90,17 @@ public class NavigationStrategy extends HandlerStrategy {
     
     @Override
     public void mouseEvent(MouseEvent e) {
-        
+        if(toHarbor != null && currentHarbor.getPosition() != toHarbor.getPosition()){
+        	currentHarbor.setActive(false);
+        	toHarbor.setActive(true);
+        	toHarbor.setNextDestination(false);
+        	currentHarbor = toHarbor;
+        	route = new Route(currentHarbor);
+        }
     }
 
     @Override
     public void keyEvent(KeyEvent e) {
-        // TODO Auto-generated method stub
         
     }
 

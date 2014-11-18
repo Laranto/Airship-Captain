@@ -1,12 +1,14 @@
 package model.navigation;
 
+import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.Shape;
+import java.awt.Stroke;
 import java.awt.geom.Line2D;
 
-import common.Constants;
-
 import model.gameobject.Renderable;
+
+import common.Constants;
 
 
 public class Route implements Renderable{
@@ -59,7 +61,11 @@ public class Route implements Renderable{
                     (int)from.getPosition().getY()+radius,
                     (int)to.getPosition().getX()+radius,
                     (int)to.getPosition().getY()+radius);
+            Stroke tmp = g.getStroke();
+//            g.setStroke(new BasicStroke(4, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0));
+            g.setStroke(new BasicStroke(4));
             g.draw(line);
+            g.setStroke(tmp);
             from.render(g);
             to.render(g);
         }
