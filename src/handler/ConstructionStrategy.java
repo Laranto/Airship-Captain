@@ -7,8 +7,9 @@ import model.gameobject.Airship;
 import model.gameobject.Entity;
 import model.gameobject.Material;
 import model.gameobject.ShipPart;
-
 import common.Constants;
+import common.enums.PropertyEnum;
+import controller.WindowController;
 
 public class ConstructionStrategy extends HandlerStrategy {
 
@@ -50,9 +51,15 @@ public class ConstructionStrategy extends HandlerStrategy {
     }
 
     @Override
-    public void publishProperty(Object activeMaterial) {
-        if(activeMaterial instanceof ShipPart){
-            this.activePlacement = (ShipPart) activeMaterial;
+    public void publishProperty(Object publishedProperty) {
+    	if(publishedProperty instanceof PropertyEnum){
+    		if(((PropertyEnum)publishedProperty) == PropertyEnum.SAVE){
+    			//TODO check if airship is valid if ok-> werft false -> message user (use JOptionPane)
+    			WindowController.showHarbor(airship);
+    		}
+    	}
+        if(publishedProperty instanceof ShipPart){
+            this.activePlacement = (ShipPart) publishedProperty;
             if(activePlacement instanceof Entity){
                 resetOrientation((Entity)activePlacement);
             }
