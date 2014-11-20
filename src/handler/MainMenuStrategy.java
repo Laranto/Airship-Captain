@@ -3,6 +3,7 @@ package handler;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
+import model.GameState;
 import model.gameobject.Airship;
 import common.enums.MenuItemEnum;
 import controller.ExitGameListener;
@@ -25,6 +26,7 @@ public class MainMenuStrategy extends HandlerStrategy {
                     break;
             case LOAD_GAME:
                     new LoadGameListener().actionPerformed(null);
+                    this.airship = GameState.getInstance().getAirship();
                     break;
             case SETTINGS:
                     //TODO: implement settings

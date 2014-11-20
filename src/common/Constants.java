@@ -8,6 +8,7 @@ public class Constants {
     public static final String FOLDER_MATERIAL = "resources/material/";
     public static final String FOLDER_OBJECTS = "resources/object/";
     public static final String FOLDER_WARE = "resources/ware/";
+    public static final String FOLDER_GAME_DATA = "resources/game_data/";
     
     public static final String NAVIGATION_BACKGROUND_IMAGE = "resources/panels/img/map.jpg";
     public static final String HARBOR_BACKGROUND_IMAGE = "resources/panels/img/zeppelin.jpg";
@@ -41,6 +42,8 @@ public class Constants {
     
     public static final float WARE_STANDARD_AMOUNT = 100;
     public static final float WARE_MAX_INFLATION_FACTOR = 5;
+    
+    public static final String GAME_FILE_ENDNG = ".asc";
 
     
     /**
@@ -61,6 +64,7 @@ public class Constants {
     @SuppressWarnings("all") //Hush, everything is oke
     public static final Vector<Integer> ENTITY_ORIENTATION_DOWN=new Vector<>(new ArrayList(){{add(0);add(1);}}
             );
+    
     
     
 }

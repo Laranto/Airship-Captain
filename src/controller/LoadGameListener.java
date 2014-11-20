@@ -2,11 +2,49 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+
+import common.Constants;
+import model.GameState;
+import model.gameobject.Airship;
 
 public class LoadGameListener implements ActionListener {
 
+    private Airship airship;
+    
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent arg0) {
+        this.loadGame("game_01");
     }
 
+    private void loadGame(String filename) {
+        InputStream fileInputStream = null;
+
+        try {
+            fileInputStream = new FileInputStream(Constants.FOLDER_GAME_DATA+ filename + "."+Constants.GAME_FILE_ENDNG);
+
+            /*
+             * The objects which should be loaded
+             */
+
+            ObjectInputStream o = new ObjectInputStream(fileInputStream);
+            airship = (Airship) o.readObject();
+            GameState.getInstance().setAirship(airship);
+            
+            
+        } catch (IOException e) {
+            System.err.println(e);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fileInputStream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

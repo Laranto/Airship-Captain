@@ -25,7 +25,7 @@ public abstract class ShipPart extends GameObject implements Renderable {
     /**
      * Graphical Representation of the Part
      */
-    private BufferedImage image;
+    private transient BufferedImage image;
 
     public int getDurability() {
         return durability;

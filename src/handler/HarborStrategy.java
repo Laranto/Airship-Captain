@@ -4,9 +4,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 import common.enums.MenuItemEnum;
-
 import controller.ExitGameListener;
 import controller.LoadGameListener;
+import controller.SaveGameListener;
 import controller.WindowController;
 import model.gameobject.Airship;
 
@@ -22,6 +22,7 @@ public class HarborStrategy extends HandlerStrategy {
 
 	@Override
 	public void mouseEvent(MouseEvent e) {
+	   
 		switch (this.activeMenu) {
 		case SHIPYARD:
 			WindowController.showConstruction(this.airship);
@@ -30,7 +31,7 @@ public class HarborStrategy extends HandlerStrategy {
 		    WindowController.showMarket(this.airship);
 			break;
 		case SAVE_GAME:
-			// TODO: implement save listener
+		    new SaveGameListener().actionPerformed(null);
 			break;
 		case LOAD_GAME:
 			new LoadGameListener().actionPerformed(null);

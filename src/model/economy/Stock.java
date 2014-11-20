@@ -1,10 +1,11 @@
 package model.economy;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-public class Stock {
+public class Stock implements Serializable{
     
     private HashMap<Ware, Integer> wareList;
 
