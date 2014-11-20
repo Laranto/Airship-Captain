@@ -43,7 +43,7 @@ public class Constants {
     public static final float WARE_STANDARD_AMOUNT = 100;
     public static final float WARE_MAX_INFLATION_FACTOR = 5;
     
-    public static final String GAME_FILE_ENDNG = ".asc";
+    public static final String GAME_FILE_ENDNG = "asc";
 
     
     /**
