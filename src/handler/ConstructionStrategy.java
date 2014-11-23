@@ -93,7 +93,11 @@ public class ConstructionStrategy extends HandlerStrategy {
     	if(publishedProperty instanceof PropertyEnum){
     		if(((PropertyEnum)publishedProperty) == PropertyEnum.SAVE){
     			//TODO check if airship is valid if ok-> werft false -> message user (use JOptionPane)
-    			WindowController.showHarbor(airship);
+    		    if(airship.isJoined()){
+    		        WindowController.showHarbor(airship);
+    		    }else{
+    		        WindowController.showError("Fehler beim speichern","Das Luftschiff konnte so nicht gespeichert werden. Es ist nicht an einem Stück!");
+    		    }
     		}
     	}
         if(publishedProperty instanceof ShipPart){

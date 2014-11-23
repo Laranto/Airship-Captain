@@ -1,6 +1,7 @@
 package controller;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import model.economy.Market;
@@ -80,4 +81,8 @@ public class WindowController{
 		container.setContentPane(panel);
 		container.paintAll(container.getGraphics());
 	}
+
+    public static void showError(String title,String message) {
+        JOptionPane.showMessageDialog(container, message, title,JOptionPane.ERROR_MESSAGE);
+    }
 }
