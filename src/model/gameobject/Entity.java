@@ -1,6 +1,7 @@
 package model.gameobject;
 
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Dimension2D;
 import java.awt.image.BufferedImage;
@@ -30,6 +31,8 @@ public abstract class Entity extends ShipPart {
     private Dimension2D     size;
 
     private List<Blocker>   associatedBlockers;
+    
+    private Point           position;
 
     /**
      * @param orientation Should have at least position 0 filled if you hope to rotate the entity without errors.
@@ -42,6 +45,20 @@ public abstract class Entity extends ShipPart {
         this.size = size;
         associatedBlockers = new ArrayList<>();
     }
+
+    
+    public Point getPosition() {
+        return position;
+    }
+
+    public void setPosition(Point position) {
+        setPosition(position.x, position.y);
+    }
+    
+    public void setPosition(int tileX, int tileY) {
+        this.position = new Point(tileX, tileY);
+    }
+
 
     public Dimension2D getSize() {
         return size;

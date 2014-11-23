@@ -14,7 +14,7 @@ import controller.WindowController;
 public class ConstructionStrategy extends HandlerStrategy {
 
     private Airship airship;
-    private ShipPart activePlacement;
+    private Object activePlacement;
     private boolean isActive = false;
     /**
      * Flag if the user is moving an entity
@@ -35,8 +35,13 @@ public class ConstructionStrategy extends HandlerStrategy {
             int tileX = e.getX() / Constants.TILE_SIZE;
             int tileY = e.getY() / Constants.TILE_SIZE;
             
-            if(activePlacement == null){
-                this.airship.removeMaterial(tileX, tileY);
+            if(activePlacement instanceof PropertyEnum){
+                PropertyEnum active = (PropertyEnum) activePlacement;
+                if(active==PropertyEnum.DELETE_MATERIAL){
+                    this.airship.removeMaterial(tileX, tileY);
+                }else if(active==PropertyEnum.DELETE_ENTITY){
+                    this.airship.removeEntity(tileX,tileY);
+                }
             }else if (tileX < Constants.AIRSHIP_WIDTH_TILES && tileY < Constants.AIRSHIP_HEIGHT_TILES) {
                 if(activePlacement instanceof Material){
                     this.airship.placeMaterial((Material)activePlacement, tileX, tileY);
@@ -63,6 +68,8 @@ public class ConstructionStrategy extends HandlerStrategy {
             if(activePlacement instanceof Entity){
                 resetOrientation((Entity)activePlacement);
             }
+        }else if(publishedProperty instanceof PropertyEnum){
+            this.activePlacement =  publishedProperty;
         }
         else{
             this.activePlacement=null;
@@ -81,7 +88,6 @@ public class ConstructionStrategy extends HandlerStrategy {
             if(e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_DOWN){
                 ent.rotate();
             }
-            System.out.println(((Entity)activePlacement).getOrientation());
         }
     }
 
@@ -89,7 +95,7 @@ public class ConstructionStrategy extends HandlerStrategy {
     public void mouseMoved(MouseEvent e) {
     }
 
-    public ShipPart getActivePlacement() {
+    public Object getActivePlacement() {
         return activePlacement;
     }
 }

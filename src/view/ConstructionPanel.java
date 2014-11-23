@@ -24,6 +24,7 @@ import model.factory.MaterialFactory;
 import model.gameobject.Airship;
 import model.gameobject.Entity;
 import model.gameobject.Material;
+import model.gameobject.ShipPart;
 
 import common.Constants;
 import common.enums.PropertyEnum;
@@ -183,12 +184,16 @@ public class ConstructionPanel extends GameDefaultPanel {
     }
     
     private class PreviewPanel extends JPanel{
+        private static final long serialVersionUID = 1L;
+
         @Override
         public void paint(Graphics g) {
             if(strategy.getActivePlacement()!=null){
             super.paint(g);
             g.translate(getSize().width/2, getSize().height/2);
-            strategy.getActivePlacement().render((Graphics2D) g);
+            if(strategy.getActivePlacement() instanceof ShipPart){
+                ((ShipPart) strategy.getActivePlacement()).render((Graphics2D) g);
+            }
             }
         }
     }
