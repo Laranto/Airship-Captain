@@ -43,6 +43,7 @@ public class WindowController{
     		constructionPanel = new ConstructionPanel(airship);
     	}
     	showPanel(constructionPanel);
+    	constructionPanel.requestFocus();
     }
     
     public static void showFight(Airship airship){
