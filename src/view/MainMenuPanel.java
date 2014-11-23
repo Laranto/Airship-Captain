@@ -19,7 +19,7 @@ import javax.swing.SwingConstants;
 import model.GameState;
 import model.gameobject.Airship;
 import common.Constants;
-import common.ImageLoader;
+import common.FileUtils;
 import common.enums.MenuItemEnum;
 import controller.ButtonController;
 
@@ -31,7 +31,7 @@ public class MainMenuPanel extends GameDefaultPanel{
 	    setLayout(null);
 	    
 	    try {
-	        this.image = ImageLoader.loadImage(new File(Constants.ZEPPLIN_COCKPIT_BACKGROUND_IMAGE));
+	        this.image = FileUtils.loadImage(new File(Constants.ZEPPLIN_COCKPIT_BACKGROUND_IMAGE));
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }

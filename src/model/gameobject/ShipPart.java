@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-import common.ImageLoader;
+import common.FileUtils;
 
 
 public abstract class ShipPart extends GameObject implements Renderable {
@@ -41,7 +41,7 @@ public abstract class ShipPart extends GameObject implements Renderable {
     }
     public void setImage(String imagePath) throws IOException
     {
-        this.setImage(ImageLoader.loadImage(new File(imagePath)));
+        this.setImage(FileUtils.loadImage(new File(imagePath)));
     }
     
     public BufferedImage getImage()

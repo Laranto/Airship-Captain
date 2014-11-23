@@ -8,41 +8,19 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 
 import model.GameState;
-import model.gameobject.Airship;
 
 import common.Constants;
+import common.FileUtils;
 
 public class SaveGameListener implements ActionListener {
 
-
-    
     @Override
     public void actionPerformed(ActionEvent arg0) {
         this.saveGame("game_01");
     }
 
     private void saveGame(String filename) {
-        OutputStream fileOutputStream = null;
-        ObjectOutputStream ois = null;
-        try {
-            System.out.println(Constants.FOLDER_GAME_DATA+ filename + "."+Constants.GAME_FILE_ENDNG);
-            fileOutputStream = new FileOutputStream(Constants.FOLDER_GAME_DATA+ filename + "."+Constants.GAME_FILE_ENDNG);
-            ois = new ObjectOutputStream(fileOutputStream);
-            
-            //saving the airship
-            ois.writeObject(GameState.getInstance().getAirship());
-            
-            
-
-        } catch (IOException e) {
-            System.err.println(e);
-        } finally {
-            try {
-                ois.close();
-                fileOutputStream.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        
+        FileUtils.saveObjectFile(GameState.getInstance().getAirship(), Constants.FOLDER_GAME_DATA, filename, Constants.GAME_FILE_ENDNG);
     }
 }
