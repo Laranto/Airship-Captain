@@ -12,15 +12,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import model.gameobject.Airship;
+
 import common.Constants;
 import common.ImageLoader;
 import common.enums.MenuItemEnum;
+
 import controller.ButtonController;
 
 public class MainMenuPanel extends GameDefaultPanel{

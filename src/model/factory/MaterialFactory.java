@@ -10,7 +10,6 @@ import java.util.List;
 import javax.management.RuntimeErrorException;
 
 import model.gameobject.Material;
-import model.gameobject.ShipPart;
 import model.gameobject.material.Floor;
 import model.gameobject.material.Wall;
 
@@ -26,7 +25,7 @@ import common.Constants;
  * @author Hesyar Uzuner <info@hesyar.com>
  * @author Laranto
  */
-public class MaterialFactory extends ShippartFactory {
+public class MaterialFactory extends ShippartFactory<Material> {
     private static final String TYPE_FLOOR = "floor";
     private static final String TYPE_WALL = "wall";
     private static final String DOM_NODE_WEIGHT = "weight";
@@ -152,7 +151,7 @@ public class MaterialFactory extends ShippartFactory {
 
 
     @Override
-    public ShipPart instanzise(ShipPart prototype) {
+    public Material instanzise(Material prototype) {
         if(!(prototype instanceof Material)){
             throw new RuntimeErrorException(new Error("Added prototype was not a Material." + prototype.toString()));
         }

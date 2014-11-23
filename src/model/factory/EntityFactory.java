@@ -12,7 +12,6 @@ import java.util.Vector;
 import javax.management.RuntimeErrorException;
 
 import model.gameobject.Entity;
-import model.gameobject.ShipPart;
 import model.gameobject.entity.Weapon;
 
 import org.jdom2.Document;
@@ -25,7 +24,7 @@ import common.Constants;
 /**
  *
  */
-public class EntityFactory extends ShippartFactory {
+public class EntityFactory extends ShippartFactory<Entity> {
 	private static final String TYPE_WEAPON = "weapon";
     private static final String DOM_NODE_OBJECT = "object";
 	private static final String DOM_NODE_NAME = "name";
@@ -146,28 +145,26 @@ public class EntityFactory extends ShippartFactory {
 		return instance;
 	}
 
-	@Override
-	public ShipPart instanzise(ShipPart prototype) {
-		if (!(prototype instanceof Entity)) {
-			throw new RuntimeErrorException(
-					new Error("Added prototype was not an Entity."
-							+ prototype.toString()));
-		}
-		Entity entityPrototype = (Entity) prototype;
-		String type = "";
-		if (prototype instanceof Weapon) {
-			type = TYPE_WEAPON;
-		}
+    @Override
+    public Entity instanzise(Entity prototype) {
+        if (!(prototype instanceof Entity)) {
+            throw new RuntimeErrorException(new Error("Added prototype was not an Entity." + prototype.toString()));
+        }
+        Entity entityPrototype = (Entity) prototype;
+        String type = "";
+        if (prototype instanceof Weapon) {
+            type = TYPE_WEAPON;
+        }
 
-		return createInstance(	type, 
-								entityPrototype.getImage(),
-								entityPrototype.getName(), 
-								entityPrototype.getDurability(),
-								entityPrototype.getValue(),
-								entityPrototype.getWeight(),
-								(int)entityPrototype.getSize().getWidth(),
-								(int)entityPrototype.getSize().getHeight(),
-								entityPrototype.getOrientation());
-	}
+        return createInstance(type
+                ,entityPrototype.getImage()
+                ,entityPrototype.getName(), entityPrototype.getDurability()
+                ,entityPrototype.getValue(), entityPrototype.getWeight()
+                ,(int) entityPrototype.getSize().getWidth()
+                ,(int) entityPrototype.getSize().getHeight()
+                ,entityPrototype.getOrientation());
+    }
+
+
 
 }

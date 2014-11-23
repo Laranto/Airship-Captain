@@ -3,11 +3,7 @@ package handler;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
-
 import model.economy.Market;
-import model.economy.Ware;
 import model.gameobject.Airship;
 
 import common.enums.MenuItemEnum;

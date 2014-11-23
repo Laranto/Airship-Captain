@@ -7,9 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import model.factory.EntityFactory;
-import model.factory.MaterialFactory;
 import model.gameobject.Entity;
-import model.gameobject.Material;
 
 public class EntityRenderTest extends JPanel {
     public static void main(String[] args) {

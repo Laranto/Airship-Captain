@@ -1,8 +1,9 @@
 package model.economy;
 
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 
-import junit.framework.Assert;
 import model.factory.WareFactory;
 import model.gameobject.Airship;
 
@@ -13,7 +14,7 @@ public class MarketTest {
     @Test
     public void testStockList() {
         Market market = new Market();
-        Assert.assertEquals(false, market.getStock().getWarelist().isEmpty());
+        assertEquals(false, market.getStock().getWarelist().isEmpty());
     }
     
 
@@ -28,7 +29,7 @@ public class MarketTest {
 
         float oldPrice = ware.getPrice();
         market.buyItem(airship, ware, 10);
-        Assert.assertTrue(ware.getPrice() > oldPrice);
+        assertTrue(ware.getPrice() > oldPrice);
        
     }
     
@@ -43,13 +44,13 @@ public class MarketTest {
         Ware ware2 = wares.get(2);
         
         
-        Assert.assertTrue(airship.getStock().getWarelist().isEmpty());
+        assertTrue(airship.getStock().getWarelist().isEmpty());
         market.buyItem(airship, ware, 2);
-        Assert.assertFalse(airship.getStock().getWarelist().isEmpty());
+        assertFalse(airship.getStock().getWarelist().isEmpty());
         
-        Assert.assertFalse(airship.getStock().getWarelist().size() > 1);
+        assertFalse(airship.getStock().getWarelist().size() > 1);
         market.buyItem(airship, ware2, 10);
-        Assert.assertEquals(2, airship.getStock().getWarelist().size());
+        assertEquals(2, airship.getStock().getWarelist().size());
         
         
         market.buyItem(airship, ware, 5);

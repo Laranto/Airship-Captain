@@ -1,10 +1,6 @@
 package model.gameobject.entity;
 
 import java.awt.Graphics2D;
-import java.awt.geom.Dimension2D;
-import java.awt.geom.Point2D;
-import java.awt.image.BufferedImage;
-import java.util.Vector;
 
 import model.gameobject.Entity;
 

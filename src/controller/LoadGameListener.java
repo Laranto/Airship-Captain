@@ -22,6 +22,7 @@ public class LoadGameListener implements ActionListener {
 
     private void loadGame(String filename) {
         InputStream fileInputStream = null;
+        ObjectInputStream ois = null;
 
         try {
             fileInputStream = new FileInputStream(Constants.FOLDER_GAME_DATA+ filename + "."+Constants.GAME_FILE_ENDNG);
@@ -30,8 +31,8 @@ public class LoadGameListener implements ActionListener {
              * The objects which should be loaded
              */
 
-            ObjectInputStream o = new ObjectInputStream(fileInputStream);
-            airship = (Airship) o.readObject();
+            ois = new ObjectInputStream(fileInputStream);
+            airship = (Airship) ois.readObject();
             GameState.getInstance().setAirship(airship);
             
             
@@ -41,6 +42,7 @@ public class LoadGameListener implements ActionListener {
             e.printStackTrace();
         } finally {
             try {
+                ois.close();
                 fileInputStream.close();
             } catch (Exception e) {
                 e.printStackTrace();
