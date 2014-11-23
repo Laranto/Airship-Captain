@@ -34,20 +34,22 @@ public class ConstructionStrategy extends HandlerStrategy {
         if(isActive){
             int tileX = e.getX() / Constants.TILE_SIZE;
             int tileY = e.getY() / Constants.TILE_SIZE;
-            
-            if(activePlacement instanceof PropertyEnum){
+            if(isMoveAction){
+                endMove(tileX, tileY);
+            }else if(activePlacement instanceof PropertyEnum){
                 PropertyEnum active = (PropertyEnum) activePlacement;
                 if(active==PropertyEnum.DELETE_MATERIAL){
                     this.airship.removeMaterial(tileX, tileY);
                 }else if(active==PropertyEnum.DELETE_ENTITY){
                     this.airship.removeEntity(tileX,tileY);
+                }else if(active==PropertyEnum.MOVE){
+                    startMove(tileX,tileY);
                 }
             }else if (tileX < Constants.AIRSHIP_WIDTH_TILES && tileY < Constants.AIRSHIP_HEIGHT_TILES) {
                 if(activePlacement instanceof Material){
                     this.airship.placeMaterial((Material)activePlacement, tileX, tileY);
                 }
                 if(activePlacement instanceof Entity){
-                    System.out.println(((Entity)activePlacement).getOrientation());
                     this.airship.placeEntity((Entity)activePlacement, tileX, tileY);
                 }
             }
@@ -55,8 +57,39 @@ public class ConstructionStrategy extends HandlerStrategy {
 
     }
 
+    
+    private void startMove(int tileX,int tileY) {
+        if(!isMoveAction){
+            Entity selected = airship.removeEntity(tileX, tileY);
+            if(selected!=null){
+                isMoveAction=true;
+                activePlacement = selected;
+            }
+        }
+    }
+    
+    private void endMove(int tileX,int tileY){
+        if(airship.placeEntity((Entity)activePlacement, tileX, tileY)){
+            isMoveAction=false;
+            publishProperty(PropertyEnum.MOVE);
+        }
+    }
+    
+    private void undoMove(){
+        if(activePlacement instanceof Entity){
+            isMoveAction=false;
+            Entity ent = (Entity) activePlacement;
+            airship.placeEntity(ent, ent.getPosition().x, ent.getPosition().y);
+        }
+    }
+    
+
     @Override
     public void publishProperty(Object publishedProperty) {
+        if(isMoveAction){
+            undoMove();
+        }
+        
     	if(publishedProperty instanceof PropertyEnum){
     		if(((PropertyEnum)publishedProperty) == PropertyEnum.SAVE){
     			//TODO check if airship is valid if ok-> werft false -> message user (use JOptionPane)

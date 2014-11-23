@@ -81,7 +81,6 @@ public class Airship extends GameObject implements Renderable{
     }
 
     private void placeEntityOnGrid(int tileX , int tileY , Entity entity) {
-        System.out.println(tileX + " " + tileY);
         equipment[tileX][tileY] = entity;
         entity.setPosition(tileX, tileY);
     }
@@ -157,12 +156,12 @@ public class Airship extends GameObject implements Renderable{
     /**
      * Removes the entity that lies on position tileX, tileY. If it's a blocker the parent entity will be removed.<br>
      * All blockers associated with the entity will be removed as well.
-     * @return
+     * @return the Entity which was removed
      */
-    public boolean removeEntity(int tileX , int tileY) {
+    public Entity removeEntity(int tileX , int tileY) {
         Entity selected = getEntity(tileX, tileY);
         if(selected == null){
-            return false;
+            return null;
         }
         if(selected instanceof Blocker){
             selected = ((Blocker)selected).getReferencedEntity();
@@ -171,7 +170,7 @@ public class Airship extends GameObject implements Renderable{
             removeEntity(blocker);
         }
         removeEntity(selected);
-        return true;
+        return selected;
     }
     
     /**
