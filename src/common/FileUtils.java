@@ -2,10 +2,15 @@ package common;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 
 import javax.imageio.ImageIO;
+
+import model.GameState;
 
 public class FileUtils {
     /**
@@ -29,7 +34,27 @@ public class FileUtils {
         return saveObjectFile(object, path + File.separator+fileName+"."+extention);
     }
     public static boolean saveObjectFile(Serializable object, String location){
-        
-        return true;
+        OutputStream fileOutputStream = null;
+        ObjectOutputStream oos = null;
+
+        try {
+            fileOutputStream = new FileOutputStream(location);
+            oos = new ObjectOutputStream(fileOutputStream);
+            oos.writeObject(GameState.getInstance().getAirship());
+            oos.flush();
+            
+
+            return true;
+        } catch (IOException e) {
+            System.err.println(e);
+            return false;
+        } finally {
+            try {
+                oos.close();
+                fileOutputStream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
