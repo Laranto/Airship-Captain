@@ -18,7 +18,7 @@ import javax.swing.SwingConstants;
 
 import model.gameobject.Airship;
 import common.Constants;
-import common.ImageLoader;
+import common.FileUtils;
 import common.enums.MenuItemEnum;
 import controller.ButtonController;
 
@@ -34,8 +34,8 @@ public class HarborPanel extends GameDefaultPanel {
         
         this.airship = airship;
         try {
-            this.image = ImageLoader.loadImage(new File(Constants.HARBOR_BACKGROUND_IMAGE));
-            this.icon = new ImageIcon(ImageLoader.loadImage(new File(Constants.COMPASS_IMAGE)));
+            this.image = FileUtils.loadImage(new File(Constants.HARBOR_BACKGROUND_IMAGE));
+            this.icon = new ImageIcon(FileUtils.loadImage(new File(Constants.COMPASS_IMAGE)));
         } catch (IOException e) {
             e.printStackTrace();
         }
