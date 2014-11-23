@@ -19,27 +19,25 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 
+import model.GameState;
 import model.factory.EntityFactory;
 import model.factory.MaterialFactory;
 import model.gameobject.Airship;
 import model.gameobject.Entity;
 import model.gameobject.Material;
 import model.gameobject.ShipPart;
-
 import common.Constants;
 import common.enums.PropertyEnum;
-
 import controller.ButtonController;
 import controller.InputController;
 
 public class ConstructionPanel extends GameDefaultPanel {
 
     private static final long serialVersionUID = 1L;
-    private Airship airship;
     private ConstructionStrategy strategy;
     
-    public ConstructionPanel(Airship airship) {
-        strategy = new ConstructionStrategy(airship);
+    public ConstructionPanel() {
+        strategy = new ConstructionStrategy();
         InputController inputController = new InputController(strategy);
         ButtonController buttonController = new ButtonController(strategy);
         addMouseListener(inputController);
@@ -47,7 +45,6 @@ public class ConstructionPanel extends GameDefaultPanel {
         addKeyListener(inputController);
         this.setFocusable(true);
         
-        this.airship = airship;
         
 
         GridLayout mainLayout = new GridLayout(1, 2);
@@ -180,7 +177,7 @@ public class ConstructionPanel extends GameDefaultPanel {
     public void paint(Graphics g) {
         super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
-        airship.render(g2);
+        GameState.getInstance().getAirship().render(g2);
     }
     
     private class PreviewPanel extends JPanel{

@@ -16,12 +16,11 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import model.GameState;
 import model.gameobject.Airship;
-
 import common.Constants;
 import common.ImageLoader;
 import common.enums.MenuItemEnum;
-
 import controller.ButtonController;
 
 public class MainMenuPanel extends GameDefaultPanel{
@@ -37,7 +36,7 @@ public class MainMenuPanel extends GameDefaultPanel{
 	        e.printStackTrace();
 	    }
 	    
-	    HandlerStrategy harborStrategy = new MainMenuStrategy(new Airship());
+	    HandlerStrategy harborStrategy = new MainMenuStrategy();
 	    ButtonController buttonController = new ButtonController(harborStrategy);
 	    
             menuItems = new ArrayList<MenuItemEnum>();

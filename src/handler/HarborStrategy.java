@@ -8,6 +8,7 @@ import controller.ExitGameListener;
 import controller.LoadGameListener;
 import controller.SaveGameListener;
 import controller.WindowController;
+import model.GameState;
 import model.gameobject.Airship;
 
 public class HarborStrategy extends HandlerStrategy {
@@ -25,10 +26,10 @@ public class HarborStrategy extends HandlerStrategy {
 	   
 		switch (this.activeMenu) {
 		case SHIPYARD:
-			WindowController.showConstruction(this.airship);
+			WindowController.showConstruction();
 			break;
 		case MARKET:
-		    WindowController.showMarket(this.airship);
+		    WindowController.showMarket(GameState.getInstance().getAirship());
 			break;
 		case SAVE_GAME:
 		    new SaveGameListener().actionPerformed(null);

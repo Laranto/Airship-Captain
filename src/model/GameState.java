@@ -19,7 +19,12 @@ public class GameState {
 
 
     public Airship getAirship() {
-        return airship;
+        if(this.airship == null)
+        {
+            this.airship = new Airship();
+        }
+        
+        return this.airship;
     }
 
     public void setAirship(Airship airship) {

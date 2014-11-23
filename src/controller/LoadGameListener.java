@@ -13,7 +13,7 @@ import model.gameobject.Airship;
 
 public class LoadGameListener implements ActionListener {
 
-    private Airship airship;
+
     
     @Override
     public void actionPerformed(ActionEvent arg0) {
@@ -30,11 +30,9 @@ public class LoadGameListener implements ActionListener {
             /*
              * The objects which should be loaded
              */
-
             ois = new ObjectInputStream(fileInputStream);
-            airship = (Airship) ois.readObject();
-            GameState.getInstance().setAirship(airship);
-            
+            System.out.println("loading game");
+            GameState.getInstance().setAirship((Airship) ois.readObject());
             
         } catch (IOException e) {
             System.err.println(e);

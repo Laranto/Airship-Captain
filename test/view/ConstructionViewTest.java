@@ -3,6 +3,7 @@ package view;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import model.GameState;
 import model.factory.MaterialFactory;
 import model.gameobject.Airship;
 
@@ -21,9 +22,10 @@ public class ConstructionViewTest {
             testship.placeMaterial(fac.getMaterials().get(0), 10, 4+i);
         }
         
+        GameState.getInstance().setAirship(testship);
         
         JFrame frame = new JFrame();
-        JPanel pane = new ConstructionPanel(testship);
+        JPanel pane = new ConstructionPanel();
         frame.setContentPane(pane);
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

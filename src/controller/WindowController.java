@@ -38,9 +38,9 @@ public class WindowController{
     	showPanel(mainMenu);
     }
     
-    public static void showConstruction(Airship airship){
+    public static void showConstruction(){
     	if(constructionPanel == null){
-    		constructionPanel = new ConstructionPanel(airship);
+    		constructionPanel = new ConstructionPanel();
     	}
     	showPanel(constructionPanel);
     	constructionPanel.requestFocus();

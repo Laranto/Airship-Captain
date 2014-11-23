@@ -3,6 +3,7 @@ package handler;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
+import model.GameState;
 import model.gameobject.Airship;
 import model.gameobject.Entity;
 import model.gameobject.Material;
@@ -13,21 +14,12 @@ import controller.WindowController;
 
 public class ConstructionStrategy extends HandlerStrategy {
 
-    private Airship airship;
     private Object activePlacement;
     private boolean isActive = false;
     /**
      * Flag if the user is moving an entity
      */
     private boolean isMoveAction = false;
-    
-    public ConstructionStrategy(){
-        this(new Airship());
-    }
-    
-    public ConstructionStrategy(Airship airship){
-        this.airship = airship;
-    }
     
     @Override
     public void  mouseEvent(MouseEvent e) {
@@ -39,18 +31,18 @@ public class ConstructionStrategy extends HandlerStrategy {
             }else if(activePlacement instanceof PropertyEnum){
                 PropertyEnum active = (PropertyEnum) activePlacement;
                 if(active==PropertyEnum.DELETE_MATERIAL){
-                    this.airship.removeMaterial(tileX, tileY);
+                    GameState.getInstance().getAirship().removeMaterial(tileX, tileY);
                 }else if(active==PropertyEnum.DELETE_ENTITY){
-                    this.airship.removeEntity(tileX,tileY);
+                    GameState.getInstance().getAirship().removeEntity(tileX,tileY);
                 }else if(active==PropertyEnum.MOVE){
                     startMove(tileX,tileY);
                 }
             }else if (tileX < Constants.AIRSHIP_WIDTH_TILES && tileY < Constants.AIRSHIP_HEIGHT_TILES) {
                 if(activePlacement instanceof Material){
-                    this.airship.placeMaterial((Material)activePlacement, tileX, tileY);
+                    GameState.getInstance().getAirship().placeMaterial((Material)activePlacement, tileX, tileY);
                 }
                 if(activePlacement instanceof Entity){
-                    this.airship.placeEntity((Entity)activePlacement, tileX, tileY);
+                    GameState.getInstance().getAirship().placeEntity((Entity)activePlacement, tileX, tileY);
                 }
             }
         }
@@ -60,7 +52,7 @@ public class ConstructionStrategy extends HandlerStrategy {
     
     private void startMove(int tileX,int tileY) {
         if(!isMoveAction){
-            Entity selected = airship.removeEntity(tileX, tileY);
+            Entity selected = GameState.getInstance().getAirship().removeEntity(tileX, tileY);
             if(selected!=null){
                 isMoveAction=true;
                 activePlacement = selected;
@@ -69,7 +61,7 @@ public class ConstructionStrategy extends HandlerStrategy {
     }
     
     private void endMove(int tileX,int tileY){
-        if(airship.placeEntity((Entity)activePlacement, tileX, tileY)){
+        if(GameState.getInstance().getAirship().placeEntity((Entity)activePlacement, tileX, tileY)){
             isMoveAction=false;
             publishProperty(PropertyEnum.MOVE);
         }
@@ -79,7 +71,7 @@ public class ConstructionStrategy extends HandlerStrategy {
         if(activePlacement instanceof Entity){
             isMoveAction=false;
             Entity ent = (Entity) activePlacement;
-            airship.placeEntity(ent, ent.getPosition().x, ent.getPosition().y);
+            GameState.getInstance().getAirship().placeEntity(ent, ent.getPosition().x, ent.getPosition().y);
         }
     }
     
@@ -93,8 +85,8 @@ public class ConstructionStrategy extends HandlerStrategy {
     	if(publishedProperty instanceof PropertyEnum){
     		if(((PropertyEnum)publishedProperty) == PropertyEnum.SAVE){
     			//TODO check if airship is valid if ok-> werft false -> message user (use JOptionPane)
-    		    if(airship.isJoined()){
-    		        WindowController.showHarbor(airship);
+    		    if(GameState.getInstance().getAirship().isJoined()){
+    		        WindowController.showHarbor(GameState.getInstance().getAirship());
     		    }else{
     		        WindowController.showError("Fehler beim speichern","Das Luftschiff konnte so nicht gespeichert werden. Es ist nicht an einem Stück!");
     		    }
