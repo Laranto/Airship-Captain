@@ -16,6 +16,7 @@ import model.gameobject.material.Floor;
 import common.Constants;
 
 public class Airship extends GameObject implements Renderable{
+    private static final long serialVersionUID = 1L;
     private Material[][] shipBody;
     private Entity[][] equipment;
     private boolean isEmpty;
@@ -86,14 +87,23 @@ public class Airship extends GameObject implements Renderable{
      * @return true when there is sufficient space to place the entity with the given orientation
      */
     private boolean canPlaceEntity(Entity entity , int tileX , int tileY, List<Point> checkedPoints) {
-        int xExtend = (int) entity.getSize().getWidth()
+        
+        //Get the entity sizes
+        int xExtend = (int) entity.getSize().getWidth()  
                 , yExtend = (int) entity.getSize().getHeight();
-        int fromX=Math.min(tileX,tileX+xExtend)
-                ,toX=Math.max(tileX,tileX+xExtend);
-        int fromY=Math.min(tileY,tileY+yExtend)
-                ,toY=Math.max(tileY,tileY+yExtend);
-        for(int x = fromX;x<toX;x++){
-            for(int y = fromY;y<toY;y++){
+        
+        //Account for the selected root. for that cut off 1 in the direction in which it is facing
+        int xNormExtend = xExtend - xExtend/Math.abs(xExtend);
+        int yNormExtend = yExtend - yExtend/Math.abs(yExtend);
+        
+        //Get the lower as start and the higher as end point.
+        int fromX=Math.min(tileX,tileX+xNormExtend)
+                ,toX=Math.max(tileX,tileX+xNormExtend);
+        int fromY=Math.min(tileY,tileY+yNormExtend)
+                ,toY=Math.max(tileY,tileY+yNormExtend);
+        
+        for(int x = fromX;x<=toX;x++){
+            for(int y = fromY;y<=toY;y++){
                 if(shipBody[x][y] instanceof Floor && equipment[x][y]==null){
                     checkedPoints.add(new Point(x, y));
                 }

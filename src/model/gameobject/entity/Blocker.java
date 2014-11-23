@@ -1,5 +1,6 @@
 package model.gameobject.entity;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 import model.gameobject.Entity;
@@ -8,7 +9,7 @@ import model.gameobject.Entity;
  * This is a blocking class. Its used to mark a tile on the airship as used by a large entity
  */
 public class Blocker extends Entity{
-
+    private static final long serialVersionUID = 1L;
     private Entity referencedEntity;
     
 
@@ -26,6 +27,8 @@ public class Blocker extends Entity{
 
     @Override
     public void render(Graphics2D g) {
+        g.setColor(Color.PINK);
+        g.fillRect(0, 0, 5, 5);
     }
 
 }

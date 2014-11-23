@@ -78,14 +78,8 @@ public class ConstructionStrategy extends HandlerStrategy {
     public void keyEvent(KeyEvent e) {
         if(activePlacement instanceof Entity){
             Entity ent = (Entity) activePlacement;
-            if(e.getKeyCode() == KeyEvent.VK_LEFT){
-                ent.setOrientation(Constants.ENTITY_ORIENTATION_LEFT);
-            }else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-                ent.setOrientation(Constants.ENTITY_ORIENTATION_RIGHT);
-            }else if(e.getKeyCode() == KeyEvent.VK_UP){
-                ent.setOrientation(Constants.ENTITY_ORIENTATION_UP);
-            }else if(e.getKeyCode() == KeyEvent.VK_DOWN){
-                ent.setOrientation(Constants.ENTITY_ORIENTATION_DOWN);
+            if(e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_DOWN){
+                ent.rotate();
             }
             System.out.println(((Entity)activePlacement).getOrientation());
         }
