@@ -1,17 +1,17 @@
 package model.gameobject;
 
+import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Dimension2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import common.Constants;
-
 import model.gameobject.entity.Blocker;
+
+import common.Constants;
 
 /**
  * An abstract representation of a piece of equipment on the airship. Can be cannons, engines, tables or whatever. Just not hull parts.
@@ -28,7 +28,7 @@ public abstract class Entity extends ShipPart {
     /**
      * The actual size of the entity. This will be used when filling in blockers on placement. 
      */
-    private Dimension2D     size;
+    private Dimension     size;
 
     private List<Blocker>   associatedBlockers;
     
@@ -37,12 +37,13 @@ public abstract class Entity extends ShipPart {
     /**
      * @param orientation Should have at least position 0 filled if you hope to rotate the entity without errors.
      */
-    public Entity(String name , int value , int weight , int durability , BufferedImage image , Vector<Integer> orientation , Dimension2D size) {
+    public Entity(String name , int value , int weight , int durability , BufferedImage image , Vector<Integer> orientation , Dimension size) {
         super(name , value , weight , durability , image);
         if(orientation!=null){
         this.orientation = new Vector<Integer>(orientation);
         }
-        this.size = size;
+        if(size!=null)
+        this.size = new Dimension(size);
         associatedBlockers = new ArrayList<>();
     }
 
@@ -60,12 +61,12 @@ public abstract class Entity extends ShipPart {
     }
 
 
-    public Dimension2D getSize() {
+    public Dimension getSize() {
         return size;
     }
 
-    public void setSize(Dimension2D size) {
-        this.size = size;
+    public void setSize(Dimension size) {
+        this.size = new Dimension(size);
     }
 
     /**

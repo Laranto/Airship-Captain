@@ -9,6 +9,7 @@ import common.ImageLoader;
 
 
 public abstract class ShipPart extends GameObject implements Renderable {
+    private static final long serialVersionUID = 1L;
     /**
      * The Shipparts health
      */
