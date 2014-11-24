@@ -70,6 +70,8 @@ public class TableRowTransferHandler extends TransferHandler {
                 if(null != optionPane.getValue() && ABBRECHEN != (int)optionPane.getValue()){
                     ((TableStockModel)source.getModel()).addItem(stockItem.getWare(), -1*(int)optionPane.getInputValue());
                     ((TableStockModel)target.getModel()).addItem(stockItem.getWare(), (int)optionPane.getInputValue());
+                    
+                    //TODO: usere market.buyItem and market.sellItem instead
                 }
             }
             return true;
