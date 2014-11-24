@@ -1,27 +1,48 @@
 package model.economy;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map.Entry;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Stock implements Serializable{
     
-    private HashMap<Ware, Integer> wareList;
+    private List<StockItem> wareList;
 
     
     public Stock() {
-        wareList = new HashMap<Ware, Integer>();
+        wareList = new ArrayList<StockItem>();
     }
     
-    public void addTradeableWare(Ware ware, int amount)
+    public void addTradeableWare(Ware ware, int amount) throws Exception
     {
-            wareList.put(ware, amount);
-        
+        StockItem stockItem = null;
+        if((stockItem = getStockItemByWareName(ware.getName())) != null)
+        {
+            if(amount < 0 && Math.abs(amount) > stockItem.getAmount()){
+                throw new Exception("There are only : "+stockItem.getAmount()+" items this kind left.");
+            }
+            if(stockItem == null && amount < 0){
+                throw new Exception("Ware "+ware.getName()+" nicht vorhanden");
+            }
+            stockItem.setAmount(stockItem.getAmount()+amount);
+            if(stockItem.getAmount() == 0){
+                wareList.remove(stockItem);
+            }
+        }else{
+            getWarelist().add(new StockItem(ware, amount, ware.getPrice()));
+        }
     }
     
+    public StockItem getStockItemByWareName(String name){
+        for(StockItem stockItem: wareList){
+            if(stockItem.getWare().getName().equals(name)){
+                return stockItem;
+            }
+        }
+        return null;
+    }
     
-    public HashMap<Ware, Integer> getWarelist()
+    public List<StockItem> getWarelist()
     {
         return this.wareList;
     }
@@ -32,17 +53,12 @@ public class Stock implements Serializable{
     public void printStock()
     {
         System.out.println("Name\t\t\t\tReferenz\t\t\t\t\t\t\t\tAnzahl\t\t\tPreis");
-        
         if(this.getWarelist().isEmpty())
         {
             System.out.println("Stock is empty");
         }else{
-            Iterator<Entry<Ware, Integer>> it = this.getWarelist().entrySet().iterator();
-            while (it.hasNext()) {
-                Entry<Ware, Integer> pairs = it.next();
-                Ware ware = pairs.getKey();
-                Integer amount = pairs.getValue();
-                System.out.println(ware.getName()+"\t"+ware +"\t"+amount+"\t\t\t"+ware.getPrice());
+            for(StockItem stockItem: wareList){
+                System.out.println(stockItem.getWare().getName()+"\t"+stockItem.getWare()+"\t"+stockItem.getAmount()+"\t\t\t"+stockItem.getWare().getPrice());
             }
         }
     }

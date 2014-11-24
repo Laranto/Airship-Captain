@@ -22,8 +22,12 @@ public class MarketViewTest {
         MaterialFactory fac = MaterialFactory.getInstance();
         List<Ware> wares = WareFactory.getInstance().getWares();
         Airship testship = new Airship();
-        testship.getStock().addTradeableWare(wares.get(0), 20);
-        testship.getStock().addTradeableWare(wares.get(1), 10);
+        try{
+            testship.getStock().addTradeableWare(wares.get(0), 20);
+            testship.getStock().addTradeableWare(wares.get(1), 10);
+        }catch(Exception e){
+            System.out.println(e);
+        }
         
         
         Market market = new Market();

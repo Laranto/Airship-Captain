@@ -1,8 +1,7 @@
 package model.economy;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map.Entry;
+import java.util.List;
 
 import model.factory.WareFactory;
 import model.gameobject.Airship;
@@ -17,9 +16,9 @@ public class Market {
     public Market() {
         this.stock = new Stock();
         this.initStock();
-        this.initMarketPrice();
+        this.initMarketPrice(stock.getWarelist());
     }
-
+    
     /*
      * initializing the stock of this market randomly
      */
@@ -27,12 +26,15 @@ public class Market {
         if(this.getStock().getWarelist().isEmpty())
         {
             ArrayList<Ware> wares = WareFactory.getInstance().getWares();
-    
-            for (int i = 0; i < wares.size(); i++) {
-                this.getStock().addTradeableWare( wares.get(i), Utils.getRandomIntBetween(10,  (int) Constants.WARE_STANDARD_AMOUNT * 2));
+            try{
+                for (int i = 0; i < wares.size(); i++) {
+                    this.getStock().addTradeableWare( wares.get(i), Utils.getRandomIntBetween(10,  (int) Constants.WARE_STANDARD_AMOUNT * 2));
+                }
+                
+                this.getStock().addTradeableWare( wares.get(0), 200 );
+            }catch(Exception e){
+                System.err.println(e.getMessage());
             }
-            
-            this.getStock().addTradeableWare( wares.get(0), 200 );
         }
     }
 
@@ -40,16 +42,14 @@ public class Market {
      * this method refreshes the new price of each item by looking at the market
      * state and the amount of the items
      */
-    private void initMarketPrice() {
-
-        Iterator<Entry<Ware, Integer>> it = this.getStock().getWarelist().entrySet().iterator();
-        while (it.hasNext()) {
-            Entry<Ware, Integer> pairs = it.next();
-
-            Ware ware = (Ware) pairs.getKey();
-            Integer amount = (Integer) pairs.getValue();
-            ware.setPrice( this.calculatePrice(amount, ware.getValue() ) );
+    private void initMarketPrice(List<StockItem> stockItems) {
+        for(StockItem stockItem: stockItems) {
+            initMarketPrice(stockItem);
         }
+    }
+
+    private void initMarketPrice(StockItem stockItem) {
+        stockItem.getWare().setPrice(calculatePrice(stockItem.getAmount(), stockItem.getWare().getValue()));
     }
 
     /**
@@ -61,28 +61,13 @@ public class Market {
      * @throws Exception
      */
     public void buyItem(Airship airship, Ware ware, int amount) throws Exception {
-        if (this.getStock().getWarelist().containsKey(ware)) {
-            int value = this.getStock().getWarelist().get(ware);
-            
-            if(value - amount < 0)
-            {
-                throw new Exception("There are only : "+(int) value+" items this kind left.");
-            }else{
-                this.getStock().getWarelist().put(ware, value - amount);
-                
-                if(airship.getStock().getWarelist().containsKey(ware))
-                {
-                    airship.getStock().getWarelist().put(ware, airship.getStock().getWarelist().get(ware)+ amount);
-                }else{
-                    airship.getStock().getWarelist().put(ware, amount);
-                }
-                
-                initMarketPrice();
-            }
-        }else{
-            throw new Exception("Resource doesn't exist.");
+        try{
+            getStock().addTradeableWare(ware, -amount);
+            airship.getStock().addTradeableWare(ware, amount);
+            initMarketPrice(getStock().getStockItemByWareName(ware.getName()));
+        }catch(Exception e){
+            throw e;
         }
-
     }
     
     /**
@@ -94,28 +79,13 @@ public class Market {
      * traden doesn't exists or is not enoug
      */
     public void sellItem(Airship airship, Ware ware, int amount) throws Exception {
-        if (airship.getStock().getWarelist().containsKey(ware)) {
-            int value = airship.getStock().getWarelist().get(ware);
-            
-            if(value - amount < 0)
-            {
-                throw new Exception("Your ship has only: "+(int) value+" items this kind left.");
-            }else{
-                airship.getStock().getWarelist().put(ware, value-amount);
-                
-                if(this.getStock().getWarelist().containsKey(ware))
-                {
-                    this.getStock().getWarelist().put(ware, this.getStock().getWarelist().get(ware)+amount);
-                }else{
-                    this.getStock().getWarelist().put(ware, amount);
-                }
-                
-                initMarketPrice();
-            }
-        }else{
-            throw new Exception("Resource doesn't exist.");
+        try{
+            airship.getStock().addTradeableWare(ware, -amount);
+            getStock().addTradeableWare(ware, amount);
+            initMarketPrice(getStock().getStockItemByWareName(ware.getName()));
+        }catch(Exception e){
+            throw e;
         }
-
     }
 
     

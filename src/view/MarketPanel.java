@@ -1,25 +1,26 @@
 package view;
 
 import handler.MarketStrategy;
+import handler.TableRowTransferHandler;
+import handler.TableStockModel;
 
-import java.awt.GridLayout;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.io.IOException;
 
-import javax.swing.DefaultListModel;
+import javax.swing.DropMode;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JList;
-import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 import model.economy.Market;
-import model.economy.Stock;
-import model.economy.Ware;
 import model.gameobject.Airship;
+
 import common.Constants;
+import common.ImageLoader;
 import common.enums.MenuItemEnum;
+
 import controller.ButtonController;
 import controller.InputController;
 
@@ -27,8 +28,7 @@ public class MarketPanel extends GameDefaultPanel {
 
     private Airship airship;
     private Market market;
-
-    private List<MenuItemEnum> marketButtons;
+    private ImageIcon icon;
 
     public MarketPanel(Airship airship, Market market) {
         this.setLayout(null);
@@ -38,83 +38,72 @@ public class MarketPanel extends GameDefaultPanel {
         MarketStrategy marketStrategy = new MarketStrategy(this.airship, this.market);
         ButtonController buttonController = new ButtonController(marketStrategy);
         InputController inputController = new InputController(marketStrategy);
+        TableRowTransferHandler transferHandler = new TableRowTransferHandler();
         
         /**
          * Ship Stock list
          */
-
-        JList<Ware> shipWareList = new JList<Ware>(this.createDefaultListModel(this.airship.getStock()));
-        shipWareList.setBounds(Constants.WINDOW_WIDTH * 3/100, Constants.WINDOW_HEIGHT * 1/12, Constants.WINDOW_WIDTH * 9/20 , Constants.WINDOW_HEIGHT * 2/3);
-        
-        shipWareList.putClientProperty(Constants.BUTTON_PROPERTY_ID, MenuItemEnum.MARKET_ITEM);
-        shipWareList.addMouseListener(inputController);
-        add(shipWareList);
-        
+        JTable playerTable = new JTable(new TableStockModel(this.airship.getStock()));
+        playerTable.setBounds(
+                Constants.WINDOW_WIDTH * 3/100, 
+                Constants.WINDOW_HEIGHT * 1/12, 
+                Constants.WINDOW_WIDTH * 9/20 , 
+                Constants.WINDOW_HEIGHT * 2/3);
+        playerTable.putClientProperty(Constants.BUTTON_PROPERTY_ID, MenuItemEnum.MARKET_ITEM);
+        playerTable.addMouseListener(inputController);
+        playerTable.setDragEnabled(true);
+        playerTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        playerTable.setDropMode(DropMode.INSERT_ROWS);
+        playerTable.setTransferHandler(transferHandler);
+        playerTable.getColumnModel().getColumn(0).setPreferredWidth(playerTable.getWidth()/10*6-4);
+        playerTable.getColumnModel().getColumn(1).setPreferredWidth(playerTable.getWidth()/10*2);
+        playerTable.getColumnModel().getColumn(2).setPreferredWidth(playerTable.getWidth()/10*2);
+        playerTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        add(playerTable);
         /**
          * Market Stock list
          */
         
-        JList<Ware> marketWareList = new JList<Ware>(this.createDefaultListModel(this.market.getStock()));
-        marketWareList.setBounds(Constants.WINDOW_WIDTH * 50/100, Constants.WINDOW_HEIGHT * 1/12, Constants.WINDOW_WIDTH * 9/20 , Constants.WINDOW_HEIGHT * 2/3);
-        marketWareList.putClientProperty(Constants.BUTTON_PROPERTY_ID, MenuItemEnum.SHIP_ITEM);
-        marketWareList.addMouseListener(inputController);
-        add(marketWareList);
-        
-        
+        JTable opponentTable = new JTable(new TableStockModel(this.market.getStock()));
+        opponentTable.setBounds(
+                Constants.WINDOW_WIDTH * 50/100, 
+                Constants.WINDOW_HEIGHT * 1/12, 
+                Constants.WINDOW_WIDTH * 9/20 , 
+                Constants.WINDOW_HEIGHT * 2/3);
+        opponentTable.putClientProperty(Constants.BUTTON_PROPERTY_ID, MenuItemEnum.MARKET_ITEM);
+        opponentTable.addMouseListener(inputController);
+        opponentTable.setDragEnabled(true);
+        opponentTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        opponentTable.setDropMode(DropMode.INSERT_ROWS);
+        opponentTable.setTransferHandler(transferHandler);
+        opponentTable.getColumnModel().getColumn(0).setPreferredWidth(opponentTable.getWidth()/10*6-4);
+        opponentTable.getColumnModel().getColumn(1).setPreferredWidth(opponentTable.getWidth()/10*2);
+        opponentTable.getColumnModel().getColumn(2).setPreferredWidth(opponentTable.getWidth()/10*2);
+        opponentTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        add(opponentTable);
         
         
         
         /**
          * For placing the harbor button
          */
-        JButton harborButton = new JButton(MenuItemEnum.HARBOR.text());
-        harborButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, MenuItemEnum.HARBOR);
-        harborButton.setHorizontalAlignment(SwingConstants.CENTER);
-        harborButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
-        harborButton.addActionListener(buttonController);
-        harborButton.setBounds(Constants.WINDOW_WIDTH/100, Constants.WINDOW_HEIGHT * 85/100, Constants.WINDOW_WIDTH/6, Constants.WINDOW_HEIGHT/11);
-        add(harborButton);
-        
-        /**
-         * For placing buy and sell buttons
-         */
-        
-        marketButtons = new ArrayList<MenuItemEnum>();
-        marketButtons.add(MenuItemEnum.BUY);
-        marketButtons.add(MenuItemEnum.SELL);
-        
-        GridLayout mainGridLayout = new GridLayout(0, 2);
-        mainGridLayout.setHgap(10);
-
-        JPanel navigationGridPanel = new JPanel(mainGridLayout);
-        navigationGridPanel.setSize(Constants.WINDOW_WIDTH / 3, Constants.WINDOW_HEIGHT / 11);
-        navigationGridPanel.setLocation(Constants.WINDOW_WIDTH * 3 / 5, Constants.WINDOW_HEIGHT * 6 / 7);
-        add(navigationGridPanel);
-
-        for (MenuItemEnum marketButtonItem : marketButtons) {
-
-            JButton marketButton = new JButton(marketButtonItem.text());
-            marketButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, marketButtonItem);
-            marketButton.setHorizontalAlignment(SwingConstants.CENTER);
-            marketButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
-            marketButton.addActionListener(buttonController);
-            navigationGridPanel.add(marketButton);
-        }
-    }
-    
-    
-    private DefaultListModel<Ware> createDefaultListModel(Stock stock)
-    {
-        DefaultListModel<Ware> defaultListModel = new DefaultListModel<Ware>();
-        
-        HashMap<Ware, Integer> map = stock.getWarelist();
-        
-        for(Map.Entry<Ware, Integer> e : map.entrySet()){
-              Ware ware = e.getKey();
-              Integer amount = e.getValue();
-              defaultListModel.addElement(ware);
+        try {
+            this.icon = new ImageIcon(ImageLoader.loadImage(new File(Constants.HARBOR_ICON)));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         
-        return defaultListModel;
+        JButton harbor = new JButton(MenuItemEnum.HARBOR.text());
+        harbor.setIcon(icon);
+        harbor.putClientProperty(Constants.BUTTON_PROPERTY_ID, MenuItemEnum.HARBOR);
+        harbor.addActionListener(buttonController);
+        harbor.setHorizontalAlignment(SwingConstants.CENTER);
+        harbor.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
+        int width = Constants.WINDOW_WIDTH / 6,
+            height = (int)harbor.getPreferredSize().getHeight(),
+            x = Constants.WINDOW_WIDTH * 3 / 4,
+            y = Constants.WINDOW_HEIGHT-height-40;
+        harbor.setBounds(x, y, width, height);
+        add(harbor);
     }
 }
