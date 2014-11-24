@@ -30,6 +30,7 @@ import common.Constants;
 import common.enums.PropertyEnum;
 import controller.ButtonController;
 import controller.InputController;
+import controller.ShipExportController;
 
 public class ConstructionPanel extends GameDefaultPanel {
 
@@ -71,8 +72,7 @@ public class ConstructionPanel extends GameDefaultPanel {
         entityPanel.add(toolsGridPanel,BorderLayout.NORTH);
         
         addRemoveButton(buttonController, toolsGridPanel,PropertyEnum.DELETE_ENTITY);
-        JPanel southPanel = createSouthPanel();
-        addSaveButton(buttonController,southPanel);
+        JPanel southPanel = createSouthPanel(buttonController);
         JPanel previewPanel = new PreviewPanel();
         previewPanel.setPreferredSize(new Dimension(Constants.TILE_SIZE*3, Constants.TILE_SIZE*3));
         //TODO Add Tooltip
@@ -114,8 +114,7 @@ public class ConstructionPanel extends GameDefaultPanel {
         materialPanel.add(toolsGridPanel,BorderLayout.NORTH);
         
         addRemoveButton(buttonController, toolsGridPanel,PropertyEnum.DELETE_MATERIAL);
-        JPanel southPanel = createSouthPanel();
-        addSaveButton(buttonController,southPanel);
+        JPanel southPanel = createSouthPanel(buttonController);
         materialPanel.add(southPanel,BorderLayout.SOUTH);
 
         
@@ -150,6 +149,23 @@ public class ConstructionPanel extends GameDefaultPanel {
         toolsGridPanel.add(saveButton);
     }
     
+    private void addInExportButton(JPanel panel) {
+        ShipExportController controller = new ShipExportController();
+        JButton exportButton = new JButton("Exportieren");
+        exportButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, PropertyEnum.SAVE);
+        exportButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
+        exportButton.addActionListener(controller);
+        exportButton.setFocusable(false);
+        panel.add(exportButton);
+        JButton importButton = new JButton("Importieren");
+        importButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, PropertyEnum.SAVE);
+        importButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
+        importButton.addActionListener(controller);
+        importButton.setFocusable(false);
+        panel.add(importButton);
+        
+    }
+    
     public void addRemoveButton(ButtonController buttonController , JPanel toolsGridPanel, PropertyEnum removeType) {
         JButton removeTilesButton = new JButton("Entfernen");
         removeTilesButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, removeType);
@@ -166,10 +182,11 @@ public class ConstructionPanel extends GameDefaultPanel {
 		return toolsGridPanel;
 	}
 	
-	private JPanel createSouthPanel(){
+	private JPanel createSouthPanel(ButtonController controller){
 	    JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 	    southPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
-	    
+        addSaveButton(controller,southPanel);
+        addInExportButton(southPanel);
 	    return southPanel;
 	}
 
