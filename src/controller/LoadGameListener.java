@@ -2,16 +2,13 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.io.Serializable;
+
+import model.GameState;
+import model.gameobject.Airship;
 
 import common.Constants;
 import common.FileUtils;
-import model.GameState;
-import model.gameobject.Airship;
 
 public class LoadGameListener implements ActionListener {
 
