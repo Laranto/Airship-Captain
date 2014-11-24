@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.io.Serializable;
 
 import common.Constants;
 import common.FileUtils;
@@ -22,30 +23,10 @@ public class LoadGameListener implements ActionListener {
     }
 
     private void loadGame(String filename) {
-        InputStream fileInputStream = null;
-        ObjectInputStream ois = null;
-
-        try {
-            fileInputStream = new FileInputStream(Constants.FOLDER_GAME_DATA+ filename + "."+Constants.GAME_FILE_ENDNG);
-
-            /*
-             * The objects which should be loaded
-             */
-            ois = new ObjectInputStream(fileInputStream);
-            System.out.println("loading game");
-            GameState.getInstance().setAirship((Airship) ois.readObject());
-            
-        } catch (IOException e) {
-            System.err.println(e);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                ois.close();
-                fileInputStream.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        Serializable readObject = FileUtils.loadObjectFile(Constants.FOLDER_GAME_DATA , filename , Constants.GAME_FILE_ENDNG);
+        if(readObject instanceof Airship){
+            //TODO Load an entire game state instead of just the ship.
+            GameState.getInstance().setAirship((Airship)readObject);
         }
     }
 }

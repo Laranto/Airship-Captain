@@ -2,8 +2,11 @@ package common;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
@@ -11,6 +14,7 @@ import java.io.Serializable;
 import javax.imageio.ImageIO;
 
 import model.GameState;
+import model.gameobject.Airship;
 
 public class FileUtils {
     /**
@@ -56,5 +60,35 @@ public class FileUtils {
                 e.printStackTrace();
             }
         }
+    }
+    public static Serializable loadObjectFile(String path, String fileName, String extention){
+        return loadObjectFile(path + File.separator+fileName+"."+extention);
+    }
+
+    private static Serializable loadObjectFile(String location) {
+        InputStream fileInputStream = null;
+        ObjectInputStream ois = null;
+        Serializable readObject = null;
+        
+        try {
+            fileInputStream = new FileInputStream(location);
+
+            /*
+             * The objects which should be loaded
+             */
+            ois = new ObjectInputStream(fileInputStream);
+            ois.readObject();
+            
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                ois.close();
+                fileInputStream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return readObject;
     }
 }
