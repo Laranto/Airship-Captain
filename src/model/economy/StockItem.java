@@ -1,6 +1,8 @@
 package model.economy;
 
-public class StockItem {
+import java.io.Serializable;
+
+public class StockItem implements Serializable {
     private Ware ware;
     private Integer amount;
     private Float price;

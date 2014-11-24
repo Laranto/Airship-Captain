@@ -77,7 +77,7 @@ public class FileUtils {
              * The objects which should be loaded
              */
             ois = new ObjectInputStream(fileInputStream);
-            ois.readObject();
+            readObject = (Serializable) ois.readObject();
             
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
