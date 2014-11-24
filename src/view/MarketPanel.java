@@ -16,11 +16,9 @@ import javax.swing.SwingConstants;
 
 import model.economy.Market;
 import model.gameobject.Airship;
-
 import common.Constants;
-import common.ImageLoader;
+import common.FileUtils;
 import common.enums.MenuItemEnum;
-
 import controller.ButtonController;
 import controller.InputController;
 
@@ -88,7 +86,7 @@ public class MarketPanel extends GameDefaultPanel {
          * For placing the harbor button
          */
         try {
-            this.icon = new ImageIcon(ImageLoader.loadImage(new File(Constants.HARBOR_ICON)));
+            this.icon = new ImageIcon(FileUtils.loadImage(new File(Constants.HARBOR_ICON)));
         } catch (IOException e) {
             e.printStackTrace();
         }
