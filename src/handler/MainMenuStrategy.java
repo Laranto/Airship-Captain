@@ -12,21 +12,15 @@ import controller.WindowController;
 
 public class MainMenuStrategy extends HandlerStrategy {
     private MenuItemEnum menuItem;
-    private Airship airship;
-
-    public MainMenuStrategy(Airship airship) {
-        this.airship = airship;
-    }
 
     @Override
     public void mouseEvent(MouseEvent e) {
         switch(menuItem){
             case START_GAME:
-                    WindowController.showConstruction(airship);
+                    WindowController.showConstruction();
                     break;
             case LOAD_GAME:
-                    new LoadGameListener().actionPerformed(null);
-                    this.airship = GameState.getInstance().getAirship();
+                    new LoadGameListener().actionPerformed(null);;
                     break;
             case SETTINGS:
                     //TODO: implement settings

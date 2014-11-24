@@ -17,7 +17,7 @@ import model.gameobject.Airship;
 import model.navigation.Harbor;
 
 import common.Constants;
-import common.ImageLoader;
+import common.FileUtils;
 import common.enums.MenuItemEnum;
 
 import controller.ButtonController;
@@ -35,8 +35,8 @@ public class NavigationPanel extends GameDefaultPanel {
     public NavigationPanel(Airship airship) {
         this.airship = airship;
         try {
-            this.image = ImageLoader.loadImage(new File(Constants.NAVIGATION_BACKGROUND_IMAGE));
-            this.icon = new ImageIcon(ImageLoader.loadImage(new File(Constants.HARBOR_ICON)));
+            this.image = FileUtils.loadImage(new File(Constants.NAVIGATION_BACKGROUND_IMAGE));
+            this.icon = new ImageIcon(FileUtils.loadImage(new File(Constants.HARBOR_ICON)));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -103,7 +103,7 @@ public class EntityFactory extends ShippartFactory<Entity> {
      */
     private Entity createInstance(String type, String imagePath, String name, int durability, int value, int weight,int width,int height) throws IOException {
 
-    	Entity m = createInstance(type,name,durability,value,weight,width,height,null);
+    	Entity m = createInstance(type,name,durability,value,weight,width,height,null,Constants.ENTITY_ORIENTATION_RIGHT);
 
         m.setImage(imagePath);
         return m;
@@ -113,19 +113,18 @@ public class EntityFactory extends ShippartFactory<Entity> {
      */
     private Entity createInstance(String type, BufferedImage image, String name, int durability, int value, int weight,int width,int height,Vector<Integer> orientation){
         
-    	Entity m = createInstance(type,name,durability,value,weight,width,height,image);
+    	Entity m = createInstance(type,name,durability,value,weight,width,height,image,orientation);
         m.setImage(image);
-        m.setOrientation(orientation);
         return m;
     }
 
-	private Entity createInstance(String type, String name, int durability, int value, int weight,int width, int height,BufferedImage image) {
+    private Entity createInstance(String type, String name, int durability, int value, int weight,int width, int height,BufferedImage image,Vector<Integer> orientation) {
 
 		Entity o = null;
 		switch (type) {
 		default:
 		case "weapon":
-			o = new Weapon(name,durability,value,weight,image, Constants.ENTITY_ORIENTATION_RIGHT, new Dimension(width,height));
+			o = new Weapon(name,durability,value,weight,image, orientation, new Dimension(width,height));
 			break;
 		}
 		return o;

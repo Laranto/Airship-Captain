@@ -1,6 +1,7 @@
 package controller;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import model.economy.Market;
@@ -37,11 +38,12 @@ public class WindowController{
     	showPanel(mainMenu);
     }
     
-    public static void showConstruction(Airship airship){
+    public static void showConstruction(){
     	if(constructionPanel == null){
-    		constructionPanel = new ConstructionPanel(airship);
+    		constructionPanel = new ConstructionPanel();
     	}
     	showPanel(constructionPanel);
+    	constructionPanel.requestFocus();
     }
     
     public static void showFight(Airship airship){
@@ -80,4 +82,8 @@ public class WindowController{
 		container.setContentPane(panel);
 		container.paintAll(container.getGraphics());
 	}
+
+    public static void showError(String title,String message) {
+        JOptionPane.showMessageDialog(container, message, title,JOptionPane.ERROR_MESSAGE);
+    }
 }
