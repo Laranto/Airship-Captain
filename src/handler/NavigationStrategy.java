@@ -91,11 +91,14 @@ public class NavigationStrategy extends HandlerStrategy {
     @Override
     public void mouseEvent(MouseEvent e) {
         if(toHarbor != null && currentHarbor.getPosition() != toHarbor.getPosition()){
-        	currentHarbor.setActive(false);
-        	toHarbor.setActive(true);
-        	toHarbor.setNextDestination(false);
-        	currentHarbor = toHarbor;
-        	route = new Route(currentHarbor);
+            if(WindowController.showTravelConfirmation("Reisen?", "Diese Reise dauert ca. 3h, willst du jetzt segeln?") == 1)
+            {
+                currentHarbor.setActive(false);
+                toHarbor.setActive(true);
+                toHarbor.setNextDestination(false);
+                currentHarbor = toHarbor;
+                route = new Route(currentHarbor);
+            }
         }
     }
 
