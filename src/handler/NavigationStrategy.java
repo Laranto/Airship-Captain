@@ -6,14 +6,13 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.GameState;
 import model.economy.Market;
 import model.gameobject.Airship;
 import model.navigation.Harbor;
 import model.navigation.Route;
-
 import common.Constants;
 import common.enums.MenuItemEnum;
-
 import controller.WindowController;
 
 public class NavigationStrategy extends HandlerStrategy {
@@ -91,7 +90,13 @@ public class NavigationStrategy extends HandlerStrategy {
     @Override
     public void mouseEvent(MouseEvent e) {
         if(toHarbor != null && currentHarbor.getPosition() != toHarbor.getPosition()){
-            if(WindowController.showTravelConfirmation("Reisen?", "Diese Reise dauert ca. 3h, willst du jetzt segeln?") == 1)
+            
+            double distance =   Math.sqrt( (Math.pow( toHarbor.getPosition().getX()-currentHarbor.getPosition().getX(),2)
+                                +Math.pow( toHarbor.getPosition().getY()-currentHarbor.getPosition().getY(),2) ));
+            
+            int timeToTravel = (int)( distance / GameState.getInstance().getAirship().getSpeed() )  ;
+            
+            if(WindowController.showTravelConfirmation("Reisen?", "Diese Reise dauert "+timeToTravel+" Minuten, willst du jetzt segeln?") == 1)
             {
                 currentHarbor.setActive(false);
                 toHarbor.setActive(true);

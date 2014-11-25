@@ -22,6 +22,7 @@ public class Airship extends GameObject implements Renderable{
     private boolean isEmpty;
     private Captain captain;
     private Stock stock;
+    private int speed;
     
     public Airship() {
         super(null,0,0);
@@ -30,6 +31,9 @@ public class Airship extends GameObject implements Renderable{
         isEmpty=true;
         captain = new Captain();
         this.stock = new Stock();
+        
+        //TODO has to be calculated (e.x. the amount of engines the ship has)
+        this.speed = 22;
     }
     
     /**
@@ -366,5 +370,13 @@ public class Airship extends GameObject implements Renderable{
     public Stock getStock()
     {
         return this.stock;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 }
