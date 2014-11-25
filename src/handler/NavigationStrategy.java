@@ -5,15 +5,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
+import model.GameState;
 import model.economy.Market;
 import model.gameobject.Airship;
 import model.navigation.Harbor;
 import model.navigation.Route;
-
 import common.Constants;
+import common.Utils;
 import common.enums.MenuItemEnum;
-
 import controller.WindowController;
 
 public class NavigationStrategy extends HandlerStrategy {
@@ -56,6 +57,7 @@ public class NavigationStrategy extends HandlerStrategy {
         harbors.add(new Harbor(new Market(), new Point(610, 200), false));
         harbors.add(new Harbor(new Market(), new Point(720, 275), false));
         harbors.add(currentHarbor);
+        GameState.getInstance().setCurrentHarbor(currentHarbor);
     }
     
     public List<Harbor> getHarbors() {
@@ -90,12 +92,50 @@ public class NavigationStrategy extends HandlerStrategy {
     
     @Override
     public void mouseEvent(MouseEvent e) {
+        currentHarbor = GameState.getInstance().getCurrentHarbor();
         if(toHarbor != null && currentHarbor.getPosition() != toHarbor.getPosition()){
-        	currentHarbor.setActive(false);
-        	toHarbor.setActive(true);
-        	toHarbor.setNextDestination(false);
-        	currentHarbor = toHarbor;
-        	route = new Route(currentHarbor);
+            
+            double distance =   Math.sqrt( (Math.pow( toHarbor.getPosition().getX()-currentHarbor.getPosition().getX(),2)
+                                +Math.pow( toHarbor.getPosition().getY()-currentHarbor.getPosition().getY(),2) ));
+            
+            int timeToTravel = (int)( distance / GameState.getInstance().getAirship().getSpeed() )  ;
+            
+            if(WindowController.showTravelConfirmation("Reisen?", "Diese Reise dauert "+timeToTravel+" Sekunden, willst du jetzt segeln?") == 1)
+            {
+                GameState.getInstance().getCurrentHarbor().setActive(false);
+                double battleChance = 0.1;
+
+                toHarbor.setActive(true);
+                toHarbor.setNextDestination(false);
+                
+                while(timeToTravel > 0)
+                {
+                    int fightProbabilty = Utils.getRandomIntBetween(0, 100);
+                    
+                    if(battleChance*100 > fightProbabilty)
+                    {
+                        System.out.println("FIGHT!!");
+                        battleChance = 0.1;
+                    }
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e1) {
+                        e1.printStackTrace();
+                    }
+                    
+                    //TODO replace these numbers with an constant
+                    battleChance*=1.2;
+                    
+                    timeToTravel--;
+                }
+                
+                
+                
+                
+                
+                GameState.getInstance().setCurrentHarbor(toHarbor);
+                route = new Route(GameState.getInstance().getCurrentHarbor());
+            }
         }
     }
 
