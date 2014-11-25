@@ -32,7 +32,7 @@ public class Stock implements Serializable{
             stockItem = new StockItem(ware, amount, ware.getPrice());
             getWarelist().add(stockItem);
         }
-        Economy.calculatePrice(stockItem.getAmount(), stockItem.getWare().getValue());
+        stockItem.getWare().setPrice(Economy.calculatePrice(stockItem.getAmount(), stockItem.getWare().getValue()));
     }
     
     public StockItem getStockItemByWareName(String name){

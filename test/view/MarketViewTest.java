@@ -23,8 +23,18 @@ public class MarketViewTest {
         List<Ware> wares = WareFactory.getInstance().getWares();
         Airship testship = new Airship();
         try{
-            testship.getStock().addTradeableWare(wares.get(0), 20);
-            testship.getStock().addTradeableWare(wares.get(1), 10);
+            testship.getStock().addTradeableWare(
+                new Ware(
+                    wares.get(0).getName(),
+                    wares.get(0).getValue(),
+                    wares.get(0).getWeight(),
+                    wares.get(0).getPrice()), 20);
+            testship.getStock().addTradeableWare(
+                    new Ware(
+                            wares.get(1).getName(),
+                            wares.get(1).getValue(),
+                            wares.get(1).getWeight(),
+                            wares.get(1).getPrice()), 10);
         }catch(Exception e){
             System.out.println(e);
         }
