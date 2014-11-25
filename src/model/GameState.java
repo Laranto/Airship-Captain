@@ -1,11 +1,13 @@
 package model;
 
 import model.gameobject.Airship;
+import model.navigation.Harbor;
 
 public class GameState {
 
     private static GameState gameState = null;
     private Airship airship;
+    private Harbor harbor;
     
     public static GameState getInstance()
     {
@@ -30,4 +32,17 @@ public class GameState {
     public void setAirship(Airship airship) {
         this.airship = airship;
     }
+    
+    public void setCurrentHarbor(Harbor harbor)
+    {
+        this.harbor = harbor;
+    }
+    
+    public Harbor getCurrentHarbor()
+    {
+        return this.harbor;
+    }
+    
+    
+    
 }
