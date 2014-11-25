@@ -29,8 +29,10 @@ public class Stock implements Serializable{
                 wareList.remove(stockItem);
             }
         }else{
-            getWarelist().add(new StockItem(ware, amount, ware.getPrice()));
+            stockItem = new StockItem(ware, amount, ware.getPrice());
+            getWarelist().add(stockItem);
         }
+        Economy.calculatePrice(stockItem.getAmount(), stockItem.getWare().getValue());
     }
     
     public StockItem getStockItemByWareName(String name){
