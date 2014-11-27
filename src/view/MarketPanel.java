@@ -4,6 +4,7 @@ import handler.MarketStrategy;
 import handler.StockItemTransferHandler;
 import handler.TableStockModel;
 
+import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
 
@@ -15,103 +16,97 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
-import model.economy.Market;
-import model.gameobject.Airship;
-
+import model.GameState;
+import model.economy.Stock;
+import common.Character;
 import common.Constants;
 import common.FileUtils;
 import common.enums.MenuItemEnum;
-
 import controller.ButtonController;
-import controller.InputController;
 
 public class MarketPanel extends GameDefaultPanel {
 
-    private Airship airship;
-    private Market market;
     private ImageIcon icon;
+    private StockItemTransferHandler transferHandler = new StockItemTransferHandler();
 
-    public MarketPanel(Airship airship, Market market) {
+    public MarketPanel() {
         this.setLayout(null);
-        this.airship = airship;
-        this.market = market;
-        
-        MarketStrategy marketStrategy = new MarketStrategy(this.airship, this.market);
-        ButtonController buttonController = new ButtonController(marketStrategy);
-        InputController inputController = new InputController(marketStrategy);
-        StockItemTransferHandler transferHandler = new StockItemTransferHandler();
         
         /**
          * Ship Stock list
          */
-        JTable playerTable = new JTable(new TableStockModel(this.airship.getStock()));
-        playerTable.setBounds(
+        JTable playerTable = new JTable(new TableStockModel(Character.PLAYER));
+        Rectangle positionPlayerTable = new Rectangle(
                 Constants.WINDOW_WIDTH * 3/100, 
                 Constants.WINDOW_HEIGHT * 1/12, 
                 Constants.WINDOW_WIDTH * 9/20 , 
                 Constants.WINDOW_HEIGHT * 2/3);
-        playerTable.putClientProperty(Constants.BUTTON_PROPERTY_ID, MenuItemEnum.MARKET_ITEM);
-        playerTable.addMouseListener(inputController);
-        playerTable.setDragEnabled(true);
-        playerTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        playerTable.setDropMode(DropMode.INSERT_ROWS);
-        playerTable.setFillsViewportHeight(true);
-        playerTable.getColumnModel().getColumn(0).setPreferredWidth(playerTable.getWidth()/10*6-4);
-        playerTable.getColumnModel().getColumn(1).setPreferredWidth(playerTable.getWidth()/10*2);
-        playerTable.getColumnModel().getColumn(2).setPreferredWidth(playerTable.getWidth()/10*2);
-        playerTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        playerTable.setTransferHandler(transferHandler);
+        addInScrollPane(playerTable, positionPlayerTable);
         
-        JScrollPane scrollPanePlayerTable = new JScrollPane(playerTable, 
-                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, 
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPanePlayerTable.setBounds(
-                Constants.WINDOW_WIDTH * 3/100, 
-                Constants.WINDOW_HEIGHT * 1/12, 
-                Constants.WINDOW_WIDTH * 9/20 , 
-                Constants.WINDOW_HEIGHT * 2/3);
-        scrollPanePlayerTable.setViewportView(playerTable);
-        scrollPanePlayerTable.setTransferHandler(transferHandler);
-        add(scrollPanePlayerTable);
         /**
          * Market Stock list
          */
-        
-        JTable opponentTable = new JTable(new TableStockModel(this.market.getStock()));
-        opponentTable.setBounds(
+        JTable opponentTable = getOpponentTable();
+        Rectangle positionOpponentTable = new Rectangle(
                 Constants.WINDOW_WIDTH * 50/100, 
                 Constants.WINDOW_HEIGHT * 1/12, 
                 Constants.WINDOW_WIDTH * 9/20 , 
                 Constants.WINDOW_HEIGHT * 2/3);
-        opponentTable.putClientProperty(Constants.BUTTON_PROPERTY_ID, MenuItemEnum.MARKET_ITEM);
-        opponentTable.addMouseListener(inputController);
-        opponentTable.setDragEnabled(true);
-        opponentTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        opponentTable.setDropMode(DropMode.INSERT_ROWS);
-        opponentTable.setFillsViewportHeight(true);
-        opponentTable.getColumnModel().getColumn(0).setPreferredWidth(opponentTable.getWidth()/10*6-4);
-        opponentTable.getColumnModel().getColumn(1).setPreferredWidth(opponentTable.getWidth()/10*2);
-        opponentTable.getColumnModel().getColumn(2).setPreferredWidth(opponentTable.getWidth()/10*2);
-        opponentTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        opponentTable.setTransferHandler(transferHandler);
-        
-        JScrollPane scrollPaneOpponentTable = new JScrollPane(opponentTable, 
-                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, 
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPaneOpponentTable.setBounds(
-                Constants.WINDOW_WIDTH * 50/100, 
-                Constants.WINDOW_HEIGHT * 1/12, 
-                Constants.WINDOW_WIDTH * 9/20 , 
-                Constants.WINDOW_HEIGHT * 2/3);
-        scrollPaneOpponentTable.setViewportView(opponentTable);
-        scrollPaneOpponentTable.setTransferHandler(transferHandler);
-        add(scrollPaneOpponentTable);
-        
-        
+        addInScrollPane(opponentTable, positionOpponentTable);
         
         /**
          * For placing the harbor button
          */
+        addBackButton();
+    }
+
+    private void addInScrollPane(JTable table, Rectangle position) {
+        table.setBounds(position);
+        table.setDragEnabled(true);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        table.setDropMode(DropMode.INSERT_ROWS);
+        table.setFillsViewportHeight(true);
+        table.getColumnModel().getColumn(0).setPreferredWidth(table.getWidth()/10*6-4);
+        table.getColumnModel().getColumn(1).setPreferredWidth(table.getWidth()/10*2);
+        table.getColumnModel().getColumn(2).setPreferredWidth(table.getWidth()/10*2);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        table.setTransferHandler(transferHandler);
+        
+        JScrollPane scrollPanePlayerTable = new JScrollPane(table, 
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, 
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPanePlayerTable.setBounds(position);
+        scrollPanePlayerTable.setViewportView(table);
+        scrollPanePlayerTable.setTransferHandler(transferHandler);
+        add(scrollPanePlayerTable);
+    }
+    
+
+    private void addBackButton() {
+        JButton backButton = createButton();
+        backButton.setHorizontalAlignment(SwingConstants.CENTER);
+        backButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
+        int width = Constants.WINDOW_WIDTH / 6,
+            height = (int)backButton.getPreferredSize().getHeight(),
+            x = Constants.WINDOW_WIDTH * 3 / 4,
+            y = Constants.WINDOW_HEIGHT-height-40;
+        backButton.setBounds(x, y, width, height);
+        add(backButton);
+    }
+    
+    protected JTable getOpponentTable() {
+        JTable opponentTable = new JTable(new TableStockModel(Character.OPPONENT){
+            @Override
+            protected Stock getStock() {
+                return GameState.getInstance().getCurrentHarbor().getMarket().getStock();
+            }
+        });
+        return opponentTable;
+    }
+
+    protected JButton createButton() {
+        MarketStrategy marketStrategy = new MarketStrategy();
+        ButtonController buttonController = new ButtonController(marketStrategy);
         try {
             this.icon = new ImageIcon(FileUtils.loadImage(new File(Constants.HARBOR_ICON)));
         } catch (IOException e) {
@@ -122,13 +117,6 @@ public class MarketPanel extends GameDefaultPanel {
         harbor.setIcon(icon);
         harbor.putClientProperty(Constants.BUTTON_PROPERTY_ID, MenuItemEnum.HARBOR);
         harbor.addActionListener(buttonController);
-        harbor.setHorizontalAlignment(SwingConstants.CENTER);
-        harbor.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
-        int width = Constants.WINDOW_WIDTH / 6,
-            height = (int)harbor.getPreferredSize().getHeight(),
-            x = Constants.WINDOW_WIDTH * 3 / 4,
-            y = Constants.WINDOW_HEIGHT-height-40;
-        harbor.setBounds(x, y, width, height);
-        add(harbor);
+        return harbor;
     }
 }

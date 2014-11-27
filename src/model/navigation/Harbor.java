@@ -16,10 +16,6 @@ public class Harbor implements Renderable{
     private boolean isActive;
     private boolean nextDestination;
     
-    public Harbor(Point position){
-        this(new Market(), position, true);
-    }
-    
     public Harbor(Market market, Point position, boolean active){
         this.market = market;
         this.position = position;

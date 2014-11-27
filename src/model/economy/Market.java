@@ -2,9 +2,8 @@ package model.economy;
 
 import java.util.ArrayList;
 
+import model.GameState;
 import model.factory.WareFactory;
-import model.gameobject.Airship;
-
 import common.Constants;
 import common.Utils;
 
@@ -25,11 +24,15 @@ public class Market {
         {
             ArrayList<Ware> wares = WareFactory.getInstance().getWares();
             try{
-                for (int i = 0; i < wares.size(); i++) {
-                    this.getStock().addTradeableWare( wares.get(i), Utils.getRandomIntBetween(10,  (int) Constants.WARE_STANDARD_AMOUNT * 2));
+                StockItem stockItem = null;
+                for (Ware ware: wares) {
+                    stockItem = this.getStock().addTradeableWare( ware, Utils.getRandomIntBetween(10,  (int) Constants.WARE_STANDARD_AMOUNT * 2));
+                    stockItem.getWare().setPrice(Economy.calculatePrice(stockItem.getAmount(), stockItem.getWare().getValue()));
                 }
                 
-                this.getStock().addTradeableWare( wares.get(0), 200 );
+                stockItem = this.getStock().addTradeableWare( wares.get(0), 200 );
+                stockItem.getWare().setPrice(Economy.calculatePrice(stockItem.getAmount(), stockItem.getWare().getValue()));
+                
             }catch(Exception e){
                 System.err.println(e.getMessage());
             }
@@ -38,28 +41,34 @@ public class Market {
 
     /**
      * This method buys an item for an airship from a market
-     * @param Airship the airship which wants to buy an item
-     * @param Ware ist the ware you want to buy
      * @param amount is the amount you want to buy
-     * @return returns the item itself the the bought was succesfull, otherwise it throws an exception
+     * @param Ware is the ware you want to buy
+     * @return returns the item itself the the bought was successful, otherwise it throws an exception
      * @throws Exception
      */
-    public void buyItem(Airship airship, Ware ware, int amount) throws Exception {
-        getStock().addTradeableWare(ware, -amount);
-        airship.getStock().addTradeableWare(ware, amount);
+    public void buyItem(Ware ware, int amount) throws Exception {
+        if(amount == 0){return;}
+        
+        StockItem marketItem = getStock().addTradeableWare(ware, -amount);
+        StockItem airshipItem = GameState.getInstance().getAirship().getStock().addTradeableWare(ware, amount);
+        
+        Economy.calculateNewPriceFor(marketItem, airshipItem);
     }
-    
+
     /**
      * This method sells an item from an airship to a market
-     * @param airship the airship which wants to sell something
-     * @param ware the ware which is been traden
+     * @param ware the ware which is been traded
      * @param amount the amount of this ware
      * @throws Exception throws an exception if the resource which wants to be
-     * traden doesn't exists or is not enoug
+     * traded doesn't exists or is not enough
      */
-    public void sellItem(Airship airship, Ware ware, int amount) throws Exception {
-        airship.getStock().addTradeableWare(ware, -amount);
-        getStock().addTradeableWare(ware, amount);
+    public void sellItem(Ware ware, int amount) throws Exception {
+        if(amount == 0){return;}
+        
+        StockItem airshipItem = GameState.getInstance().getAirship().getStock().addTradeableWare(ware, -amount);
+        StockItem marketItem = getStock().addTradeableWare(ware, amount);
+        
+        Economy.calculateNewPriceFor(marketItem, airshipItem);
     }
 
     public Stock getStock() {

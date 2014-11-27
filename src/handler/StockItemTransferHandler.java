@@ -16,9 +16,12 @@ import javax.swing.TransferHandler;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import model.GameState;
 import model.economy.StockItem;
 import model.economy.StockItemTransferable;
 import model.economy.Ware;
+
+import common.Character;
 
 public class StockItemTransferHandler extends TransferHandler {
     private static final int ABBRECHEN = 2;
@@ -52,8 +55,17 @@ public class StockItemTransferHandler extends TransferHandler {
                         
                         
                         if(null != optionPane.getValue() && ABBRECHEN != (int)optionPane.getValue()){
-                            ((TableStockModel)source.getModel()).addItem(stockItem.getWare(), -1*(int)optionPane.getInputValue());
-                            ((TableStockModel)target.getModel()).addItem(stockItem.getWare(), (int)optionPane.getInputValue());
+                            if(isPlayer()){
+                                GameState.getInstance().getCurrentHarbor().getMarket().
+                                        sellItem(
+                                                stockItem.getWare(), 
+                                                (int)optionPane.getInputValue());
+                            }else{
+                                GameState.getInstance().getCurrentHarbor().getMarket().
+                                        buyItem(
+                                                stockItem.getWare(), 
+                                                (int)optionPane.getInputValue());
+                            }
                         }
                         accept = true;
                     }
@@ -63,6 +75,10 @@ public class StockItemTransferHandler extends TransferHandler {
             }
         }
         return accept;
+    }
+
+    private boolean isPlayer() {
+        return ((TableStockModel)source.getModel()).getCharacter() == Character.PLAYER;
     }
     
     private void addSlider(final JOptionPane optionPane, final int maximum) {
@@ -115,8 +131,7 @@ public class StockItemTransferHandler extends TransferHandler {
             source = (JTable) c;
             t = new StockItemTransferable(new StockItem(
                     (Ware)source.getModel().getValueAt(source.getSelectedRow(), 0), 
-                    (int)source.getModel().getValueAt(source.getSelectedRow(), 1), 
-                    (float)source.getModel().getValueAt(source.getSelectedRow(), 2)));
+                    (int)source.getModel().getValueAt(source.getSelectedRow(), 1)));
         }
         return t;
     }

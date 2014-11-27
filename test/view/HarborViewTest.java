@@ -27,7 +27,7 @@ public class HarborViewTest {
         }
 
         JFrame frame = new JFrame("Airship Captain");
-        JPanel pane = new HarborPanel(testship);
+        JPanel pane = new HarborPanel();
         frame.setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
         frame.setResizable(false);
 

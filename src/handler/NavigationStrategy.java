@@ -5,55 +5,52 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import model.GameState;
 import model.economy.Market;
-import model.gameobject.Airship;
 import model.navigation.Harbor;
 import model.navigation.Route;
+
 import common.Constants;
 import common.Utils;
 import common.enums.MenuItemEnum;
+
 import controller.WindowController;
 
 public class NavigationStrategy extends HandlerStrategy {
 
-    private Airship airship;
     private Harbor currentHarbor;
     private Harbor toHarbor;
     private List<Harbor> harbors;
     private Route route;
     
-    public NavigationStrategy(Airship airship){
-        this.airship = airship;
+    public NavigationStrategy(){
         parseHarbours();
         route = new Route(currentHarbor);
     }
     
     private void parseHarbours() {
-        currentHarbor =  new Harbor(new Point(310, 340));
+        currentHarbor =  GameState.getInstance().getCurrentHarbor();
         harbors = new ArrayList<Harbor>();
-        harbors.add(new Harbor(new Market(), new Point(110, 500), false));
-        harbors.add(new Harbor(new Market(), new Point(160, 410), false));
-        harbors.add(new Harbor(new Market(), new Point(210, 300), false));
-        harbors.add(new Harbor(new Market(), new Point(280, 200), false));
-        harbors.add(new Harbor(new Market(), new Point(290, 60), false));
-        harbors.add(new Harbor(new Market(), new Point(280, 400), false));
-        harbors.add(new Harbor(new Market(), new Point(300, 490), false));
-        harbors.add(new Harbor(new Market(), new Point(330, 260), false));
-        harbors.add(new Harbor(new Market(), new Point(450, 200), false));
-        harbors.add(new Harbor(new Market(), new Point(460, 500), false));
-        harbors.add(new Harbor(new Market(), new Point(490, 290), false));
-        harbors.add(new Harbor(new Market(), new Point(500, 90), false));
-        harbors.add(new Harbor(new Market(), new Point(500, 400), false));
-        harbors.add(new Harbor(new Market(), new Point(600, 50), false));
-        harbors.add(new Harbor(new Market(), new Point(600, 270), false));
-        harbors.add(new Harbor(new Market(), new Point(600, 345), false));
-        harbors.add(new Harbor(new Market(), new Point(610, 200), false));
-        harbors.add(new Harbor(new Market(), new Point(720, 275), false));
-        harbors.add(currentHarbor);
-        GameState.getInstance().setCurrentHarbor(currentHarbor);
+        harbors.add(new Harbor(new Market(), new Point(110, 500), currentHarbor.getPosition().equals(new Point(110, 500))));
+        harbors.add(new Harbor(new Market(), new Point(160, 410), currentHarbor.getPosition().equals(new Point(160, 410))));
+        harbors.add(new Harbor(new Market(), new Point(210, 300), currentHarbor.getPosition().equals(new Point(210, 300))));
+        harbors.add(new Harbor(new Market(), new Point(280, 200), currentHarbor.getPosition().equals(new Point(280, 200))));
+        harbors.add(new Harbor(new Market(), new Point(280, 400), currentHarbor.getPosition().equals(new Point(280, 400))));
+        harbors.add(new Harbor(new Market(), new Point(290,  60), currentHarbor.getPosition().equals(new Point(290,  60))));
+        harbors.add(new Harbor(new Market(), new Point(300, 490), currentHarbor.getPosition().equals(new Point(300, 490))));
+        harbors.add(new Harbor(new Market(), new Point(310, 340), currentHarbor.getPosition().equals(new Point(310, 340))));
+        harbors.add(new Harbor(new Market(), new Point(330, 260), currentHarbor.getPosition().equals(new Point(330, 260))));
+        harbors.add(new Harbor(new Market(), new Point(450, 200), currentHarbor.getPosition().equals(new Point(450, 200))));
+        harbors.add(new Harbor(new Market(), new Point(460, 500), currentHarbor.getPosition().equals(new Point(460, 500))));
+        harbors.add(new Harbor(new Market(), new Point(490, 290), currentHarbor.getPosition().equals(new Point(490, 290))));
+        harbors.add(new Harbor(new Market(), new Point(500,  90), currentHarbor.getPosition().equals(new Point(500,  90))));
+        harbors.add(new Harbor(new Market(), new Point(500, 400), currentHarbor.getPosition().equals(new Point(500, 400))));
+        harbors.add(new Harbor(new Market(), new Point(600,  50), currentHarbor.getPosition().equals(new Point(600,  50))));
+        harbors.add(new Harbor(new Market(), new Point(600, 270), currentHarbor.getPosition().equals(new Point(600, 270))));
+        harbors.add(new Harbor(new Market(), new Point(600, 345), currentHarbor.getPosition().equals(new Point(600, 345))));
+        harbors.add(new Harbor(new Market(), new Point(610, 200), currentHarbor.getPosition().equals(new Point(610, 200))));
+        harbors.add(new Harbor(new Market(), new Point(720, 275), currentHarbor.getPosition().equals(new Point(720, 275))));
     }
     
     public List<Harbor> getHarbors() {
@@ -124,13 +121,6 @@ public class NavigationStrategy extends HandlerStrategy {
                     
                     timeToTravel--;
                 }
-                
-                
-                
-                
-                
-                GameState.getInstance().setCurrentHarbor(toHarbor);
-                route = new Route(GameState.getInstance().getCurrentHarbor());
             }
         }
     }
@@ -144,7 +134,7 @@ public class NavigationStrategy extends HandlerStrategy {
     public void publishProperty(Object next) {
         if(next instanceof MenuItemEnum){
             if(MenuItemEnum.HARBOR == (MenuItemEnum)next){
-                WindowController.showHarbor(airship);
+                WindowController.showHarbor();
             }
         }
     }

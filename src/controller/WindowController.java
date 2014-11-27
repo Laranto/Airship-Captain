@@ -1,11 +1,14 @@
 package controller;
 
+import java.awt.Point;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import model.GameState;
 import model.economy.Market;
-import model.gameobject.Airship;
+import model.navigation.Harbor;
 import view.ConstructionPanel;
 import view.FightPanel;
 import view.HarborPanel;
@@ -46,34 +49,37 @@ public class WindowController{
     	constructionPanel.requestFocus();
     }
     
-    public static void showFight(Airship airship){
+    public static void showFight(){
     	if(fightPanel == null){
-    		fightPanel = new FightPanel(airship);
+    		fightPanel = new FightPanel();
     	}
     	showPanel(fightPanel);
     }
     
-    public static void showNavigation(Airship airship){
+    public static void showNavigation(){
     	if(navigationPanel == null){
-    		navigationPanel = new NavigationPanel(airship);
+    		navigationPanel = new NavigationPanel();
     	}
     	showPanel(navigationPanel);
     }
     
-    public static void showHarbor(Airship airship){
+    public static void showHarbor(){
     	if(harborPanel == null){
-    		harborPanel = new HarborPanel(airship);
+                if(GameState.getInstance().getCurrentHarbor() == null){
+                    GameState.getInstance().setCurrentHarbor(new Harbor(new Market(), new Point(310, 340), true));
+                }
+    		harborPanel = new HarborPanel();
     	}
     	showPanel(harborPanel);
     }
     
     
     //TODO: Market should be passed as parameter from harbor
-    public static void showMarket(Airship airship)
+    public static void showMarket()
     {
         if(marketPanel == null)
         {
-            marketPanel = new MarketPanel(airship, new Market());
+            marketPanel = new MarketPanel();
         }
         showPanel(marketPanel);
     }

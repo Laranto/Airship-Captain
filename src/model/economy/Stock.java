@@ -13,7 +13,7 @@ public class Stock implements Serializable{
         wareList = new ArrayList<StockItem>();
     }
     
-    public void addTradeableWare(Ware ware, int amount) throws Exception
+    public StockItem addTradeableWare(Ware ware, int amount) throws Exception
     {
         StockItem stockItem = null;
         if((stockItem = getStockItemByWareName(ware.getName())) != null)
@@ -21,18 +21,18 @@ public class Stock implements Serializable{
             if(amount < 0 && Math.abs(amount) > stockItem.getAmount()){
                 throw new Exception("There are only : "+stockItem.getAmount()+" items this kind left.");
             }
-            if(stockItem == null && amount < 0){
-                throw new Exception("Ware "+ware.getName()+" nicht vorhanden");
-            }
             stockItem.setAmount(stockItem.getAmount()+amount);
             if(stockItem.getAmount() == 0){
                 wareList.remove(stockItem);
             }
         }else{
-            stockItem = new StockItem(ware, amount, ware.getPrice());
+            if(amount < 0){
+                throw new Exception("Ware "+ware.getName()+" nicht vorhanden");
+            }
+            stockItem = new StockItem(ware, amount);
             getWarelist().add(stockItem);
         }
-        stockItem.getWare().setPrice(Economy.calculatePrice(stockItem.getAmount(), stockItem.getWare().getValue()));
+        return stockItem;
     }
     
     public StockItem getStockItemByWareName(String name){
@@ -47,21 +47,5 @@ public class Stock implements Serializable{
     public List<StockItem> getWarelist()
     {
         return this.wareList;
-    }
-    
-    /**
-     * Printing the state of the market in the console
-     */
-    public void printStock()
-    {
-        System.out.println("Name\t\t\t\tReferenz\t\t\t\t\t\t\t\tAnzahl\t\t\tPreis");
-        if(this.getWarelist().isEmpty())
-        {
-            System.out.println("Stock is empty");
-        }else{
-            for(StockItem stockItem: wareList){
-                System.out.println(stockItem.getWare().getName()+"\t"+stockItem.getWare()+"\t"+stockItem.getAmount()+"\t\t\t"+stockItem.getWare().getPrice());
-            }
-        }
     }
 }

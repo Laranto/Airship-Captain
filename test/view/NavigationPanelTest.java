@@ -2,12 +2,9 @@ package view;
 
 import javax.swing.JFrame;
 
-import model.gameobject.Airship;
-
 import org.junit.Test;
 
 import common.Constants;
-
 import controller.WindowController;
 
 public class NavigationPanelTest {
@@ -22,7 +19,7 @@ public class NavigationPanelTest {
         frame.setVisible(true);
         frame.setVisible(true);
         WindowController.setFrame(frame);
-        WindowController.showNavigation(new Airship());
+        WindowController.showNavigation();
         while(true){
             try {
                 Thread.sleep(100);

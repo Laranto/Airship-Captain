@@ -4,21 +4,17 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 import common.enums.MenuItemEnum;
+
 import controller.ExitGameListener;
 import controller.LoadGameListener;
 import controller.SaveGameListener;
 import controller.WindowController;
-import model.GameState;
-import model.gameobject.Airship;
 
 public class HarborStrategy extends HandlerStrategy {
 
 	private MenuItemEnum activeMenu;
 
-	private Airship airship;
-
-	public HarborStrategy(Airship airship) {
-		this.airship = airship;
+	public HarborStrategy() {
 	}
 
 	@Override
@@ -29,7 +25,7 @@ public class HarborStrategy extends HandlerStrategy {
 			WindowController.showConstruction();
 			break;
 		case MARKET:
-		    WindowController.showMarket(GameState.getInstance().getAirship());
+		    WindowController.showMarket();
 			break;
 		case SAVE_GAME:
 		    new SaveGameListener().actionPerformed(null);
@@ -41,7 +37,7 @@ public class HarborStrategy extends HandlerStrategy {
 			new ExitGameListener().actionPerformed(null);
 			break;
 		case NAVIGATION_MAP:
-		        WindowController.showNavigation(airship);
+		        WindowController.showNavigation();
 		        break;
 		default:
 			break;

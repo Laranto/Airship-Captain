@@ -5,12 +5,10 @@ import java.io.Serializable;
 public class StockItem implements Serializable {
     private Ware ware;
     private Integer amount;
-    private Float price;
     
-    public StockItem(Ware ware, Integer amount, Float price) {
+    public StockItem(Ware ware, Integer amount) {
         this.ware = ware;
         this.amount = amount;
-        this.price = price;
     }
 
     public Ware getWare() {
@@ -21,19 +19,11 @@ public class StockItem implements Serializable {
         return amount;
     }
 
-    public Float getPrice(){
-        return price;
-    }
-    
     public void setWare(Ware ware) {
         this.ware = ware;
     }
 
     public void setAmount(Integer amount) {
         this.amount = amount;
-    }
-    
-    public void setPrice(Float price) {
-        this.price = price;
     }
 }

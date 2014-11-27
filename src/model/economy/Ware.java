@@ -4,20 +4,20 @@ import model.gameobject.GameObject;
 
 public class Ware extends GameObject implements Tradeable{
 
-    private float price;
+    private double price;
 
 
-    public Ware(String name , int value , int weight, float price) {
+    public Ware(String name , int value , int weight, double price) {
         super(name , value , weight);
         this.price = price;
     }
 
     
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
     

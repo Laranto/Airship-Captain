@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
+import model.GameState;
 import model.factory.ScenarioFactory;
 import model.gameobject.Airship;
 import model.navigation.Scenario;
@@ -17,21 +18,18 @@ import common.Constants;
 import controller.InputController;
 
 public class FightPanel extends GameDefaultPanel {
-    private Airship airship;
     private Airship enemy;
     
     
     
-    public FightPanel(Airship airship) {
-        this.airship = airship;
-        Scenario szenario = ScenarioFactory.build(airship.getCaptain());
+    public FightPanel() {
+        Scenario szenario = ScenarioFactory.build();
         enemy = szenario.getEnemy();
         
-        FightStrategy strategy = new FightStrategy(airship);
+        FightStrategy strategy = new FightStrategy();
         addMouseListener(new InputController(strategy));
         addMouseMotionListener(new InputController(strategy));
         
-        this.airship = airship;
         
 
         GridLayout mainLayout = new GridLayout(1, 2);
@@ -48,7 +46,7 @@ public class FightPanel extends GameDefaultPanel {
     public void paint(Graphics g) {
         super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
-        airship.render(g2);
+        GameState.getInstance().getAirship().render(g2);
         g2.translate(Constants.WINDOW_WIDTH/2, 0);
         enemy.render(g2);
     }

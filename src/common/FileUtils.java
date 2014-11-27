@@ -14,7 +14,6 @@ import java.io.Serializable;
 import javax.imageio.ImageIO;
 
 import model.GameState;
-import model.gameobject.Airship;
 
 public class FileUtils {
     /**

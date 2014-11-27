@@ -13,7 +13,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
-import model.gameobject.Airship;
 import model.navigation.Harbor;
 
 import common.Constants;
@@ -26,14 +25,12 @@ import controller.InputController;
 
 public class NavigationPanel extends GameDefaultPanel {
 
-    private Airship airship;
     private BufferedImage image;
     private ImageIcon icon;
     private HandlerStrategy strategy = null;
     
 
-    public NavigationPanel(Airship airship) {
-        this.airship = airship;
+    public NavigationPanel() {
         try {
             this.image = FileUtils.loadImage(new File(Constants.NAVIGATION_BACKGROUND_IMAGE));
             this.icon = new ImageIcon(FileUtils.loadImage(new File(Constants.HARBOR_ICON)));
@@ -41,7 +38,7 @@ public class NavigationPanel extends GameDefaultPanel {
             e.printStackTrace();
         }
         
-        strategy = new NavigationStrategy(airship);
+        strategy = new NavigationStrategy();
         InputController inputController = new InputController(strategy);
         ButtonController buttonController = new ButtonController(strategy);
         addMouseListener(inputController);

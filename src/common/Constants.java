@@ -40,8 +40,8 @@ public class Constants {
     public static final int HARBOR_CIRCLE_DIAMETER = 20;
     public static final String HARBOR_ICON = "resources/panels/img/anchor.png";
     
-    public static final float WARE_STANDARD_AMOUNT = 100;
-    public static final float WARE_MAX_INFLATION_FACTOR = 5;
+    public static final double WARE_STANDARD_AMOUNT = 100;
+    public static final double WARE_MAX_INFLATION_FACTOR = 5;
     public static final double WARE_SELL_RATIO = 0.8;    
     
     

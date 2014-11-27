@@ -3,9 +3,8 @@ package handler;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
-import model.GameState;
-import model.gameobject.Airship;
 import common.enums.MenuItemEnum;
+
 import controller.ExitGameListener;
 import controller.LoadGameListener;
 import controller.WindowController;

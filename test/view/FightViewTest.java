@@ -23,7 +23,7 @@ public class FightViewTest {
         
         
         JFrame frame = new JFrame();
-        JPanel pane = new FightPanel(testship);
+        JPanel pane = new FightPanel();
         frame.setContentPane(pane);
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

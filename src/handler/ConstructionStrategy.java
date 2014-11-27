@@ -4,12 +4,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 import model.GameState;
-import model.gameobject.Airship;
 import model.gameobject.Entity;
 import model.gameobject.Material;
 import model.gameobject.ShipPart;
+
 import common.Constants;
 import common.enums.PropertyEnum;
+
 import controller.WindowController;
 
 public class ConstructionStrategy extends HandlerStrategy {
@@ -86,7 +87,7 @@ public class ConstructionStrategy extends HandlerStrategy {
     		if(((PropertyEnum)publishedProperty) == PropertyEnum.SAVE){
     			//TODO check if airship is valid if ok-> werft false -> message user (use JOptionPane)
     		    if(GameState.getInstance().getAirship().isJoined()){
-    		        WindowController.showHarbor(GameState.getInstance().getAirship());
+    		        WindowController.showHarbor();
     		    }else{
     		        WindowController.showError("Fehler beim speichern","Das Luftschiff konnte so nicht gespeichert werden. Es ist nicht an einem Stück!");
     		    }

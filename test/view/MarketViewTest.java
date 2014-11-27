@@ -54,7 +54,7 @@ public class MarketViewTest {
         }
         
         JFrame frame = new JFrame("Market view");
-        JPanel pane = new MarketPanel(testship, market);
+        JPanel pane = new MarketPanel();
         frame.setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
         frame.setResizable(false);
 
