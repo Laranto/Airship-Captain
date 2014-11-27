@@ -42,6 +42,8 @@ public class Constants {
     
     public static final float WARE_STANDARD_AMOUNT = 100;
     public static final float WARE_MAX_INFLATION_FACTOR = 5;
+    public static final double WARE_SELL_RATIO = 0.8;    
+    
     
     public static final String GAME_FILE_ENDNG = "asc";
 
