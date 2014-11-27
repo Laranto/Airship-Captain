@@ -25,10 +25,6 @@ public class NavigationStrategy extends HandlerStrategy {
     private List<Harbor> harbors;
     private Route route;
     
-    public NavigationStrategy(){
-        this(new Airship());
-    }
-    
     public NavigationStrategy(Airship airship){
         this.airship = airship;
         parseHarbours();
