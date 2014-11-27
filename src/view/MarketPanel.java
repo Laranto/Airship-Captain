@@ -55,6 +55,7 @@ public class MarketPanel extends GameDefaultPanel {
         playerTable.setDragEnabled(true);
         playerTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         playerTable.setDropMode(DropMode.INSERT_ROWS);
+        playerTable.setFillsViewportHeight(true);
         playerTable.getColumnModel().getColumn(0).setPreferredWidth(playerTable.getWidth()/10*6-4);
         playerTable.getColumnModel().getColumn(1).setPreferredWidth(playerTable.getWidth()/10*2);
         playerTable.getColumnModel().getColumn(2).setPreferredWidth(playerTable.getWidth()/10*2);
@@ -87,6 +88,7 @@ public class MarketPanel extends GameDefaultPanel {
         opponentTable.setDragEnabled(true);
         opponentTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         opponentTable.setDropMode(DropMode.INSERT_ROWS);
+        opponentTable.setFillsViewportHeight(true);
         opponentTable.getColumnModel().getColumn(0).setPreferredWidth(opponentTable.getWidth()/10*6-4);
         opponentTable.getColumnModel().getColumn(1).setPreferredWidth(opponentTable.getWidth()/10*2);
         opponentTable.getColumnModel().getColumn(2).setPreferredWidth(opponentTable.getWidth()/10*2);
