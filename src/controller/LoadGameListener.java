@@ -15,17 +15,17 @@ public class LoadGameListener implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        String choosenFilePath = WindowController.showFileChooser(Constants.FOLDER_GAME_DATA, "Airship Captain Game Datei", Constants.FILE_ENDNG_GAME,false);
+        String choosenFilePath = WindowController.showFileChooser(Constants.FOLDER_GAME_DATA, "Airship Captain Game Datei", Constants.FILE_ENDING_GAME,false);
         if(choosenFilePath != null)
         {
             File choosenFile = new File(choosenFilePath);
-            String fileNameWithoutExtension = choosenFile.getName().substring(0, choosenFile.getName().length()-Constants.FILE_ENDNG_GAME.length()-1);
+            String fileNameWithoutExtension = choosenFile.getName().substring(0, choosenFile.getName().length()-Constants.FILE_ENDING_GAME.length()-1);
             this.loadGame(fileNameWithoutExtension);
         }
     }
 
     private void loadGame(String filename) {
-        Serializable readObject = FileUtils.loadObjectFile(Constants.FOLDER_GAME_DATA , filename , Constants.FILE_ENDNG_GAME);
+        Serializable readObject = FileUtils.loadObjectFile(Constants.FOLDER_GAME_DATA , filename , Constants.FILE_ENDING_GAME);
         if(readObject instanceof Airship){
             //TODO Load an entire game state instead of just the ship.
             GameState.getInstance().setAirship((Airship)readObject);

@@ -29,12 +29,12 @@ public class ShipExportController implements ActionListener {
     }
 
     private void executeImport() {
-        String fileName = WindowController.showFileChooser(Constants.FOLDER_AIRSHIPS, "Airship Captain Schiff Datei", Constants.FILE_ENDNG_SHIP, false);
+        String fileName = WindowController.showFileChooser(Constants.FOLDER_AIRSHIPS, "Airship Captain Schiff Datei", Constants.FILE_ENDING_SHIP, false);
         if (fileName != null)
         {
             File choosenFile = new File(fileName);
-            fileName = choosenFile.getName().substring(0, choosenFile.getName().length() - Constants.FILE_ENDNG_SHIP.length() - 1);
-            Serializable readObject = FileUtils.loadObjectFile(Constants.FOLDER_AIRSHIPS, fileName, Constants.FILE_ENDNG_SHIP);
+            fileName = choosenFile.getName().substring(0, choosenFile.getName().length() - Constants.FILE_ENDING_SHIP.length() - 1);
+            Serializable readObject = FileUtils.loadObjectFile(Constants.FOLDER_AIRSHIPS, fileName, Constants.FILE_ENDING_SHIP);
             if (readObject instanceof Airship) {
                 GameState.getInstance().setAirship((Airship) readObject);
             }
@@ -43,14 +43,14 @@ public class ShipExportController implements ActionListener {
     }
 
     private void executeExport() {
-        String fileName = WindowController.showFileChooser(Constants.FOLDER_AIRSHIPS, "Airship Captain Schiff Datei", Constants.FILE_ENDNG_SHIP, true);
+        String fileName = WindowController.showFileChooser(Constants.FOLDER_AIRSHIPS, "Airship Captain Schiff Datei", Constants.FILE_ENDING_SHIP, true);
         if (fileName != null)
         {
-            if (fileName.endsWith("." + Constants.FILE_ENDNG_SHIP))
+            if (fileName.endsWith("." + Constants.FILE_ENDING_SHIP))
             {
-                fileName = fileName.substring(0, fileName.length() - 1 - Constants.FILE_ENDNG_SHIP.length());
+                fileName = fileName.substring(0, fileName.length() - 1 - Constants.FILE_ENDING_SHIP.length());
             }
-            FileUtils.saveObjectFile(GameState.getInstance().getAirship(), Constants.FOLDER_AIRSHIPS, fileName, Constants.FILE_ENDNG_SHIP);
+            FileUtils.saveObjectFile(GameState.getInstance().getAirship(), Constants.FOLDER_AIRSHIPS, fileName, Constants.FILE_ENDING_SHIP);
         }
     }
 

@@ -12,13 +12,13 @@ public class SaveGameListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        String fileName = WindowController.showFileChooser(Constants.FOLDER_GAME_DATA, "Airship Captain Game Datei", Constants.FILE_ENDNG_GAME,true);
+        String fileName = WindowController.showFileChooser(Constants.FOLDER_GAME_DATA, "Airship Captain Game Datei", Constants.FILE_ENDING_GAME,true);
 
         if(fileName != null)
         {
-            if(fileName.endsWith("."+Constants.FILE_ENDNG_GAME))
+            if(fileName.endsWith("."+Constants.FILE_ENDING_GAME))
             {
-                fileName = fileName.substring(0, fileName.length()-1-Constants.FILE_ENDNG_GAME.length());
+                fileName = fileName.substring(0, fileName.length()-1-Constants.FILE_ENDING_GAME.length());
             }
         }
         
@@ -27,6 +27,6 @@ public class SaveGameListener implements ActionListener {
 
     private void saveGame(String filename) {
         
-        FileUtils.saveObjectFile(GameState.getInstance().getAirship(), Constants.FOLDER_GAME_DATA, filename, Constants.FILE_ENDNG_GAME);
+        FileUtils.saveObjectFile(GameState.getInstance().getAirship(), Constants.FOLDER_GAME_DATA, filename, Constants.FILE_ENDING_GAME);
     }
 }

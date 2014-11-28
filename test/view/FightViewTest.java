@@ -12,7 +12,7 @@ import common.FileUtils;
 public class FightViewTest {
     public static void main(String[] args) {
 
-        GameState.getInstance().setAirship((Airship) FileUtils.loadObjectFile(Constants.FOLDER_AIRSHIPS, "hashership", Constants.FILE_ENDNG_SHIP));
+        GameState.getInstance().setAirship((Airship) FileUtils.loadObjectFile(Constants.FOLDER_AIRSHIPS, "hashership", Constants.FILE_ENDING_SHIP));
         
         JFrame frame = new JFrame();
         JPanel pane = new FightPanel();

@@ -46,8 +46,8 @@ public class Constants {
     public static final double WARE_SELL_RATIO = 0.8;    
     
     
-    public static final String FILE_ENDNG_GAME = "asc";
-    public static final String FILE_ENDNG_SHIP = "ascs";
+    public static final String FILE_ENDING_GAME = "asc";
+    public static final String FILE_ENDING_SHIP = "ascs";
 
     
     /**

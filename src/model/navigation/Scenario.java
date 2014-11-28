@@ -23,7 +23,7 @@ public abstract class Scenario {
         if(this.opponent == null)
         {
             //TODO: has to be adjusted, for example for random enemy
-            this.opponent = (Airship) FileUtils.loadObjectFile(Constants.FOLDER_AIRSHIPS, "enemy01", Constants.FILE_ENDNG_SHIP);
+            this.opponent = (Airship) FileUtils.loadObjectFile(Constants.FOLDER_AIRSHIPS, "enemy01", Constants.FILE_ENDING_SHIP);
         }
         return opponent;
     }
