@@ -17,6 +17,6 @@ public class SaveGameListener implements ActionListener {
 
     private void saveGame(String filename) {
         
-        FileUtils.saveObjectFile(GameState.getInstance().getAirship(), Constants.FOLDER_GAME_DATA, filename, Constants.GAME_FILE_ENDNG);
+        FileUtils.saveObjectFile(GameState.getInstance().getAirship(), Constants.FOLDER_GAME_DATA, filename, Constants.FILE_ENDNG_GAME);
     }
 }
