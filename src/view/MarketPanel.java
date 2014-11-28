@@ -39,6 +39,9 @@ public class MarketPanel extends GameDefaultPanel {
         /**
          * Ship Stock list
          */
+        JLabel playerNameLabel = new JLabel(GameState.getInstance().getAirship().getName());
+        playerNameLabel.setBounds(Constants.WINDOW_WIDTH * 3/100, Constants.WINDOW_HEIGHT * 1/25, Constants.WINDOW_WIDTH * 9/20, 20);
+        add(playerNameLabel);
         JTable playerTable = new JTable(new TableStockModel(Character.PLAYER));
         Rectangle positionPlayerTable = new Rectangle(
                 Constants.WINDOW_WIDTH * 3/100, 
@@ -50,6 +53,9 @@ public class MarketPanel extends GameDefaultPanel {
         /**
          * Market Stock list
          */
+        JLabel marketNameLabel = new JLabel("Markt");
+        marketNameLabel.setBounds(Constants.WINDOW_WIDTH * 50/100, Constants.WINDOW_HEIGHT * 1/25, Constants.WINDOW_WIDTH * 9/20, 20);
+        add(marketNameLabel);
         JTable opponentTable = getOpponentTable();
         Rectangle positionOpponentTable = new Rectangle(
                 Constants.WINDOW_WIDTH * 50/100, 

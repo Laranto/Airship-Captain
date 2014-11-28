@@ -5,14 +5,14 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import model.GameState;
 import model.economy.Market;
 import model.economy.Ware;
 import model.factory.MaterialFactory;
 import model.factory.WareFactory;
 import model.gameobject.Airship;
-
 import common.Constants;
-
+import common.FileUtils;
 import controller.WindowController;
 
 public class MarketViewTest {
@@ -42,16 +42,8 @@ public class MarketViewTest {
         
         Market market = new Market();
         
-        for (int i = 0; i < 10; i++) {
-            testship.placeMaterial(fac.getMaterials().get(0), 4, 4 + i);
-        }
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 5; j++)
-                testship.placeMaterial(fac.getMaterials().get(1), 5 + j, 4 + i);
-        }
-        for (int i = 0; i < 10; i++) {
-            testship.placeMaterial(fac.getMaterials().get(0), 10, 4 + i);
-        }
+        GameState.getInstance().setAirship((Airship) FileUtils.loadObjectFile(Constants.FOLDER_AIRSHIPS, "hashership", Constants.FILE_ENDING_SHIP));
+        
         
         JFrame frame = new JFrame("Market view");
         JPanel pane = new MarketPanel();

@@ -31,6 +31,7 @@ public class Airship extends GameObject implements Renderable{
         isEmpty=true;
         captain = new Captain();
         this.stock = new Stock();
+        this.setName("Noname");
         
         //TODO has to be calculated (e.x. the amount of engines the ship has)
         this.speed = 22;
