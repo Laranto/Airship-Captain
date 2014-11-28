@@ -1,8 +1,13 @@
 package common;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
+
+import model.economy.Market;
+import model.navigation.Harbor;
 
 public class Constants {
     public static final String FOLDER_MATERIAL = "resources/material/";
@@ -46,6 +51,27 @@ public class Constants {
     
     
     public static final String GAME_FILE_ENDNG = "asc";
+    
+    
+    public static final List<Harbor> HARBORS = new ArrayList<Harbor>(){{
+        add(new Harbor(new Market(), new Point(160, 410), false));
+        add(new Harbor(new Market(), new Point(210, 300), false));
+        add(new Harbor(new Market(), new Point(280, 200), false));
+        add(new Harbor(new Market(), new Point(280, 400), false));
+        add(new Harbor(new Market(), new Point(290,  60), false));
+        add(new Harbor(new Market(), new Point(300, 490), false));
+        add(new Harbor(new Market(), new Point(330, 260), false));
+        add(new Harbor(new Market(), new Point(450, 200), false));
+        add(new Harbor(new Market(), new Point(460, 500), false));
+        add(new Harbor(new Market(), new Point(490, 290), false));
+        add(new Harbor(new Market(), new Point(500,  90), false));
+        add(new Harbor(new Market(), new Point(500, 400), false));
+        add(new Harbor(new Market(), new Point(600,  50), false));
+        add(new Harbor(new Market(), new Point(600, 270), false));
+        add(new Harbor(new Market(), new Point(600, 345), false));
+        add(new Harbor(new Market(), new Point(610, 200), false));
+        add(new Harbor(new Market(), new Point(720, 275), false)); 
+    }};
 
     
     /**

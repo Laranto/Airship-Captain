@@ -1,13 +1,9 @@
 package handler;
 
-import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 import model.GameState;
-import model.economy.Market;
 import model.navigation.Harbor;
 import model.navigation.Route;
 
@@ -19,46 +15,16 @@ import controller.WindowController;
 
 public class NavigationStrategy extends HandlerStrategy {
 
-    private Harbor currentHarbor;
     private Harbor toHarbor;
-    private List<Harbor> harbors;
     private Route route;
     
     public NavigationStrategy(){
-        parseHarbours();
-        route = new Route(currentHarbor);
+        route = new Route(GameState.getInstance().getCurrentHarbor());
     }
     
-    private void parseHarbours() {
-        currentHarbor =  GameState.getInstance().getCurrentHarbor();
-        harbors = new ArrayList<Harbor>();
-        harbors.add(new Harbor(new Market(), new Point(110, 500), currentHarbor.getPosition().equals(new Point(110, 500))));
-        harbors.add(new Harbor(new Market(), new Point(160, 410), currentHarbor.getPosition().equals(new Point(160, 410))));
-        harbors.add(new Harbor(new Market(), new Point(210, 300), currentHarbor.getPosition().equals(new Point(210, 300))));
-        harbors.add(new Harbor(new Market(), new Point(280, 200), currentHarbor.getPosition().equals(new Point(280, 200))));
-        harbors.add(new Harbor(new Market(), new Point(280, 400), currentHarbor.getPosition().equals(new Point(280, 400))));
-        harbors.add(new Harbor(new Market(), new Point(290,  60), currentHarbor.getPosition().equals(new Point(290,  60))));
-        harbors.add(new Harbor(new Market(), new Point(300, 490), currentHarbor.getPosition().equals(new Point(300, 490))));
-        harbors.add(new Harbor(new Market(), new Point(310, 340), currentHarbor.getPosition().equals(new Point(310, 340))));
-        harbors.add(new Harbor(new Market(), new Point(330, 260), currentHarbor.getPosition().equals(new Point(330, 260))));
-        harbors.add(new Harbor(new Market(), new Point(450, 200), currentHarbor.getPosition().equals(new Point(450, 200))));
-        harbors.add(new Harbor(new Market(), new Point(460, 500), currentHarbor.getPosition().equals(new Point(460, 500))));
-        harbors.add(new Harbor(new Market(), new Point(490, 290), currentHarbor.getPosition().equals(new Point(490, 290))));
-        harbors.add(new Harbor(new Market(), new Point(500,  90), currentHarbor.getPosition().equals(new Point(500,  90))));
-        harbors.add(new Harbor(new Market(), new Point(500, 400), currentHarbor.getPosition().equals(new Point(500, 400))));
-        harbors.add(new Harbor(new Market(), new Point(600,  50), currentHarbor.getPosition().equals(new Point(600,  50))));
-        harbors.add(new Harbor(new Market(), new Point(600, 270), currentHarbor.getPosition().equals(new Point(600, 270))));
-        harbors.add(new Harbor(new Market(), new Point(600, 345), currentHarbor.getPosition().equals(new Point(600, 345))));
-        harbors.add(new Harbor(new Market(), new Point(610, 200), currentHarbor.getPosition().equals(new Point(610, 200))));
-        harbors.add(new Harbor(new Market(), new Point(720, 275), currentHarbor.getPosition().equals(new Point(720, 275))));
-    }
-    
-    public List<Harbor> getHarbors() {
-        return harbors;
-    }
     
     public Harbor getHarbor(int tileX, int tileY){
-        for(Harbor h: harbors){
+        for(Harbor h: Constants.HARBORS){
             if(isOnHarbor(h, tileX, tileY)){
                 return h;
             }
@@ -85,7 +51,7 @@ public class NavigationStrategy extends HandlerStrategy {
     
     @Override
     public void mouseEvent(MouseEvent e) {
-        currentHarbor = GameState.getInstance().getCurrentHarbor();
+        Harbor currentHarbor = GameState.getInstance().getCurrentHarbor();
         if(toHarbor != null && currentHarbor.getPosition() != toHarbor.getPosition()){
             
             double distance =   Math.sqrt( (Math.pow( toHarbor.getPosition().getX()-currentHarbor.getPosition().getX(),2)
@@ -95,11 +61,13 @@ public class NavigationStrategy extends HandlerStrategy {
             
             if(WindowController.showTravelConfirmation("Reisen?", "Diese Reise dauert "+timeToTravel+" Sekunden, willst du jetzt segeln?") == 1)
             {
-                GameState.getInstance().getCurrentHarbor().setActive(false);
                 double battleChance = 0.1;
 
+                GameState.getInstance().getCurrentHarbor().setActive(false);
                 toHarbor.setActive(true);
                 toHarbor.setNextDestination(false);
+                GameState.getInstance().setCurrentHarbor(toHarbor);
+                route = new Route();
                 
                 while(timeToTravel > 0)
                 {

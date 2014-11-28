@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import common.Constants;
+
 import model.GameState;
 import model.economy.Market;
 import model.navigation.Harbor;
@@ -66,7 +68,8 @@ public class WindowController{
     public static void showHarbor(){
     	if(harborPanel == null){
                 if(GameState.getInstance().getCurrentHarbor() == null){
-                    GameState.getInstance().setCurrentHarbor(new Harbor(new Market(), new Point(310, 340), true));
+                    Constants.HARBORS.get(0).setActive(true);
+                    GameState.getInstance().setCurrentHarbor(Constants.HARBORS.get(0));
                 }
     		harborPanel = new HarborPanel();
     	}

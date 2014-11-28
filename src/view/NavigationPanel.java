@@ -74,7 +74,7 @@ public class NavigationPanel extends GameDefaultPanel {
                 Constants.WINDOW_HEIGHT, 
                 null                            /*Image Observer*/
         );
-        for(Harbor h: ((NavigationStrategy)strategy).getHarbors()){
+        for(Harbor h: Constants.HARBORS){
             h.render(g2);
         }
         ((NavigationStrategy)strategy).getRoute().render(g2);
