@@ -1,7 +1,6 @@
 package model.factory;
 
 import java.awt.Dimension;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -98,33 +97,30 @@ public class EntityFactory extends ShippartFactory<Entity> {
 	}
 	
     /**
-     * Creating an instance of a material. Do not use this when you have the image already loaded.
+     * Creating an instance of a material.Sets default rotation
      * @throws IOException when the image can not be loaded
      */
     private Entity createInstance(String type, String imagePath, String name, int durability, int value, int weight,int width,int height) throws IOException {
 
-    	Entity m = createInstance(type,name,durability,value,weight,width,height,null,Constants.ENTITY_ORIENTATION_RIGHT);
-
-        m.setImage(imagePath);
+    	Entity m = createInstance(type,name,durability,value,weight,width,height,imagePath,Constants.ENTITY_ORIENTATION_RIGHT);
         return m;
     }
     /**
-     * Creating an instance of a material. Does not parse the image again. If the image has been loaded this should be used.
+     * Creating an instance of a material. Keeps rotation.
      */
-    private Entity createInstance(String type, BufferedImage image, String name, int durability, int value, int weight,int width,int height,Vector<Integer> orientation){
+    private Entity createInstance(String type, String imagePath, String name, int durability, int value, int weight,int width,int height,Vector<Integer> orientation){
         
-    	Entity m = createInstance(type,name,durability,value,weight,width,height,image,orientation);
-        m.setImage(image);
+    	Entity m = createInstance(type,name,durability,value,weight,width,height,imagePath,orientation);
         return m;
     }
 
-    private Entity createInstance(String type, String name, int durability, int value, int weight,int width, int height,BufferedImage image,Vector<Integer> orientation) {
+    private Entity createInstance(String type, String name, int durability, int value, int weight,int width, int height,String imagePath,Vector<Integer> orientation) {
 
 		Entity o = null;
 		switch (type) {
 		default:
 		case "weapon":
-			o = new Weapon(name,durability,value,weight,image, orientation, new Dimension(width,height));
+			o = new Weapon(name,durability,value,weight,imagePath, orientation, new Dimension(width,height));
 			break;
 		}
 		return o;
@@ -156,7 +152,7 @@ public class EntityFactory extends ShippartFactory<Entity> {
         }
 
         return createInstance(type
-                ,entityPrototype.getImage()
+                ,entityPrototype.getImagePath()
                 ,entityPrototype.getName(), entityPrototype.getDurability()
                 ,entityPrototype.getValue(), entityPrototype.getWeight()
                 ,(int) entityPrototype.getSize().getWidth()

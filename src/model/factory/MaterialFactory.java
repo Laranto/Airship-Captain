@@ -1,6 +1,5 @@
 package model.factory;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -95,36 +94,27 @@ public class MaterialFactory extends ShippartFactory<Material> {
 
 
     /**
-     * Creating an instance of a material. Do not use this when you have the image already loaded.
+     * Creating an instance of a material.
      * @throws IOException when the image can not be loaded
      */
-    private Material createInstance(String type, String imagePath, String name, int durability, int value, int weight) throws IOException {
+    private Material createInstance(String type, String imagePath, String name, int durability, int value, int weight) {
 
-        Material m = createInstance(type,name,durability,value,weight,null);
-        m.setImage(imagePath);
-        return m;
-    }
-    /**
-     * Creating an instance of a material. Does not parse the image again. If the image has been loaded this should be used.
-     */
-    private Material createInstance(String type, BufferedImage image, String name, int durability, int value, int weight){
-        
-        Material m = createInstance(type,name,durability,value,weight,image);
+        Material m = createInstance(type,name,durability,value,weight,imagePath);
         return m;
     }
 
     /**
      * Utility for createInstace Methods.
      */
-    private Material createInstance(String type , String name , int durability , int value , int weight,BufferedImage image) {
+    private Material createInstance(String type , String name , int durability , int value , int weight, String imagePath) {
         Material m = null;
         switch (type) {
             default:
             case TYPE_WALL:
-                m = new Wall(name,value,weight,durability,image);
+                m = new Wall(name,value,weight,durability,imagePath);
                 break;
             case TYPE_FLOOR:
-                m = new Floor(name,value,weight,durability,image);
+                m = new Floor(name,value,weight,durability,imagePath);
                 break;
         }
         return m;
@@ -162,7 +152,7 @@ public class MaterialFactory extends ShippartFactory<Material> {
         }
         
         return createInstance(type
-                , materialPrototype.getImage()
+                , materialPrototype.getImagePath()
                 , materialPrototype.getName()
                 , materialPrototype.getDurability()
                 , materialPrototype.getValue()

@@ -14,13 +14,18 @@ public abstract class ShipPart extends GameObject implements Renderable {
      * The Shipparts health
      */
     private int durability;
+    private String imagePath;
     
     
-    
-    public ShipPart(String name , int value , int weight , int durability , BufferedImage image) {
+    public ShipPart(String name , int value , int weight , int durability , String imagePath) {
         super(name , value , weight);
         this.durability = durability;
-        this.image = image;
+        try {
+            setImage(imagePath);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -36,19 +41,41 @@ public abstract class ShipPart extends GameObject implements Renderable {
         this.durability = durability;
     }
     
+    /**
+     * Hard sets the image. Use with care
+     */
     public void setImage(BufferedImage image){
         this.image=image;
     }
+    
+    /**
+     * Gets the image using the provided path.
+     */
     public void setImage(String imagePath) throws IOException
     {
-        this.setImage(FileUtils.loadImage(new File(imagePath)));
+        if(imagePath!=null){
+            this.imagePath=imagePath;
+            this.setImage(FileUtils.loadImage(new File(imagePath)));
+        }
     }
     
     public BufferedImage getImage()
     {
+        if(image==null){
+            try {
+                setImage(imagePath);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
         return this.image;
     }
     
+    public String getImagePath() {
+        return imagePath;
+    }
+
     @Override
     public void render(Graphics2D g) {
         g.drawImage(getImage(), null, 0, 0);

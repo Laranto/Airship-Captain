@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -37,14 +37,21 @@ public abstract class Entity extends ShipPart {
     /**
      * @param orientation Should have at least position 0 filled if you hope to rotate the entity without errors.
      */
-    public Entity(String name , int value , int weight , int durability , BufferedImage image , Vector<Integer> orientation , Dimension size) {
-        super(name , value , weight , durability , image);
+    public Entity(String name , int value , int weight , int durability , String imagePath , Vector<Integer> orientation , Dimension size) {
+        super(name , value , weight , durability , imagePath);
         if(orientation!=null){
         this.orientation = new Vector<Integer>(orientation);
         }
-        if(size!=null)
-        this.size = new Dimension(size);
+        if(size!=null){
+            this.size = new Dimension(size);
+        }
         associatedBlockers = new ArrayList<>();
+        try {
+            setImage(imagePath);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     

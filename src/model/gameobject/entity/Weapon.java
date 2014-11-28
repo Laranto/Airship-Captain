@@ -2,7 +2,6 @@ package model.gameobject.entity;
 
 import java.awt.Dimension;
 import java.awt.Point;
-import java.awt.image.BufferedImage;
 import java.util.Vector;
 
 import model.gameobject.Entity;
@@ -17,8 +16,8 @@ public class Weapon extends Entity {
     private int ammunition;
     private Point aim;
 
-    public Weapon(String name , int value , int weight , int durability , BufferedImage image , Vector<Integer> orientation , Dimension size) {
-        super(name , value , weight , durability , image , orientation , size);
+    public Weapon(String name , int value , int weight , int durability , String imagePath , Vector<Integer> orientation , Dimension size) {
+        super(name , value , weight , durability , imagePath , orientation , size);
     }
 
     public void aim(int tileX, int tileY){

@@ -27,8 +27,9 @@ public class Blocker extends Entity{
 
     @Override
     public void render(Graphics2D g) {
-        g.setColor(Color.PINK);
-        g.fillRect(0, 0, 5, 5);
+        //Debugbox, if needed
+//        g.setColor(Color.PINK);
+//        g.fillRect(0, 0, 5, 5);
     }
 
 }

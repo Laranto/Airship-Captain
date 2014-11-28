@@ -10,14 +10,35 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
 import model.GameState;
 
 public class FileUtils {
+    
+    private static HashMap<String, BufferedImage> loadedImages = new HashMap<>();
+    
+    
     /**
-     * Contained unit to load a Bufferedimage from a file 
+     * Gets an image using the provided path. It tries first to read it from the memory, 
+     * if there is no instance of the image in the memory it will be loaded from the file system.
+     * @param imagePath Path where the image file is, including image name
+     * @return a buffered image version of the file provided
+     * @throws IOException when the file could not have been read.
+     */
+    public static BufferedImage getImage(String imagePath) throws IOException{
+        BufferedImage loadedImage = loadedImages.get(imagePath);
+        if(loadedImage==null){
+            loadedImage = loadImage(new File(imagePath));
+            loadedImages.put(imagePath, loadedImage);
+        }
+        return loadedImage;
+    }
+    
+    /**
+     * Contained unit to load a Bufferedimage from a file. If possible use <code>getImage()</code>
      * @param imgFile
      * @return
      * @throws IOException 
