@@ -48,11 +48,18 @@ public class Market {
      */
     public void buyItem(Ware ware, int amount) throws Exception {
         if(amount == 0){return;}
-        
-        StockItem marketItem = getStock().addTradeableWare(ware, -amount);
-        StockItem airshipItem = GameState.getInstance().getAirship().getStock().addTradeableWare(ware, amount);
-        
-        Economy.calculateNewPriceFor(marketItem, airshipItem);
+        double totalCosts = ware.getPrice()*amount;
+        Money captainMoney = GameState.getInstance().getAirship().getCaptain().getMoney();
+        if(captainMoney.getAmount() >= totalCosts)
+        {
+            StockItem marketItem = getStock().addTradeableWare(ware, -amount);
+            StockItem airshipItem = GameState.getInstance().getAirship().getStock().addTradeableWare(ware, amount);
+            
+            GameState.getInstance().getAirship().getCaptain().getMoney().removeAmount(ware.getPrice()*amount);
+            Economy.calculateNewPriceFor(marketItem, airshipItem);
+        }else{
+            throw new Exception("You don't have enough money, you need : "+totalCosts+", but you have only: "+captainMoney.getAmount());
+        }
     }
 
     /**
@@ -64,9 +71,12 @@ public class Market {
      */
     public void sellItem(Ware ware, int amount) throws Exception {
         if(amount == 0){return;}
-        
+
+
         StockItem airshipItem = GameState.getInstance().getAirship().getStock().addTradeableWare(ware, -amount);
         StockItem marketItem = getStock().addTradeableWare(ware, amount);
+        
+        GameState.getInstance().getAirship().getCaptain().getMoney().addAmount(ware.getPrice()*amount);
         
         Economy.calculateNewPriceFor(marketItem, airshipItem);
     }
