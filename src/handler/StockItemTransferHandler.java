@@ -24,6 +24,7 @@ import model.economy.Ware;
 import common.Character;
 
 public class StockItemTransferHandler extends TransferHandler {
+    private static final long serialVersionUID = 1L;
     private static final int ABBRECHEN = 2;
     private static JTable source;
 

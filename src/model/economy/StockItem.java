@@ -3,6 +3,8 @@ package model.economy;
 import java.io.Serializable;
 
 public class StockItem implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
     private Ware ware;
     private Integer amount;
     

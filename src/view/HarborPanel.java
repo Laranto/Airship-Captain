@@ -23,7 +23,7 @@ import common.enums.MenuItemEnum;
 import controller.ButtonController;
 
 public class HarborPanel extends GameDefaultPanel {
-
+    private static final long serialVersionUID = 1L;
     private BufferedImage image;
     private ImageIcon icon;
     private List<MenuItemEnum> navigationButtons;

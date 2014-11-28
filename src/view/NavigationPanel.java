@@ -24,7 +24,7 @@ import controller.InputController;
 
 
 public class NavigationPanel extends GameDefaultPanel {
-
+    private static final long serialVersionUID = 1L;
     private BufferedImage image;
     private ImageIcon icon;
     private HandlerStrategy strategy = null;

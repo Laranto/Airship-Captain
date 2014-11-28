@@ -29,7 +29,7 @@ import common.enums.MenuItemEnum;
 import controller.ButtonController;
 
 public class MarketPanel extends GameDefaultPanel {
-
+    private static final long serialVersionUID = 1L;
     private ImageIcon icon;
     private StockItemTransferHandler transferHandler = new StockItemTransferHandler();
 

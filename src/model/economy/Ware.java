@@ -3,7 +3,8 @@ package model.economy;
 import model.gameobject.GameObject;
 
 public class Ware extends GameObject implements Tradeable{
-
+    private static final long serialVersionUID = 1L;
+    
     private double price;
 
 

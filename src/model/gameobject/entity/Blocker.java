@@ -1,6 +1,5 @@
 package model.gameobject.entity;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 
 import model.gameobject.Entity;

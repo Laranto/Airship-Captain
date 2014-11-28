@@ -5,10 +5,9 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.Serializable;
 
-import com.sun.glass.ui.Window;
-
 import model.GameState;
 import model.gameobject.Airship;
+
 import common.Constants;
 import common.FileUtils;
 

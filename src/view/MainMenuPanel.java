@@ -16,14 +16,14 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import model.GameState;
-import model.gameobject.Airship;
 import common.Constants;
 import common.FileUtils;
 import common.enums.MenuItemEnum;
+
 import controller.ButtonController;
 
 public class MainMenuPanel extends GameDefaultPanel{
+    private static final long serialVersionUID = 1L;
         private List<MenuItemEnum> menuItems;
         private BufferedImage image;
 	

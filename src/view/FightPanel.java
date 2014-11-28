@@ -18,6 +18,7 @@ import common.Constants;
 import controller.InputController;
 
 public class FightPanel extends GameDefaultPanel {
+    private static final long serialVersionUID = 1L;
     private Airship enemy;
     
     
