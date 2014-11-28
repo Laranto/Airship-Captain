@@ -43,11 +43,6 @@ public class GameState {
     
     public Harbor getCurrentHarbor()
     {
-        if(this.harbor == null)
-        {
-            //for testing purpose
-            this.harbor = new Harbor(new Market(), new Point(100, 100), true);
-        }
         return this.harbor;
     }
     
