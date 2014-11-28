@@ -22,12 +22,13 @@ import javax.swing.SwingConstants;
 import model.GameState;
 import model.factory.EntityFactory;
 import model.factory.MaterialFactory;
-import model.gameobject.Airship;
 import model.gameobject.Entity;
 import model.gameobject.Material;
 import model.gameobject.ShipPart;
+
 import common.Constants;
 import common.enums.PropertyEnum;
+
 import controller.ButtonController;
 import controller.InputController;
 import controller.ShipExportController;
@@ -152,13 +153,13 @@ public class ConstructionPanel extends GameDefaultPanel {
     private void addInExportButton(JPanel panel) {
         ShipExportController controller = new ShipExportController();
         JButton exportButton = new JButton("Exportieren");
-        exportButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, PropertyEnum.SAVE);
+        exportButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, PropertyEnum.EXPORT);
         exportButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
         exportButton.addActionListener(controller);
         exportButton.setFocusable(false);
         panel.add(exportButton);
         JButton importButton = new JButton("Importieren");
-        importButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, PropertyEnum.SAVE);
+        importButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, PropertyEnum.IMPORT);
         importButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
         importButton.addActionListener(controller);
         importButton.setFocusable(false);

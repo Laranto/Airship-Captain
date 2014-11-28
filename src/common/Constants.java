@@ -8,7 +8,8 @@ public class Constants {
     public static final String FOLDER_MATERIAL = "resources/material/";
     public static final String FOLDER_OBJECTS = "resources/object/";
     public static final String FOLDER_WARE = "resources/ware/";
-    public static final String FOLDER_GAME_DATA = "resources/game_data/";
+    public static final String FOLDER_GAME_DATA = "resources/save/";
+    public static final String FOLDER_AIRSHIPS = "resources/ship/";
     
     public static final String NAVIGATION_BACKGROUND_IMAGE = "resources/panels/img/map.jpg";
     public static final String HARBOR_BACKGROUND_IMAGE = "resources/panels/img/zeppelin.jpg";
