@@ -1,11 +1,15 @@
 package controller;
 
+import java.awt.Component;
 import java.awt.Point;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
+import common.Constants;
 import model.GameState;
 import model.economy.Market;
 import model.navigation.Harbor;
@@ -107,4 +111,19 @@ public class WindowController{
         
         return n;
     }
+    
+    
+    public static String showFileChooser(String defaultFolder, String fileExtensionDescription, String fileExtension)
+    {
+        JFileChooser chooser = new JFileChooser(defaultFolder);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(fileExtensionDescription, fileExtension);
+        chooser.setFileFilter(filter);
+    
+        int returnVal = chooser.showOpenDialog(container);
+        if(returnVal == JFileChooser.APPROVE_OPTION) {
+           return chooser.getSelectedFile().getName();
+        }
+        return null;
+    }
+    
 }

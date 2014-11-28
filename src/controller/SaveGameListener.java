@@ -12,7 +12,17 @@ public class SaveGameListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        this.saveGame("game_01");
+        String fileName = WindowController.showFileChooser(Constants.FOLDER_GAME_DATA, "Airship Captain Game Datei", Constants.FILE_ENDNG_GAME);
+
+        if(fileName != null)
+        {
+            if(fileName.endsWith("."+Constants.FILE_ENDNG_GAME))
+            {
+                fileName = fileName.substring(0, fileName.length()-1-Constants.FILE_ENDNG_GAME.length());
+            }
+        }
+        
+        this.saveGame(fileName);
     }
 
     private void saveGame(String filename) {

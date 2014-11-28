@@ -2,21 +2,27 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.Serializable;
+
+import com.sun.glass.ui.Window;
 
 import model.GameState;
 import model.gameobject.Airship;
-
 import common.Constants;
 import common.FileUtils;
 
 public class LoadGameListener implements ActionListener {
-
-
     
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        this.loadGame("game_01");
+        String choosenFilePath = WindowController.showFileChooser(Constants.FOLDER_GAME_DATA, "Airship Captain Game Datei", Constants.FILE_ENDNG_GAME);
+        File choosenFile = new File(choosenFilePath);
+        if(choosenFilePath != null)
+        {
+            String fileNameWithoutExtension = choosenFile.getName().substring(0, choosenFile.getName().length()-Constants.FILE_ENDNG_GAME.length()-1);
+            this.loadGame(fileNameWithoutExtension);
+        }
     }
 
     private void loadGame(String filename) {
