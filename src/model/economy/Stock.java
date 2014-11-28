@@ -29,7 +29,7 @@ public class Stock implements Serializable{
             if(amount < 0){
                 throw new Exception("Ware "+ware.getName()+" nicht vorhanden");
             }
-            stockItem = new StockItem(ware, amount);
+            stockItem = new StockItem(new Ware(ware.getName(), ware.getValue(), ware.getWeight(), ware.getPrice()), amount);
             getWarelist().add(stockItem);
         }
         return stockItem;

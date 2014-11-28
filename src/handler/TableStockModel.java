@@ -1,5 +1,7 @@
 package handler;
 
+import java.text.DecimalFormat;
+
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
@@ -10,11 +12,12 @@ import common.Character;
 public class TableStockModel implements TableModel {
 
     private String[] COLUMN_NAMES = {"Ware", "Anzahl", "Preis"};
-    private Class<?>[] COLUMN_CLAZZES = {String.class, Integer.class, Double.class};
+    private Class<?>[] COLUMN_CLAZZES = {String.class, Integer.class, String.class};
     private final int FIRST_COLUMN = 0;
     private final int SECOND_COLUMN = 1;
     private final int THIRD_COLUMN = 2;
     private Character character;
+    private DecimalFormat df = new DecimalFormat("0.00");
 
     public TableStockModel(Character character) {
         this.character = character;
@@ -65,7 +68,7 @@ public class TableStockModel implements TableModel {
         case SECOND_COLUMN:
             return getStock().getWarelist().get(rowIndex).getAmount();
         case THIRD_COLUMN:
-            return getStock().getWarelist().get(rowIndex).getWare().getPrice();
+            return df.format(getStock().getWarelist().get(rowIndex).getWare().getPrice());
         }
         return null;
     }

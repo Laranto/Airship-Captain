@@ -11,17 +11,21 @@ import java.io.IOException;
 import javax.swing.DropMode;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import model.GameState;
 import model.economy.Stock;
+
 import common.Character;
 import common.Constants;
 import common.FileUtils;
 import common.enums.MenuItemEnum;
+
 import controller.ButtonController;
 
 public class MarketPanel extends GameDefaultPanel {
@@ -69,6 +73,9 @@ public class MarketPanel extends GameDefaultPanel {
         table.getColumnModel().getColumn(0).setPreferredWidth(table.getWidth()/10*6-4);
         table.getColumnModel().getColumn(1).setPreferredWidth(table.getWidth()/10*2);
         table.getColumnModel().getColumn(2).setPreferredWidth(table.getWidth()/10*2);
+        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+        rightRenderer.setHorizontalAlignment( JLabel.RIGHT );
+        table.getColumnModel().getColumn(2).setCellRenderer(rightRenderer);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.setTransferHandler(transferHandler);
         
@@ -81,7 +88,6 @@ public class MarketPanel extends GameDefaultPanel {
         add(scrollPanePlayerTable);
     }
     
-
     private void addBackButton() {
         JButton backButton = createButton();
         backButton.setHorizontalAlignment(SwingConstants.CENTER);
@@ -94,16 +100,6 @@ public class MarketPanel extends GameDefaultPanel {
         add(backButton);
     }
     
-    protected JTable getOpponentTable() {
-        JTable opponentTable = new JTable(new TableStockModel(Character.OPPONENT){
-            @Override
-            protected Stock getStock() {
-                return GameState.getInstance().getCurrentHarbor().getMarket().getStock();
-            }
-        });
-        return opponentTable;
-    }
-
     protected JButton createButton() {
         MarketStrategy marketStrategy = new MarketStrategy();
         ButtonController buttonController = new ButtonController(marketStrategy);
@@ -118,5 +114,16 @@ public class MarketPanel extends GameDefaultPanel {
         harbor.putClientProperty(Constants.BUTTON_PROPERTY_ID, MenuItemEnum.HARBOR);
         harbor.addActionListener(buttonController);
         return harbor;
+    }
+    
+    
+    protected JTable getOpponentTable() {
+        JTable opponentTable = new JTable(new TableStockModel(Character.OPPONENT){
+            @Override
+            protected Stock getStock() {
+                return GameState.getInstance().getCurrentHarbor().getMarket().getStock();
+            }
+        });
+        return opponentTable;
     }
 }

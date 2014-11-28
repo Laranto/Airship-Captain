@@ -2,11 +2,13 @@ package model.economy;
 
 import static org.junit.Assert.*;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 import model.GameState;
 import model.factory.WareFactory;
 import model.gameobject.Airship;
+import model.navigation.Harbor;
 
 import org.junit.Test;
 
@@ -25,13 +27,14 @@ public class MarketTest {
     {
         Airship airship = new Airship();
         GameState.getInstance().setAirship(airship);
-        Market market = new Market();
-        ArrayList<Ware> wares = WareFactory.getInstance().getWares();
-        Ware ware = wares.get(1);
+        GameState.getInstance().setCurrentHarbor(new Harbor(new Market(), new Point(310, 340), true));
+        Market market = GameState.getInstance().getCurrentHarbor().getMarket();
 
+        String wareName = "Kalant Cabernet Sauvignon 2012";
+        Ware ware = market.getStock().getStockItemByWareName(wareName).getWare();
         double oldPrice = ware.getPrice();
         market.buyItem(ware, 10);
-        double neuerPreis = GameState.getInstance().getAirship().getStock().getStockItemByWareName(ware.getName()).getWare().getPrice();
+        double neuerPreis = market.getStock().getStockItemByWareName(wareName).getWare().getPrice();
         assertTrue("Der Marktpreis hat sich nicht verteuert alter Preis: "+oldPrice +"\n neuer Preis: "+neuerPreis, 
                     neuerPreis >= oldPrice);
        

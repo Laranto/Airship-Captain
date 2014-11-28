@@ -25,15 +25,13 @@ public class Economy {
      */
     public static double calculatePrice(int currentAmount, int pricePerHundred)
     {
-
         double newPrice = (pricePerHundred + pricePerHundred * (( ( (Constants.WARE_STANDARD_AMOUNT - currentAmount) / Constants.WARE_STANDARD_AMOUNT) ) ));
-
+        
         if (newPrice < pricePerHundred / Constants.WARE_MAX_INFLATION_FACTOR) {
             newPrice = pricePerHundred / Constants.WARE_MAX_INFLATION_FACTOR;
         } else if (newPrice > pricePerHundred * Constants.WARE_MAX_INFLATION_FACTOR) {
             newPrice = pricePerHundred  * Constants.WARE_MAX_INFLATION_FACTOR;
         }
-        
         return  Math.round(newPrice);
     }
 }
