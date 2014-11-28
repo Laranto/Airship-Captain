@@ -3,24 +3,16 @@ package view;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import model.factory.MaterialFactory;
+import model.GameState;
 import model.gameobject.Airship;
+
+import common.Constants;
+import common.FileUtils;
 
 public class FightViewTest {
     public static void main(String[] args) {
-        MaterialFactory fac = MaterialFactory.getInstance();
-        Airship testship = new Airship();
-        for(int i = 0;i<11;i++){
-            testship.placeMaterial(fac.getMaterials().get(0), 4, 4+i);
-        }
-        for(int i = 0;i<10;i++){
-            for(int j = 0;j<5;j++)
-            testship.placeMaterial(fac.getMaterials().get(1), 5+j, 4+i);
-        }
-        for(int i = 0;i<11;i++){
-            testship.placeMaterial(fac.getMaterials().get(0), 10, 4+i);
-        }
-        
+
+        GameState.getInstance().setAirship((Airship) FileUtils.loadObjectFile(Constants.FOLDER_AIRSHIPS, "hashership", Constants.FILE_ENDNG_SHIP));
         
         JFrame frame = new JFrame();
         JPanel pane = new FightPanel();
