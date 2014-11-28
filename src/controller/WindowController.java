@@ -1,7 +1,7 @@
 package controller;
 
-import java.awt.Component;
 import java.awt.Point;
+import java.io.File;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import common.Constants;
 import model.GameState;
 import model.economy.Market;
 import model.navigation.Harbor;
@@ -115,7 +114,7 @@ public class WindowController{
     
     public static String showFileChooser(String defaultFolder, String fileExtensionDescription, String fileExtension, boolean isSave)
     {
-        JFileChooser chooser = new JFileChooser(defaultFolder);
+        JFileChooser chooser = new JFileChooser(new File(defaultFolder));
         FileNameExtensionFilter filter = new FileNameExtensionFilter(fileExtensionDescription, fileExtension);
         chooser.setFileFilter(filter);
     

@@ -85,7 +85,7 @@ public class FileUtils {
         return loadObjectFile(path + File.separator+fileName+"."+extention);
     }
 
-    private static Serializable loadObjectFile(String location) {
+    public static Serializable loadObjectFile(String location) {
         InputStream fileInputStream = null;
         ObjectInputStream ois = null;
         Serializable readObject = null;
