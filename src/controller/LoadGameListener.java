@@ -20,7 +20,7 @@ public class LoadGameListener implements ActionListener {
     }
 
     private void loadGame(String filename) {
-        Serializable readObject = FileUtils.loadObjectFile(Constants.FOLDER_GAME_DATA , filename , Constants.GAME_FILE_ENDNG);
+        Serializable readObject = FileUtils.loadObjectFile(Constants.FOLDER_GAME_DATA , filename , Constants.FILE_ENDNG_GAME);
         if(readObject instanceof Airship){
             //TODO Load an entire game state instead of just the ship.
             GameState.getInstance().setAirship((Airship)readObject);
