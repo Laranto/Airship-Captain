@@ -113,10 +113,10 @@ public class WindowController{
     }
     
     
-    public static String showFileChooser()
+    public static String showFileChooser(String defaultFolder, String fileExtensionDescription, String fileExtension)
     {
-        JFileChooser chooser = new JFileChooser(Constants.FOLDER_GAME_DATA);
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Airship Captain Datei", Constants.FILE_ENDNG_GAME);
+        JFileChooser chooser = new JFileChooser(defaultFolder);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(fileExtensionDescription, fileExtension);
         chooser.setFileFilter(filter);
     
         int returnVal = chooser.showOpenDialog(container);

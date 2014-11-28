@@ -13,12 +13,10 @@ import common.Constants;
 import common.FileUtils;
 
 public class LoadGameListener implements ActionListener {
-
-
     
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        String choosenFilePath = WindowController.showFileChooser();
+        String choosenFilePath = WindowController.showFileChooser(Constants.FOLDER_GAME_DATA, "Airship Captain Game Datei", Constants.FILE_ENDNG_GAME);
         File choosenFile = new File(choosenFilePath);
         if(choosenFilePath != null)
         {
