@@ -113,13 +113,18 @@ public class WindowController{
     }
     
     
-    public static String showFileChooser(String defaultFolder, String fileExtensionDescription, String fileExtension)
+    public static String showFileChooser(String defaultFolder, String fileExtensionDescription, String fileExtension, boolean isSave)
     {
         JFileChooser chooser = new JFileChooser(defaultFolder);
         FileNameExtensionFilter filter = new FileNameExtensionFilter(fileExtensionDescription, fileExtension);
         chooser.setFileFilter(filter);
     
-        int returnVal = chooser.showOpenDialog(container);
+        int returnVal;
+        if(isSave){
+            returnVal = chooser.showSaveDialog(container);    
+        }else{
+            returnVal = chooser.showOpenDialog(container);
+        }
         if(returnVal == JFileChooser.APPROVE_OPTION) {
            return chooser.getSelectedFile().getName();
         }

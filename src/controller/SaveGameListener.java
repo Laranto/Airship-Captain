@@ -12,7 +12,7 @@ public class SaveGameListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        String fileName = WindowController.showFileChooser(Constants.FOLDER_GAME_DATA, "Airship Captain Game Datei", Constants.FILE_ENDNG_GAME);
+        String fileName = WindowController.showFileChooser(Constants.FOLDER_GAME_DATA, "Airship Captain Game Datei", Constants.FILE_ENDNG_GAME,true);
 
         if(fileName != null)
         {
