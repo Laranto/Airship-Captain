@@ -17,9 +17,9 @@ public class LoadGameListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent arg0) {
         String choosenFilePath = WindowController.showFileChooser(Constants.FOLDER_GAME_DATA, "Airship Captain Game Datei", Constants.FILE_ENDNG_GAME);
-        File choosenFile = new File(choosenFilePath);
         if(choosenFilePath != null)
         {
+            File choosenFile = new File(choosenFilePath);
             String fileNameWithoutExtension = choosenFile.getName().substring(0, choosenFile.getName().length()-Constants.FILE_ENDNG_GAME.length()-1);
             this.loadGame(fileNameWithoutExtension);
         }
