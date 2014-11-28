@@ -107,7 +107,7 @@ public class NavigationStrategy extends HandlerStrategy {
                     
                     if(battleChance*100 > fightProbabilty)
                     {
-                        System.out.println("FIGHT!!");
+                        WindowController.showFight();
                         battleChance = 0.1;
                     }
                     try {

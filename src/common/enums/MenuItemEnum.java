@@ -23,7 +23,15 @@ public enum MenuItemEnum {
 	LOAD_GAME("Laden..."), 
 	EXIT_GAME("Spiel verlassen"),
 	
-	NAVIGATION_MAP("Karte")
+	NAVIGATION_MAP("Karte"),
+	
+	/*
+	 * Fight
+	 */
+	EXIT_FIGHT("Aus Kampf fliehen.."),
+	
+	
+	
 	;
 	
 	private String text;
