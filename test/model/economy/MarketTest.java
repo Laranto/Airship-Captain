@@ -6,6 +6,8 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import model.GameState;
+import model.economy.Market;
+import model.economy.Ware;
 import model.factory.WareFactory;
 import model.gameobject.Airship;
 import model.navigation.Harbor;

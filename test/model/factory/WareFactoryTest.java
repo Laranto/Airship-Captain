@@ -7,6 +7,7 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 
 import model.economy.Ware;
+import model.factory.WareFactory;
 
 import org.junit.Test;
 

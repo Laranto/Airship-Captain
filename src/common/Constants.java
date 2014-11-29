@@ -26,6 +26,7 @@ public class Constants {
     public static final int TILE_SIZE = 16;
     public static final int AIRSHIP_WIDTH_TILES = (WINDOW_WIDTH/2)/TILE_SIZE;
     public static final int AIRSHIP_HEIGHT_TILES = WINDOW_HEIGHT/TILE_SIZE;
+    public static final String AIRSHIP_NAME_DEFAULT = "Noname";
     
     
     public static final Color COLOR_SKYBLUE = new Color(128,218,235);

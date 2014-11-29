@@ -5,6 +5,7 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 
+import model.factory.MaterialFactory;
 import model.gameobject.Material;
 
 import org.junit.Before;

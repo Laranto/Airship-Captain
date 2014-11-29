@@ -6,6 +6,7 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 
+import model.factory.EntityFactory;
 import model.gameobject.Entity;
 
 import org.junit.Before;

@@ -31,7 +31,7 @@ public class Airship extends GameObject implements Renderable{
         isEmpty=true;
         captain = new Captain();
         this.stock = new Stock();
-        this.setName("Noname");
+        this.setName(Constants.AIRSHIP_NAME_DEFAULT);
         
         //TODO has to be calculated (e.x. the amount of engines the ship has)
         this.speed = 22;
@@ -50,9 +50,8 @@ public class Airship extends GameObject implements Renderable{
      * Places a new instance of the given material at the given location. Only possible if the location is empty space.
      */
     public void placeMaterial(Material mat, int tileX, int tileY){
-        
-        //Nothing on that tile yet
-        if(shipBody[tileX][tileY] == null && mat!=null){
+            //Nothing on that tile yet
+        if(inBounds(tileX, tileY) && shipBody[tileX][tileY] == null && mat!=null){
             if(isEmpty || hasAdjacentTile(tileX,tileY)){
                 shipBody[tileX][tileY] = (Material) MaterialFactory.getInstance().instanzise(mat);
                 isEmpty=false;
@@ -61,13 +60,17 @@ public class Airship extends GameObject implements Renderable{
     }
     
     
+    private boolean inBounds(int tileX , int tileY) {
+        return tileX>=0&&tileY>=0&&tileX<Constants.AIRSHIP_WIDTH_TILES&&tileY<Constants.AIRSHIP_HEIGHT_TILES;
+    }
+
     /**
      * Places an entity at the given position if possible. Checks the Airship body and other placed entities if there is space to place it.
      * @param entity Entity in the state, in which it should be placed 
 
      */
     public boolean placeEntity(Entity entity, int tileX, int tileY){
-        if(entity!=null){
+        if(entity!=null && inBounds(tileX, tileY)){
             List<Point> checkedPoints = new LinkedList<>();
             if(canPlaceEntity(entity,tileX,tileY,checkedPoints)){
                 Entity placedEntity = (Entity) EntityFactory.getInstance().instanzise(entity);
@@ -86,8 +89,10 @@ public class Airship extends GameObject implements Renderable{
     }
 
     private void placeEntityOnGrid(int tileX , int tileY , Entity entity) {
+        if(inBounds(tileX, tileY)){
         equipment[tileX][tileY] = entity;
         entity.setPosition(tileX, tileY);
+        }
     }
 
 
@@ -134,10 +139,20 @@ public class Airship extends GameObject implements Renderable{
      */
     public ShipPart getShipPartByPosition(int tileX, int tileY)
     {
-        if(this.equipment[tileX][tileY]!=null){
-            return this.equipment[tileX][tileY];
+        if(inBounds(tileX, tileY)){
+            if(this.equipment[tileX][tileY]!=null){
+                return this.equipment[tileX][tileY];
+            }
+            return this.shipBody[tileX][tileY];
         }
+        return null;
+    }
+    
+    public Material getMaterialByPosition(int tileX, int tileY){
+        if(inBounds(tileX, tileY)){
         return this.shipBody[tileX][tileY];
+        }
+        return null;
     }
     
     /*
@@ -148,14 +163,25 @@ public class Airship extends GameObject implements Renderable{
         /**
          * checking if the remove method has been called on the right
          */
-        if(tileX >= 0 && tileX < Constants.AIRSHIP_WIDTH_TILES 
-                && tileY >= 0 && tileY < Constants.AIRSHIP_WIDTH_TILES
-                && equipment[tileX][tileY]==null)
+        if(inBounds(tileX, tileY)&& equipment[tileX][tileY]==null)
         {
         	shipBody[tileX][tileY] = null;
+        	updateIsEmpty();
         	return true;
         }
         return false;
+    }
+
+    private void updateIsEmpty() {
+        for(int x = 0;x<Constants.AIRSHIP_WIDTH_TILES;x++){
+            for(int y = 0;y<Constants.AIRSHIP_HEIGHT_TILES;y++){
+                if(shipBody[x][y]!=null){
+                    isEmpty=false;
+                    return;
+                }
+            }
+        }
+        isEmpty=true;
     }
 
     /**
@@ -164,18 +190,21 @@ public class Airship extends GameObject implements Renderable{
      * @return the Entity which was removed
      */
     public Entity removeEntity(int tileX , int tileY) {
-        Entity selected = getEntity(tileX, tileY);
-        if(selected == null){
-            return null;
+        if(inBounds(tileX, tileY)){
+            Entity selected = getEntity(tileX, tileY);
+            if(selected == null){
+                return null;
+            }
+            if(selected instanceof Blocker){
+                selected = ((Blocker)selected).getReferencedEntity();
+            }
+            for (Blocker blocker : selected.getAssociatedBlockers()) {
+                removeEntity(blocker);
+            }
+            removeEntity(selected);
+            return selected;
         }
-        if(selected instanceof Blocker){
-            selected = ((Blocker)selected).getReferencedEntity();
-        }
-        for (Blocker blocker : selected.getAssociatedBlockers()) {
-            removeEntity(blocker);
-        }
-        removeEntity(selected);
-        return selected;
+        return null;
     }
     
     /**
@@ -242,9 +271,12 @@ public class Airship extends GameObject implements Renderable{
     /**
      * Calculates if the airship is in one piece of if it's split in parts with open space in between.
      * <br>Use with caution, might take a bit when checking large ships
-     * @return true, if the airship is in one piece.
+     * @return true, if the airship is in one piece, false when there is no airship or the ship is split in one or more pieces
      */
     public boolean isJoined(){
+        if(isEmpty){
+            return false;
+        }
     	Material[][] checkBody = new Material[shipBody.length][shipBody[0].length];
     	LinkedList<Point> uncheckedPositions = new LinkedList<>();
     	findStartpoint(checkBody, uncheckedPositions);
@@ -306,20 +338,24 @@ public class Airship extends GameObject implements Renderable{
      *                  
      */
     public Entity getEntity(int tileX, int tileY) {
-        return equipment[tileX][tileY];
+        if(inBounds(tileX, tileY)){
+            return equipment[tileX][tileY];
+        }
+        return null;
     }
 
 
     @Override
     public String getName() {
-        // TODO Auto-generated method stub
         return super.getName();
     }
 
 
     @Override
     public void setName(String name) {
-        super.setName(name);
+        if(name!=null && !"".equals(name)){
+            super.setName(name);
+        }
     }
 
 
@@ -380,4 +416,10 @@ public class Airship extends GameObject implements Renderable{
     public void setSpeed(int speed) {
         this.speed = speed;
     }
+
+    public boolean isEmpty() {
+        return isEmpty;
+    }
+
+
 }

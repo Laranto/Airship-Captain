@@ -1,4 +1,4 @@
-package model.material;
+package model.gameobject.material;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
