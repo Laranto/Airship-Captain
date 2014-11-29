@@ -30,6 +30,11 @@ public enum MenuItemEnum {
 	 */
 	EXIT_FIGHT("Aus Kampf fliehen.."),
 	
+	/*
+	 * Settings
+	 */
+	SAVE_GAME_SETTINGS("Einstellungen speichern"),
+	
 	
 	
 	;

@@ -36,6 +36,9 @@ public class HarborStrategy extends HandlerStrategy {
 		case EXIT_GAME:
 			new ExitGameListener().actionPerformed(null);
 			break;
+	     case SETTINGS:
+	         WindowController.showSettings();
+	        break;
 		case NAVIGATION_MAP:
 		        WindowController.showNavigation();
 		        break;

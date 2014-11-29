@@ -22,7 +22,7 @@ public class MainMenuStrategy extends HandlerStrategy {
                     new LoadGameListener().actionPerformed(null);;
                     break;
             case SETTINGS:
-                    //TODO: implement settings
+                    WindowController.showSettings();
                     break;
             case EXIT_GAME:
                     new ExitGameListener().actionPerformed(null);

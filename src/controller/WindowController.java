@@ -18,6 +18,7 @@ import view.HarborPanel;
 import view.MainMenuPanel;
 import view.MarketPanel;
 import view.NavigationPanel;
+import view.SettingsPanel;
 
 /**
  *  Controls which panel is being displayed.
@@ -32,6 +33,7 @@ public class WindowController{
     private static JPanel navigationPanel;
     private static JPanel harborPanel;
     private static JPanel marketPanel;
+    private static JPanel settingsPanel;
     
     public static void setFrame(JFrame frame){
     	container = frame;
@@ -85,6 +87,15 @@ public class WindowController{
             marketPanel = new MarketPanel();
         }
         showPanel(marketPanel);
+    }
+    
+    public static void showSettings()
+    {
+        if(settingsPanel == null)
+        {
+            settingsPanel = new SettingsPanel();
+        }
+        showPanel(settingsPanel);
     }
     
     private static void showPanel(JPanel panel) {

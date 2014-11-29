@@ -47,6 +47,7 @@ public class HarborPanel extends GameDefaultPanel {
         navigationButtons.add(MenuItemEnum.MARKET);
         navigationButtons.add(MenuItemEnum.SAVE_GAME);
         navigationButtons.add(MenuItemEnum.LOAD_GAME);
+        navigationButtons.add(MenuItemEnum.SETTINGS);
         navigationButtons.add(MenuItemEnum.EXIT_GAME);
 
         GridLayout mainGridLayout = new GridLayout(0, 1);
