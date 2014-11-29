@@ -195,9 +195,6 @@ public class Airship extends GameObject implements Renderable{
             if(selected == null){
                 return null;
             }
-            if(selected instanceof Blocker){
-                selected = ((Blocker)selected).getReferencedEntity();
-            }
             for (Blocker blocker : selected.getAssociatedBlockers()) {
                 removeEntity(blocker);
             }
@@ -339,7 +336,11 @@ public class Airship extends GameObject implements Renderable{
      */
     public Entity getEntity(int tileX, int tileY) {
         if(inBounds(tileX, tileY)){
-            return equipment[tileX][tileY];
+            Entity selected =equipment[tileX][tileY];
+            if(selected instanceof Blocker){
+                selected = ((Blocker)selected).getReferencedEntity();
+            }
+            return selected;
         }
         return null;
     }

@@ -1,9 +1,14 @@
 package model.gameobject.material;
 
 import static org.junit.Assert.*;
+
+import java.awt.Dimension;
+
 import model.factory.MaterialFactory;
 import model.gameobject.Airship;
+import model.gameobject.Entity;
 import model.gameobject.Material;
+import model.gameobject.entity.Weapon;
 import model.gameobject.material.Floor;
 
 import org.junit.Before;
@@ -16,12 +21,16 @@ public class AirshipTest {
     private Airship aship;
     private Material tFloor;
     private Material tWall;
+    private Entity tEntity;
+    private Entity tEntity2;
     
     @Before
     public void setUp() throws Exception {
         aship = new Airship();
         tFloor = new Floor("testF", 1, 1, 1, "");
         tWall = new Floor("testW", 1, 1, 1, "");
+        tEntity = new Weapon("testWeapon", 1, 1, 1, "", Constants.ENTITY_ORIENTATION_RIGHT, new Dimension(2, 1));
+        tEntity2 = new Weapon("testWeapon2", 1, 1, 1, "", Constants.ENTITY_ORIENTATION_RIGHT, new Dimension(2, 1));
     }
 
     
@@ -206,6 +215,37 @@ public class AirshipTest {
         assertTrue("Airship is in one piece", aship.isJoined());
         aship.removeMaterial(7, 5);
         assertFalse("Airship is split", aship.isJoined());
+    }
+    
+    
+    private void buildPlaceEntityTestArea() {
+        for(int i = 0;i<10;i++){
+            aship.placeMaterial(tFloor, 5, 5+i);    
+            aship.placeMaterial(tFloor, 6, 5+i);    
+            aship.placeMaterial(tFloor, 7, 5+i);    
+        }
+    }
+    
+    private void compareEntities(Entity expected,Entity result){
+        assertNotNull(result);
+        assertEquals(expected.getName(), result.getName());
+    }
+    
+    @Test
+    public void testPlaceRemoveEntity(){
+        buildPlaceEntityTestArea();
+        aship.placeEntity(tEntity, 6, 5);
+        compareEntities(tEntity, aship.getEntity(6, 5));
+        compareEntities(tEntity, aship.getEntity(7, 5));
+        assertNull(aship.getEntity(5, 5));
+        aship.placeEntity(tEntity, 4, 5);
+        assertNull(aship.getEntity(5, 5));
+        assertNull(aship.getEntity(4, 5));
+        tEntity2.rotate();
+        aship.placeEntity(tEntity2, 6, 6);
+        compareEntities(tEntity2, aship.getEntity(6, 6));
+        compareEntities(tEntity2, aship.getEntity(5, 6));
+        assertNull(aship.getEntity(7, 6));
     }
 
 }
