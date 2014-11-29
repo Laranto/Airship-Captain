@@ -23,8 +23,11 @@ public class MarketTest {
     }
     
 
-    //TODO: Test funktioniert nicht 2 von 5 Mal ist der neue Preis kleiner als der alte Preis!!!!!
     @Test
+    /**
+     * Testing whether the price is rising when I buy a lot of an item
+     * @throws Exception throws an Exception when I can't buy something
+     */
     public void testMarketPrice() throws Exception
     {
         Airship airship = new Airship();
@@ -35,14 +38,17 @@ public class MarketTest {
         String wareName = "Kalant Cabernet Sauvignon 2012";
         Ware ware = market.getStock().getStockItemByWareName(wareName).getWare();
         double oldPrice = ware.getPrice();
-        market.buyItem(ware, 10);
+        market.buyItem(ware, market.getStock().getStockItemByWareName(wareName).getAmount() /2);
         double neuerPreis = market.getStock().getStockItemByWareName(wareName).getWare().getPrice();
-        assertTrue("Der Marktpreis hat sich nicht verteuert alter Preis: "+oldPrice +"\n neuer Preis: "+neuerPreis, 
-                    neuerPreis >= oldPrice);
-       
+        
+        assertTrue("Der Marktpreis hat sich nicht verteuert alter Preis: "+oldPrice +"\n neuer Preis: "+neuerPreis,  neuerPreis >= oldPrice);
     }
     
-    @Test(expected = Exception.class)  
+    /**
+     * Tests if the transfer between the market and ship is been successful
+     * @throws Exception
+     */
+    @Test
     public void testShipMarketTrade() throws Exception
     {
         Airship airship = new Airship();
@@ -61,12 +67,23 @@ public class MarketTest {
         assertFalse(airship.getStock().getWarelist().size() > 1);
         market.buyItem(ware2, 10);
         assertEquals(2, airship.getStock().getWarelist().size());
+
+    }
+    
+    @Test(expected = Exception.class)  
+    public void testOverSellingBuyingItems()  throws Exception
+    {
+        Airship airship = new Airship();
+        GameState.getInstance().setAirship(airship);
+        Market market = new Market();
         
+        ArrayList<Ware> wares = WareFactory.getInstance().getWares();
+        Ware ware = wares.get(1);
+        Ware ware2 = wares.get(2);
         
         market.buyItem(ware, 5);
         market.sellItem(ware, 100);
     }
-    
     
 
 }
