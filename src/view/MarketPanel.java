@@ -1,10 +1,16 @@
 package view;
 
 import handler.MarketStrategy;
+import handler.NavigationStrategy;
 import handler.StockItemTransferHandler;
 import handler.TableStockModel;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -20,20 +26,27 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 import model.GameState;
 import model.economy.Stock;
-
+import model.navigation.Harbor;
 import common.Character;
 import common.Constants;
 import common.FileUtils;
 import common.enums.MenuItemEnum;
-
 import controller.ButtonController;
 
 public class MarketPanel extends GameDefaultPanel {
     private static final long serialVersionUID = 1L;
     private ImageIcon icon;
+    private BufferedImage image;
     private StockItemTransferHandler transferHandler = new StockItemTransferHandler();
 
     public MarketPanel() {
+        try {
+            this.image = FileUtils.loadImage(new File(Constants.MARKET_BACKGROUND_IMAGE));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        
         this.setLayout(null);
         
         /**
@@ -41,6 +54,8 @@ public class MarketPanel extends GameDefaultPanel {
          */
         JLabel playerNameLabel = new JLabel(GameState.getInstance().getAirship().getName());
         playerNameLabel.setBounds(Constants.WINDOW_WIDTH * 3/100, Constants.WINDOW_HEIGHT * 1/25, Constants.WINDOW_WIDTH * 9/20, 20);
+        playerNameLabel.setForeground(Color.WHITE);
+        playerNameLabel.setFont(new Font("Serif", Font.BOLD, 20));
         add(playerNameLabel);
         JTable playerTable = new JTable(new TableStockModel(Character.PLAYER));
         Rectangle positionPlayerTable = new Rectangle(
@@ -55,6 +70,8 @@ public class MarketPanel extends GameDefaultPanel {
          */
         JLabel marketNameLabel = new JLabel("Markt");
         marketNameLabel.setBounds(Constants.WINDOW_WIDTH * 50/100, Constants.WINDOW_HEIGHT * 1/25, Constants.WINDOW_WIDTH * 9/20, 20);
+        marketNameLabel.setForeground(Color.WHITE);
+        marketNameLabel.setFont(new Font("Serif", Font.BOLD, 20));
         add(marketNameLabel);
         JTable opponentTable = getOpponentTable();
         Rectangle positionOpponentTable = new Rectangle(
@@ -131,5 +148,19 @@ public class MarketPanel extends GameDefaultPanel {
             }
         });
         return opponentTable;
+    }
+    
+    @Override
+    public void paintComponent(Graphics g){
+        Graphics2D g2 = (Graphics2D) g;
+        g2.drawImage(
+                image, 
+                0,                              /*start x position*/
+                0,                              /*start y position*/
+                Constants.WINDOW_WIDTH,
+                Constants.WINDOW_HEIGHT, 
+                null                            /*Image Observer*/
+        );
+
     }
 }

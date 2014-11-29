@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Point;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -11,6 +12,7 @@ import model.economy.Ware;
 import model.factory.MaterialFactory;
 import model.factory.WareFactory;
 import model.gameobject.Airship;
+import model.navigation.Harbor;
 import common.Constants;
 import common.FileUtils;
 import controller.WindowController;
@@ -41,8 +43,9 @@ public class MarketViewTest {
         
         
         Market market = new Market();
-        
-        GameState.getInstance().setAirship((Airship) FileUtils.loadObjectFile(Constants.FOLDER_AIRSHIPS, "hashership", Constants.FILE_ENDING_SHIP));
+        Airship airship = new Airship();
+        GameState.getInstance().setAirship(airship);
+        GameState.getInstance().setCurrentHarbor(new Harbor(market, new Point(100,100), true));
         
         
         JFrame frame = new JFrame("Market view");
