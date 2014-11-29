@@ -5,6 +5,8 @@ import java.io.Serializable;
 
 import model.economy.Money;
 
+import common.Constants;
+
 public class Captain  implements Renderable, Serializable {
     private static final long serialVersionUID = 1L;
     
@@ -13,6 +15,7 @@ public class Captain  implements Renderable, Serializable {
 
     public Captain() {
         this.money = new Money(1000);
+        this.name = Constants.CAPTAIN_NAME_DEFAULT;
     }
     
     @Override
