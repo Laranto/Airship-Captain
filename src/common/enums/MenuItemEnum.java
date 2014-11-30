@@ -29,6 +29,7 @@ public enum MenuItemEnum {
 	 * Fight
 	 */
 	EXIT_FIGHT("Aus Kampf fliehen.."),
+	ROTATE_SHIP("Schiff wenden"),
 	
 	/*
 	 * Settings

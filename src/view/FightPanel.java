@@ -49,7 +49,21 @@ public class FightPanel extends GameDefaultPanel {
         controlMenu.setBackground(Constants.COLOR_SKYBLUE);
         add(controlMenu);
         
+        /**
+         * rotate ship button
+         */
+        JButton rotateShipButton = new JButton(MenuItemEnum.ROTATE_SHIP.text());
+        rotateShipButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, MenuItemEnum.ROTATE_SHIP);
+        rotateShipButton.addActionListener(new ButtonController(strategy));
+        rotateShipButton.setHorizontalAlignment(SwingConstants.CENTER);
+        rotateShipButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
+        int width = Constants.WINDOW_WIDTH *99/100,
+            height = (int)rotateShipButton.getPreferredSize().getHeight(),
+            x = Constants.WINDOW_WIDTH * 1 / 10,
+            y = Constants.WINDOW_HEIGHT-100;
+        rotateShipButton.setBounds(x, y, width, height);
 
+        controlMenu.add(rotateShipButton);
        
         /**
          * escape from battle Button
@@ -59,9 +73,9 @@ public class FightPanel extends GameDefaultPanel {
         exitFight.addActionListener(new ButtonController(strategy));
         exitFight.setHorizontalAlignment(SwingConstants.CENTER);
         exitFight.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
-        int width = Constants.WINDOW_WIDTH *99/100,
-            height = (int)exitFight.getPreferredSize().getHeight(),
-            x = Constants.WINDOW_WIDTH * 3 / 4,
+            width = Constants.WINDOW_WIDTH *99/100;
+            height = (int)exitFight.getPreferredSize().getHeight();
+            x = Constants.WINDOW_WIDTH * 3 / 4;
             y = Constants.WINDOW_HEIGHT-100;
         exitFight.setBounds(x, y, width, height);
         

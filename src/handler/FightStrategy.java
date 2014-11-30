@@ -6,8 +6,9 @@ import java.awt.event.MouseEvent;
 import model.GameState;
 import model.gameobject.Entity;
 import model.gameobject.entity.Weapon;
-
 import common.Constants;
+import common.enums.MenuItemEnum;
+import controller.WindowController;
 
 public class FightStrategy extends HandlerStrategy {
 
@@ -34,7 +35,27 @@ public class FightStrategy extends HandlerStrategy {
 
     @Override
     public void publishProperty(Object activeEntity) {
-        this.activeEntity = (Entity) activeEntity;
+        if(activeEntity instanceof MenuItemEnum)
+        {
+            this.handleAction((MenuItemEnum) activeEntity);
+        }else{
+            this.activeEntity = (Entity) activeEntity;
+        }
+    }
+    
+    private void handleAction(MenuItemEnum activeMenuItem)
+    {
+        switch(activeMenuItem)
+        {
+        case EXIT_FIGHT:
+            System.out.println("escape from battle");
+            WindowController.showNavigation();
+            break;
+        case ROTATE_SHIP:
+            System.out.println("Schiff wenden");
+            break;
+        }
+        
     }
 
     @Override
