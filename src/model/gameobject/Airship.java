@@ -274,7 +274,7 @@ public class Airship extends GameObject implements Renderable{
         if(isEmpty){
             return false;
         }
-    	Material[][] checkBody = new Material[shipBody.length][shipBody[0].length];
+    	Material[][] checkBody = new Material[Constants.AIRSHIP_WIDTH_TILES][Constants.AIRSHIP_HEIGHT_TILES];
     	LinkedList<Point> uncheckedPositions = new LinkedList<>();
     	findStartpoint(checkBody, uncheckedPositions);
     	while(!uncheckedPositions.isEmpty()){
@@ -307,12 +307,14 @@ public class Airship extends GameObject implements Renderable{
 
 	private void findStartpoint(Material[][] checkBody,
 			LinkedList<Point> uncheckedPositions) {
-		for(int x=0, y=0;x<Constants.AIRSHIP_WIDTH_TILES && y<Constants.AIRSHIP_HEIGHT_TILES;x++, y++){
-           	 if(shipBody[x][y]!=null){
-           		 checkBody[x][y]=shipBody[x][y];
-           		 uncheckedPositions.push(new Point(x, y));
-           		 break;
-           	 }
+		for(int x=0;x<Constants.AIRSHIP_WIDTH_TILES ;x++){
+		    for(int y=0; y<Constants.AIRSHIP_HEIGHT_TILES; y++){
+               	 if(shipBody[x][y]!=null){
+               		 checkBody[x][y]=shipBody[x][y];
+               		 uncheckedPositions.push(new Point(x, y));
+               		 return;
+               	 }
+		    }
           }
 	}
 
