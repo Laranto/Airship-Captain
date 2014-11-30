@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 public class Constants {
+
+    public static final int GAME_TICK_SPEED = 100;
+    
     public static final String FOLDER_MATERIAL = "resources/material/";
     public static final String FOLDER_OBJECTS = "resources/object/";
     public static final String FOLDER_WARE = "resources/ware/";
@@ -73,7 +76,6 @@ public class Constants {
     @SuppressWarnings("all") //Hush, everything is oke
     public static final Vector<Integer> ENTITY_ORIENTATION_DOWN=new Vector<>(new ArrayList(){{add(0);add(1);}}
             );
-    
     
     
 }

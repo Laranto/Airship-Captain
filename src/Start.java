@@ -26,7 +26,7 @@ public class Start {
         //TODO main loop
         while(true){
             try {
-                Thread.sleep(300);
+                Thread.sleep(Constants.GAME_TICK_SPEED);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
