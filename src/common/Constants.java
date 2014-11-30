@@ -23,6 +23,8 @@ public class Constants {
     
     public static final int WINDOW_WIDTH = 800;
     public static final int WINDOW_HEIGHT = 600;
+    public static final int CONTROL_PANEL_WIDTH = 200;
+    public static final int CONTROL_PANEL_HEIGHT = 100;
     /** Tile Size in Pixels*/
     public static final int TILE_SIZE = 16;
     public static final int AIRSHIP_WIDTH_TILES = (WINDOW_WIDTH/2)/TILE_SIZE;

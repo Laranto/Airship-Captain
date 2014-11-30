@@ -22,10 +22,14 @@ import controller.InputController;
 public class FightPanel extends GameDefaultPanel {
     private static final long serialVersionUID = 1L;
     private Airship enemy;
+    private JPanel controlMenu;
     
     
     
     public FightPanel() {
+        this.setDoubleBuffered(true);
+        this.setFocusable(true);
+        
         Scenario szenario = ScenarioFactory.build();
         enemy = szenario.getEnemy();
         
@@ -35,19 +39,21 @@ public class FightPanel extends GameDefaultPanel {
         
         this.setLayout(null);
         
+        controlMenu = new JPanel();
+        controlMenu.setDoubleBuffered(true);
+        controlMenu.setFocusable(true);
+        controlMenu.setBounds(  Constants.WINDOW_WIDTH - Constants.CONTROL_PANEL_WIDTH, 
+                                Constants.WINDOW_HEIGHT - Constants.CONTROL_PANEL_HEIGHT , 
+                                Constants.CONTROL_PANEL_WIDTH, 
+                                Constants.CONTROL_PANEL_HEIGHT);
+        controlMenu.setBackground(Constants.COLOR_SKYBLUE);
+        add(controlMenu);
         
 
-        GridLayout mainLayout = new GridLayout(1, 2);
-        JPanel battleField = new JPanel(mainLayout);
-        battleField.setBounds(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT*1/20);
-        add(battleField);
-
-        JPanel shipView = new JPanel();
-        battleField.add(shipView);
-        
-        JPanel enemyView = new JPanel();
-        battleField.add(enemyView);
-
+       
+        /**
+         * escape from battle Button
+         */
         JButton exitFight = new JButton(MenuItemEnum.EXIT_FIGHT.text());
         exitFight.putClientProperty(Constants.BUTTON_PROPERTY_ID, MenuItemEnum.EXIT_FIGHT);
         exitFight.addActionListener(new ButtonController(strategy));
@@ -59,7 +65,7 @@ public class FightPanel extends GameDefaultPanel {
             y = Constants.WINDOW_HEIGHT-100;
         exitFight.setBounds(x, y, width, height);
         
-        add(exitFight);
+        controlMenu.add(exitFight);
     }
     
     @Override
@@ -69,5 +75,6 @@ public class FightPanel extends GameDefaultPanel {
         GameState.getInstance().getAirship().render(g2);
         g2.translate(Constants.WINDOW_WIDTH/2, 0);
         enemy.render(g2);
+        controlMenu.repaint();
     }
 }

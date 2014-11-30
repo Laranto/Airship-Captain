@@ -21,22 +21,14 @@ public class Money implements Serializable{
         {
             this.amount -= amount;
         }
-        printAmount();
     }
     
     public void addAmount(double amount)
     {
         this.amount += amount;
-        printAmount();
     }
 
     public double getAmount() {
         return amount;
     }
-    
-    private void printAmount()
-    {
-        System.out.println(this.amount);
-    }
-
 }
