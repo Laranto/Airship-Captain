@@ -54,14 +54,14 @@ public class NavigationStrategy extends HandlerStrategy implements Tickable {
         if(toHarbor != null && GameState.getInstance().getCurrentHarbor().getPosition() != toHarbor.getPosition() && route.getRemainingDuration() == 0){
             if(wantsToTravel()){
             	route.setTo(toHarbor);
-                route.start();
+                route.startTravel();
             }
         }
     }
                     
                     
     private boolean wantsToTravel() {
-        return WindowController.showTravelConfirmation("Reisen?", "Diese Reise dauert "+route.getDuration()+" Sekunden, willst du jetzt segeln?") == 1;
+        return WindowController.showTravelConfirmation("Reisen?", "Diese Reise dauert "+route.calculateDuration()+" Sekunden, willst du jetzt segeln?") == 1;
                 }
 
     @Override
