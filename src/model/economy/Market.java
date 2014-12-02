@@ -13,32 +13,8 @@ public class Market {
 
     public Market() {
         this.stock = new Stock();
-        this.initStock();
     }
     
-    /*
-     * initializing the stock of this market randomly
-     */
-    private void initStock() {
-        if(this.getStock().getWarelist().isEmpty())
-        {
-            ArrayList<Ware> wares = WareFactory.getInstance().getWares();
-            try{
-                StockItem stockItem = null;
-                for (Ware ware: wares) {
-                    stockItem = this.getStock().addTradeableWare( ware, Utils.getRandomIntBetween(10,  (int) Constants.WARE_STANDARD_AMOUNT * 2));
-                    stockItem.getWare().setPrice(Economy.calculatePrice(stockItem.getAmount(), stockItem.getWare().getValue()));
-                }
-                
-                stockItem = this.getStock().addTradeableWare( wares.get(0), 200 );
-                stockItem.getWare().setPrice(Economy.calculatePrice(stockItem.getAmount(), stockItem.getWare().getValue()));
-                
-            }catch(Exception e){
-                System.err.println(e.getMessage());
-            }
-        }
-    }
-
     /**
      * This method buys an item for an airship from a market
      * @param amount is the amount you want to buy

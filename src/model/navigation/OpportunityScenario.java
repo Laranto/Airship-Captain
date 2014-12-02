@@ -8,4 +8,11 @@ public class OpportunityScenario extends Scenario {
         super(description, captain);
     }
 
+    @Override
+    public void show() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    
 }

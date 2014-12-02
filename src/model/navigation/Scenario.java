@@ -9,16 +9,18 @@ import model.gameobject.Captain;
 public abstract class Scenario {
 
     private String description;
-    private Airship opponent;
+    private boolean isActive;
     
     public Scenario(String description, Captain captain){
         this.description = description;
+        this.isActive = true;
     }
     
     public String getDescription(){
         return description;
     }
     
+    public abstract void show();
     public Airship getEnemy() {
         if(this.opponent == null)
         {
@@ -30,5 +32,13 @@ public abstract class Scenario {
     
     public void setEnemy(Airship opponent){
         this.opponent = opponent;
+    }
+    
+    public boolean isActive(){
+        return isActive;
+    };
+    
+    protected void setActive(boolean isActive){
+        this.isActive = isActive;
     }
 }

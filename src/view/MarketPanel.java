@@ -35,11 +35,15 @@ import controller.ButtonController;
 
 public class MarketPanel extends GameDefaultPanel {
     private static final long serialVersionUID = 1L;
-    private ImageIcon icon;
+    protected ImageIcon icon;
     private BufferedImage image;
     private StockItemTransferHandler transferHandler = new StockItemTransferHandler();
 
     public MarketPanel() {
+        draw();
+    }
+    
+    public void draw(){
         try {
             this.image = FileUtils.loadImage(new File(Constants.MARKET_BACKGROUND_IMAGE));
         } catch (IOException e) {

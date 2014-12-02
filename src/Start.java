@@ -1,4 +1,7 @@
+import handler.Tickable;
+
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import javax.swing.RepaintManager;
 
 import common.Constants;
@@ -29,6 +32,9 @@ public class Start {
                 Thread.sleep(Constants.GAME_TICK_SPEED);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+            for(Tickable tickable:WindowController.getTickables()){
+                tickable.tick();
             }
             frame.repaint();
         }

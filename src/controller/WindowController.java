@@ -1,17 +1,18 @@
 package controller;
 
-import java.awt.Point;
+import handler.Tickable;
 import java.io.File;
 
 import javax.swing.JFileChooser;
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import model.GameState;
-import model.economy.Market;
-import model.navigation.Harbor;
 import view.ConstructionPanel;
 import view.FightPanel;
 import view.HarborPanel;
@@ -20,12 +21,14 @@ import view.MarketPanel;
 import view.NavigationPanel;
 import view.SettingsPanel;
 
+import common.Constants;
+
 /**
  *  Controls which panel is being displayed.
  */
 public class WindowController{
 
-	
+    private static List<Tickable> tickables = new LinkedList<Tickable>();
     private static JFrame container;
     private static JPanel mainMenu;
     private static JPanel constructionPanel;
@@ -71,7 +74,7 @@ public class WindowController{
     public static void showHarbor(){
     	if(harborPanel == null){
                 if(GameState.getInstance().getCurrentHarbor() == null){
-                    GameState.getInstance().setCurrentHarbor(new Harbor(new Market(), new Point(310, 340), true));
+                    GameState.getInstance().setCurrentHarbor(Constants.HARBORS.get(0));
                 }
     		harborPanel = new HarborPanel();
     	}
@@ -141,4 +144,8 @@ public class WindowController{
         return null;
     }
     
+
+    public static List<Tickable> getTickables() {
+        return tickables;
+    }
 }

@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.factory.WareFactory;
+
+import common.Constants;
+import common.Utils;
+
 public class Stock implements Serializable{
     private static final long serialVersionUID = 1L;
     
@@ -12,6 +17,30 @@ public class Stock implements Serializable{
     
     public Stock() {
         wareList = new ArrayList<StockItem>();
+        initStock();
+    }
+    
+    /*
+     * initializing the stock randomly
+     */
+    private void initStock() {
+        if(wareList.isEmpty())
+        {
+            ArrayList<Ware> wares = WareFactory.getInstance().getWares();
+            try{
+                StockItem stockItem = null;
+                for (Ware ware: wares) {
+                    stockItem = addTradeableWare( ware, Utils.getRandomIntBetween(10,  (int) Constants.WARE_STANDARD_AMOUNT * 2));
+                    stockItem.getWare().setPrice(Economy.calculatePrice(stockItem.getAmount(), stockItem.getWare().getValue()));
+                }
+                
+                stockItem = addTradeableWare( wares.get(0), 200 );
+                stockItem.getWare().setPrice(Economy.calculatePrice(stockItem.getAmount(), stockItem.getWare().getValue()));
+                
+            }catch(Exception e){
+                System.err.println(e.getMessage());
+            }
+        }
     }
     
     public StockItem addTradeableWare(Ware ware, int amount) throws Exception

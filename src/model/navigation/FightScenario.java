@@ -8,4 +8,9 @@ public class FightScenario extends Scenario {
         super(description, captain);
     }
 
+    @Override
+    public void show() {
+        
+    }
+
 }
