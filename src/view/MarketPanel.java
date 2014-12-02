@@ -1,7 +1,6 @@
 package view;
 
 import handler.MarketStrategy;
-import handler.NavigationStrategy;
 import handler.StockItemTransferHandler;
 import handler.TableStockModel;
 
@@ -26,11 +25,12 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 import model.GameState;
 import model.economy.Stock;
-import model.navigation.Harbor;
+
 import common.Character;
 import common.Constants;
 import common.FileUtils;
 import common.enums.MenuItemEnum;
+
 import controller.ButtonController;
 
 public class MarketPanel extends GameDefaultPanel {
@@ -38,12 +38,13 @@ public class MarketPanel extends GameDefaultPanel {
     protected ImageIcon icon;
     private BufferedImage image;
     private StockItemTransferHandler transferHandler = new StockItemTransferHandler();
-
-    public MarketPanel() {
-        draw();
-    }
+    private boolean isCreated = false;
     
-    public void draw(){
+    
+    public MarketPanel() {}
+    
+    public void create(){
+        this.isCreated=true;
         try {
             this.image = FileUtils.loadImage(new File(Constants.MARKET_BACKGROUND_IMAGE));
         } catch (IOException e) {
@@ -156,6 +157,9 @@ public class MarketPanel extends GameDefaultPanel {
     
     @Override
     public void paintComponent(Graphics g){
+        if(!isCreated){
+            create();
+        }
         Graphics2D g2 = (Graphics2D) g;
         g2.drawImage(
                 image, 

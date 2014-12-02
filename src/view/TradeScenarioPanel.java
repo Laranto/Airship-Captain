@@ -18,13 +18,12 @@ import common.FileUtils;
 import common.enums.MenuItemEnum;
 
 public class TradeScenarioPanel extends MarketPanel {
-
+    private static final long serialVersionUID = 1L;
     private Stock stock = null;
     private ActionListener exitListener;
 
     public TradeScenarioPanel(ActionListener exitListener){
         this.exitListener = exitListener;
-        super.draw();
     }
     
     @Override
@@ -34,7 +33,6 @@ public class TradeScenarioPanel extends MarketPanel {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        exitListener.actionPerformed(null);
         JButton navigation = new JButton(MenuItemEnum.NAVIGATION_MAP.text());
         navigation.setIcon(icon);
         navigation.addActionListener(exitListener);

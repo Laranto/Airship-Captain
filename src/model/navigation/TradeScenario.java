@@ -18,7 +18,6 @@ public class TradeScenario extends Scenario {
         WindowController.showPanel(new TradeScenarioPanel(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println("Meh");
                     setActive(false);
                     WindowController.showNavigation();
                 }
