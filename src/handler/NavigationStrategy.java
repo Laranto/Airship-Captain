@@ -53,9 +53,10 @@ public class NavigationStrategy extends HandlerStrategy implements Tickable {
     public void mouseEvent(MouseEvent event) {
         if(toHarbor != null && GameState.getInstance().getCurrentHarbor().getPosition() != toHarbor.getPosition() && route.getRemainingDuration() == 0){
             if(wantsToTravel()){
+            	route.setTo(toHarbor);
                 route.start();
-                    }
-                    }
+            }
+        }
     }
                     
                     
@@ -79,14 +80,16 @@ public class NavigationStrategy extends HandlerStrategy implements Tickable {
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        if(toHarbor == null && (toHarbor = getHarbor(e.getX(), e.getY())) != null){
-            toHarbor.setNextDestination(true);
-            route.setTo(toHarbor);
-        }
-        if(toHarbor != null && !isOnHarbor(toHarbor, e.getX(), e.getY())){
-            toHarbor.setNextDestination(false);
-            toHarbor = null;
-            route.setTo(null);
+    	if(!route.isTravelling()){
+	        if(toHarbor == null && (toHarbor = getHarbor(e.getX(), e.getY())) != null){
+	            toHarbor.setNextDestination(true);
+	            route.setTo(toHarbor);
+	        }
+	        if(toHarbor != null && !isOnHarbor(toHarbor, e.getX(), e.getY())){
+	            toHarbor.setNextDestination(false);
+	            toHarbor = null;
+	            route.setTo(null);
+	        }
         }
     }
 
@@ -96,7 +99,7 @@ public class NavigationStrategy extends HandlerStrategy implements Tickable {
         if(route.getRemainingDuration() != 0 && !route.hasActiveScenario()){
             route.travel();
         }else{
-            System.out.println("not Traveling");
+//            System.out.println("not Traveling");
         }
     }
 }

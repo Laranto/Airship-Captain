@@ -108,9 +108,8 @@ public class Route implements Renderable{
     }
 
     public void travel() {
-        if(getRemainingDuration() > 0){          
-            travelStep();
-        }else{
+        travelStep();
+        if(getRemainingDuration()==0){          
             endTravel();
         }
     }
@@ -135,9 +134,14 @@ public class Route implements Renderable{
     }
 
     private void endTravel() {
+    	System.out.println("Ended Traveling!");
         GameState.getInstance().getCurrentHarbor().setActive(false);
         to.setActive(true);
         to.setNextDestination(false);
         GameState.getInstance().setCurrentHarbor(to);
+    }
+
+	public boolean isTravelling() {
+	    return getRemainingDuration()!=0;
     }
 }
