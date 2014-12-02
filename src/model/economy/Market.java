@@ -2,6 +2,7 @@ package model.economy;
 
 import java.util.ArrayList;
 
+import view.MarketPanel;
 import model.GameState;
 import model.factory.WareFactory;
 import common.Constants;
@@ -34,6 +35,8 @@ public class Market {
             
             GameState.getInstance().getAirship().getCaptain().getMoney().removeAmount(ware.getPrice()*amount);
             Economy.calculateNewPriceFor(marketItem, airshipItem);
+            //ugly??
+            MarketPanel.updateMoneyLabel();
         }else{
             WindowController.showError("No Money", "You don't have enough money, you need : "+totalCosts+", but you have only: "+captainMoney.getAmount());
         }
@@ -56,6 +59,8 @@ public class Market {
         GameState.getInstance().getAirship().getCaptain().getMoney().addAmount(ware.getPrice()*amount);
         
         Economy.calculateNewPriceFor(marketItem, airshipItem);
+        //ugly??
+        MarketPanel.updateMoneyLabel();
     }
 
     public Stock getStock() {

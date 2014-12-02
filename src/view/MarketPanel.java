@@ -40,6 +40,9 @@ public class MarketPanel extends GameDefaultPanel {
     private StockItemTransferHandler transferHandler = new StockItemTransferHandler();
     private boolean isCreated = false;
     
+    //TODO: ask arni or suter about this problem
+    private static JLabel moneyLabel;
+    
     
     public MarketPanel() {}
     
@@ -55,13 +58,21 @@ public class MarketPanel extends GameDefaultPanel {
         this.setLayout(null);
         
         /**
+         * Label for displaying the money
+         */
+        moneyLabel = getLabel("", 
+                                        Constants.WINDOW_WIDTH * 10/100, 
+                                        Constants.WINDOW_HEIGHT * 21/25, 
+                                        36);
+        updateMoneyLabel();
+        add(moneyLabel);
+        
+        
+        /**
          * Ship Stock list
          */
-        JLabel playerNameLabel = new JLabel(GameState.getInstance().getAirship().getName());
-        playerNameLabel.setBounds(Constants.WINDOW_WIDTH * 3/100, Constants.WINDOW_HEIGHT * 1/25, Constants.WINDOW_WIDTH * 9/20, 20);
-        playerNameLabel.setForeground(Color.WHITE);
-        playerNameLabel.setFont(new Font("Serif", Font.BOLD, 20));
-        add(playerNameLabel);
+        add(getLabel(GameState.getInstance().getAirship().getName(), Constants.WINDOW_WIDTH * 3/100, Constants.WINDOW_HEIGHT * 1/25, 20));
+
         JTable playerTable = new JTable(new TableStockModel(Character.PLAYER));
         Rectangle positionPlayerTable = new Rectangle(
                 Constants.WINDOW_WIDTH * 3/100, 
@@ -73,11 +84,8 @@ public class MarketPanel extends GameDefaultPanel {
         /**
          * Market Stock list
          */
-        JLabel marketNameLabel = new JLabel("Markt");
-        marketNameLabel.setBounds(Constants.WINDOW_WIDTH * 50/100, Constants.WINDOW_HEIGHT * 1/25, Constants.WINDOW_WIDTH * 9/20, 20);
-        marketNameLabel.setForeground(Color.WHITE);
-        marketNameLabel.setFont(new Font("Serif", Font.BOLD, 20));
-        add(marketNameLabel);
+        add(getLabel("Markt", Constants.WINDOW_WIDTH * 50/100, Constants.WINDOW_HEIGHT * 1/25, 20));
+        
         JTable opponentTable = getOpponentTable();
         Rectangle positionOpponentTable = new Rectangle(
                 Constants.WINDOW_WIDTH * 50/100, 
@@ -91,6 +99,16 @@ public class MarketPanel extends GameDefaultPanel {
          */
         addBackButton();
     }
+    
+    private JLabel getLabel(String labelValue, int x, int y, int fontSize)
+    {
+        JLabel label = new JLabel(labelValue);
+        label.setBounds(x, y, Constants.WINDOW_WIDTH * 9/20, 30);
+        label.setForeground(Color.WHITE);
+        label.setFont(new Font("Serif", Font.BOLD, fontSize));
+        return (label);
+    }
+    
 
     private void addInScrollPane(JTable table, Rectangle position) {
         table.setBounds(position);
@@ -170,5 +188,10 @@ public class MarketPanel extends GameDefaultPanel {
                 null                            /*Image Observer*/
         );
 
+    }
+    
+    public static void updateMoneyLabel()
+    {
+        moneyLabel.setText("$ "+GameState.getInstance().getAirship().getCaptain().getMoney().getAmount());
     }
 }
