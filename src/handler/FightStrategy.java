@@ -43,6 +43,7 @@ public class FightStrategy extends HandlerStrategy {
         }
     }
     
+    @SuppressWarnings("incomplete-switch")
     private void handleAction(MenuItemEnum activeMenuItem)
     {
         switch(activeMenuItem)
@@ -52,7 +53,7 @@ public class FightStrategy extends HandlerStrategy {
             WindowController.showNavigation();
             break;
         case ROTATE_SHIP:
-            System.out.println("Schiff wenden");
+            GameState.getInstance().getAirship().rotate();
             break;
         }
         
