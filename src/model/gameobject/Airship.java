@@ -23,6 +23,7 @@ public class Airship extends GameObject implements Renderable{
     private Captain captain;
     private Stock stock;
     private int speed;
+    private boolean isRotated;
     
     public Airship() {
         super(null,0,0);
@@ -32,7 +33,7 @@ public class Airship extends GameObject implements Renderable{
         captain = new Captain();
         this.stock = new Stock();
         this.setName(Constants.AIRSHIP_NAME_DEFAULT);
-        
+        isRotated=false;
         //TODO has to be calculated (e.x. the amount of engines the ship has)
         this.speed = 22;
     }
@@ -50,7 +51,11 @@ public class Airship extends GameObject implements Renderable{
      * Places a new instance of the given material at the given location. Only possible if the location is empty space.
      */
     public void placeMaterial(Material mat, int tileX, int tileY){
-            //Nothing on that tile yet
+        if(isRotated){
+            tileX = rotateSelectedX(tileX);
+            tileY = rotateSelectedY(tileY);
+        }
+       //Nothing on that tile yet
         if(inBounds(tileX, tileY) && shipBody[tileX][tileY] == null && mat!=null){
             if(isEmpty || hasAdjacentTile(tileX,tileY)){
                 shipBody[tileX][tileY] = (Material) MaterialFactory.getInstance().instanzise(mat);
@@ -70,6 +75,10 @@ public class Airship extends GameObject implements Renderable{
 
      */
     public boolean placeEntity(Entity entity, int tileX, int tileY){
+        if(isRotated){
+            tileX = rotateSelectedX(tileX);
+            tileX = rotateSelectedY(tileY);
+        }
         if(entity!=null && inBounds(tileX, tileY)){
             List<Point> checkedPoints = new LinkedList<>();
             if(canPlaceEntity(entity,tileX,tileY,checkedPoints)){
@@ -139,6 +148,11 @@ public class Airship extends GameObject implements Renderable{
      */
     public ShipPart getShipPartByPosition(int tileX, int tileY)
     {
+        if(isRotated){
+            tileX = rotateSelectedX(tileX);
+            tileX = rotateSelectedY(tileY);
+        }
+        
         if(inBounds(tileX, tileY)){
             if(this.equipment[tileX][tileY]!=null){
                 return this.equipment[tileX][tileY];
@@ -149,17 +163,25 @@ public class Airship extends GameObject implements Renderable{
     }
     
     public Material getMaterialByPosition(int tileX, int tileY){
+        if(isRotated){
+            tileX = rotateSelectedX(tileX);
+            tileX = rotateSelectedY(tileY);
+        }
         if(inBounds(tileX, tileY)){
         return this.shipBody[tileX][tileY];
         }
         return null;
     }
     
-    /*
+    /**
     *   Removes a material from the ship. There may not be any entities (or blockers) in the way for this 
     */
     public boolean removeMaterial(int tileX, int tileY)
     {
+        if(isRotated){
+            tileX = rotateSelectedX(tileX);
+            tileX = rotateSelectedY(tileY);
+        }
         /**
          * checking if the remove method has been called on the right
          */
@@ -190,6 +212,10 @@ public class Airship extends GameObject implements Renderable{
      * @return the Entity which was removed
      */
     public Entity removeEntity(int tileX , int tileY) {
+        if(isRotated){
+            tileX = rotateSelectedX(tileX);
+            tileX = rotateSelectedY(tileY);
+        }
         if(inBounds(tileX, tileY)){
             Entity selected = getEntity(tileX, tileY);
             if(selected == null){
@@ -224,11 +250,24 @@ public class Airship extends GameObject implements Renderable{
     
     
 
+    
+    /**
+     * Causes the ship to be roated. This also concerns all inputs
+     */
+    public void rotate(){
+        isRotated= (!isRotated);
+    }
 
     @Override
     public void render(Graphics2D g) {
+        AffineTransform originalCoordinates = g.getTransform();
+        if(isRotated){
+            g.translate(Constants.AIRSHIP_WIDTH_TILES*Constants.TILE_SIZE, (Constants.AIRSHIP_HEIGHT_TILES-1)*Constants.TILE_SIZE);
+            g.rotate(Math.toRadians(180));
+        }
         renderMaterial(g);
         renderEquipment(g);
+        g.setTransform(originalCoordinates);
     }
 
 
@@ -337,6 +376,10 @@ public class Airship extends GameObject implements Renderable{
      *                  
      */
     public Entity getEntity(int tileX, int tileY) {
+        if(isRotated){
+            tileX = rotateSelectedX(tileX);
+            tileX = rotateSelectedY(tileY);
+        }
         if(inBounds(tileX, tileY)){
             Entity selected =equipment[tileX][tileY];
             if(selected instanceof Blocker){
@@ -399,6 +442,15 @@ public class Airship extends GameObject implements Renderable{
             }
          }
         return weight;
+    }
+    
+    
+    private int rotateSelectedY(int tileY) {
+        return Constants.AIRSHIP_HEIGHT_TILES-2-tileY;
+    }
+
+    private int rotateSelectedX(int tileX) {
+        return Constants.AIRSHIP_WIDTH_TILES-1-tileX;
     }
 
 
