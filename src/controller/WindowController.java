@@ -83,7 +83,6 @@ public class WindowController{
     }
     
     
-    //TODO: Market should be passed as parameter from harbor
     public static void showMarket()
     {
         if(marketPanel == null)
