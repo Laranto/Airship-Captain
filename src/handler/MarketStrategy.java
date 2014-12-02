@@ -24,6 +24,9 @@ public class MarketStrategy extends HandlerStrategy {
             case HARBOR:
                 WindowController.showHarbor();
                 break;
+            case NAVIGATION_MAP:
+                WindowController.showNavigation();
+                break;
             default:
                 break;
             }
