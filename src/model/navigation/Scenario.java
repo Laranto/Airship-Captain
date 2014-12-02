@@ -10,6 +10,7 @@ public abstract class Scenario {
 
     private String description;
     private boolean isActive;
+    private Airship opponent;
     
     public Scenario(String description, Captain captain){
         this.description = description;

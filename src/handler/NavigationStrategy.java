@@ -1,13 +1,9 @@
 package handler;
 
-import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 import model.GameState;
-import model.economy.Market;
 import model.navigation.Harbor;
 import model.navigation.Route;
 
@@ -55,8 +51,7 @@ public class NavigationStrategy extends HandlerStrategy implements Tickable {
     
     @Override
     public void mouseEvent(MouseEvent event) {
-        currentHarbor = GameState.getInstance().getCurrentHarbor();
-        if(toHarbor != null && currentHarbor.getPosition() != toHarbor.getPosition() && route.getRemainingDuration() == 0){
+        if(toHarbor != null && GameState.getInstance().getCurrentHarbor().getPosition() != toHarbor.getPosition() && route.getRemainingDuration() == 0){
             if(wantsToTravel()){
                 route.start();
                     }

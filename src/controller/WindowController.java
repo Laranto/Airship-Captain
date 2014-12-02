@@ -66,7 +66,7 @@ public class WindowController{
     
     public static void showNavigation(){
     	if(navigationPanel == null){
-    		navigationPanel = new NavigationPanel();
+    	    navigationPanel = new NavigationPanel();
     	}
     	showPanel(navigationPanel);
     }
@@ -74,6 +74,7 @@ public class WindowController{
     public static void showHarbor(){
     	if(harborPanel == null){
                 if(GameState.getInstance().getCurrentHarbor() == null){
+                    Constants.HARBORS.get(0).setActive(true);
                     GameState.getInstance().setCurrentHarbor(Constants.HARBORS.get(0));
                 }
     		harborPanel = new HarborPanel();
@@ -101,7 +102,7 @@ public class WindowController{
         showPanel(settingsPanel);
     }
     
-    private static void showPanel(JPanel panel) {
+    public static void showPanel(JPanel panel) {
 		container.setContentPane(panel);
 		container.paintAll(container.getGraphics());
 	}
