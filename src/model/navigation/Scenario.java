@@ -39,7 +39,7 @@ public abstract class Scenario {
         return isActive;
     };
     
-    protected void setActive(boolean isActive){
+    public void setActive(boolean isActive){
         this.isActive = isActive;
     }
 }

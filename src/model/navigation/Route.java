@@ -144,6 +144,7 @@ public class Route implements Renderable{
 
     private void travelStep() {
         try {
+        	System.out.println("travelling");
             int fightProbabilty = Utils.getRandomIntBetween(0, 100);
             if (battleChance * 100 > fightProbabilty) {
                 scenario = ScenarioFactory.build();
@@ -161,7 +162,7 @@ public class Route implements Renderable{
     }
 
     private void endTravel() {
-    	System.out.println("Ended Traveling!");
+    	System.out.println("Ended Travelling!");
         GameState.getInstance().getCurrentHarbor().setActive(false);
         to.setActive(true);
         to.setNextDestination(false);

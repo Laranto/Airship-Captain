@@ -1,9 +1,11 @@
 package controller;
 
 import handler.Tickable;
+
 import java.io.File;
 
 import javax.swing.JFileChooser;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import model.GameState;
+import model.navigation.Scenario;
 import view.ConstructionPanel;
 import view.FightPanel;
 import view.HarborPanel;
@@ -20,7 +23,6 @@ import view.MainMenuPanel;
 import view.MarketPanel;
 import view.NavigationPanel;
 import view.SettingsPanel;
-
 import common.Constants;
 
 /**
@@ -55,13 +57,6 @@ public class WindowController{
     	}
     	showPanel(constructionPanel);
     	constructionPanel.requestFocus();
-    }
-    
-    public static void showFight(){
-    	if(fightPanel == null){
-    		fightPanel = new FightPanel();
-    	}
-    	showPanel(fightPanel);
     }
     
     public static void showNavigation(){

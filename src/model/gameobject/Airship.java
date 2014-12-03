@@ -77,7 +77,7 @@ public class Airship extends GameObject implements Renderable{
     public boolean placeEntity(Entity entity, int tileX, int tileY){
         if(isRotated){
             tileX = rotateSelectedX(tileX);
-            tileX = rotateSelectedY(tileY);
+            tileY = rotateSelectedY(tileY);
         }
         if(entity!=null && inBounds(tileX, tileY)){
             List<Point> checkedPoints = new LinkedList<>();
@@ -150,7 +150,7 @@ public class Airship extends GameObject implements Renderable{
     {
         if(isRotated){
             tileX = rotateSelectedX(tileX);
-            tileX = rotateSelectedY(tileY);
+            tileY = rotateSelectedY(tileY);
         }
         
         if(inBounds(tileX, tileY)){
@@ -165,7 +165,7 @@ public class Airship extends GameObject implements Renderable{
     public Material getMaterialByPosition(int tileX, int tileY){
         if(isRotated){
             tileX = rotateSelectedX(tileX);
-            tileX = rotateSelectedY(tileY);
+            tileY = rotateSelectedY(tileY);
         }
         if(inBounds(tileX, tileY)){
         return this.shipBody[tileX][tileY];
@@ -180,7 +180,7 @@ public class Airship extends GameObject implements Renderable{
     {
         if(isRotated){
             tileX = rotateSelectedX(tileX);
-            tileX = rotateSelectedY(tileY);
+            tileY = rotateSelectedY(tileY);
         }
         /**
          * checking if the remove method has been called on the right
@@ -214,7 +214,7 @@ public class Airship extends GameObject implements Renderable{
     public Entity removeEntity(int tileX , int tileY) {
         if(isRotated){
             tileX = rotateSelectedX(tileX);
-            tileX = rotateSelectedY(tileY);
+            tileY = rotateSelectedY(tileY);
         }
         if(inBounds(tileX, tileY)){
             Entity selected = getEntity(tileX, tileY);
@@ -378,7 +378,7 @@ public class Airship extends GameObject implements Renderable{
     public Entity getEntity(int tileX, int tileY) {
         if(isRotated){
             tileX = rotateSelectedX(tileX);
-            tileX = rotateSelectedY(tileY);
+            tileY = rotateSelectedY(tileY);
         }
         if(inBounds(tileX, tileY)){
             Entity selected =equipment[tileX][tileY];

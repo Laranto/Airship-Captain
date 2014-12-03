@@ -51,12 +51,14 @@ public class NavigationStrategy extends HandlerStrategy implements Tickable {
     
     @Override
     public void mouseEvent(MouseEvent event) {
-        if(toHarbor != null && GameState.getInstance().getCurrentHarbor().getPosition() != toHarbor.getPosition() && route.getRemainingDuration() == 0){
-            if(wantsToTravel()){
-            	route.setTo(toHarbor);
-                route.startTravel();
-                    }
-                    }
+		if (toHarbor != null && 
+			GameState.getInstance().getCurrentHarbor().getPosition() != toHarbor.getPosition() && 
+			route.getRemainingDuration() == 0) {
+				if (wantsToTravel()) {
+					route.setTo(toHarbor);
+					route.startTravel();
+				}
+		}
     }
                     
                     

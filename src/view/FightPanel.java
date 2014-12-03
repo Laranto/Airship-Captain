@@ -28,14 +28,13 @@ public class FightPanel extends GameDefaultPanel {
     
     
     
-    public FightPanel() {
+    public FightPanel(Scenario scenario) {
         this.setDoubleBuffered(true);
         this.setFocusable(true);
         
-        Scenario szenario = ScenarioFactory.build();
-        enemy = szenario.getEnemy();
+        enemy = scenario.getEnemy();
         
-        FightStrategy strategy = new FightStrategy();
+        FightStrategy strategy = new FightStrategy(scenario);
         addMouseListener(new InputController(strategy));
         addMouseMotionListener(new InputController(strategy));
         

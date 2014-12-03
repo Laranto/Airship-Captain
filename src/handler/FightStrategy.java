@@ -11,10 +11,9 @@ import model.GameState;
 import model.gameobject.Entity;
 import model.gameobject.entity.Cannonball;
 import model.gameobject.entity.Weapon;
-
+import model.navigation.Scenario;
 import common.Constants;
 import common.enums.MenuItemEnum;
-
 import controller.WindowController;
 
 public class FightStrategy extends HandlerStrategy {
@@ -22,8 +21,10 @@ public class FightStrategy extends HandlerStrategy {
     private Entity activeEntity;
     private boolean isCannonActive = false;
     private static LinkedList<Cannonball> cannonballs = new LinkedList<Cannonball>();
+	private Scenario scenario;
     
-    public FightStrategy(){
+    public FightStrategy(Scenario scenario){
+		this.scenario = scenario;
     }
     
     @Override
@@ -70,6 +71,7 @@ public class FightStrategy extends HandlerStrategy {
         {
         case EXIT_FIGHT:
             System.out.println("escape from battle");
+            scenario.setActive(false);
             WindowController.showNavigation();
             break;
         case ROTATE_SHIP:
