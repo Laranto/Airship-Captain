@@ -120,7 +120,7 @@ public class EntityFactory extends ShippartFactory<Entity> {
 		switch (type) {
 		default:
 		case "weapon":
-			o = new Weapon(name,durability,value,weight,imagePath, orientation, new Dimension(width,height));
+			o = new Weapon(name,value,weight,durability,imagePath, orientation, new Dimension(width,height));
 			break;
 		}
 		return o;
