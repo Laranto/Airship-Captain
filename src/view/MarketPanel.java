@@ -12,6 +12,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.NumberFormat;
 
 import javax.swing.DropMode;
 import javax.swing.ImageIcon;
@@ -192,6 +193,7 @@ public class MarketPanel extends GameDefaultPanel {
     
     public static void updateMoneyLabel()
     {
-        moneyLabel.setText("$ "+GameState.getInstance().getAirship().getCaptain().getMoney().getAmount());
+
+        moneyLabel.setText("$ "+ (GameState.getInstance().getAirship().getCaptain().getMoney().getAmount())  );
     }
 }

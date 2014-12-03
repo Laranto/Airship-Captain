@@ -1,6 +1,7 @@
 package model.economy;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 
 public class Money implements Serializable{
 
@@ -21,14 +22,21 @@ public class Money implements Serializable{
         {
             this.amount -= amount;
         }
+        this.formatAmount();
     }
     
     public void addAmount(double amount)
     {
         this.amount += amount;
+        this.formatAmount();        
     }
 
     public double getAmount() {
         return amount;
+    }
+    
+    private void formatAmount()
+    {
+        this.amount = (Math.round(this.amount*100.0 ))/100.0;
     }
 }
