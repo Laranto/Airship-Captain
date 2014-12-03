@@ -188,7 +188,7 @@ public class MarketPanel extends GameDefaultPanel {
                 Constants.WINDOW_HEIGHT, 
                 null                            /*Image Observer*/
         );
-
+        updateMoneyLabel();
     }
     
     public static void updateMoneyLabel()
