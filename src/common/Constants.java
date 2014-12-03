@@ -55,6 +55,7 @@ public class Constants {
     public static final Color HARBOR_CIRCLE_BORDER = Color.BLACK;
     public static final int HARBOR_CIRCLE_DIAMETER = 20;
     public static final String HARBOR_ICON = "resources/panels/img/anchor.png";
+    @SuppressWarnings("serial")
     public static final List<Harbor> HARBORS = new ArrayList<Harbor>(){{
         add(new Harbor(new Market(), new Point(310, 340), false));
         add(new Harbor(new Market(), new Point(110, 500), false));

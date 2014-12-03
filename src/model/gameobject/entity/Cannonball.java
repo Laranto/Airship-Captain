@@ -1,23 +1,29 @@
 package model.gameobject.entity;
 
-import handler.FightStrategy;
-
 import java.awt.Graphics2D;
 import java.awt.Point;
-
-import common.Constants;
+import java.util.Vector;
 
 import model.gameobject.Renderable;
+
+import common.Constants;
 
 public class Cannonball implements Renderable{
 
     private Point from;
     private Point currentPosition;
     private Point to;
+    private Vector<Double> velocity; 
 
-    public Cannonball(Point start) {
+    public Cannonball(Point start, int damage) {
         this.from = start;
         this.to = start;
+        velocity=new Vector<>();
+        velocity.add((double) (to.x-from.x));
+        velocity.add((double) (to.y-from.y));
+        double length=Math.sqrt(Math.pow(velocity.get(0), 2)+Math.pow(velocity.get(1), 2));
+        velocity.set(0, velocity.get(0)/length*damage);
+        velocity.set(1, velocity.get(1)/length*damage);
     }
 
     public void aim(Point to){
@@ -46,9 +52,9 @@ public class Cannonball implements Renderable{
             //TODO:
             //1. draw cannonball
             //2. reposition cannonball
-            if(currentPosition.equals(to)){
-                FightStrategy.removeCannonball(this);
-            }
+//            if(currentPosition.equals(to)){
+//                FightStrategy.removeCannonball(this);
+//            }
         }
 //        System.out.println(
 //                "xStart: "+(int)getFrom().getX()+
@@ -98,5 +104,9 @@ public class Cannonball implements Renderable{
                 yStart, 
                 (xEnd), 
                 (yEnd));
+    }
+
+    public void move() {
+        currentPosition.setLocation(currentPosition.x+velocity.get(0), currentPosition.y+velocity.get(1));
     }
 }

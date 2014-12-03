@@ -25,6 +25,7 @@ public class FightPanel extends GameDefaultPanel {
     private static final long serialVersionUID = 1L;
     private Airship enemy;
     private JPanel controlMenu;
+    private FightStrategy strategy;
     
     
     
@@ -34,7 +35,7 @@ public class FightPanel extends GameDefaultPanel {
         
         enemy = scenario.getEnemy();
         
-        FightStrategy strategy = new FightStrategy(scenario);
+        strategy = new FightStrategy(scenario);
         addMouseListener(new InputController(strategy));
         addMouseMotionListener(new InputController(strategy));
         
@@ -92,7 +93,7 @@ public class FightPanel extends GameDefaultPanel {
         enemy.render(g2);
         controlMenu.repaint();
         g2.translate(-Constants.WINDOW_WIDTH/2, 0);
-        for(Cannonball cannonball: FightStrategy.getCannonballs()){
+        for(Cannonball cannonball: strategy.getCannonballs()){
             cannonball.render(g2);
         }
     }
