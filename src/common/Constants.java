@@ -81,6 +81,7 @@ public class Constants {
     public static final double WARE_MAX_INFLATION_FACTOR = 5;
     public static final double WARE_SELL_RATIO = 0.8;    
     
+    public static final double OBJECT_SELL_RATIO = 0.7;
     
     public static final String FILE_ENDING_GAME = "asc";
     public static final String FILE_ENDING_SHIP = "ascs";
@@ -108,6 +109,8 @@ public class Constants {
     
 	public static final Stroke STROKE_DASHED = new BasicStroke(4, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, 10, new float[]{10f},0);
 	public static final Stroke STROKE_SOLID = new BasicStroke(4);
+
+
     
     
 }

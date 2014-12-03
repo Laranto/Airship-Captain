@@ -5,12 +5,11 @@ import java.awt.event.MouseEvent;
 
 import model.GameState;
 import model.gameobject.Entity;
+import model.gameobject.GameObject;
 import model.gameobject.Material;
 import model.gameobject.ShipPart;
-
 import common.Constants;
 import common.enums.PropertyEnum;
-
 import controller.WindowController;
 
 public class ConstructionStrategy extends HandlerStrategy {
@@ -31,19 +30,38 @@ public class ConstructionStrategy extends HandlerStrategy {
                 endMove(tileX, tileY);
             }else if(activePlacement instanceof PropertyEnum){
                 PropertyEnum active = (PropertyEnum) activePlacement;
+                
+                GameObject removedObject = null;
                 if(active==PropertyEnum.DELETE_MATERIAL){
-                    GameState.getInstance().getAirship().removeMaterial(tileX, tileY);
+                    removedObject = GameState.getInstance().getAirship().removeMaterial(tileX, tileY);
                 }else if(active==PropertyEnum.DELETE_ENTITY){
-                    GameState.getInstance().getAirship().removeEntity(tileX,tileY);
+                    removedObject = GameState.getInstance().getAirship().removeEntity(tileX,tileY);
                 }else if(active==PropertyEnum.MOVE){
                     startMove(tileX,tileY);
                 }
-            }else if (tileX < Constants.AIRSHIP_WIDTH_TILES && tileY < Constants.AIRSHIP_HEIGHT_TILES) {
-                if(activePlacement instanceof Material){
-                    GameState.getInstance().getAirship().placeMaterial((Material)activePlacement, tileX, tileY);
+                
+                if(removedObject != null)
+                {
+                    GameState.getInstance().getAirship().getCaptain().getMoney().addAmount(removedObject.getValue()*Constants.OBJECT_SELL_RATIO);
                 }
-                if(activePlacement instanceof Entity){
-                    GameState.getInstance().getAirship().placeEntity((Entity)activePlacement, tileX, tileY);
+                
+            }else if (tileX < Constants.AIRSHIP_WIDTH_TILES && tileY < Constants.AIRSHIP_HEIGHT_TILES) {
+                GameObject gameObject = (GameObject)activePlacement;
+                double moneyAmountNeeded = (gameObject.getValue());
+                boolean hasEnoughMoney = ( GameState.getInstance().getAirship().getCaptain().getMoney().getAmount() - moneyAmountNeeded >=0 ? true : false);
+                boolean objectPlaced = false;
+                if(hasEnoughMoney){
+                    if(activePlacement instanceof Material){
+                        objectPlaced = GameState.getInstance().getAirship().placeMaterial((Material)activePlacement, tileX, tileY);
+                    }
+                    if(activePlacement instanceof Entity){
+                        objectPlaced = GameState.getInstance().getAirship().placeEntity((Entity)activePlacement, tileX, tileY);
+                    }
+                    if(objectPlaced){
+                        GameState.getInstance().getAirship().getCaptain().getMoney().removeAmount(moneyAmountNeeded); 
+                    }
+                }else{
+                    WindowController.showError("Not enough money", "You don't have enough money to place this object.");
                 }
             }
         }

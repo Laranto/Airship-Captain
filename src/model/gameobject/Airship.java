@@ -50,7 +50,7 @@ public class Airship extends GameObject implements Renderable{
     /**
      * Places a new instance of the given material at the given location. Only possible if the location is empty space.
      */
-    public void placeMaterial(Material mat, int tileX, int tileY){
+    public boolean placeMaterial(Material mat, int tileX, int tileY){
         if(isRotated){
             tileX = rotateSelectedX(tileX);
             tileY = rotateSelectedY(tileY);
@@ -60,8 +60,10 @@ public class Airship extends GameObject implements Renderable{
             if(isEmpty || hasAdjacentTile(tileX,tileY)){
                 shipBody[tileX][tileY] = (Material) MaterialFactory.getInstance().instanzise(mat);
                 isEmpty=false;
+                return true;
             }
         }
+        return false;
     }
     
     
@@ -176,7 +178,7 @@ public class Airship extends GameObject implements Renderable{
     /**
     *   Removes a material from the ship. There may not be any entities (or blockers) in the way for this 
     */
-    public boolean removeMaterial(int tileX, int tileY)
+    public Material removeMaterial(int tileX, int tileY)
     {
         if(isRotated){
             tileX = rotateSelectedX(tileX);
@@ -187,11 +189,13 @@ public class Airship extends GameObject implements Renderable{
          */
         if(inBounds(tileX, tileY)&& equipment[tileX][tileY]==null)
         {
+            Material tempMaterial = shipBody[tileX][tileY];
         	shipBody[tileX][tileY] = null;
         	updateIsEmpty();
-        	return true;
+        	
+        	return tempMaterial;
         }
-        return false;
+        return null;
     }
 
     private void updateIsEmpty() {
