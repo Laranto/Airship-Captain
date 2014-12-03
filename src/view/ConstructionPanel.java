@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -22,13 +24,12 @@ import javax.swing.SwingConstants;
 import model.GameState;
 import model.factory.EntityFactory;
 import model.factory.MaterialFactory;
+import model.gameobject.Captain;
 import model.gameobject.Entity;
 import model.gameobject.Material;
 import model.gameobject.ShipPart;
-
 import common.Constants;
 import common.enums.PropertyEnum;
-
 import controller.ButtonController;
 import controller.InputController;
 import controller.ShipExportController;
@@ -38,6 +39,8 @@ public class ConstructionPanel extends GameDefaultPanel {
     private static final long serialVersionUID = 1L;
     private ConstructionStrategy strategy;
     
+    private JLabel informationLabel;
+    
     public ConstructionPanel() {
         strategy = new ConstructionStrategy();
         InputController inputController = new InputController(strategy);
@@ -46,23 +49,29 @@ public class ConstructionPanel extends GameDefaultPanel {
         addMouseMotionListener(inputController);
         addKeyListener(inputController);
         this.setFocusable(true);
+
         
+        informationLabel = new JLabel("Airshipname:  ($ 1000)");
+        informationLabel.setBounds(Constants.WINDOW_WIDTH * 510/1000, 5, Constants.WINDOW_WIDTH * 49/100, 50);
+        informationLabel.setFont(new Font("Serif", Font.BOLD, 20));
+        add(informationLabel);
         
 
-        GridLayout mainLayout = new GridLayout(1, 2);
-        this.setLayout(mainLayout);
+        this.setLayout(null);
+        JPanel mainPanel = new JPanel(new GridLayout(1,1));
+        mainPanel.setBounds(Constants.WINDOW_WIDTH * 501/1000, 50, Constants.WINDOW_WIDTH * 49/100, Constants.WINDOW_HEIGHT*7/8);
 
-        JPanel shipView = new JPanel();
-        this.add(shipView);
         
         JTabbedPane selectionSide = new JTabbedPane();
-        this.add(selectionSide);
+        mainPanel.add(selectionSide);
         
         JPanel materialPanel = createMaterialPanel(buttonController);
         selectionSide.addTab("Material", materialPanel);
         
         JPanel entityPanel = createEntityPanel(buttonController);
         selectionSide.addTab("Gegenstände",entityPanel);
+        
+        add(mainPanel);
     }
 
 	private JPanel createEntityPanel(ButtonController buttonController) {
@@ -93,6 +102,7 @@ public class ConstructionPanel extends GameDefaultPanel {
         JPanel tilesPickerPanel = new JPanel(tilesPickerGrid);
         for (int i = 0; i < entities.size(); i++) {
             JButton tileButton = new JButton(entities.get(i).getName());
+            tileButton.setToolTipText("$ "+entities.get(i).getValue());
             tileButton.setIcon(new ImageIcon(entities.get(i).getImage()));
             tileButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, entities.get(i));
             tileButton.addActionListener(buttonController);
@@ -127,6 +137,7 @@ public class ConstructionPanel extends GameDefaultPanel {
         for (int i = 0; i < materials.size(); i++) {
             JButton tileButton = new JButton(materials.get(i).getName());
             tileButton.setIcon(new ImageIcon(materials.get(i).getImage()));
+            tileButton.setToolTipText("$ "+materials.get(i).getValue());
             tileButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, materials.get(i));
             tileButton.addActionListener(buttonController);
             tileButton.setHorizontalAlignment(SwingConstants.LEFT);
@@ -191,11 +202,13 @@ public class ConstructionPanel extends GameDefaultPanel {
 	    return southPanel;
 	}
 
+	
     @Override
     public void paint(Graphics g) {
         super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
         GameState.getInstance().getAirship().render(g2);
+        updateInformationLabel();
     }
     
     private class PreviewPanel extends JPanel{
@@ -211,5 +224,11 @@ public class ConstructionPanel extends GameDefaultPanel {
             }
             }
         }
+    }
+    
+    private void updateInformationLabel()
+    {
+        Captain captain = GameState.getInstance().getAirship().getCaptain();
+        informationLabel.setText(captain.getName()+"     ($ "+captain.getMoney().getAmount()+")");
     }
 }
