@@ -4,7 +4,6 @@ import handler.FightStrategy;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -13,9 +12,12 @@ import javax.swing.SwingConstants;
 import model.GameState;
 import model.factory.ScenarioFactory;
 import model.gameobject.Airship;
+import model.gameobject.entity.Cannonball;
 import model.navigation.Scenario;
+
 import common.Constants;
 import common.enums.MenuItemEnum;
+
 import controller.ButtonController;
 import controller.InputController;
 
@@ -90,5 +92,9 @@ public class FightPanel extends GameDefaultPanel {
         g2.translate(Constants.WINDOW_WIDTH/2, 0);
         enemy.render(g2);
         controlMenu.repaint();
+        g2.translate(-Constants.WINDOW_WIDTH/2, 0);
+        for(Cannonball cannonball: FightStrategy.getCannonballs()){
+            cannonball.render(g2);
+        }
     }
 }

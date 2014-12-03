@@ -1,34 +1,54 @@
 package handler;
 
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.LinkedList;
+
+import javax.swing.SwingUtilities;
 
 import model.GameState;
 import model.gameobject.Entity;
+import model.gameobject.entity.Cannonball;
 import model.gameobject.entity.Weapon;
+
 import common.Constants;
 import common.enums.MenuItemEnum;
+
 import controller.WindowController;
 
 public class FightStrategy extends HandlerStrategy {
 
     private Entity activeEntity;
+    private boolean isCannonActive = false;
+    private static LinkedList<Cannonball> cannonballs = new LinkedList<Cannonball>();
     
     public FightStrategy(){
     }
     
     @Override
     public void  mouseEvent(MouseEvent e) {
+        if(SwingUtilities.isRightMouseButton(e) && isCannonActive){
+            isCannonActive = false;
+            cannonballs.removeLast();
+            return;
+        }
         int tileX = e.getX() / Constants.TILE_SIZE;
         int tileY = e.getY() / Constants.TILE_SIZE;
         if(tileX < Constants.AIRSHIP_WIDTH_TILES && tileY < Constants.AIRSHIP_HEIGHT_TILES){
             if(activeEntity == null){
                 activeEntity = GameState.getInstance().getAirship().getEntity(tileX, tileY);
-            }else{
-                if(activeEntity instanceof Weapon){
-                    Weapon w = (Weapon)activeEntity;
-                    w.aim(tileX, tileY);
-                }
+            }
+            if(activeEntity instanceof Weapon){
+                cannonballs.addLast(((Weapon)activeEntity).aim());
+                isCannonActive = true;
+            }
+        }else{
+            if(isCannonActive){
+                cannonballs.getLast().fire();
+                ((Weapon)activeEntity).reload();
+                activeEntity = null;
+                isCannonActive = false;
             }
         }
     }
@@ -66,5 +86,18 @@ public class FightStrategy extends HandlerStrategy {
 
     @Override
     public void mouseMoved(MouseEvent e) {
+        if(isCannonActive){
+            int tileX = e.getX();
+            int tileY = e.getY();
+            cannonballs.getLast().aim(new Point(tileX, tileY));
+        }
+    }
+    
+    public static LinkedList<Cannonball> getCannonballs(){
+        return cannonballs;
+    }
+    
+    public static void removeCannonball(Cannonball cannonball){
+        cannonballs.remove(cannonball);
     }
 }

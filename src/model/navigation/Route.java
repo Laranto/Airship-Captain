@@ -118,7 +118,6 @@ public class Route implements Renderable{
     private void travelStep() {
         try {
             int fightProbabilty = Utils.getRandomIntBetween(0, 100);
-            System.out.println("traveling");
             if (battleChance * 100 > fightProbabilty) {
                 scenario = ScenarioFactory.build();
                 scenario.show();

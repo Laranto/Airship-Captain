@@ -1,5 +1,6 @@
 package model.navigation;
 
+import controller.WindowController;
 import model.gameobject.Captain;
 
 public class FightScenario extends Scenario {
@@ -10,7 +11,7 @@ public class FightScenario extends Scenario {
 
     @Override
     public void show() {
-        
+        WindowController.showFight();
     }
 
 }

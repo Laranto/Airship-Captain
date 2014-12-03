@@ -95,8 +95,6 @@ public class NavigationStrategy extends HandlerStrategy implements Tickable {
     public void tick() {
         if(route.getRemainingDuration() != 0 && !route.hasActiveScenario()){
             route.travel();
-        }else{
-            System.out.println("not Traveling");
         }
     }
 }

@@ -6,10 +6,8 @@ import java.util.Vector;
 
 import model.gameobject.Entity;
 
-/**
- *
- * @author Hesyar Uzuner <info@hesyar.com>
- */
+import common.Constants;
+
 public class Weapon extends Entity {
     private static final long serialVersionUID = 1L;
     private int damage;
@@ -20,11 +18,12 @@ public class Weapon extends Entity {
         super(name , value , weight , durability , imagePath , orientation , size);
     }
 
-    public void aim(int tileX, int tileY){
-        aim = new Point(tileX, tileY);
+    public Cannonball aim(){
+        return new Cannonball(new Point((int)(getPosition().getX()+getSize().getWidth())*Constants.TILE_SIZE, (int)((getPosition().getY()+getSize().getHeight()/2)*Constants.TILE_SIZE)));
     };
     public void fire(){
-    
+        System.out.println("Die Kanone trifft: "+aim.getX()+"/"+aim.getY());
+        aim = null;
     };
     public void reload(){
     
@@ -57,5 +56,4 @@ public class Weapon extends Entity {
     public void setAmmunition(int ammunition) {
         this.ammunition = ammunition;
     }
-    
 }
