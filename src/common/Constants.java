@@ -1,7 +1,9 @@
 package common;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Point;
+import java.awt.Stroke;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -102,6 +104,10 @@ public class Constants {
     @SuppressWarnings("all") //Hush, everything is oke
     public static final Vector<Integer> ENTITY_ORIENTATION_DOWN=new Vector<>(new ArrayList(){{add(0);add(1);}}
             );
+
+    
+	public static final Stroke STROKE_DASHED = new BasicStroke(4, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, 10, new float[]{10f},0);
+	public static final Stroke STROKE_SOLID = new BasicStroke(4);
     
     
 }

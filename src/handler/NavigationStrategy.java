@@ -53,14 +53,15 @@ public class NavigationStrategy extends HandlerStrategy implements Tickable {
     public void mouseEvent(MouseEvent event) {
         if(toHarbor != null && GameState.getInstance().getCurrentHarbor().getPosition() != toHarbor.getPosition() && route.getRemainingDuration() == 0){
             if(wantsToTravel()){
-                route.start();
+            	route.setTo(toHarbor);
+                route.startTravel();
                     }
                     }
     }
                     
                     
     private boolean wantsToTravel() {
-        return WindowController.showTravelConfirmation("Reisen?", "Diese Reise dauert "+route.getDuration()+" Sekunden, willst du jetzt segeln?") == 1;
+        return WindowController.showTravelConfirmation("Reisen?", "Diese Reise dauert "+route.calculateDuration()+" Sekunden, willst du jetzt segeln?") == 1;
                 }
 
     @Override
@@ -79,6 +80,7 @@ public class NavigationStrategy extends HandlerStrategy implements Tickable {
 
     @Override
     public void mouseMoved(MouseEvent e) {
+    	if(!route.isTravelling()){
         if(toHarbor == null && (toHarbor = getHarbor(e.getX(), e.getY())) != null){
             toHarbor.setNextDestination(true);
             route.setTo(toHarbor);
@@ -88,6 +90,7 @@ public class NavigationStrategy extends HandlerStrategy implements Tickable {
             toHarbor = null;
             route.setTo(null);
         }
+    }
     }
 
 
