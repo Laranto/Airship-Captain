@@ -101,8 +101,7 @@ public class ConstructionPanel extends GameDefaultPanel {
         GridLayout tilesPickerGrid = new GridLayout(entities.size()/2, 2);
         JPanel tilesPickerPanel = new JPanel(tilesPickerGrid);
         for (int i = 0; i < entities.size(); i++) {
-            JButton tileButton = new JButton(entities.get(i).getName());
-            tileButton.setToolTipText("$ "+entities.get(i).getValue());
+            JButton tileButton = new JButton(entities.get(i).getName()+" ($ "+entities.get(i).getValue()+")");
             tileButton.setIcon(new ImageIcon(entities.get(i).getImage()));
             tileButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, entities.get(i));
             tileButton.addActionListener(buttonController);
@@ -135,9 +134,8 @@ public class ConstructionPanel extends GameDefaultPanel {
         JPanel tilesPickerPanel = new JPanel(tilesPickerGrid);
         
         for (int i = 0; i < materials.size(); i++) {
-            JButton tileButton = new JButton(materials.get(i).getName());
+            JButton tileButton = new JButton(materials.get(i).getName()+" ($ "+materials.get(i).getValue()+")");
             tileButton.setIcon(new ImageIcon(materials.get(i).getImage()));
-            tileButton.setToolTipText("$ "+materials.get(i).getValue());
             tileButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, materials.get(i));
             tileButton.addActionListener(buttonController);
             tileButton.setHorizontalAlignment(SwingConstants.LEFT);

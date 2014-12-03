@@ -3,14 +3,14 @@
     <material type="wall" width="2" height="2">
         <name>Wooden wall</name>
         <image>img/wall.png</image>
-        <value>10</value>
-        <durability>30</durability>
+        <value>20</value>
+        <durability>28</durability>
         <weight>20</weight>
     </material>
     <material type="floor" width="2" height="2">
         <name>Wooden planks</name>
         <image>img/floor.png</image>
-        <value>10</value>
+        <value>18</value>
         <durability>30</durability>
         <weight>20</weight>
     </material>    
