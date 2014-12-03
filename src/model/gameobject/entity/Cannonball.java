@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.util.Vector;
 
 import model.gameobject.Renderable;
+import model.gameobject.ShipPart;
 
 import common.Constants;
 
@@ -13,14 +14,20 @@ public class Cannonball implements Renderable{
     private Point from;
     private Point currentPosition;
     private Point to;
-    private Vector<Double> velocity; 
+    private Vector<Double> velocity;
+    private int damage; 
 
     public Cannonball(Point start, int damage) {
         this.from = start;
         this.to = start;
+        this.damage = damage;
         velocity=new Vector<>();
         velocity.add((double) (to.x-from.x));
         velocity.add((double) (to.y-from.y));
+        updateVelocity(damage);
+    }
+
+    private void updateVelocity(int damage) {
         double length=Math.sqrt(Math.pow(velocity.get(0), 2)+Math.pow(velocity.get(1), 2));
         velocity.set(0, velocity.get(0)/length*damage);
         velocity.set(1, velocity.get(1)/length*damage);
@@ -106,7 +113,21 @@ public class Cannonball implements Renderable{
                 (yEnd));
     }
 
+    public void calculateCollision(ShipPart hitShipPart) {
+        if(damage>hitShipPart.getDurability()){
+            damage=damage-hitShipPart.getDurability();
+        }else{
+            damage = 0;
+            hitShipPart.setDurability(hitShipPart.getDurability()-damage);
+        }
+    }
+    
+    public int getDamage() {
+        return damage;
+    }
+
     public void move() {
+        //TODO detect all tiles between current and next current position
         currentPosition.setLocation(currentPosition.x+velocity.get(0), currentPosition.y+velocity.get(1));
     }
 }

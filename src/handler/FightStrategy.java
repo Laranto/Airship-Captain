@@ -107,9 +107,14 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
 
     @Override
     public void tick() {
-        for (Cannonball cannonball : cannonballs) {
-            cannonball.move();
-            
+        for (int i = 0;i<cannonballs.size();i++) {
+            Cannonball cannonball = cannonballs.get(i);
+            if(cannonball!=null){
+                cannonball.move();
+                if(cannonball.getDamage()==0){
+                    cannonballs.remove(i);
+                }
+            }
         }
     }
 }
