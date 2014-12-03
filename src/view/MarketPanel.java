@@ -65,7 +65,6 @@ public class MarketPanel extends GameDefaultPanel {
                                         Constants.WINDOW_WIDTH * 10/100, 
                                         Constants.WINDOW_HEIGHT * 21/25, 
                                         36);
-        updateMoneyLabel();
         add(moneyLabel);
         
         
@@ -188,12 +187,9 @@ public class MarketPanel extends GameDefaultPanel {
                 Constants.WINDOW_HEIGHT, 
                 null                            /*Image Observer*/
         );
-        updateMoneyLabel();
-    }
-    
-    public static void updateMoneyLabel()
-    {
-
+        
+        //updating the moneyLabel
         moneyLabel.setText("$ "+ (GameState.getInstance().getAirship().getCaptain().getMoney().getAmount())  );
     }
+    
 }

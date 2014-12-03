@@ -31,7 +31,7 @@ public class Airship extends GameObject implements Renderable{
         equipment   = new Entity[Constants.AIRSHIP_WIDTH_TILES][Constants.AIRSHIP_HEIGHT_TILES];
         isEmpty=true;
         captain = new Captain();
-        this.stock = new Stock();
+        this.stock = new Stock(true);
         this.setName(Constants.AIRSHIP_NAME_DEFAULT);
         isRotated=false;
         //TODO has to be calculated (e.x. the amount of engines the ship has)

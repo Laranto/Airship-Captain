@@ -15,9 +15,17 @@ public class Stock implements Serializable{
     private List<StockItem> wareList;
 
     
-    public Stock() {
+    public Stock(boolean emptyStock)
+    {
         wareList = new ArrayList<StockItem>();
-        initStock();
+        if(!emptyStock)
+        {
+            initStock();
+        }
+    }
+    
+    public Stock() {
+        this(false);
     }
     
     /*
