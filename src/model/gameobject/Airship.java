@@ -480,5 +480,11 @@ public class Airship extends GameObject implements Renderable{
         return isEmpty;
     }
 
+    public void resetRotation() {
+        if(isRotated){
+            rotate();
+        }
+    }
+
 
 }

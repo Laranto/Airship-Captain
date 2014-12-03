@@ -19,7 +19,7 @@ public class Weapon extends Entity {
     }
 
     public Cannonball aim(){
-        return new Cannonball(new Point((int)(getPosition().getX()+getSize().getWidth())*Constants.TILE_SIZE, (int)((getPosition().getY()+getSize().getHeight()/2)*Constants.TILE_SIZE)));
+        return new Cannonball(new Point((int)(getPosition().getX()+getSize().getWidth())*Constants.TILE_SIZE, (int)((getPosition().getY()+getSize().getHeight()/2)*Constants.TILE_SIZE)),getDamage());
     };
     public void fire(){
         System.out.println("Die Kanone trifft: "+aim.getX()+"/"+aim.getY());

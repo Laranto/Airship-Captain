@@ -16,11 +16,11 @@ import common.Constants;
 import common.enums.MenuItemEnum;
 import controller.WindowController;
 
-public class FightStrategy extends HandlerStrategy {
+public class FightStrategy extends HandlerStrategy implements Tickable{
 
     private Entity activeEntity;
     private boolean isCannonActive = false;
-    private static LinkedList<Cannonball> cannonballs = new LinkedList<Cannonball>();
+    private LinkedList<Cannonball> cannonballs = new LinkedList<Cannonball>();
 	private Scenario scenario;
     
     public FightStrategy(Scenario scenario){
@@ -72,6 +72,7 @@ public class FightStrategy extends HandlerStrategy {
         case EXIT_FIGHT:
             System.out.println("escape from battle");
             scenario.setActive(false);
+            GameState.getInstance().getAirship().resetRotation();
             WindowController.showNavigation();
             break;
         case ROTATE_SHIP:
@@ -96,11 +97,19 @@ public class FightStrategy extends HandlerStrategy {
         }
     }
     
-    public static LinkedList<Cannonball> getCannonballs(){
+    public LinkedList<Cannonball> getCannonballs(){
         return cannonballs;
     }
     
-    public static void removeCannonball(Cannonball cannonball){
+    public void removeCannonball(Cannonball cannonball){
         cannonballs.remove(cannonball);
+    }
+
+    @Override
+    public void tick() {
+        for (Cannonball cannonball : cannonballs) {
+            cannonball.move();
+            
+        }
     }
 }
