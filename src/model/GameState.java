@@ -35,7 +35,7 @@ public class GameState {
     
     public void setCurrentHarbor(Harbor harbor)
     {
-    	if(harbor != null){
+    	if(this.harbor != null){
     		this.harbor.setActive(false);
     	}
     	harbor.setActive(true);
