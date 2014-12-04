@@ -1,12 +1,6 @@
 package model.economy;
 
-import java.util.ArrayList;
-
-import view.MarketPanel;
 import model.GameState;
-import model.factory.WareFactory;
-import common.Constants;
-import common.Utils;
 import controller.WindowController;
 
 public class Market {
