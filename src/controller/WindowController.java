@@ -3,26 +3,23 @@ package controller;
 import handler.Tickable;
 
 import java.io.File;
-
-import javax.swing.JFileChooser;
-
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import model.GameState;
-import model.navigation.Scenario;
 import view.ConstructionPanel;
-import view.FightPanel;
 import view.HarborPanel;
 import view.MainMenuPanel;
 import view.MarketPanel;
 import view.NavigationPanel;
 import view.SettingsPanel;
+
 import common.Constants;
 
 /**

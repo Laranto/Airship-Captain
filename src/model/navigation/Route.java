@@ -84,36 +84,35 @@ public class Route implements Renderable{
             int radius = (int)Constants.HARBOR_CIRCLE_DIAMETER/2;
             Point2D fromPosition = new Point((int)getFrom().getPosition().getX()+radius, (int)getFrom().getPosition().getY()+radius);
             Point2D toPosition = new Point((int)to.getPosition().getX()+radius, (int)to.getPosition().getY()+radius); 
-            line = new Line2D.Double(fromPosition, toPosition);
-            Stroke tmp = g.getStroke();
-//            g.setStroke(new BasicStroke(4, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0));
-            g.setStroke(Constants.STROKE_SOLID);
-            g.draw(line);
             if(isTravelling()){
-            	Color tmpCol = g.getColor();
-            	Point2D currentPosition = new Point((int)toPosition.getX()-directedStep.get(0)*remainingDuration, 
-            										(int)toPosition.getY()-directedStep.get(1)*remainingDuration);
-            	Shape progressLine = new Line2D.Double(fromPosition, currentPosition);
-            	g.setStroke(Constants.STROKE_DASHED);
-            	g.setColor(Color.red);
-            	g.draw(progressLine);
-            	g.setColor(tmpCol);
+            	drawTravelLine(g, fromPosition, toPosition);
+            }else{
+                drawLines(g, fromPosition, toPosition);
             }
-            g.setStroke(tmp);
             getFrom().render(g);
-            to.render(g);
+            getTo().render(g);
         }
     }
 
-    public void removeLines(Graphics2D g) {
-        if(!isCorrectRoute() && line != null){
-            g.clearRect(
-                    (int)line.getBounds().getX(), 
-                    (int)line.getBounds().getY(), 
-                    (int)line.getBounds().getWidth(),
-                    (int)line.getBounds().getHeight());
-            line = null;
-        }
+    private void drawTravelLine(Graphics2D g, Point2D fromPosition, Point2D toPosition) {
+        Point2D currentPosition = new Point((int)toPosition.getX()-directedStep.get(0)*remainingDuration, 
+        									(int)toPosition.getY()-directedStep.get(1)*remainingDuration);
+        Shape progressLine = new Line2D.Double(fromPosition, currentPosition);
+        Color tmpCol = g.getColor();
+        Stroke tmpStroke = g.getStroke();
+        g.setStroke(Constants.STROKE_DASHED);
+        g.setColor(Color.red);
+        g.draw(progressLine);
+        g.setStroke(tmpStroke);
+        g.setColor(tmpCol);
+    }
+
+    private void drawLines(Graphics2D g, Point2D fromPosition, Point2D toPosition) {
+        line = new Line2D.Double(fromPosition, toPosition);
+        Stroke tmp = g.getStroke();
+        g.setStroke(Constants.STROKE_SOLID);
+        g.draw(line);
+        g.setStroke(tmp);
     }
 
     public void startTravel() {

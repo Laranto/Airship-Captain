@@ -65,7 +65,7 @@ public class NavigationPanel extends GameDefaultPanel {
     @Override
     public void paintComponent(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
-        ((NavigationStrategy)strategy).getRoute().removeLines(g2);
+//        ((NavigationStrategy)strategy).getRoute().removeLines(g2);
         g2.drawImage(
                 image, 
                 0,                              /*start x position*/

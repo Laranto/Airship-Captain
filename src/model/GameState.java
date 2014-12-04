@@ -1,8 +1,5 @@
 package model;
 
-import java.awt.Point;
-
-import model.economy.Market;
 import model.gameobject.Airship;
 import model.navigation.Harbor;
 
@@ -39,7 +36,7 @@ public class GameState {
     public void setCurrentHarbor(Harbor harbor)
     {
     	if(harbor != null){
-    		harbor.setActive(false);
+    		this.harbor.setActive(false);
     	}
     	harbor.setActive(true);
     	harbor.setNextDestination(false);

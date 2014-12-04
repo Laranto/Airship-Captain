@@ -18,7 +18,7 @@ public class NavigationStrategy extends HandlerStrategy implements Tickable {
     private Route route;
     
     public NavigationStrategy(){
-        route = new Route(GameState.getInstance().getCurrentHarbor());
+        route = new Route();
         WindowController.getTickables().add(this);
     }
     
