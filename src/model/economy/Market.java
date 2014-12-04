@@ -22,14 +22,13 @@ public class Market {
         if(amount == 0){return;}
         double totalCosts = ware.getPrice()*amount;
         Money captainMoney = GameState.getInstance().getAirship().getCaptain().getMoney();
-        if(captainMoney.getAmount() >= totalCosts)
-        {
+        try{
+            GameState.getInstance().getAirship().getCaptain().getMoney().removeAmount(ware.getPrice()*amount);
             StockItem marketItem = getStock().addTradeableWare(ware, -amount);
             StockItem airshipItem = GameState.getInstance().getAirship().getStock().addTradeableWare(ware, amount);
             
-            GameState.getInstance().getAirship().getCaptain().getMoney().removeAmount(ware.getPrice()*amount);
             Economy.calculateNewPriceFor(marketItem, airshipItem);
-        }else{
+        }catch(ArithmeticException exp){
             WindowController.showError("No Money", "You don't have enough money, you need : "+totalCosts+", but you have only: "+captainMoney.getAmount());
         }
     }

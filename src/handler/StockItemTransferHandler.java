@@ -20,8 +20,8 @@ import model.GameState;
 import model.economy.StockItem;
 import model.economy.StockItemTransferable;
 import model.economy.Ware;
-
 import common.Character;
+import controller.WindowController;
 
 public class StockItemTransferHandler extends TransferHandler {
     private static final long serialVersionUID = 1L;
@@ -72,7 +72,7 @@ public class StockItemTransferHandler extends TransferHandler {
                     }
                 }
             } catch (Exception exp) {
-                exp.printStackTrace();
+                WindowController.showError("Transfer Error", exp.getMessage());
             }
         }
         return accept;

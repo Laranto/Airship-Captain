@@ -1,7 +1,6 @@
 package model.economy;
 
 import java.io.Serializable;
-import java.text.NumberFormat;
 
 public class Money implements Serializable {
 
@@ -16,10 +15,11 @@ public class Money implements Serializable {
         this.amount = startAmount;
     }
 
-    public void removeAmount(double amount) {
-        if (this.amount - amount >= 0) {
-            this.amount -= amount;
+    public void removeAmount(double amount) throws ArithmeticException {
+        if (this.amount - amount < 0) {
+            throw new ArithmeticException("You need "+amount+" but only have "+this.amount+".");
         }
+        this.amount -= amount;
         this.formatAmount();
     }
 
