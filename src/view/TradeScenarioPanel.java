@@ -1,7 +1,5 @@
 package view;
 
-import handler.TableStockModel;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -9,14 +7,14 @@ import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JTable;
 
 import model.economy.Stock;
 import model.navigation.TradeScenario;
-import common.Character;
+
 import common.Constants;
 import common.FileUtils;
 import common.enums.MenuItemEnum;
+
 import controller.WindowController;
 
 public class TradeScenarioPanel extends MarketPanel {
@@ -51,16 +49,10 @@ public class TradeScenarioPanel extends MarketPanel {
     }
     
     @Override
-    protected JTable getOpponentTable() {
-        JTable opponentTable = new JTable(new TableStockModel(Character.OPPONENT){
-            @Override
-            protected Stock getStock() {
-                if(stock == null){
-                    stock = new Stock();
-                }
-                return stock;
-            }
-        });
-        return opponentTable;
+    protected Stock getOpponentStock() {
+        if(stock == null){
+            stock = new Stock();
+        }
+        return stock;
     }
 }

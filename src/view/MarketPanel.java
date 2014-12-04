@@ -24,13 +24,13 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import model.GameState;
+import model.economy.Economy;
 import model.economy.Stock;
-
+import model.economy.StockItem;
 import common.Character;
 import common.Constants;
 import common.FileUtils;
 import common.enums.MenuItemEnum;
-
 import controller.ButtonController;
 
 public class MarketPanel extends GameDefaultPanel {
@@ -162,16 +162,34 @@ public class MarketPanel extends GameDefaultPanel {
     }
     
     
-    protected JTable getOpponentTable() {
+    private JTable getOpponentTable() {
+        adjustAirshipPrices();
         JTable opponentTable = new JTable(new TableStockModel(Character.OPPONENT){
             @Override
             protected Stock getStock() {
-                return GameState.getInstance().getCurrentHarbor().getMarket().getStock();
+                return getOpponentStock();
             }
         });
         return opponentTable;
     }
     
+    protected Stock getOpponentStock(){
+        return GameState.getInstance().getCurrentHarbor().getMarket().getStock();
+    }
+    
+    private void adjustAirshipPrices() {
+        StockItem airshipItem = null;
+        for(StockItem marketItem: getOpponentStock().getWarelist()){
+            if((airshipItem = getItemOnAirship(marketItem)) != null){
+                Economy.calculateNewPriceFor(marketItem, airshipItem);
+            }
+        }
+    }
+
+    private StockItem getItemOnAirship(StockItem stockItem) {
+        return GameState.getInstance().getAirship().getStock().getStockItemByWareName(stockItem.getWare().getName());
+    }
+
     @Override
     public void paintComponent(Graphics g){
         if(!isCreated){
