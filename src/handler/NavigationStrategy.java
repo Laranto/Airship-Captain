@@ -57,6 +57,8 @@ public class NavigationStrategy extends HandlerStrategy implements Tickable {
 				if (wantsToTravel()) {
 					route.setTo(toHarbor);
 					route.startTravel();
+					setChanged();
+					notifyObservers();
 				}
 		}
     }
@@ -99,7 +101,10 @@ public class NavigationStrategy extends HandlerStrategy implements Tickable {
     @Override
     public void tick() {
         if(route.getRemainingDuration() != 0 && !route.hasActiveScenario()){
-            route.travel();
+            if(!route.travel()){
+                setChanged();
+                notifyObservers();
+            }
         }
     }
 }

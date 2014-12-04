@@ -10,10 +10,10 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
 import model.navigation.Harbor;
+import view.swing.ObserverButton;
 
 import common.Constants;
 import common.FileUtils;
@@ -38,7 +38,9 @@ public class NavigationPanel extends GameDefaultPanel {
             e.printStackTrace();
         }
         
+        ObserverButton harbor = new ObserverButton(MenuItemEnum.HARBOR.text());
         strategy = new NavigationStrategy();
+        strategy.addObserver(harbor);
         InputController inputController = new InputController(strategy);
         ButtonController buttonController = new ButtonController(strategy);
         addMouseListener(inputController);
@@ -48,7 +50,6 @@ public class NavigationPanel extends GameDefaultPanel {
         
         setLayout(null);
         
-        JButton harbor = new JButton(MenuItemEnum.HARBOR.text());
         harbor.setIcon(icon);
         harbor.putClientProperty(Constants.BUTTON_PROPERTY_ID, MenuItemEnum.HARBOR);
         harbor.addActionListener(buttonController);

@@ -134,11 +134,13 @@ public class Route implements Renderable{
         return scenario == null?false:scenario.isActive();
     }
 
-    public void travel() {
+    public boolean travel() {
         travelStep();
         if(getRemainingDuration()==0){          
             endTravel();
+            return false;
         }
+        return true;
     }
 
     private void travelStep() {
