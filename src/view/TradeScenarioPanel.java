@@ -2,6 +2,7 @@ package view;
 
 import handler.TableStockModel;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
@@ -11,21 +12,24 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 
 import model.economy.Stock;
-
+import model.navigation.TradeScenario;
 import common.Character;
 import common.Constants;
 import common.FileUtils;
 import common.enums.MenuItemEnum;
+import controller.WindowController;
 
 public class TradeScenarioPanel extends MarketPanel {
     private static final long serialVersionUID = 1L;
     private Stock stock = null;
-    private ActionListener exitListener;
+    private TradeScenario scenario;
 
-    public TradeScenarioPanel(ActionListener exitListener){
-        this.exitListener = exitListener;
+    public TradeScenarioPanel(TradeScenario scenario) {
+        this.scenario = scenario;
+        
     }
-    
+
+
     @Override
     protected JButton createButton() {
         try {
@@ -35,7 +39,14 @@ public class TradeScenarioPanel extends MarketPanel {
         }
         JButton navigation = new JButton(MenuItemEnum.NAVIGATION_MAP.text());
         navigation.setIcon(icon);
-        navigation.addActionListener(exitListener);
+        navigation.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                scenario.setActive(false);
+                WindowController.showNavigation();
+            }
+        });
         return navigation;
     }
     

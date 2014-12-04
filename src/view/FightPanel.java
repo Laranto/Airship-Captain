@@ -10,10 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import model.GameState;
-import model.factory.ScenarioFactory;
 import model.gameobject.Airship;
 import model.gameobject.entity.Cannonball;
-import model.navigation.Scenario;
+import model.navigation.FightScenario;
 
 import common.Constants;
 import common.enums.MenuItemEnum;
@@ -29,12 +28,11 @@ public class FightPanel extends GameDefaultPanel {
     
     
     
-    public FightPanel(Scenario scenario) {
+    public FightPanel(FightScenario scenario) {
         this.setDoubleBuffered(true);
         this.setFocusable(true);
         
         enemy = scenario.getEnemy();
-        
         strategy = new FightStrategy(scenario);
         addMouseListener(new InputController(strategy));
         addMouseMotionListener(new InputController(strategy));

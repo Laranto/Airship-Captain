@@ -12,7 +12,6 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.text.NumberFormat;
 
 import javax.swing.DropMode;
 import javax.swing.ImageIcon;
@@ -42,7 +41,7 @@ public class MarketPanel extends GameDefaultPanel {
     private boolean isCreated = false;
     
     //TODO: ask arni or suter about this problem
-    private static JLabel moneyLabel;
+    private static JLabel moneyLabel = new JLabel("");
     
     
     public MarketPanel() {}
