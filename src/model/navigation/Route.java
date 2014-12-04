@@ -163,9 +163,6 @@ public class Route implements Renderable{
 
     private void endTravel() {
     	System.out.println("Ended Travelling!");
-        GameState.getInstance().getCurrentHarbor().setActive(false);
-        to.setActive(true);
-        to.setNextDestination(false);
         GameState.getInstance().setCurrentHarbor(to);
     }
 

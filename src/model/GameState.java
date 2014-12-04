@@ -38,6 +38,11 @@ public class GameState {
     
     public void setCurrentHarbor(Harbor harbor)
     {
+    	if(harbor != null){
+    		harbor.setActive(false);
+    	}
+    	harbor.setActive(true);
+    	harbor.setNextDestination(false);
         this.harbor = harbor;
     }
     

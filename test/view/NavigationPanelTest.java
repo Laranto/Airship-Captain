@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.JFrame;
 
+import model.GameState;
+
 import org.junit.Test;
 
 import common.Constants;
@@ -17,7 +19,7 @@ public class NavigationPanelTest {
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setVisible(true);
-        frame.setVisible(true);
+        GameState.getInstance().setCurrentHarbor(Constants.HARBORS.get(0));
         WindowController.setFrame(frame);
         WindowController.showNavigation();
         while(true){

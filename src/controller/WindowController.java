@@ -69,7 +69,6 @@ public class WindowController{
     public static void showHarbor(){
     	if(harborPanel == null){
                 if(GameState.getInstance().getCurrentHarbor() == null){
-                    Constants.HARBORS.get(0).setActive(true);
                     GameState.getInstance().setCurrentHarbor(Constants.HARBORS.get(0));
                 }
     		harborPanel = new HarborPanel();
