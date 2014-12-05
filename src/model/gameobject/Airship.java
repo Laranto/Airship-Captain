@@ -57,8 +57,8 @@ public class Airship extends GameObject implements Renderable{
         }
        //Nothing on that tile yet
         if(inBounds(tileX, tileY) && shipBody[tileX][tileY] == null && mat!=null){
-            GameState.getInstance().getAirship().getCaptain().getMoney().removeAmount(mat.getValue());
             if(isEmpty || hasAdjacentTile(tileX,tileY)){
+                GameState.getInstance().getAirship().getCaptain().getMoney().removeAmount(mat.getValue());
                 shipBody[tileX][tileY] = (Material) MaterialFactory.getInstance().instanzise(mat);
                 isEmpty=false;
                 return true;
@@ -83,9 +83,9 @@ public class Airship extends GameObject implements Renderable{
             tileY = rotateSelectedY(tileY);
         }
         if(entity!=null && inBounds(tileX, tileY)){
-            GameState.getInstance().getAirship().getCaptain().getMoney().removeAmount(entity.getValue());
             List<Point> checkedPoints = new LinkedList<>();
             if(canPlaceEntity(entity,tileX,tileY,checkedPoints)){
+                GameState.getInstance().getAirship().getCaptain().getMoney().removeAmount(entity.getValue());
                 Entity placedEntity = (Entity) EntityFactory.getInstance().instanzise(entity);
                 placeEntityOnGrid(tileX, tileY, placedEntity);
                 for (Point point : checkedPoints) {
