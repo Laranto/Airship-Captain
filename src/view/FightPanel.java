@@ -91,8 +91,12 @@ public class FightPanel extends GameDefaultPanel {
         enemy.render(g2);
         controlMenu.repaint();
         g2.translate(-Constants.WINDOW_WIDTH/2, 0);
-        for(Cannonball cannonball: strategy.getCannonballs()){
-            cannonball.render(g2);
+        Cannonball cannonball = null;
+        for(int i=0; i < strategy.getCannonballs().size(); i++){
+            cannonball = strategy.getCannonballs().get(i); 
+            if(cannonball != null){
+                cannonball.render(g2);
+            }
         }
     }
 }

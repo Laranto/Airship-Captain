@@ -36,6 +36,13 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
         }
         int tileX = e.getX() / Constants.TILE_SIZE;
         int tileY = e.getY() / Constants.TILE_SIZE;
+        
+        if(isCannonActive){
+            cannonballs.getLast().fire();
+            ((Weapon)activeEntity).reload();
+            activeEntity = null;
+            isCannonActive = false;
+        }
         if(tileX < Constants.AIRSHIP_WIDTH_TILES && tileY < Constants.AIRSHIP_HEIGHT_TILES){
             if(activeEntity == null){
                 activeEntity = GameState.getInstance().getAirship().getEntity(tileX, tileY);
@@ -43,13 +50,6 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
             if(activeEntity instanceof Weapon){
                 cannonballs.addLast(((Weapon)activeEntity).aim());
                 isCannonActive = true;
-            }
-        }else{
-            if(isCannonActive){
-                cannonballs.getLast().fire();
-                ((Weapon)activeEntity).reload();
-                activeEntity = null;
-                isCannonActive = false;
             }
         }
     }
