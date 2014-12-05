@@ -20,7 +20,7 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
 
     private Entity activeEntity;
     private boolean isCannonActive = false;
-    private LinkedList<Cannonball> cannonballs = new LinkedList<Cannonball>();
+    private static LinkedList<Cannonball> cannonballs = new LinkedList<Cannonball>();
 	private Scenario scenario;
     
     public FightStrategy(Scenario scenario){
@@ -101,7 +101,7 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
         return cannonballs;
     }
     
-    public void removeCannonball(Cannonball cannonball){
+    public static void removeCannonball(Cannonball cannonball){
         cannonballs.remove(cannonball);
     }
 

@@ -7,12 +7,12 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import model.GameState;
 import model.economy.Stock;
 import model.factory.EntityFactory;
 import model.factory.MaterialFactory;
 import model.gameobject.entity.Blocker;
 import model.gameobject.material.Floor;
-
 import common.Constants;
 
 public class Airship extends GameObject implements Renderable{
@@ -50,13 +50,14 @@ public class Airship extends GameObject implements Renderable{
     /**
      * Places a new instance of the given material at the given location. Only possible if the location is empty space.
      */
-    public boolean placeMaterial(Material mat, int tileX, int tileY){
+    public boolean placeMaterial(Material mat, int tileX, int tileY) throws ArithmeticException{
         if(isRotated){
             tileX = rotateSelectedX(tileX);
             tileY = rotateSelectedY(tileY);
         }
        //Nothing on that tile yet
         if(inBounds(tileX, tileY) && shipBody[tileX][tileY] == null && mat!=null){
+            GameState.getInstance().getAirship().getCaptain().getMoney().removeAmount(mat.getValue());
             if(isEmpty || hasAdjacentTile(tileX,tileY)){
                 shipBody[tileX][tileY] = (Material) MaterialFactory.getInstance().instanzise(mat);
                 isEmpty=false;
@@ -76,12 +77,13 @@ public class Airship extends GameObject implements Renderable{
      * @param entity Entity in the state, in which it should be placed 
 
      */
-    public boolean placeEntity(Entity entity, int tileX, int tileY){
+    public boolean placeEntity(Entity entity, int tileX, int tileY) throws ArithmeticException{
         if(isRotated){
             tileX = rotateSelectedX(tileX);
             tileY = rotateSelectedY(tileY);
         }
         if(entity!=null && inBounds(tileX, tileY)){
+            GameState.getInstance().getAirship().getCaptain().getMoney().removeAmount(entity.getValue());
             List<Point> checkedPoints = new LinkedList<>();
             if(canPlaceEntity(entity,tileX,tileY,checkedPoints)){
                 Entity placedEntity = (Entity) EntityFactory.getInstance().instanzise(entity);

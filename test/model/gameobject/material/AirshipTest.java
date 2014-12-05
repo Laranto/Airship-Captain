@@ -29,8 +29,8 @@ public class AirshipTest {
         aship = new Airship();
         tFloor = new Floor("testF", 1, 1, 1, "");
         tWall = new Floor("testW", 1, 1, 1, "");
-        tEntity = new Weapon("testWeapon", 1, 1, 1, "", Constants.ENTITY_ORIENTATION_RIGHT, new Dimension(2, 1));
-        tEntity2 = new Weapon("testWeapon2", 1, 1, 1, "", Constants.ENTITY_ORIENTATION_RIGHT, new Dimension(2, 1));
+        tEntity = new Weapon("testWeapon", 1, 1, 1, "", Constants.ENTITY_ORIENTATION_RIGHT, new Dimension(2, 1), 5);
+        tEntity2 = new Weapon("testWeapon2", 1, 1, 1, "", Constants.ENTITY_ORIENTATION_RIGHT, new Dimension(2, 1), 5);
     }
 
     

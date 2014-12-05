@@ -1,5 +1,6 @@
 package model.economy;
 
+import model.GameState;
 import common.Constants;
 
 public class Economy {
@@ -25,8 +26,8 @@ public class Economy {
      */
     public static double calculatePrice(int currentAmount, int pricePerHundred)
     {
+        //TODO: regressive Berechnung des Preises.
         double newPrice = (pricePerHundred + pricePerHundred * (( ( (Constants.WARE_STANDARD_AMOUNT - currentAmount) / Constants.WARE_STANDARD_AMOUNT) ) ));
-        
         if (newPrice < pricePerHundred / Constants.WARE_MAX_INFLATION_FACTOR) {
             newPrice = pricePerHundred / Constants.WARE_MAX_INFLATION_FACTOR;
         } else if (newPrice > pricePerHundred * Constants.WARE_MAX_INFLATION_FACTOR) {

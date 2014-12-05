@@ -14,8 +14,9 @@ public class Weapon extends Entity {
     private int ammunition;
     private Point aim;
 
-    public Weapon(String name , int value , int weight , int durability , String imagePath , Vector<Integer> orientation , Dimension size) {
+    public Weapon(String name , int value , int weight , int durability , String imagePath , Vector<Integer> orientation , Dimension size, int damage) {
         super(name , value , weight , durability , imagePath , orientation , size);
+        this.damage = damage;
     }
 
     public Cannonball aim(){

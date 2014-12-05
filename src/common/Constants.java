@@ -26,6 +26,8 @@ public class Constants {
     public static final String ZEPPLIN_COCKPIT_BACKGROUND_IMAGE = "resources/panels/img/zepplin_cockpit.png";
     public static final String COMPASS_IMAGE = "resources/panels/img/compass.png";
     public static final String MARKET_BACKGROUND_IMAGE = "resources/panels/img/market.jpg";
+    public static final String CANNONBALL_IMAGE = "resources/object/weapons/img/cannonball.png";
+    public static final int CANNONBALL_SIZE = 10;
     
     
     public static final String XML_FILE_ENDING = ".xml";
@@ -80,7 +82,7 @@ public class Constants {
     
     public static final double WARE_STANDARD_AMOUNT = 100;
     public static final double WARE_MAX_INFLATION_FACTOR = 5;
-    public static final double WARE_SELL_RATIO = 0.8;    
+    public static final double WARE_SELL_RATIO = 0.5;    
     
     public static final double OBJECT_SELL_RATIO = 0.7;
     
@@ -111,7 +113,4 @@ public class Constants {
 	public static final Stroke STROKE_DASHED = new BasicStroke(4, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, 10, new float[]{10f},0);
 	public static final Stroke STROKE_SOLID = new BasicStroke(4);
 
-
-    
-    
 }

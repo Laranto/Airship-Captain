@@ -46,9 +46,7 @@ public class ConstructionStrategy extends HandlerStrategy {
                 }
                 
             }else if (tileX < Constants.AIRSHIP_WIDTH_TILES && tileY < Constants.AIRSHIP_HEIGHT_TILES) {
-                GameObject gameObject = (GameObject)activePlacement;
                 try{
-                GameState.getInstance().getAirship().getCaptain().getMoney().removeAmount(gameObject.getValue()); 
                     if(activePlacement instanceof Material){
                         GameState.getInstance().getAirship().placeMaterial((Material)activePlacement, tileX, tileY);
                     }

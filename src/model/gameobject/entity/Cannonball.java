@@ -1,133 +1,125 @@
 package model.gameobject.entity;
 
+import handler.FightStrategy;
+
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Vector;
 
+import model.GameState;
 import model.gameobject.Renderable;
 import model.gameobject.ShipPart;
-
 import common.Constants;
+import common.FileUtils;
 
-public class Cannonball implements Renderable{
+public class Cannonball implements Renderable {
 
     private Point from;
     private Point currentPosition;
     private Point to;
     private Vector<Double> velocity;
-    private int damage; 
+    private BufferedImage image;
+    private int damage;
 
     public Cannonball(Point start, int damage) {
         this.from = start;
         this.to = start;
         this.damage = damage;
-        velocity=new Vector<>();
-        velocity.add((double) (to.x-from.x));
-        velocity.add((double) (to.y-from.y));
-        updateVelocity(damage);
+        velocity = new Vector<Double>();
+        velocity.add(0.0);
+        velocity.add(0.0);
+        try {
+            this.image = FileUtils.loadImage(new File(
+                    Constants.CANNONBALL_IMAGE));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void updateVelocity(int damage) {
-        double length=Math.sqrt(Math.pow(velocity.get(0), 2)+Math.pow(velocity.get(1), 2));
-        velocity.set(0, velocity.get(0)/length*damage);
-        velocity.set(1, velocity.get(1)/length*damage);
-    }
-
-    public void aim(Point to){
+    public void aim(Point to) {
         this.to = to;
     }
-    
-    public void fire(){
-        currentPosition = from;
+
+    private void updateVelocity() {
+        double length = Math.sqrt(Math.pow(velocity.get(0), 2)
+                + Math.pow(velocity.get(1), 2));
+        velocity.set(0, velocity.get(0) / length * damage);
+        velocity.set(1, velocity.get(1) / length * damage);
     }
-    
-    public Point getFrom(){
+
+    public void fire() {
+        velocity.set(0, (double) (to.getX() - from.getX()));
+        velocity.set(1, (double) (to.getY() - from.getY()));
+        currentPosition = new Point(from);
+    }
+
+    public Point getFrom() {
         return from;
     }
-    
-    public Point getTo(){
+
+    public Point getTo() {
         return to;
     }
-    
+
     private boolean isFiring() {
         return currentPosition != null;
     }
 
     @Override
     public void render(Graphics2D g) {
-        if(isFiring()){
-            //TODO:
-            //1. draw cannonball
-            //2. reposition cannonball
-//            if(currentPosition.equals(to)){
-//                FightStrategy.removeCannonball(this);
-//            }
+        if (isFiring()) {
+            g.drawImage(image, (int) currentPosition.getX(), /* start x position */
+                    (int) currentPosition.getY(), /* start y position */
+                    Constants.CANNONBALL_SIZE, Constants.CANNONBALL_SIZE, null); /*
+                                                                                  * Image
+                                                                                  * Observer
+                                                                                  */
+            if (removeCannonball()) {
+                System.out.println("cannon removed");
+                FightStrategy.removeCannonball(this);
+            }
+            updateVelocity();
+            Point start = new Point(currentPosition);
+            move();
+            handleDamage(start, currentPosition);
+        } else {
+            int xStart = (int) getFrom().getX(), yStart = (int) getFrom()
+                    .getY(), xEnd = ((int) getTo().getX()), yEnd = ((int) getTo()
+                    .getY());
+
+            g.setColor(Constants.HARBOR_CIRCLE_BACKGROUND_ACTIVE);
+            g.drawLine(xStart, yStart, (xEnd), (yEnd));
         }
-//        System.out.println(
-//                "xStart: "+(int)getFrom().getX()+
-//                " yStart: "+(int)getFrom().getY()+
-//                " xEnd: "+((int)getTo().getX())+
-//                " yEnd: "+((int)getTo().getY()));
-//        g.setColor(Constants.HARBOR_CIRCLE_BACKGROUND_ACTIVE);
-//        g.drawLine(
-//                (int)getFrom().getX(), 
-//                (int)getFrom().getY(), 
-//                (int)getTo().getX(), 
-//                (int)getTo().getY());
+    }
+
+    private void handleDamage(Point start, Point end) {
         
-        int xStart = (int)getFrom().getX(),
-            yStart = (int)getFrom().getY(),
-            xEnd = ((int)getTo().getX()),
-            yEnd = ((int)getTo().getY());
-        
-        System.out.println(
-                "xStart: "+xStart+
-                " yStart: "+yStart+
-                " xEnd: "+xEnd+
-                " yEnd: "+yEnd);
-        
-        double m =  0;
-        if(yStart-yEnd != 0 || xEnd-xStart != 0){
-            m = (double)(yStart-yEnd)/(xEnd-xStart);
-        }
-        int xDistance = Constants.WINDOW_WIDTH-xEnd;
-        int yDistance = Math.min(Constants.WINDOW_HEIGHT-yEnd, yEnd);
-        if(xDistance < yDistance){
-            yDistance *= m;
-        }else{
-            xDistance *= m;
-        }
-        System.out.println(
-                " m: "+m+
-                " xDistance: "+xDistance+
-                " yDistance: "+yDistance+
-                " xStart new: "+xStart+
-                " yStart new: "+yStart+
-                " xEnd new: "+(xEnd)+
-                " yEnd new: "+(yEnd));
-        g.setColor(Constants.HARBOR_CIRCLE_BACKGROUND_ACTIVE);
-        g.drawLine(
-                xStart, 
-                yStart, 
-                (xEnd), 
-                (yEnd));
+    }
+
+    private boolean removeCannonball() {
+        return currentPosition.getX() < 0 || currentPosition.getX() > Constants.WINDOW_WIDTH || 
+                currentPosition.getY() < 0 || currentPosition.getY() > Constants.WINDOW_HEIGHT;
     }
 
     public void calculateCollision(ShipPart hitShipPart) {
-        if(damage>hitShipPart.getDurability()){
-            damage=damage-hitShipPart.getDurability();
-        }else{
+        if (damage > hitShipPart.getDurability()) {
+            damage = damage - hitShipPart.getDurability();
+        } else {
             damage = 0;
-            hitShipPart.setDurability(hitShipPart.getDurability()-damage);
+            hitShipPart.setDurability(hitShipPart.getDurability() - damage);
         }
     }
-    
+
     public int getDamage() {
         return damage;
     }
 
     public void move() {
-        //TODO detect all tiles between current and next current position
-        currentPosition.setLocation(currentPosition.x+velocity.get(0), currentPosition.y+velocity.get(1));
+        // TODO detect all tiles between current and next current position
+        currentPosition.setLocation(currentPosition.getX() + velocity.get(0),
+                currentPosition.getY() + velocity.get(1));
     }
 }
