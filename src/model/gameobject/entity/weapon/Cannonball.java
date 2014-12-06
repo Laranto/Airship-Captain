@@ -86,7 +86,7 @@ public class Cannonball implements Renderable {
         // TODO detect all tiles between current and next current position
 //        updateVelocity();
         int remainingMove = damage;
-        while(remainingMove>radius){
+        while(remainingMove>radius&&!isOutOfBounds()){
             Vector2d move = new Vector2d(direction).multiply(radius);
             currentPosition.setLocation(currentPosition.getX() + move.getX(),
                     currentPosition.getY() + move.getY());
@@ -102,17 +102,23 @@ public class Cannonball implements Renderable {
     }
 
     private void checkCollision(Airship... airships) {
-        int x = (int)(currentPosition.getX()+radius)/Constants.TILE_SIZE;
-        int yTop=(int)(currentPosition.getY())/Constants.TILE_SIZE;
-        int yBot=(int)(currentPosition.getY()+2*radius)/Constants.TILE_SIZE;
-        if(yBot==yTop){
-            calculateCollision(airships[(int)(x/Constants.AIRSHIP_WIDTH_TILES)].getShipPartByPosition(x%Constants.AIRSHIP_WIDTH_TILES, yTop));
-        }else{
-            calculateCollision(airships[(int)(x/Constants.AIRSHIP_WIDTH_TILES)].getShipPartByPosition(x%Constants.AIRSHIP_WIDTH_TILES, yTop));
-            if(damage>0){
-                calculateCollision(airships[(int)(x/Constants.AIRSHIP_WIDTH_TILES)].getShipPartByPosition(x%Constants.AIRSHIP_WIDTH_TILES, yBot));
+        if(!isOutOfBounds()){
+            int x = (int)(currentPosition.getX()+radius)/Constants.TILE_SIZE;
+            int yTop=(int)(currentPosition.getY())/Constants.TILE_SIZE;
+            int yBot=(int)(currentPosition.getY()+2*radius)/Constants.TILE_SIZE;
+            int airship = 0;
+            if(x>Constants.AIRSHIP_WIDTH_TILES){
+                airship=1;
             }
+            if(yBot==yTop){
+                calculateCollision(airships[airship].getShipPartByPosition(x%Constants.AIRSHIP_WIDTH_TILES, yTop));
+            }else{
+                calculateCollision(airships[airship].getShipPartByPosition(x%Constants.AIRSHIP_WIDTH_TILES, yTop));
+                if(damage>0){
+                    calculateCollision(airships[airship].getShipPartByPosition(x%Constants.AIRSHIP_WIDTH_TILES, yBot));
+                }
+            }
+            airships[airship].checkDamage();
         }
-        airships[(int)(x/Constants.AIRSHIP_WIDTH_TILES)].checkDamage();
     }
 }

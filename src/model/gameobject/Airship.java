@@ -160,6 +160,9 @@ public class Airship extends GameObject implements Renderable{
         
         if(inBounds(tileX, tileY)){
             if(this.equipment[tileX][tileY]!=null){
+                if(this.equipment[tileX][tileY] instanceof Blocker){
+                    return ((Blocker)equipment[tileX][tileY]).getReferencedEntity();
+                }
                 return this.equipment[tileX][tileY];
             }
             return this.shipBody[tileX][tileY];
