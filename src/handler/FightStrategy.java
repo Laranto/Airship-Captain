@@ -9,22 +9,27 @@ import javax.swing.SwingUtilities;
 
 import model.GameState;
 import model.gameobject.Entity;
-import model.gameobject.entity.Cannonball;
 import model.gameobject.entity.Weapon;
+import model.gameobject.entity.weapon.Aim;
+import model.gameobject.entity.weapon.Cannonball;
 import model.navigation.Scenario;
+
 import common.Constants;
 import common.enums.MenuItemEnum;
+
 import controller.WindowController;
 
 public class FightStrategy extends HandlerStrategy implements Tickable{
 
     private Entity activeEntity;
     private boolean isCannonActive = false;
-    private static LinkedList<Cannonball> cannonballs = new LinkedList<Cannonball>();
+    private LinkedList<Cannonball> cannonballs = new LinkedList<Cannonball>();
 	private Scenario scenario;
+	private Aim aim;
     
     public FightStrategy(Scenario scenario){
 		this.scenario = scenario;
+		WindowController.getTickables().add(this);
     }
     
     @Override
@@ -38,17 +43,20 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
         int tileY = e.getY() / Constants.TILE_SIZE;
         
         if(isCannonActive){
-            cannonballs.getLast().fire();
-            ((Weapon)activeEntity).reload();
+            cannonballs.add(((Weapon)activeEntity).fire());
+//            cannonballs.getLast().fire();
+//            ((Weapon)activeEntity).reload();
             activeEntity = null;
             isCannonActive = false;
+            aim=null;
         }
         if(tileX < Constants.AIRSHIP_WIDTH_TILES && tileY < Constants.AIRSHIP_HEIGHT_TILES){
             if(activeEntity == null){
                 activeEntity = GameState.getInstance().getAirship().getEntity(tileX, tileY);
             }
             if(activeEntity instanceof Weapon){
-                cannonballs.addLast(((Weapon)activeEntity).aim());
+//                cannonballs.addLast(((Weapon)activeEntity).aim());
+                aim = ((Weapon)activeEntity).aim(e.getX(), e.getY());
                 isCannonActive = true;
             }
         }
@@ -93,7 +101,7 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
         if(isCannonActive){
             int tileX = e.getX();
             int tileY = e.getY();
-            cannonballs.getLast().aim(new Point(tileX, tileY));
+            aim.setTo(new Point(tileX, tileY));
         }
     }
     
@@ -101,7 +109,7 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
         return cannonballs;
     }
     
-    public static void removeCannonball(Cannonball cannonball){
+    public void removeCannonball(Cannonball cannonball){
         cannonballs.remove(cannonball);
     }
 
@@ -111,10 +119,16 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
             Cannonball cannonball = cannonballs.get(i);
             if(cannonball!=null){
                 cannonball.move();
-                if(cannonball.getDamage()==0){
+                if(cannonball.getDamage()==0 || cannonball.isOutOfBounds()){
                     cannonballs.remove(i);
                 }
             }
         }
     }
+
+    public Aim getAim() {
+        return aim;
+    }
+
+
 }

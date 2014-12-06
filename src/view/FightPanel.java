@@ -11,7 +11,7 @@ import javax.swing.SwingConstants;
 
 import model.GameState;
 import model.gameobject.Airship;
-import model.gameobject.entity.Cannonball;
+import model.gameobject.entity.weapon.Cannonball;
 import model.navigation.FightScenario;
 
 import common.Constants;
@@ -97,6 +97,9 @@ public class FightPanel extends GameDefaultPanel {
             if(cannonball != null){
                 cannonball.render(g2);
             }
+        }
+        if(strategy.getAim()!=null){
+            strategy.getAim().render(g2);
         }
     }
 }

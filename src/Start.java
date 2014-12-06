@@ -1,5 +1,3 @@
-import handler.Tickable;
-
 import javax.swing.JFrame;
 import javax.swing.RepaintManager;
 
@@ -32,8 +30,8 @@ public class Start {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            for(Tickable tickable:WindowController.getTickables()){
-                tickable.tick();
+            for(int i = 0;i<WindowController.getTickables().size();i++){
+                WindowController.getTickables().get(i).tick();
             }
             frame.repaint();
         }
