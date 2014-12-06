@@ -9,6 +9,8 @@ import javax.swing.JButton;
 
 import model.GameState;
 import model.gameobject.Airship;
+import model.gameobject.Captain;
+import model.gameobject.GameObject;
 
 import common.Constants;
 import common.FileUtils;
@@ -36,10 +38,14 @@ public class ShipExportController implements ActionListener {
             fileName = choosenFile.getName().substring(0, choosenFile.getName().length() - Constants.FILE_ENDING_SHIP.length() - 1);
             Serializable readObject = FileUtils.loadObjectFile(Constants.FOLDER_AIRSHIPS, fileName, Constants.FILE_ENDING_SHIP);
             if (readObject instanceof Airship) {
-                GameState.getInstance().setAirship((Airship) readObject);
+                Airship readShip = (Airship) readObject;
+                Captain captain = GameState.getInstance().getAirship().getCaptain();
+                double valueDifference = GameState.getInstance().getAirship().getValue()-readShip.getValue();
+                captain.getMoney().changeAmount(valueDifference);
+                readShip.setCaptain(captain);
+                GameState.getInstance().setAirship(readShip);
             }
         }
-
     }
 
     private void executeExport() {

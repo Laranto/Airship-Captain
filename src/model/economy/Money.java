@@ -29,6 +29,14 @@ public class Money implements Serializable {
             this.formatAmount();
         }
     }
+    
+    public void changeAmount(double amount){
+        if(amount>=0){
+            addAmount(amount);
+        }else{
+            removeAmount(amount*-1);
+        }
+    }
 
     public double getAmount() {
         return amount;

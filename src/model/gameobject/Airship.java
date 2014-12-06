@@ -46,6 +46,11 @@ public class Airship extends GameObject implements Renderable{
         return captain;
     }
     
+
+    public void setCaptain(Captain captain) {
+        this.captain=captain;
+    }
+
     
     /**
      * Places a new instance of the given material at the given location. Only possible if the location is empty space.
@@ -414,8 +419,8 @@ public class Airship extends GameObject implements Renderable{
     @Override
     public int getValue() {
         int value = 0;
-        for(int x = -1;x<=1;x++){
-            for(int y = -1;y<=1;y++){
+        for(int x = 0;x<Constants.AIRSHIP_WIDTH_TILES;x++){
+            for(int y = 0;y<Constants.AIRSHIP_HEIGHT_TILES;y++){
                 if(shipBody[x][y]!=null){
                     value+=shipBody[x][y].getValue();
                 }
@@ -437,8 +442,8 @@ public class Airship extends GameObject implements Renderable{
     @Override
     public int getWeight() {
         int weight = 0;
-        for(int x = -1;x<=1;x++){
-            for(int y = -1;y<=1;y++){
+        for(int x = 0;x<Constants.AIRSHIP_WIDTH_TILES;x++){
+            for(int y = 0;y<Constants.AIRSHIP_HEIGHT_TILES;y++){
                 if(shipBody[x][y]!=null){
                     weight+=shipBody[x][y].getWeight();
                 }
@@ -487,6 +492,4 @@ public class Airship extends GameObject implements Renderable{
             rotate();
         }
     }
-
-
 }
