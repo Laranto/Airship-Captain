@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.Serializable;
 
 import model.GameState;
-import model.gameobject.Airship;
 
 import common.Constants;
 import common.FileUtils;
@@ -26,9 +25,7 @@ public class LoadGameListener implements ActionListener {
 
     private void loadGame(String filename) {
         Serializable readObject = FileUtils.loadObjectFile(Constants.FOLDER_GAME_DATA , filename , Constants.FILE_ENDING_GAME);
-        if(readObject instanceof Airship){
-            //TODO Load an entire game state instead of just the ship.
-            GameState.getInstance().setAirship((Airship)readObject);
-        }
+        GameState.setInstance((GameState)readObject);
+        WindowController.showHarbor();
     }
 }

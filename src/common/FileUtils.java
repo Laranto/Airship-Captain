@@ -14,8 +14,6 @@ import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
-import model.GameState;
-
 public class FileUtils {
     
     private static HashMap<String, BufferedImage> loadedImages = new HashMap<>();
@@ -64,7 +62,7 @@ public class FileUtils {
         try {
             fileOutputStream = new FileOutputStream(location);
             oos = new ObjectOutputStream(fileOutputStream);
-            oos.writeObject(GameState.getInstance().getAirship());
+            oos.writeObject(object);
             oos.flush();
             
 

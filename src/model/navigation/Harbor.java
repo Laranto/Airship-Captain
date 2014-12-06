@@ -3,13 +3,13 @@ package model.navigation;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.io.Serializable;
 
 import model.economy.Market;
 import model.gameobject.Renderable;
-
 import common.Constants;
 
-public class Harbor implements Renderable{
+public class Harbor implements Renderable, Serializable{
     
     private Market market;
     private Point position;

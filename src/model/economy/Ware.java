@@ -1,8 +1,10 @@
 package model.economy;
 
+import java.io.Serializable;
+
 import model.gameobject.GameObject;
 
-public class Ware extends GameObject implements Tradeable{
+public class Ware extends GameObject implements Tradeable, Serializable{
     private static final long serialVersionUID = 1L;
     
     private double price;

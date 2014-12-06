@@ -108,6 +108,11 @@ public class WindowController {
         JOptionPane.showMessageDialog(container, message, title,
                 JOptionPane.ERROR_MESSAGE);
     }
+    
+    public static void showMessage(String title, String message) {
+        JOptionPane.showMessageDialog(container, message, title,
+                JOptionPane.INFORMATION_MESSAGE);
+    }
 
     public static int showTravelConfirmation(String title, String message) {
         Object[] options = { "Abbrechen", "Segel setzen!" };

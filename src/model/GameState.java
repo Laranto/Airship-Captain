@@ -1,13 +1,23 @@
 package model;
 
+import java.io.Serializable;
+
 import model.gameobject.Airship;
 import model.navigation.Harbor;
 
-public class GameState {
+public class GameState implements Serializable{
 
     private static GameState gameState = null;
     private Airship airship;
     private Harbor harbor;
+    
+    /**
+     * For loading and Testing purposes
+     * @param gameState
+     */
+    public static void setInstance(GameState game) {
+        gameState = game;
+    }
     
     public static GameState getInstance()
     {
@@ -37,6 +47,7 @@ public class GameState {
     {
     	if(this.harbor != null){
     		this.harbor.setActive(false);
+    		this.harbor.setNextDestination(false);
     	}
     	harbor.setActive(true);
     	harbor.setNextDestination(false);
@@ -47,7 +58,4 @@ public class GameState {
     {
         return this.harbor;
     }
-    
-    
-    
 }
