@@ -16,7 +16,7 @@ public class MainMenuStrategy extends HandlerStrategy {
     public void mouseEvent(MouseEvent e) {
         switch(menuItem){
             case START_GAME:
-                    WindowController.showConstruction();
+                    WindowController.showSettings();
                     break;
             case LOAD_GAME:
                     new LoadGameListener().actionPerformed(null);;

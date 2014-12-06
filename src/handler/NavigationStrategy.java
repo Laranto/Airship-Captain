@@ -85,16 +85,16 @@ public class NavigationStrategy extends HandlerStrategy implements Tickable {
     @Override
     public void mouseMoved(MouseEvent e) {
     	if(!route.isTravelling()){
-        if(toHarbor == null && (toHarbor = getHarbor(e.getX(), e.getY())) != null){
-            toHarbor.setNextDestination(true);
-            route.setTo(toHarbor);
+            if(toHarbor == null && (toHarbor = getHarbor(e.getX(), e.getY())) != null){
+                toHarbor.setNextDestination(true);
+                route.setTo(toHarbor);
+            }
+            if(toHarbor != null && !isOnHarbor(toHarbor, e.getX(), e.getY())){
+                toHarbor.setNextDestination(false);
+                toHarbor = null;
+                route.setTo(null);
+            }
         }
-        if(toHarbor != null && !isOnHarbor(toHarbor, e.getX(), e.getY())){
-            toHarbor.setNextDestination(false);
-            toHarbor = null;
-            route.setTo(null);
-        }
-    }
     }
 
 

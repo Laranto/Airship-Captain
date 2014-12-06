@@ -22,7 +22,6 @@ public class Airship extends GameObject implements Renderable{
     private boolean isEmpty;
     private Captain captain;
     private Stock stock;
-    private int speed;
     private boolean isRotated;
     
     public Airship() {
@@ -33,9 +32,7 @@ public class Airship extends GameObject implements Renderable{
         captain = new Captain();
         this.stock = new Stock(true);
         this.setName(Constants.AIRSHIP_NAME_DEFAULT);
-        isRotated=false;
-        //TODO has to be calculated (e.x. the amount of engines the ship has)
-        this.speed = 22;
+        isRotated=false;    
     }
     
     /**
@@ -62,13 +59,13 @@ public class Airship extends GameObject implements Renderable{
         }
        //Nothing on that tile yet
         if(inBounds(tileX, tileY) && shipBody[tileX][tileY] == null && mat!=null){
-            if(isEmpty || hasAdjacentTile(tileX,tileY)){
-                GameState.getInstance().getAirship().getCaptain().getMoney().removeAmount(mat.getValue());
+            if( isEmpty || hasAdjacentTile(tileX,tileY)  ){
                 shipBody[tileX][tileY] = (Material) MaterialFactory.getInstance().instanzise(mat);
                 isEmpty=false;
                 return true;
             }
         }
+        
         return false;
     }
     
@@ -90,7 +87,6 @@ public class Airship extends GameObject implements Renderable{
         if(entity!=null && inBounds(tileX, tileY)){
             List<Point> checkedPoints = new LinkedList<>();
             if(canPlaceEntity(entity,tileX,tileY,checkedPoints)){
-                GameState.getInstance().getAirship().getCaptain().getMoney().removeAmount(entity.getValue());
                 Entity placedEntity = (Entity) EntityFactory.getInstance().instanzise(entity);
                 placeEntityOnGrid(tileX, tileY, placedEntity);
                 for (Point point : checkedPoints) {
@@ -475,12 +471,11 @@ public class Airship extends GameObject implements Renderable{
         return this.stock;
     }
 
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
+    
+    public double getSpeed() {
+        double speed = (((Constants.AIRSHIP_MIN_SPEED-Constants.AIRSHIP_MAX_SPEED)/Constants.AIRSHIP_MAX_WEIGHT)*getWeight())+Constants.AIRSHIP_MAX_SPEED;
+        speed = (speed < Constants.AIRSHIP_MIN_SPEED ? Constants.AIRSHIP_MIN_SPEED : speed); 
+        return Math.round((speed*100.0))/100.0;
     }
 
     public boolean isEmpty() {

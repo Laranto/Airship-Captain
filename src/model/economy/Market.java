@@ -1,9 +1,11 @@
 package model.economy;
 
+import java.io.Serializable;
+
 import model.GameState;
 import controller.WindowController;
 
-public class Market {
+public class Market implements Serializable{
 
     private Stock stock;
 

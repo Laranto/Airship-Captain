@@ -26,7 +26,10 @@ public class SaveGameListener implements ActionListener {
     }
 
     private void saveGame(String filename) {
-        
-        FileUtils.saveObjectFile(GameState.getInstance().getAirship(), Constants.FOLDER_GAME_DATA, filename, Constants.FILE_ENDING_GAME);
+        if(FileUtils.saveObjectFile(GameState.getInstance(), Constants.FOLDER_GAME_DATA, filename, Constants.FILE_ENDING_GAME)){
+            WindowController.showMessage("Save Message", "Der Spielstand wurde erfolgreich gespeichert!");
+        }else{
+            WindowController.showError("Error Message", "Der Spielstand konnte nicht erfolgreich gespeichert werden!");
+        }
     }
 }

@@ -12,13 +12,12 @@ import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
+import model.GameState;
 import model.navigation.Harbor;
 import view.swing.ObserverButton;
-
 import common.Constants;
 import common.FileUtils;
 import common.enums.MenuItemEnum;
-
 import controller.ButtonController;
 import controller.InputController;
 
@@ -75,7 +74,11 @@ public class NavigationPanel extends GameDefaultPanel {
                 null                            /*Image Observer*/
         );
         for(Harbor h: Constants.HARBORS){
-            h.render(g2);
+            if(GameState.getInstance().getCurrentHarbor().getPosition().equals(h.getPosition())){
+                GameState.getInstance().getCurrentHarbor().render(g2);
+            }else{
+                h.render(g2);
+            }
         }
         ((NavigationStrategy)strategy).getRoute().render(g2);
     }

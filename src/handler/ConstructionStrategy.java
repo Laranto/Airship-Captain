@@ -47,11 +47,15 @@ public class ConstructionStrategy extends HandlerStrategy {
                 
             }else if (tileX < Constants.AIRSHIP_WIDTH_TILES && tileY < Constants.AIRSHIP_HEIGHT_TILES) {
                 try{
+                    boolean addedObject = false;
                     if(activePlacement instanceof Material){
-                        GameState.getInstance().getAirship().placeMaterial((Material)activePlacement, tileX, tileY);
+                        addedObject = GameState.getInstance().getAirship().placeMaterial((Material)activePlacement, tileX, tileY);
                     }
                     if(activePlacement instanceof Entity){
-                        GameState.getInstance().getAirship().placeEntity((Entity)activePlacement, tileX, tileY);
+                        addedObject = GameState.getInstance().getAirship().placeEntity((Entity)activePlacement, tileX, tileY);
+                    }
+                    if(addedObject){
+                        GameState.getInstance().getAirship().getCaptain().getMoney().removeAmount(((ShipPart)activePlacement).getValue());
                     }
                 }catch(ArithmeticException ex){
                     WindowController.showError("Not enough money", "You don't have enough money to place this object.");

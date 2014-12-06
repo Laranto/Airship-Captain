@@ -24,12 +24,15 @@ import javax.swing.SwingConstants;
 import model.GameState;
 import model.factory.EntityFactory;
 import model.factory.MaterialFactory;
+import model.gameobject.Airship;
 import model.gameobject.Captain;
 import model.gameobject.Entity;
 import model.gameobject.Material;
 import model.gameobject.ShipPart;
+
 import common.Constants;
 import common.enums.PropertyEnum;
+
 import controller.ButtonController;
 import controller.InputController;
 import controller.ShipExportController;
@@ -103,6 +106,7 @@ public class ConstructionPanel extends GameDefaultPanel {
         for (int i = 0; i < entities.size(); i++) {
             JButton tileButton = new JButton(entities.get(i).getName()+" ($ "+entities.get(i).getValue()+")");
             tileButton.setIcon(new ImageIcon(entities.get(i).getImage()));
+            tileButton.setToolTipText("weight: "+entities.get(i).getWeight());
             tileButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, entities.get(i));
             tileButton.addActionListener(buttonController);
             tileButton.setHorizontalAlignment(SwingConstants.LEFT);
@@ -136,6 +140,7 @@ public class ConstructionPanel extends GameDefaultPanel {
         for (int i = 0; i < materials.size(); i++) {
             JButton tileButton = new JButton(materials.get(i).getName()+" ($ "+materials.get(i).getValue()+")");
             tileButton.setIcon(new ImageIcon(materials.get(i).getImage()));
+            tileButton.setToolTipText("weight: "+materials.get(i).getWeight());
             tileButton.putClientProperty(Constants.BUTTON_PROPERTY_ID, materials.get(i));
             tileButton.addActionListener(buttonController);
             tileButton.setHorizontalAlignment(SwingConstants.LEFT);
@@ -226,7 +231,8 @@ public class ConstructionPanel extends GameDefaultPanel {
     
     private void updateInformationLabel()
     {
-        Captain captain = GameState.getInstance().getAirship().getCaptain();
-        informationLabel.setText(captain.getName()+"     ($ "+captain.getMoney().getAmount()+")");
+        Airship airship = GameState.getInstance().getAirship();
+        Captain captain = airship.getCaptain();
+        informationLabel.setText(captain.getName()+"     $ "+captain.getMoney().getAmount()+"    Speed: "+airship.getSpeed());
     }
 }
