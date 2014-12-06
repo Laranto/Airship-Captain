@@ -11,4 +11,5 @@ public abstract class HandlerStrategy extends Observable {
 
     public abstract void publishProperty(Object activeMaterial);
     public abstract void mouseMoved(MouseEvent e);
+    public abstract void mouseDragged(MouseEvent e);
 }

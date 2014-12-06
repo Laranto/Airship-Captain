@@ -143,4 +143,10 @@ public class ConstructionStrategy extends HandlerStrategy {
     public Object getActivePlacement() {
         return activePlacement;
     }
+
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        mouseEvent(e);
+    }
 }

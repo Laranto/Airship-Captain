@@ -129,5 +129,9 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
         return aim;
     }
 
+    @Override
+    public void mouseDragged(MouseEvent e) {
+    }
+
 
 }

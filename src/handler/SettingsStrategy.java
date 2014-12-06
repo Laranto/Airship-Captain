@@ -59,6 +59,11 @@ public class SettingsStrategy extends HandlerStrategy {
     {
         this.settingsList.add(field);
     }
+
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+    }
     
 
 }

@@ -48,4 +48,8 @@ public class MainMenuStrategy extends HandlerStrategy {
     public void mouseMoved(MouseEvent e) {
     }
 
+    @Override
+    public void mouseDragged(MouseEvent e) {
+    }
+
 }

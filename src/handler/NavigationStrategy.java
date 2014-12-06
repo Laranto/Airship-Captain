@@ -107,4 +107,9 @@ public class NavigationStrategy extends HandlerStrategy implements Tickable {
             }
         }
     }
+
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+    }
 }
