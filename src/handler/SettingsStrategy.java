@@ -28,7 +28,7 @@ public class SettingsStrategy extends HandlerStrategy {
             case SAVE_GAME_SETTINGS:
                 GameState.getInstance().getAirship().getCaptain().setName(settingsList.get(0).getText());   //captains name
                 GameState.getInstance().getAirship().setName(settingsList.get(1).getText());                //ships name
-                if(GameState.getInstance().getAirship().getWeight() == 0)
+                if(!GameState.getInstance().getAirship().isJoined())
                 {
                     WindowController.showConstruction();
                 }else{
