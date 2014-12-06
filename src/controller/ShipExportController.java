@@ -41,9 +41,15 @@ public class ShipExportController implements ActionListener {
                 Airship readShip = (Airship) readObject;
                 Captain captain = GameState.getInstance().getAirship().getCaptain();
                 double valueDifference = GameState.getInstance().getAirship().getValue()-readShip.getValue();
-                captain.getMoney().changeAmount(valueDifference);
-                readShip.setCaptain(captain);
-                GameState.getInstance().setAirship(readShip);
+                try
+                {
+                    captain.getMoney().changeAmount(valueDifference);
+                    readShip.setCaptain(captain);
+                    GameState.getInstance().setAirship(readShip);
+                }catch(ArithmeticException arithmeticException)
+                {
+                    WindowController.showError("Not enough money", "You need "+Math.abs(valueDifference)+" but only have "+captain.getMoney().getAmount());
+                }
             }
         }
     }
