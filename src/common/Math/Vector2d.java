@@ -14,6 +14,10 @@ public class Vector2d {
         this.y = y;
     }
 
+    public Vector2d(Vector2d velocity) {
+        this(velocity.getX(),velocity.getY());
+    }
+
     public double getX() {
         return x;
     }
@@ -39,12 +43,21 @@ public class Vector2d {
         return new Vector2d(x/length, y/length);
     }
     
-    public void add(double n){
+    public Vector2d add(double n){
         x=x+n;
         y=y+n;
+        return this;
     }
-    public void multiply(double n){
+    
+    public Vector2d add(Vector2d v){
+        x=x+v.getX();
+        y=y+v.getY();
+        return this;
+    }
+    
+    public Vector2d multiply(double n){
         x=x*n;
         y=y*n;
+        return this;
     }
 }

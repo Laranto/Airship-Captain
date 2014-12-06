@@ -117,7 +117,7 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
         for (int i = 0;i<cannonballs.size();i++) {
             Cannonball cannonball = cannonballs.get(i);
             if(cannonball!=null){
-                cannonball.move();
+                cannonball.move(GameState.getInstance().getAirship(),scenario.getEnemy());
                 if(cannonball.getDamage()==0 || cannonball.isOutOfBounds()){
                     cannonballs.remove(i);
                 }

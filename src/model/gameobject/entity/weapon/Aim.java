@@ -36,7 +36,6 @@ public class Aim implements Renderable{
 
     @Override
     public void render(Graphics2D g) {
-
         g.setColor(Constants.HARBOR_CIRCLE_BACKGROUND_ACTIVE);
         g.drawLine((int)from.getX(), (int)from.getY(), (int)to.getX(), (int)to.getY());
     }
