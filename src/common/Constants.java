@@ -20,6 +20,7 @@ public class Constants {
     public static final String FOLDER_WARE = "resources/ware/";
     public static final String FOLDER_GAME_DATA = "resources/save/";
     public static final String FOLDER_AIRSHIPS = "resources/ship/";
+    public static final String FOLDER_ENEMY_AIRSHIPS = "resources/enemy_ship/";
     
     public static final String NAVIGATION_BACKGROUND_IMAGE = "resources/panels/img/map.jpg";
     public static final String HARBOR_BACKGROUND_IMAGE = "resources/panels/img/zeppelin.jpg";

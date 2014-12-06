@@ -1,9 +1,16 @@
 package model.navigation;
 
-import common.Constants;
-import common.FileUtils;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Random;
+
+import com.sun.org.apache.bcel.internal.generic.SIPUSH;
+
 import model.gameobject.Airship;
 import model.gameobject.Captain;
+import common.Constants;
+import common.FileUtils;
+import common.Utils;
 
 
 public abstract class Scenario {
@@ -23,10 +30,13 @@ public abstract class Scenario {
     
     public abstract void show();
     public Airship getEnemy() {
+        ArrayList<File> fileList = FileUtils.getFileList(Constants.FOLDER_ENEMY_AIRSHIPS);
+        String shipName = fileList.get(new Random().nextInt(fileList.size())).getName();
+        shipName = shipName.substring(0, shipName.length()-Constants.FILE_ENDING_SHIP.length()-1);
+        
         if(this.opponent == null)
         {
-            //TODO: has to be adjusted, for example for random enemy
-            this.opponent = (Airship) FileUtils.loadObjectFile(Constants.FOLDER_AIRSHIPS, "enemy01", Constants.FILE_ENDING_SHIP);
+            this.opponent = (Airship) FileUtils.loadObjectFile(Constants.FOLDER_ENEMY_AIRSHIPS, shipName, Constants.FILE_ENDING_SHIP);
         }
         return opponent;
     }
