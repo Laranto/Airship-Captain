@@ -70,6 +70,7 @@ public class Cannonball implements Renderable {
         if(hitShipPart!=null){
             if (damage > hitShipPart.getDurability()) {
                 damage = damage - hitShipPart.getDurability();
+                hitShipPart.setDurability(0);
             } else {
                 damage = 0;
                 hitShipPart.setDurability(hitShipPart.getDurability() - damage);
@@ -112,5 +113,6 @@ public class Cannonball implements Renderable {
                 calculateCollision(airships[(int)(x/Constants.AIRSHIP_WIDTH_TILES)].getShipPartByPosition(x%Constants.AIRSHIP_WIDTH_TILES, yBot));
             }
         }
+        airships[(int)(x/Constants.AIRSHIP_WIDTH_TILES)].checkDamage();
     }
 }

@@ -487,4 +487,20 @@ public class Airship extends GameObject implements Renderable{
             rotate();
         }
     }
+
+    public void checkDamage() {
+        for(int x = 0;x<Constants.AIRSHIP_WIDTH_TILES;x++){
+            for(int y = 0;y<Constants.AIRSHIP_HEIGHT_TILES;y++){
+                ShipPart part = getShipPartByPosition(x, y);
+                if(part!=null && part.getDurability()<=0){
+                    removeShipPart(x,y);
+                }
+            }
+         }
+    }
+
+    private void removeShipPart(int x , int y) {
+        removeMaterial(x, y);
+        removeEntity(x, y);
+    }
 }
