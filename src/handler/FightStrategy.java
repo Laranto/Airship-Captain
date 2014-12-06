@@ -70,7 +70,6 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
         switch(activeMenuItem)
         {
         case EXIT_FIGHT:
-            System.out.println("escape from battle");
             scenario.setActive(false);
             GameState.getInstance().getAirship().resetRotation();
             WindowController.showNavigation();

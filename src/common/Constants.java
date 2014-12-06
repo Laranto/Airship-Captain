@@ -42,7 +42,15 @@ public class Constants {
     public static final int AIRSHIP_WIDTH_TILES = (WINDOW_WIDTH/2)/TILE_SIZE;
     public static final int AIRSHIP_HEIGHT_TILES = WINDOW_HEIGHT/TILE_SIZE;
     public static final String AIRSHIP_NAME_DEFAULT = "Noname";
+    
+    
+    public static final double AIRSHIP_MAX_WEIGHT = 40000.0;  //for calculating the speed, 
+    public static final double AIRSHIP_MAX_SPEED = 40.0;
+    public static final double AIRSHIP_MIN_SPEED = 2.0;
+    
+    public static final double CAPTAIN_START_MONEY = 100000;
     public static final String CAPTAIN_NAME_DEFAULT = "Me the Captain";
+    
     
     
     public static final Color COLOR_SKYBLUE = new Color(128,218,235);

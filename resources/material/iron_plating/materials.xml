@@ -12,6 +12,6 @@
         <image>img/iron_trapdoor.png</image>
         <value>30</value>
         <durability>120</durability>
-        <weight>60</weight>
+        <weight>25</weight>
     </material>    
 </materials>

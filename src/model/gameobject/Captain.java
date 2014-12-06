@@ -14,7 +14,7 @@ public class Captain  implements Renderable, Serializable {
     private String name;
 
     public Captain() {
-        this.money = new Money(1000);
+        this.money = new Money(Constants.CAPTAIN_START_MONEY);
         this.name = Constants.CAPTAIN_NAME_DEFAULT;
     }
     
