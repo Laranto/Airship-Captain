@@ -10,12 +10,12 @@
         <durability>20</durability>
     </object>   
     <object type="weapon" width="2" height="1">
-        <name>Cannon</name>
+        <name>DoomCannon</name>
         <image>img/cannon.png</image>
         <weight>100</weight>
         <ammunition>100</ammunition>
-        <damage>5</damage>
-        <value>10</value>
+        <damage>500</damage>
+        <value>1000</value>
         <durability>20</durability>
     </object>   
     <object type="weapon" width="2" height="1">
