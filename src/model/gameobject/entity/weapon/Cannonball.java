@@ -26,7 +26,7 @@ public class Cannonball implements Renderable {
     
     
     public Cannonball(Aim aim , int damage) {
-        radius=Constants.CANNONBALL_SIZE;
+        radius=Constants.CANNONBALL_SIZE/2;
         
         try {
             this.image = FileUtils.loadImage(new File(
@@ -41,11 +41,7 @@ public class Cannonball implements Renderable {
         velocity = new Vector2d(to.getX()-from.getX(), to.getY()-from.getY());
         velocity = velocity.getNormalizedVector();
         velocity.multiply(damage);
-        //Add 1 Cannonball Diameter to the start position to prevent collision with the cannon.
-        currentPosition=new Point(
-                (int)(from.getX()+Math.abs(velocity.getX())/velocity.getX()*(2*radius)),  
-                (int)from.getY()
-                );
+        currentPosition = new Point((int)from.getX(),(int)(from.getY()-radius));        
     }
 
     public Point getFrom() {
