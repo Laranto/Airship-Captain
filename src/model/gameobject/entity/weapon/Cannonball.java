@@ -35,8 +35,8 @@ public class Cannonball implements Renderable {
             e.printStackTrace();
         }
 
-        from = aim.getFrom();
-        to = aim.getTo();
+        from = new Point(aim.getFrom());
+        to = new Point(aim.getTo());
         this.damage=damage;
         velocity = new Vector2d(to.getX()-from.getX(), to.getY()-from.getY());
         velocity = velocity.getNormalizedVector();
