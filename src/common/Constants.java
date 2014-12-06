@@ -45,7 +45,7 @@ public class Constants {
     
     
     public static final double AIRSHIP_MAX_WEIGHT = 40000.0;  //for calculating the speed, 
-    public static final double AIRSHIP_MAX_SPEED = 40.0;
+    public static final double AIRSHIP_MAX_SPEED = 25.0;
     public static final double AIRSHIP_MIN_SPEED = 2.0;
     
     public static final double CAPTAIN_START_MONEY = 100000;
