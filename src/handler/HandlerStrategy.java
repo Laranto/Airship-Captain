@@ -7,9 +7,11 @@ import java.util.Observable;
 public abstract class HandlerStrategy extends Observable {
 
     public abstract void mouseEvent(MouseEvent e);
-    public abstract void keyEvent(KeyEvent e);
+    public abstract void keyReleased(KeyEvent e);
 
     public abstract void publishProperty(Object activeMaterial);
     public abstract void mouseMoved(MouseEvent e);
     public abstract void mouseDragged(MouseEvent e);
+    public abstract void keyTyped(KeyEvent e);
+    public abstract void keyPressed(KeyEvent e);
 }

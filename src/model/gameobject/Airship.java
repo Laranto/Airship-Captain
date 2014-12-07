@@ -7,12 +7,12 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import model.GameState;
 import model.economy.Stock;
 import model.factory.EntityFactory;
 import model.factory.MaterialFactory;
 import model.gameobject.entity.Blocker;
 import model.gameobject.material.Floor;
+
 import common.Constants;
 
 public class Airship extends GameObject implements Renderable{
@@ -275,6 +275,7 @@ public class Airship extends GameObject implements Renderable{
             g.translate(Constants.AIRSHIP_WIDTH_TILES*Constants.TILE_SIZE, (Constants.AIRSHIP_HEIGHT_TILES-1)*Constants.TILE_SIZE);
             g.rotate(Math.toRadians(180));
         }
+        captain.render(g);
         renderMaterial(g);
         renderEquipment(g);
         g.setTransform(originalCoordinates);

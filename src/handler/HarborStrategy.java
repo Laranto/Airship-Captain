@@ -54,9 +54,7 @@ public class HarborStrategy extends HandlerStrategy {
 	}
 
     @Override
-    public void keyEvent(KeyEvent e) {
-        // TODO Auto-generated method stub
-        
+    public void keyReleased(KeyEvent e) {
     }
 
     @Override
@@ -65,6 +63,14 @@ public class HarborStrategy extends HandlerStrategy {
 
     @Override
     public void mouseDragged(MouseEvent e) {
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
     }
 
 }

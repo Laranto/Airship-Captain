@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.Stroke;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -51,6 +52,12 @@ public class Constants {
     
     public static final double CAPTAIN_START_MONEY = 100000;
     public static final String CAPTAIN_NAME_DEFAULT = "Me the Captain";
+    public static final int MOVE_UP = KeyEvent.VK_UP;
+    public static final int MOVE_DOWN = KeyEvent.VK_DOWN;
+    public static final int MOVE_LEFT = KeyEvent.VK_LEFT;
+    public static final int MOVE_RIGHT = KeyEvent.VK_RIGHT;
+    public static final double CAPTAIN_MOVE_SPEED = 2;
+    public static final String CAPTAIN_HAT_IMAGE = "resources/captain/captain_hat.png";
     
     
     
@@ -121,5 +128,6 @@ public class Constants {
     
 	public static final Stroke STROKE_DASHED = new BasicStroke(4, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, 10, new float[]{10f},0);
 	public static final Stroke STROKE_SOLID = new BasicStroke(4);
+
 
 }

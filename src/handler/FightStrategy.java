@@ -90,12 +90,6 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
     }
 
     @Override
-    public void keyEvent(KeyEvent e) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
     public void mouseMoved(MouseEvent e) {
         if(isCannonActive){
             int tileX = e.getX();
@@ -132,6 +126,18 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
     @Override
     public void mouseDragged(MouseEvent e) {
     }
+    
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
 
+    @Override
+    public void keyPressed(KeyEvent e) {
+        GameState.getInstance().getAirship().getCaptain().move(e);
+    }
 
+    @Override
+    public void keyReleased(KeyEvent e) {
+        
+    }
 }

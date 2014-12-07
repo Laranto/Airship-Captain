@@ -69,7 +69,7 @@ public class NavigationStrategy extends HandlerStrategy implements Tickable {
                 }
 
     @Override
-    public void keyEvent(KeyEvent e) {
+    public void keyReleased(KeyEvent e) {
         
     }
 
@@ -111,5 +111,15 @@ public class NavigationStrategy extends HandlerStrategy implements Tickable {
 
     @Override
     public void mouseDragged(MouseEvent e) {
+    }
+
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+
+    @Override
+    public void keyPressed(KeyEvent e) {
     }
 }

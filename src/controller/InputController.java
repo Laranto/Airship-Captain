@@ -22,15 +22,17 @@ public class InputController extends MouseAdapter implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        strategy.keyPressed(e);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        strategy.keyEvent(e);
+        strategy.keyReleased(e);
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
+        strategy.keyTyped(e);
     }
 
     @Override

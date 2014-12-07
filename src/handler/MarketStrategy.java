@@ -40,7 +40,7 @@ public class MarketStrategy extends HandlerStrategy {
     }
 
     @Override
-    public void keyEvent(KeyEvent e) {
+    public void keyReleased(KeyEvent e) {
     }
 
     @Override
@@ -49,6 +49,14 @@ public class MarketStrategy extends HandlerStrategy {
 
     @Override
     public void mouseDragged(MouseEvent e) {
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
     }
 
 }

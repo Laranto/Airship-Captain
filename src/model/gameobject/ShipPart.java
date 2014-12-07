@@ -14,12 +14,14 @@ public abstract class ShipPart extends GameObject implements Renderable {
      * The Shipparts health
      */
     private int durability;
+    private int maxDurability;
     private String imagePath;
     
     
     public ShipPart(String name , int value , int weight , int durability , String imagePath) {
         super(name , value , weight);
         this.durability = durability;
+        this.maxDurability = durability;
         try {
             setImage(imagePath);
         } catch (IOException e) {
@@ -33,6 +35,14 @@ public abstract class ShipPart extends GameObject implements Renderable {
      */
     private transient BufferedImage image;
 
+    public int getMaxDurability(){
+        return maxDurability;
+    }
+    
+    public boolean isShattered(){
+        return maxDurability != durability;
+    }
+    
     public int getDurability() {
         return durability;
     }

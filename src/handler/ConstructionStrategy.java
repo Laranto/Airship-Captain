@@ -127,7 +127,7 @@ public class ConstructionStrategy extends HandlerStrategy {
     }
 
     @Override
-    public void keyEvent(KeyEvent e) {
+    public void keyReleased(KeyEvent e) {
         if(activePlacement instanceof Entity){
             Entity ent = (Entity) activePlacement;
             if(e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_DOWN){
@@ -148,5 +148,15 @@ public class ConstructionStrategy extends HandlerStrategy {
     @Override
     public void mouseDragged(MouseEvent e) {
         mouseEvent(e);
+    }
+
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+
+    @Override
+    public void keyPressed(KeyEvent e) {
     }
 }
