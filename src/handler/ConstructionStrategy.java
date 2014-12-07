@@ -58,7 +58,7 @@ public class ConstructionStrategy extends HandlerStrategy {
                         GameState.getInstance().getAirship().getCaptain().getMoney().removeAmount(((ShipPart)activePlacement).getValue());
                     }
                 }catch(ArithmeticException ex){
-                    WindowController.showError("Not enough money", "You don't have enough money to place this object.");
+                    WindowController.showError("Nicht genug Geld vorhanden", "Du hast wenig Geld um dieses Objekt zu platzieren!");
                 }
             }
         }
