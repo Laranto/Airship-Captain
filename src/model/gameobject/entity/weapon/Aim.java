@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 
 import common.Constants;
+import common.Math.Vector2d;
 
 import model.gameobject.Renderable;
 
@@ -32,6 +33,11 @@ public class Aim implements Renderable{
 
     public void setTo(Point to) {
         this.to = to;
+    }
+    
+    public void shiftFrom(Vector2d shift){
+        from.x=(int) (from.x+shift.getX());
+        from.y=(int) (from.y+shift.getY());
     }
 
     @Override
