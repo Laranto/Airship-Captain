@@ -275,7 +275,6 @@ public class Airship extends GameObject implements Renderable{
             g.translate(Constants.AIRSHIP_WIDTH_TILES*Constants.TILE_SIZE, (Constants.AIRSHIP_HEIGHT_TILES-1)*Constants.TILE_SIZE);
             g.rotate(Math.toRadians(180));
         }
-        captain.render(g);
         renderMaterial(g);
         renderEquipment(g);
         g.setTransform(originalCoordinates);
