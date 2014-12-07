@@ -24,8 +24,6 @@ public class WareFactoryTest {
 
             Ware ware = wares.get(0);
             assertNotNull(ware.getName());
-            System.out.println(ware.getName());
-
         } catch (Exception e) {
             e.printStackTrace();
             fail("Exception was thrown");

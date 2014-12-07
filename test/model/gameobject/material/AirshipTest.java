@@ -3,6 +3,7 @@ package model.gameobject.material;
 import static org.junit.Assert.*;
 
 import java.awt.Dimension;
+import java.io.File;
 
 import model.factory.MaterialFactory;
 import model.gameobject.Airship;
@@ -27,10 +28,10 @@ public class AirshipTest {
     @Before
     public void setUp() throws Exception {
         aship = new Airship();
-        tFloor = new Floor("testF", 1, 1, 1, "");
-        tWall = new Floor("testW", 1, 1, 1, "");
-        tEntity = new Weapon("testWeapon", 1, 1, 1, "", Constants.ENTITY_ORIENTATION_RIGHT, new Dimension(2, 1), 5);
-        tEntity2 = new Weapon("testWeapon2", 1, 1, 1, "", Constants.ENTITY_ORIENTATION_RIGHT, new Dimension(2, 1), 5);
+        tFloor = new Floor("testF", 1, 1, 1, Constants.FOLDER_MATERIAL+"wood_planks"+File.separator+"img"+File.separator+"floor.png");
+        tWall = new Wall("testW", 1, 1, 1, Constants.FOLDER_MATERIAL+"wood_planks"+File.separator+"img"+File.separator+"wall.png");
+        tEntity = new Weapon("testWeapon", 1, 1, 1, Constants.CANNONBALL_IMAGE, Constants.ENTITY_ORIENTATION_RIGHT, new Dimension(2, 1), 5);
+        tEntity2 = new Weapon("testWeapon2", 1, 1, 1, Constants.CANNONBALL_IMAGE, Constants.ENTITY_ORIENTATION_RIGHT, new Dimension(2, 1), 5);
     }
 
     
