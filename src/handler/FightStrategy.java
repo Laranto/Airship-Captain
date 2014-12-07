@@ -3,7 +3,9 @@ package handler;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Random;
 
 import javax.swing.SwingUtilities;
 
@@ -15,6 +17,7 @@ import model.gameobject.entity.weapon.Cannonball;
 import model.navigation.Scenario;
 
 import common.Constants;
+import common.Math.Vector2d;
 import common.enums.MenuItemEnum;
 
 import controller.WindowController;
@@ -117,7 +120,13 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
                 }
             }
         }
-        
+
+        handleBattleSituation();
+        handleArtificialFiring();
+    }
+    
+    private void handleBattleSituation()
+    {        
         if(scenario.getEnemy().getDamageInPercent() > Constants.BATTLE_FINISH_RATIO){
             int profit = (scenario.getEnemy().getTotalDurability())/Constants.BATTLE_PROFIT_RATIO;
             scenario.getEnemy().setTotalDurability(0);
@@ -133,7 +142,23 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
             WindowController.showMessage("Kampf vorbei", "Du hast $ "+loss+" verloren.. :( ");
             handleAction(MenuItemEnum.EXIT_FIGHT);
         }
+    }
+
+    
+    private void handleArtificialFiring()
+    {
+        Random random = new Random();
+        ArrayList<Weapon> weapons = scenario.getEnemy().getWeapons();
+
+        int aimX = random.nextInt(Constants.AIRSHIP_WIDTH_TILES*Constants.TILE_SIZE);
+        int aimY = random.nextInt(Constants.AIRSHIP_HEIGHT_TILES*Constants.TILE_SIZE);
         
+        if(GameState.getInstance().getAirship().getShipPartByPosition(aimX/Constants.TILE_SIZE, aimY/Constants.TILE_SIZE) != null)
+        {
+            int weaponNumber = random.nextInt(weapons.size());
+            weapons.get(weaponNumber).aim(aimX, aimY).shiftFrom(new Vector2d(Constants.AIRSHIP_WIDTH_TILES*Constants.TILE_SIZE, 0));
+            cannonballs.add(weapons.get(weaponNumber).fire());
+        }
     }
 
     public Aim getAim() {

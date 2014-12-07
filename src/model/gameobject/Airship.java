@@ -3,6 +3,7 @@ package model.gameobject;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.AffineTransform;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,9 +12,10 @@ import model.economy.Stock;
 import model.factory.EntityFactory;
 import model.factory.MaterialFactory;
 import model.gameobject.entity.Blocker;
+import model.gameobject.entity.Weapon;
 import model.gameobject.material.Floor;
+
 import common.Constants;
-import controller.WindowController;
 
 public class Airship extends GameObject implements Renderable{
     private static final long serialVersionUID = 1L;
@@ -548,5 +550,22 @@ public class Airship extends GameObject implements Renderable{
     public int getTotalDurability()
     {
         return this.totalDurability;
+    }
+    
+    public ArrayList<Weapon> getWeapons() {
+        ArrayList<Weapon> weapons = new ArrayList<Weapon>();
+
+        for (int x = 0; x < Constants.AIRSHIP_WIDTH_TILES; x++) {
+            for (int y = 0; y < Constants.AIRSHIP_HEIGHT_TILES; y++) {
+                Entity entity = getEntity(x, y);
+                if (entity != null && entity instanceof Weapon) {
+                    if(!weapons.contains((Weapon) entity))
+                    {
+                        weapons.add((Weapon) entity);
+                    }
+                }
+            }
+        }
+        return weapons;
     }
 }
