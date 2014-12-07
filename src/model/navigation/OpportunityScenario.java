@@ -17,8 +17,9 @@ public class OpportunityScenario extends Scenario {
     @Override
     public void show() {
         int value = new Random().nextInt(Constants.OPPORTUNITY_MAX_MONEY);
-        WindowController.showMessage("Opportunity Scenario", "Sie haben "+value+" gefunden");
+        WindowController.showMessage("Opportunity Scenario", "Sie haben "+value+"$ gefunden");
         GameState.getInstance().getAirship().getCaptain().getMoney().addAmount(value);
+        setActive(false);
     }
 
     
