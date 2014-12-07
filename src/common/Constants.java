@@ -130,6 +130,9 @@ public class Constants {
 	public static final Stroke STROKE_DASHED = new BasicStroke(4, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, 10, new float[]{10f},0);
 	public static final Stroke STROKE_SOLID = new BasicStroke(4);
 
+    public static final double BATTLE_FINISH_RATIO = 10; //in percent  10 -> 10%
+    public static final int BATTLE_PROFIT_RATIO = 10;  // min=1 max : infinite :: divides the ship durability by this number 
+
 
 
 }
