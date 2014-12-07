@@ -5,9 +5,9 @@
         <image>img/cannon.png</image>
         <weight>100</weight>
         <ammunition>100</ammunition>
-        <damage>5</damage>
+        <damage>100</damage>
         <value>100</value>
-        <durability>20</durability>
+        <durability>1000</durability>
     </object>   
     <object type="weapon" width="2" height="1">
         <name>DoomCannon</name>

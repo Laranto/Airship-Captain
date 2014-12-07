@@ -10,6 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
@@ -108,5 +109,20 @@ public class FileUtils {
             }
         }
         return readObject;
+    }
+    
+    public static ArrayList<File> getFileList(String folderPath)
+    {
+        ArrayList<File> files = new ArrayList<File>();
+        File folder = new File(folderPath);
+        for(int i=0;i<folder.listFiles().length;i++)
+        {
+            files.add(folder.listFiles()[i]);
+        }
+        return files;
+    }
+    
+    public static void main(String[] args) {
+        getFileList(Constants.FOLDER_ENEMY_AIRSHIPS);
     }
 }

@@ -33,7 +33,7 @@ public class MoneyTest {
         
     }
     
-    @Test
+    @Test(expected=ArithmeticException.class)
     public void removeAmountTest()
     {
         money.removeAmount(100);
@@ -41,7 +41,6 @@ public class MoneyTest {
         Assert.assertEquals(900, money.getAmount(), 0);
         
         money.removeAmount(1300);
-        Assert.assertEquals(900, money.getAmount(), 0);
     }
     
 }

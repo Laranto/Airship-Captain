@@ -79,7 +79,6 @@ public class MarketTest {
         
         ArrayList<Ware> wares = WareFactory.getInstance().getWares();
         Ware ware = wares.get(1);
-        Ware ware2 = wares.get(2);
         
         market.buyItem(ware, 5);
         market.sellItem(ware, 100);

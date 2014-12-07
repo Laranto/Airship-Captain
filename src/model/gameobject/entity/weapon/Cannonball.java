@@ -72,8 +72,8 @@ public class Cannonball implements Renderable {
                 damage = damage - hitShipPart.getDurability();
                 hitShipPart.setDurability(0);
             } else {
-                damage = 0;
                 hitShipPart.setDurability(hitShipPart.getDurability() - damage);
+                damage = 0;
             }
         }
     }

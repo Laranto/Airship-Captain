@@ -1,6 +1,5 @@
 package model.economy;
 
-import model.GameState;
 import common.Constants;
 
 public class Economy {

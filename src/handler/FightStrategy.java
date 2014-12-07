@@ -90,12 +90,6 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
     }
 
     @Override
-    public void keyEvent(KeyEvent e) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
     public void mouseMoved(MouseEvent e) {
         if(isCannonActive){
             int tileX = e.getX();
@@ -123,6 +117,23 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
                 }
             }
         }
+        
+        if(scenario.getEnemy().getDamageInPercent() > Constants.BATTLE_FINISH_RATIO){
+            int profit = (scenario.getEnemy().getTotalDurability())/Constants.BATTLE_PROFIT_RATIO;
+            scenario.getEnemy().setTotalDurability(0);
+            GameState.getInstance().getAirship().getCaptain().getMoney().addAmount(profit);
+            WindowController.showMessage("Kampf vorbei", "Dein Gegner ist geflohen. Du hast $ "+profit+" gewonnen. ");
+            handleAction(MenuItemEnum.EXIT_FIGHT);
+        }
+        
+        if(GameState.getInstance().getAirship().getDamageInPercent() > Constants.BATTLE_FINISH_RATIO){
+            int loss = (GameState.getInstance().getAirship().getTotalDurability())/Constants.BATTLE_PROFIT_RATIO;
+            GameState.getInstance().getAirship().setTotalDurability(0);
+            GameState.getInstance().getAirship().getCaptain().getMoney().removeAmount(loss);
+            WindowController.showMessage("Kampf vorbei", "Du hast $ "+loss+" verloren.. :( ");
+            handleAction(MenuItemEnum.EXIT_FIGHT);
+        }
+        
     }
 
     public Aim getAim() {
@@ -132,6 +143,18 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
     @Override
     public void mouseDragged(MouseEvent e) {
     }
+    
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
 
+    @Override
+    public void keyPressed(KeyEvent e) {
+        GameState.getInstance().getAirship().getCaptain().move(e);
+    }
 
+    @Override
+    public void keyReleased(KeyEvent e) {
+        
+    }
 }

@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.Stroke;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -20,6 +21,7 @@ public class Constants {
     public static final String FOLDER_WARE = "resources/ware/";
     public static final String FOLDER_GAME_DATA = "resources/save/";
     public static final String FOLDER_AIRSHIPS = "resources/ship/";
+    public static final String FOLDER_ENEMY_AIRSHIPS = "resources/enemy_ship/";
     
     public static final String NAVIGATION_BACKGROUND_IMAGE = "resources/panels/img/map.jpg";
     public static final String HARBOR_BACKGROUND_IMAGE = "resources/panels/img/zeppelin.jpg";
@@ -50,7 +52,14 @@ public class Constants {
     
     public static final double CAPTAIN_START_MONEY = 100000;
     public static final String CAPTAIN_NAME_DEFAULT = "Me the Captain";
+    public static final int MOVE_UP = KeyEvent.VK_UP;
+    public static final int MOVE_DOWN = KeyEvent.VK_DOWN;
+    public static final int MOVE_LEFT = KeyEvent.VK_LEFT;
+    public static final int MOVE_RIGHT = KeyEvent.VK_RIGHT;
+    public static final double CAPTAIN_MOVE_SPEED = 2;
+    public static final String CAPTAIN_HAT_IMAGE = "resources/captain/captain_hat.png";
     
+    public static final int OPPORTUNITY_MAX_MONEY = 20;
     
     
     public static final Color COLOR_SKYBLUE = new Color(128,218,235);
@@ -91,8 +100,8 @@ public class Constants {
     public static final double WARE_STANDARD_AMOUNT = 100;
     public static final double WARE_MAX_INFLATION_FACTOR = 5;
     public static final double WARE_SELL_RATIO = 0.5;    
-    
     public static final double OBJECT_SELL_RATIO = 0.7;
+    public static final int MAX_TRADEABLE_ITEMS = 10;
     
     public static final String FILE_ENDING_GAME = "asc";
     public static final String FILE_ENDING_SHIP = "ascs";
@@ -120,5 +129,11 @@ public class Constants {
     
 	public static final Stroke STROKE_DASHED = new BasicStroke(4, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, 10, new float[]{10f},0);
 	public static final Stroke STROKE_SOLID = new BasicStroke(4);
+
+    public static final double BATTLE_FINISH_RATIO = 10; //in percent  10 -> 10%
+    public static final int BATTLE_PROFIT_RATIO = 10;  // min=1 max : infinite :: divides the ship durability by this number 
+
+
+
 
 }

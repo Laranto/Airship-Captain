@@ -7,13 +7,13 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import model.GameState;
 import model.economy.Stock;
 import model.factory.EntityFactory;
 import model.factory.MaterialFactory;
 import model.gameobject.entity.Blocker;
 import model.gameobject.material.Floor;
 import common.Constants;
+import controller.WindowController;
 
 public class Airship extends GameObject implements Renderable{
     private static final long serialVersionUID = 1L;
@@ -23,6 +23,11 @@ public class Airship extends GameObject implements Renderable{
     private Captain captain;
     private Stock stock;
     private boolean isRotated;
+    private int totalDurability;
+
+
+
+    private double damageInPercent;
     
     public Airship() {
         super(null,0,0);
@@ -33,6 +38,7 @@ public class Airship extends GameObject implements Renderable{
         this.stock = new Stock(true);
         this.setName(Constants.AIRSHIP_NAME_DEFAULT);
         isRotated=false;    
+        totalDurability = 0;
     }
     
     /**
@@ -96,6 +102,7 @@ public class Airship extends GameObject implements Renderable{
                         placeEntityOnGrid(point.x, point.y,blocker);
                     }
                 }
+                
                 return true;
             }
         }
@@ -278,6 +285,7 @@ public class Airship extends GameObject implements Renderable{
         renderMaterial(g);
         renderEquipment(g);
         g.setTransform(originalCoordinates);
+        
     }
 
 
@@ -495,15 +503,50 @@ public class Airship extends GameObject implements Renderable{
         for(int x = 0;x<Constants.AIRSHIP_WIDTH_TILES;x++){
             for(int y = 0;y<Constants.AIRSHIP_HEIGHT_TILES;y++){
                 ShipPart part = getShipPartByPosition(x, y);
+
                 if(part!=null && part.getDurability()<=0){
                     removeShipPart(x,y);
                 }
             }
          }
+        
     }
 
     private void removeShipPart(int x , int y) {
         removeMaterial(x, y);
         removeEntity(x, y);
+    }
+    
+    public int getCurrentDurability()
+    {
+        int currentDurability = 0;
+        for(int x = 0;x<Constants.AIRSHIP_WIDTH_TILES;x++){
+            for(int y = 0;y<Constants.AIRSHIP_HEIGHT_TILES;y++){
+                ShipPart part = getShipPartByPosition(x, y);
+                if(part!=null){
+                    currentDurability+= part.getDurability();
+                }
+            }
+         }
+        return currentDurability;
+    }
+    
+    
+    public double getDamageInPercent()
+    {        
+        if(getTotalDurability() == 0){
+            setTotalDurability(getCurrentDurability());
+        }
+        
+        return (getTotalDurability()-getCurrentDurability())*1.0/(getCurrentDurability()*1.0)*100;
+    }
+    
+    public void setTotalDurability(int totalDurability) {
+        this.totalDurability = totalDurability;
+    }
+    
+    public int getTotalDurability()
+    {
+        return this.totalDurability;
     }
 }
