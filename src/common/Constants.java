@@ -100,8 +100,8 @@ public class Constants {
     public static final double WARE_STANDARD_AMOUNT = 100;
     public static final double WARE_MAX_INFLATION_FACTOR = 5;
     public static final double WARE_SELL_RATIO = 0.5;    
-    
     public static final double OBJECT_SELL_RATIO = 0.7;
+    public static final int MAX_TRADEABLE_ITEMS = 10;
     
     public static final String FILE_ENDING_GAME = "asc";
     public static final String FILE_ENDING_SHIP = "ascs";
@@ -132,6 +132,7 @@ public class Constants {
 
     public static final double BATTLE_FINISH_RATIO = 10; //in percent  10 -> 10%
     public static final int BATTLE_PROFIT_RATIO = 10;  // min=1 max : infinite :: divides the ship durability by this number 
+
 
 
 

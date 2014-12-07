@@ -21,6 +21,7 @@ import model.economy.StockItem;
 import model.economy.StockItemTransferable;
 import model.economy.Ware;
 import common.Character;
+import common.Constants;
 import controller.WindowController;
 
 public class StockItemTransferHandler extends TransferHandler {
@@ -48,7 +49,8 @@ public class StockItemTransferHandler extends TransferHandler {
                         StockItem stockItem = (StockItem)value;
                         JFrame parent = new JFrame();
                         JOptionPane optionPane = new JOptionPane();
-                        addSlider(optionPane, stockItem.getAmount());
+                        int maximum = Math.min(stockItem.getAmount(), Constants.MAX_TRADEABLE_ITEMS);
+                        addSlider(optionPane, maximum);
                         optionPane.setMessageType(JOptionPane.QUESTION_MESSAGE);
                         optionPane.setOptionType(JOptionPane.OK_CANCEL_OPTION);
                         JDialog dialog = optionPane.createDialog(parent, "Transfer");
@@ -86,7 +88,7 @@ public class StockItemTransferHandler extends TransferHandler {
         optionPane.setInputValue(1);
         final JTextField text = new JTextField("1");
         final JSlider slider = new JSlider();
-        slider.setMajorTickSpacing(Math.max((int)Math.ceil(maximum/10),1));
+        slider.setMajorTickSpacing(1);
         slider.setMaximum(maximum);
         slider.setValue(1);
         slider.setPaintTicks(true);
