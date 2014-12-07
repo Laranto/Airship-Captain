@@ -59,6 +59,7 @@ public class Constants {
     public static final double CAPTAIN_MOVE_SPEED = 2;
     public static final String CAPTAIN_HAT_IMAGE = "resources/captain/captain_hat.png";
     
+    public static final int OPPORTUNITY_MAX_MONEY = 20;
     
     
     public static final Color COLOR_SKYBLUE = new Color(128,218,235);
@@ -128,6 +129,7 @@ public class Constants {
     
 	public static final Stroke STROKE_DASHED = new BasicStroke(4, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, 10, new float[]{10f},0);
 	public static final Stroke STROKE_SOLID = new BasicStroke(4);
+
 
 
 }
