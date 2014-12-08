@@ -12,6 +12,9 @@ import common.enums.MenuItemEnum;
 
 import controller.WindowController;
 
+/**
+ * Handels the travel on the navigation panel
+ */
 public class NavigationStrategy extends HandlerStrategy implements Tickable {
 
     private Harbor toHarbor;
@@ -36,15 +39,7 @@ public class NavigationStrategy extends HandlerStrategy implements Tickable {
         return h.getPosition().getX() <= tileX && tileX <= h.getPosition().getX()+Constants.HARBOR_CIRCLE_DIAMETER &&
            h.getPosition().getY() <= tileY && tileY <= h.getPosition().getY()+Constants.HARBOR_CIRCLE_DIAMETER;
     }
-    
-    public boolean hasNextDestination(){
-        return toHarbor != null;
-    }
-    
-    public Harbor getNextDestination(){
-        return toHarbor;
-    }
-    
+
     public Route getRoute(){
         return route;
     }

@@ -9,6 +9,9 @@ import controller.ExitGameListener;
 import controller.LoadGameListener;
 import controller.WindowController;
 
+/**
+ * Handles the inputs which the mainmenu gets
+ */
 public class MainMenuStrategy extends HandlerStrategy {
     private MenuItemEnum menuItem;
 

@@ -24,6 +24,9 @@ import common.Character;
 import common.Constants;
 import controller.WindowController;
 
+/**
+ *  Handles the inputs of the items which are tradeable
+ */
 public class StockItemTransferHandler extends TransferHandler {
     private static final long serialVersionUID = 1L;
     private static final int ABBRECHEN = 2;

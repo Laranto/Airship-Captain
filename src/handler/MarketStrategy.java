@@ -7,13 +7,13 @@ import common.enums.MenuItemEnum;
 
 import controller.WindowController;
 
+/**
+ * handles the input of the marketpanl
+ */
 public class MarketStrategy extends HandlerStrategy {
 
     private MenuItemEnum activeMenu;
-
-    public MarketStrategy() {
-    }
-
+    
     @Override
     public void mouseEvent(MouseEvent e) {
  

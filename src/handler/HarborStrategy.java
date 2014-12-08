@@ -10,12 +10,14 @@ import controller.LoadGameListener;
 import controller.SaveGameListener;
 import controller.WindowController;
 
+/**
+ * When the player is on the harborview than this class
+ * gets the input of the player and handles it
+ *
+ */
 public class HarborStrategy extends HandlerStrategy {
 
 	private MenuItemEnum activeMenu;
-
-	public HarborStrategy() {
-	}
 
 	@Override
 	public void mouseEvent(MouseEvent e) {

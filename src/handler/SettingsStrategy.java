@@ -10,6 +10,9 @@ import model.GameState;
 import common.enums.MenuItemEnum;
 import controller.WindowController;
 
+/**
+ * Handles the inputs of the settings panel
+ */
 public class SettingsStrategy extends HandlerStrategy {
     private MenuItemEnum activeMenu;
 
@@ -18,7 +21,6 @@ public class SettingsStrategy extends HandlerStrategy {
     public SettingsStrategy() {
         settingsList = new ArrayList<JTextField>();
     }
-
 
     @Override
     public void mouseEvent(MouseEvent e) {
@@ -60,7 +62,6 @@ public class SettingsStrategy extends HandlerStrategy {
         this.settingsList.add(field);
     }
 
-
     @Override
     public void mouseDragged(MouseEvent e) {
     }
@@ -74,6 +75,4 @@ public class SettingsStrategy extends HandlerStrategy {
     @Override
     public void keyPressed(KeyEvent e) {
     }
-    
-
 }

@@ -9,6 +9,9 @@ import model.GameState;
 import model.economy.Stock;
 import common.Character;
 
+/**
+ * Handles the trade between the 2 tables
+ */
 public class TableStockModel implements TableModel {
 
     private String[] COLUMN_NAMES = {"Ware", "Anzahl", "Preis"};

@@ -22,6 +22,9 @@ import common.enums.MenuItemEnum;
 
 import controller.WindowController;
 
+/**
+ * Handles the inputs when a fight starts
+ */
 public class FightStrategy extends HandlerStrategy implements Tickable{
 
     private Entity activeEntity;
@@ -47,8 +50,6 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
         
         if(isCannonActive){
             cannonballs.add(((Weapon)activeEntity).fire());
-//            cannonballs.getLast().fire();
-//            ((Weapon)activeEntity).reload();
             activeEntity = null;
             isCannonActive = false;
             aim=null;
@@ -58,7 +59,6 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
                 activeEntity = GameState.getInstance().getAirship().getEntity(tileX, tileY);
             }
             if(activeEntity instanceof Weapon){
-//                cannonballs.addLast(((Weapon)activeEntity).aim());
                 aim = ((Weapon)activeEntity).aim(e.getX(), e.getY());
                 isCannonActive = true;
             }
@@ -105,10 +105,6 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
     public LinkedList<Cannonball> getCannonballs(){
         return cannonballs;
     }
-    
-    public void removeCannonball(Cannonball cannonball){
-        cannonballs.remove(cannonball);
-    }
 
     @Override
     public void tick() {
@@ -148,7 +144,7 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
         }
     }
 
-    
+
     private void handleArtificialFiring()
     {
         Random random = new Random();
