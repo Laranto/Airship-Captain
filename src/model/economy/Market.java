@@ -31,7 +31,7 @@ public class Market implements Serializable{
             
             Economy.calculateNewPriceFor(marketItem, airshipItem);
         }catch(ArithmeticException exp){
-            WindowController.showError("No Money", "You don't have enough money, you need : "+totalCosts+", but you have only: "+captainMoney.getAmount());
+            WindowController.showError("Kein Geld", "Du hast nicht genug Geld, du brauchst : $ "+totalCosts+", aber hast nur: $ "+captainMoney.getAmount());
         }
     }
 

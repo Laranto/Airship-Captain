@@ -44,7 +44,7 @@ public class SettingsPanel extends GameDefaultPanel {
         /**
          * Panel Title
          */
-        JLabel panelTitle = new JLabel("Einstellungen");
+        JLabel panelTitle = new JLabel("Optionen");
         panelTitle.setBounds(Constants.WINDOW_WIDTH/10, Constants.WINDOW_HEIGHT/200, Constants.WINDOW_WIDTH *8/10, Constants.WINDOW_HEIGHT * 1/12);
         panelTitle.setFont(new Font("Serif", Font.BOLD, 32));
         add(panelTitle);
@@ -54,17 +54,16 @@ public class SettingsPanel extends GameDefaultPanel {
          */
         JTextField captainName = new JTextField(GameState.getInstance().getAirship().getCaptain().getName());
         settingsStrategy.addSettingField(captainName);
-        this.addInputRow(new JLabel("Captain-name: "), captainName);
+        this.addInputRow(new JLabel("Name des Kapitäns: "), captainName);
         
         JTextField shipName = new JTextField(GameState.getInstance().getAirship().getName());
         settingsStrategy.addSettingField(shipName);
-        this.addInputRow(new JLabel("Ship-name: "), shipName);
+        this.addInputRow(new JLabel("Name des Schiffs: "), shipName);
 
         
         /**
          * Formular button
          */
-
         JButton saveButton = new JButton("Speichern");
         saveButton.setBackground(Constants.BUTTON_BACKGROUND_INACTIVE);
         saveButton.addActionListener(buttonController);

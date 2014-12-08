@@ -54,7 +54,7 @@ public class ConstructionPanel extends GameDefaultPanel {
         this.setFocusable(true);
 
         
-        informationLabel = new JLabel("Airshipname:  ($ 1000)");
+        informationLabel = new JLabel("Name des Schiffs:  ($ 1000)");
         informationLabel.setBounds(Constants.WINDOW_WIDTH * 510/1000, 5, Constants.WINDOW_WIDTH * 49/100, 50);
         informationLabel.setFont(new Font("Serif", Font.BOLD, 20));
         add(informationLabel);
@@ -233,6 +233,6 @@ public class ConstructionPanel extends GameDefaultPanel {
     {
         Airship airship = GameState.getInstance().getAirship();
         Captain captain = airship.getCaptain();
-        informationLabel.setText(captain.getName()+"     $ "+captain.getMoney().getAmount()+"    Speed: "+airship.getSpeed());
+        informationLabel.setText(captain.getName()+"     $ "+captain.getMoney().getAmount()+"  Geschw.: "+airship.getSpeed());
     }
 }
