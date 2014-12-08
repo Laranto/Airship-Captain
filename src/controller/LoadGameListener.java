@@ -10,6 +10,10 @@ import model.GameState;
 import common.Constants;
 import common.FileUtils;
 
+/**
+ * Listener to load an existing game.
+ *
+ */
 public class LoadGameListener implements ActionListener {
     
     @Override

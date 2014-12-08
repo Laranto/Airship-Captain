@@ -8,6 +8,10 @@ import model.GameState;
 import common.Constants;
 import common.FileUtils;
 
+/**
+ * Listener to save an active GameState
+ *
+ */
 public class SaveGameListener implements ActionListener {
 
     @Override
