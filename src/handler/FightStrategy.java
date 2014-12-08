@@ -82,6 +82,7 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
         {
         case EXIT_FIGHT:
             scenario.setActive(false);
+            WindowController.getTickables().remove(this);
             GameState.getInstance().getAirship().resetRotation();
             WindowController.showNavigation();
             break;

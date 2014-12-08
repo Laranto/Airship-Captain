@@ -50,7 +50,7 @@ public class Constants {
     public static final double AIRSHIP_MAX_SPEED = 25.0;
     public static final double AIRSHIP_MIN_SPEED = 2.0;
     
-    public static final double CAPTAIN_START_MONEY = 1000;
+    public static final double CAPTAIN_START_MONEY = 10000;
     public static final String CAPTAIN_NAME_DEFAULT = "Me the Captain";
     public static final int MOVE_UP = KeyEvent.VK_UP;
     public static final int MOVE_DOWN = KeyEvent.VK_DOWN;
