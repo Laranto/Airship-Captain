@@ -3,15 +3,15 @@
     <material type="wall" width="2" height="2">
         <name>Iron wall</name>
         <image>img/iron_block.png</image>
-        <value>35</value>
-        <durability>120</durability>
-        <weight>60</weight>
+        <value>40</value>
+        <durability>30</durability>
+        <weight>50</weight>
     </material>
     <material type="floor" width="2" height="2">
         <name>Iron planks</name>
         <image>img/iron_trapdoor.png</image>
         <value>30</value>
-        <durability>120</durability>
+        <durability>30</durability>
         <weight>25</weight>
     </material>    
 </materials>

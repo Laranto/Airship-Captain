@@ -47,10 +47,10 @@ public class Constants {
     
     
     public static final double AIRSHIP_MAX_WEIGHT = 40000.0;  //for calculating the speed, 
-    public static final double AIRSHIP_MAX_SPEED = 25.0;
+    public static final double AIRSHIP_MAX_SPEED = 26.0;
     public static final double AIRSHIP_MIN_SPEED = 2.0;
     
-    public static final double CAPTAIN_START_MONEY = 10000;
+    public static final double CAPTAIN_START_MONEY = 5000;
     public static final String CAPTAIN_NAME_DEFAULT = "Me the Captain";
     public static final int MOVE_UP = KeyEvent.VK_UP;
     public static final int MOVE_DOWN = KeyEvent.VK_DOWN;
@@ -99,8 +99,8 @@ public class Constants {
     
     public static final double WARE_STANDARD_AMOUNT = 100;
     public static final double WARE_MAX_INFLATION_FACTOR = 5;
-    public static final double WARE_SELL_RATIO = 0.5;    
-    public static final double OBJECT_SELL_RATIO = 0.7;
+    public static final double WARE_SELL_RATIO = 0.75;    
+    public static final double OBJECT_SELL_RATIO = 0.75;
     public static final int MAX_TRADEABLE_ITEMS = 10;
     
     public static final String FILE_ENDING_GAME = "asc";
@@ -131,7 +131,7 @@ public class Constants {
 	public static final Stroke STROKE_SOLID = new BasicStroke(4);
 
     public static final double BATTLE_FINISH_RATIO = 10; //in percent  10 -> 10%
-    public static final int BATTLE_PROFIT_RATIO = 10;  // min=1 max : infinite :: divides the ship durability by this number 
+    public static final int BATTLE_PROFIT_RATIO = 7;  // min=1 max=infinite :: divides the ship durability by this number and adds it as money
 
 
 

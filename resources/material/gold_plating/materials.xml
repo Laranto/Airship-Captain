@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<materials>
+    <material type="wall" width="2" height="2">
+        <name>Golden wall strong</name>
+        <image>img/gold_block_strong.png</image>
+        <value>80</value>
+        <durability>100</durability>
+        <weight>100</weight>
+    </material>
+    <material type="wall" width="2" height="2">
+        <name>Golden wall weak</name>
+        <image>img/gold_block_weak.png</image>
+        <value>60</value>
+        <durability>60</durability>
+        <weight>60</weight>
+    </material>
+    <material type="floor" width="2" height="2">
+        <name>Gold planks</name>
+        <image>img/gold_trapdoor.png</image>
+        <value>40</value>
+        <durability>30</durability>
+        <weight>35</weight>
+    </material>      
+</materials>
