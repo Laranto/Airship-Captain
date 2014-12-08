@@ -5,8 +5,7 @@ import controller.WindowController;
 import model.gameobject.Captain;
 
 /**
- * Defines what to show, if a fight starts on a Route.
- * 
+ *  Scenario to handle not so friendly meetings with other travelers
  */
 public class FightScenario extends Scenario {
 

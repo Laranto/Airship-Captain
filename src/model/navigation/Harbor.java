@@ -10,9 +10,7 @@ import model.gameobject.Renderable;
 import common.Constants;
 
 /**
- * A Harbor which is used by the GameState for the currentHarbor
- * and all destinations on the NavigationPanel
- * 
+ *  A Harbor in the game world. 
  */
 public class Harbor implements Renderable, Serializable{
     

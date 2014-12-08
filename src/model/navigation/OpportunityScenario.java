@@ -9,8 +9,7 @@ import model.GameState;
 import model.gameobject.Captain;
 
 /**
- * Defines what to show, if an opportunity starts on a Route.
- * 
+ *  Scenario for when you get lucky and find some spare change somewhere
  */
 public class OpportunityScenario extends Scenario {
 
