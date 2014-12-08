@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<materials>
+    <material type="floor" width="2" height="2">
+        <name>Gras floor</name>
+        <image>img/gras_trapdoor.png</image>
+        <value>10</value>
+        <durability>4</durability>
+        <weight>8</weight>
+    </material>  
+</materials>
