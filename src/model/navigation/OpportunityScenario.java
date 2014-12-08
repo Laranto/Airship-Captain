@@ -8,6 +8,10 @@ import controller.WindowController;
 import model.GameState;
 import model.gameobject.Captain;
 
+/**
+ * Defines what to show, if an opportunity starts on a Route.
+ * 
+ */
 public class OpportunityScenario extends Scenario {
 
     public OpportunityScenario(String description, Captain captain) {

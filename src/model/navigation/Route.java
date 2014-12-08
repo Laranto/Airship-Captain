@@ -16,7 +16,10 @@ import model.gameobject.Renderable;
 import common.Constants;
 import common.Utils;
 
-
+/**
+ * Defines a Route between two Harbors
+ * 
+ */
 public class Route implements Renderable{
 
     private Harbor to;
@@ -57,6 +60,10 @@ public class Route implements Renderable{
         to = harbor;
     }
     
+    /**
+     * Distance between the two Harbors
+     * @return
+     */
     public Double calculateDistance(){
         if(!isCorrectRoute()){
             return 0.0;
@@ -70,14 +77,29 @@ public class Route implements Renderable{
         return Math.sqrt(Math.pow(directedDistance.get(0),2) + Math.pow(directedDistance.get(1), 2));
     }
 
+    /**
+     * calculates the Duration of the Route
+     * distance / airship speed
+     * @return
+     */
     public int calculateDuration(){
         return (int)(calculateDistance()/GameState.getInstance().getAirship().getSpeed());
     }
 
+    /**
+     * Route is correct if current harbor and next 
+     * Destination should not be null.
+     * @return
+     */
     private boolean isCorrectRoute() {
         return getFrom() != null && to != null;
     }
 
+    /**
+     * Draws a line between to Harbors:
+     * - when traveling
+     * - when choosing next Destination 
+     */
     @Override
     public void render(Graphics2D g) {
         if(isCorrectRoute()){
@@ -134,6 +156,10 @@ public class Route implements Renderable{
         return scenario == null?false:scenario.isActive();
     }
 
+    /**
+     * The player travels on the route.
+     * @return
+     */
     public boolean travel() {
         travelStep();
         if(getRemainingDuration()==0){          
@@ -167,7 +193,7 @@ public class Route implements Renderable{
         GameState.getInstance().setCurrentHarbor(to);
     }
 
-	public boolean isTravelling() {
-	    return getRemainingDuration()!=0;
+    public boolean isTravelling() {
+	return getRemainingDuration()!=0;
     }
 }

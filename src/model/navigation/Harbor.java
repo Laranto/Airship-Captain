@@ -9,6 +9,11 @@ import model.economy.Market;
 import model.gameobject.Renderable;
 import common.Constants;
 
+/**
+ * A Harbor which is used by the GameState for the currentHarbor
+ * and all destinations on the NavigationPanel
+ * 
+ */
 public class Harbor implements Renderable, Serializable{
     
     private Market market;
@@ -38,6 +43,13 @@ public class Harbor implements Renderable, Serializable{
         this.nextDestination = nextDestination;
     }
 
+    /**
+     * Draws a harbor
+     * 
+     * HARBOR_CIRCLE_BACKGROUND_ACTIVE: current Harbor
+     * HARBOR_CIRCLE_BACKGROUND_NEXT_DESTINATION: next Destination
+     * HARBOR_CIRCLE_BACKGROUND: a Harbor
+     */
     @Override
     public void render(Graphics2D g) {
         Color tmpColor = g.getColor();
