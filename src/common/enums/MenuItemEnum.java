@@ -1,5 +1,10 @@
 package common.enums;
 
+/**
+ * This class holds button items as enum, it is used
+ * everywhere where there is a button needed
+ *
+ */
 public enum MenuItemEnum {
     
     START_GAME("Spiel starten"),
@@ -34,14 +39,11 @@ public enum MenuItemEnum {
 	/*
 	 * Settings
 	 */
-	SAVE_GAME_SETTINGS("Einstellungen speichern"),
-	
-	
-	
-	;
-	
+	SAVE_GAME_SETTINGS("Einstellungen speichern");
+    
+    
 	private String text;
-
+	
 	private MenuItemEnum(String text) {
 		this.text = text;
 	}

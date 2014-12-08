@@ -9,12 +9,18 @@ import model.factory.WareFactory;
 import common.Constants;
 import common.Utils;
 
+/**
+ * The stock which contains a list of wares
+ */
 public class Stock implements Serializable{
     private static final long serialVersionUID = 1L;
     
     private List<StockItem> wareList;
 
-    
+    /**
+     * creates a stock with random wares if true given
+     * @param emptyStock true if the stock should be empty, false oterwhise
+     */
     public Stock(boolean emptyStock)
     {
         wareList = new ArrayList<StockItem>();
@@ -28,7 +34,7 @@ public class Stock implements Serializable{
         this(false);
     }
     
-    /*
+    /**
      * initializing the stock randomly
      */
     private void initStock() {
@@ -51,6 +57,13 @@ public class Stock implements Serializable{
         }
     }
     
+    /**
+     * Adds a tradeable ware to this stock
+     * @param the ware which should be traded
+     * @param the amount of the ware which should be traded
+     * @return StockItem the item which is currently in the stock
+     * @throws Exception when the there is not any ware of this kind
+     */
     public StockItem addTradeableWare(Ware ware, int amount) throws Exception
     {
         StockItem stockItem = null;
@@ -73,6 +86,11 @@ public class Stock implements Serializable{
         return stockItem;
     }
     
+    /**
+     * Returns the item in the stock by the given name
+     * @param String the name of the searched ware
+     * @return the StockItem which was found by the given name, null otherwise
+     */
     public StockItem getStockItemByWareName(String name){
         for(StockItem stockItem: wareList){
             if(stockItem.getWare().getName().equals(name)){
