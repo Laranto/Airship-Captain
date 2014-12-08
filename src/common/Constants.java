@@ -12,10 +12,17 @@ import java.util.Vector;
 import model.economy.Market;
 import model.navigation.Harbor;
 
+/**
+ * Holds a lot of constants which are used 
+ * all over the code
+ */
 public class Constants {
 
     public static final int GAME_TICK_SPEED = 100;
     
+    /**
+     * folder paths
+     */
     public static final String FOLDER_MATERIAL = "resources/material/";
     public static final String FOLDER_OBJECTS = "resources/object/";
     public static final String FOLDER_WARE = "resources/ware/";
@@ -23,6 +30,9 @@ public class Constants {
     public static final String FOLDER_AIRSHIPS = "resources/ship/";
     public static final String FOLDER_ENEMY_AIRSHIPS = "resources/enemy_ship/";
     
+    /**
+     * path to the images
+     */
     public static final String NAVIGATION_BACKGROUND_IMAGE = "resources/panels/img/map.jpg";
     public static final String HARBOR_BACKGROUND_IMAGE = "resources/panels/img/zeppelin.jpg";
     public static final String ZEPPLIN_COCKPIT_BACKGROUND_IMAGE = "resources/panels/img/zepplin_cockpit.png";
@@ -31,25 +41,37 @@ public class Constants {
     public static final String CANNONBALL_IMAGE = "resources/object/weapons/img/cannonball.png";
     public static final int CANNONBALL_SIZE = 10;
     
-    
+    /**
+     * file ending
+     */
     public static final String XML_FILE_ENDING = ".xml";
+    public static final String FILE_ENDING_GAME = "asc";
+    public static final String FILE_ENDING_SHIP = "ascs";
     
-    
+    /**
+     * main frame constants
+     */
     public static final int WINDOW_WIDTH = 800;
     public static final int WINDOW_HEIGHT = 600;
     public static final int CONTROL_PANEL_WIDTH = 300;
     public static final int CONTROL_PANEL_HEIGHT = 100;
+    
     /** Tile Size in Pixels*/
     public static final int TILE_SIZE = 16;
     public static final int AIRSHIP_WIDTH_TILES = (WINDOW_WIDTH/2)/TILE_SIZE;
     public static final int AIRSHIP_HEIGHT_TILES = WINDOW_HEIGHT/TILE_SIZE;
     public static final String AIRSHIP_NAME_DEFAULT = "Noname";
     
-    
+    /**
+     * airship constants
+     */
     public static final double AIRSHIP_MAX_WEIGHT = 40000.0;  //for calculating the speed, 
     public static final double AIRSHIP_MAX_SPEED = 26.0;
     public static final double AIRSHIP_MIN_SPEED = 2.0;
     
+    /**
+     * captain constants
+     */
     public static final double CAPTAIN_START_MONEY = 5000;
     public static final String CAPTAIN_NAME_DEFAULT = "Me the Captain";
     public static final int MOVE_UP = KeyEvent.VK_UP;
@@ -61,13 +83,18 @@ public class Constants {
     
     public static final int OPPORTUNITY_MAX_MONEY = 20;
     
-    
+    /**
+     * Game GUI
+     */
     public static final Color COLOR_SKYBLUE = new Color(128,218,235);
     public static final Color BUTTON_BACKGROUND_INACTIVE = Color.LIGHT_GRAY.brighter();
     public static final Color BUTTON_BACKGROUND_DELETE_ACTIVE = Color.RED;
     public static final Color BUTTON_BACKGROUND_ACTIVE = Color.LIGHT_GRAY;
     public static final Object BUTTON_PROPERTY_ID = "id";
     
+    /**
+     * Navigation
+     */
     public static final Color HARBOR_CIRCLE_BACKGROUND_ACTIVE = Color.RED;
     public static final Color HARBOR_CIRCLE_BACKGROUND_NEXT_DESTINATION = Color.BLUE;
     public static final Color HARBOR_CIRCLE_BACKGROUND = Color.WHITE;
@@ -97,14 +124,16 @@ public class Constants {
         add(new Harbor(new Market(), new Point(720, 275), false));
     }};
     
+    /**
+     * Market and Wares
+     */
     public static final double WARE_STANDARD_AMOUNT = 100;
     public static final double WARE_MAX_INFLATION_FACTOR = 5;
     public static final double WARE_SELL_RATIO = 0.75;    
     public static final double OBJECT_SELL_RATIO = 0.75;
     public static final int MAX_TRADEABLE_ITEMS = 10;
     
-    public static final String FILE_ENDING_GAME = "asc";
-    public static final String FILE_ENDING_SHIP = "ascs";
+
 
     
     /**

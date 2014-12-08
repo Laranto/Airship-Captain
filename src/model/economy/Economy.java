@@ -2,6 +2,10 @@ package model.economy;
 
 import common.Constants;
 
+/**
+ * Hold methods which are used mostly in market
+ * to calculate some prices
+ */
 public class Economy {
     
     /**
