@@ -5,6 +5,9 @@ import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 
+/**
+ * This is need to transfer an item from one table to the other
+ */
 public class StockItemTransferable implements Transferable{
     
     public static final DataFlavor STOCKITEM_FLAVOR = new DataFlavor(StockItem.class, "model.economy.StockItem");

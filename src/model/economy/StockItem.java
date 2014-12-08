@@ -2,6 +2,11 @@ package model.economy;
 
 import java.io.Serializable;
 
+/**
+ * This hold an StockItem, this means it hold a ware and 
+ * the amount of the ware which is in the stock. The ware itself
+ * doesn't know how many there is of his kind in the stock.
+ */
 public class StockItem implements Serializable {
     private static final long serialVersionUID = 1L;
     

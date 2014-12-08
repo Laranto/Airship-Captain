@@ -7,6 +7,8 @@ import controller.WindowController;
 
 public class Market implements Serializable{
 
+    private static final long serialVersionUID = 1L;
+
     private Stock stock;
 
     public Market() {
@@ -44,7 +46,6 @@ public class Market implements Serializable{
      */
     public void sellItem(Ware ware, int amount) throws Exception {
         if(amount == 0){return;}
-
 
         StockItem airshipItem = GameState.getInstance().getAirship().getStock().addTradeableWare(ware, -amount);
         StockItem marketItem = getStock().addTradeableWare(ware, amount);

@@ -15,15 +15,21 @@ import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
+/**
+ * A class for holding methods which can be used
+ * for accessing the file system
+ */
 public class FileUtils {
     
+    /**
+     * contains all the loaded images
+     */
     private static HashMap<String, BufferedImage> loadedImages = new HashMap<>();
-    
     
     /**
      * Gets an image using the provided path. It tries first to read it from the memory, 
      * if there is no instance of the image in the memory it will be loaded from the file system.
-     * @param imagePath Path where the image file is, including image name
+     * @param imagePath where the image file is, including image name
      * @return a buffered image version of the file provided
      * @throws IOException when the file could not have been read.
      */
@@ -38,9 +44,9 @@ public class FileUtils {
     
     /**
      * Contained unit to load a Bufferedimage from a file. If possible use <code>getImage()</code>
-     * @param imgFile
-     * @return
-     * @throws IOException 
+     * @param imgFile a file which exists on the os
+     * @return BufferedImage image which is loaded from the filesystem
+     * @throws IOException when the file couldn't be load
      */
     public static BufferedImage loadImage(File imgFile) throws IOException {
         BufferedImage img = null;
@@ -53,10 +59,20 @@ public class FileUtils {
         return img;
     }
     
+    /**
+     * Saves an object
+     * @param Serializable the object which should be saved
+     * @param String the path where the object should be saved
+     * @param String the name of the saving object
+     * @param String the extension of the saved file
+     * @return true if the save was successfull, otherwise false 
+     */
     public static boolean saveObjectFile(Serializable object, String path, String fileName, String extention){
         return saveObjectFile(object, path + File.separator+fileName+"."+extention);
     }
-    public static boolean saveObjectFile(Serializable object, String location){
+    
+
+    private static boolean saveObjectFile(Serializable object, String location){
         OutputStream fileOutputStream = null;
         ObjectOutputStream oos = null;
 
@@ -80,11 +96,19 @@ public class FileUtils {
             }
         }
     }
+    
+    /**
+     * Loads an object
+     * @param String path the path of the file which should be loaded
+     * @param fileName
+     * @param extention
+     * @return
+     */
     public static Serializable loadObjectFile(String path, String fileName, String extention){
         return loadObjectFile(path + File.separator+fileName+"."+extention);
     }
 
-    public static Serializable loadObjectFile(String location) {
+    private static Serializable loadObjectFile(String location) {
         InputStream fileInputStream = null;
         ObjectInputStream ois = null;
         Serializable readObject = null;
@@ -111,6 +135,10 @@ public class FileUtils {
         return readObject;
     }
     
+    /**
+     * @param String folderPath the path of the source folder 
+     * @return ArrayList<File> a list of file which this folder contains
+     */
     public static ArrayList<File> getFileList(String folderPath)
     {
         ArrayList<File> files = new ArrayList<File>();
@@ -120,9 +148,5 @@ public class FileUtils {
             files.add(folder.listFiles()[i]);
         }
         return files;
-    }
-    
-    public static void main(String[] args) {
-        getFileList(Constants.FOLDER_ENEMY_AIRSHIPS);
     }
 }

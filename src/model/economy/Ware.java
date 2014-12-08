@@ -4,17 +4,17 @@ import java.io.Serializable;
 
 import model.gameobject.GameObject;
 
+/**
+ * This class hold the ware attributes
+ */
 public class Ware extends GameObject implements Tradeable, Serializable{
     private static final long serialVersionUID = 1L;
-    
     private double price;
-
 
     public Ware(String name , int value , int weight, double price) {
         super(name , value , weight);
         this.price = price;
     }
-
     
     public double getPrice() {
         return price;
