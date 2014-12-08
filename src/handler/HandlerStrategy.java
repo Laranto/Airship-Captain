@@ -4,6 +4,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.Observable;
 
+/**
+ *  State-Machine for processing inputs and calling model functions. Serves as facade-layer from the view to the model 
+ */
 public abstract class HandlerStrategy extends Observable {
 
     public abstract void mouseEvent(MouseEvent e);

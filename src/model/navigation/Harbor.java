@@ -9,6 +9,9 @@ import model.economy.Market;
 import model.gameobject.Renderable;
 import common.Constants;
 
+/**
+ *  A Harbor in the game world. 
+ */
 public class Harbor implements Renderable, Serializable{
     
     private Market market;

@@ -8,6 +8,9 @@ import controller.WindowController;
 import model.GameState;
 import model.gameobject.Captain;
 
+/**
+ *  Scenario for when you get lucky and find some spare change somewhere
+ */
 public class OpportunityScenario extends Scenario {
 
     public OpportunityScenario(String description, Captain captain) {
