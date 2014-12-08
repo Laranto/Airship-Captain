@@ -5,7 +5,10 @@ import common.Constants;
 
 import controller.WindowController;
 
-
+/**
+ * The starting class for the project Airship-Captain.
+ * 
+ */
 public class Start {
 
     /**
@@ -23,7 +26,6 @@ public class Start {
         WindowController.setFrame(frame);
         WindowController.showMainMenu();
         
-        //TODO main loop
         while(true){
             try {
                 Thread.sleep(Constants.GAME_TICK_SPEED);

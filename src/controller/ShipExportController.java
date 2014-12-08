@@ -10,12 +10,15 @@ import javax.swing.JButton;
 import model.GameState;
 import model.gameobject.Airship;
 import model.gameobject.Captain;
-import model.gameobject.GameObject;
 
 import common.Constants;
 import common.FileUtils;
 import common.enums.PropertyEnum;
 
+/**
+ * Handles the import/export of an Airship. 
+ *
+ */
 public class ShipExportController implements ActionListener {
 
 

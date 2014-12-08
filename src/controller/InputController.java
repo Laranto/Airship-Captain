@@ -7,6 +7,11 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Listening to keyboard or mouse inputs of the user and 
+ * sends them to the given strategy to handle the event.
+ * 
+ */
 public class InputController extends MouseAdapter implements KeyListener {
 
     private HandlerStrategy strategy;

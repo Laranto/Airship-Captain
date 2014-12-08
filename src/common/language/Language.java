@@ -3,7 +3,10 @@ package common.language;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-
+/**
+ * RessourceBundle uses property Files to load the correct language in the Application  
+ * 
+ */
 public class Language {
     
     private static ResourceBundle resources;

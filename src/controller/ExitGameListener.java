@@ -3,6 +3,10 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Listener to close the game.
+ * 
+ */
 public class ExitGameListener implements ActionListener {
 
     @Override
