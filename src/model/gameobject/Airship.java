@@ -17,6 +17,9 @@ import model.gameobject.material.Floor;
 
 import common.Constants;
 
+/**
+ *  A Representation for an Airship consisting of Materials and holding Entities.
+ */
 public class Airship extends GameObject implements Renderable{
     private static final long serialVersionUID = 1L;
     private Material[][] shipBody;
@@ -179,6 +182,9 @@ public class Airship extends GameObject implements Renderable{
         return null;
     }
     
+    /**
+     * @return the material on the given position
+     */
     public Material getMaterialByPosition(int tileX, int tileY){
         if(isRotated){
             tileX = rotateSelectedX(tileX);
@@ -291,7 +297,7 @@ public class Airship extends GameObject implements Renderable{
     }
 
 
-    public void renderEquipment(Graphics2D g) {
+    private void renderEquipment(Graphics2D g) {
         AffineTransform originalCoordinates = g.getTransform();
         for(int x = 0;x<Constants.AIRSHIP_WIDTH_TILES;x++){
             for(int y = 0; y<Constants.AIRSHIP_HEIGHT_TILES;y++){
@@ -307,7 +313,7 @@ public class Airship extends GameObject implements Renderable{
     }
 
 
-    public void renderMaterial(Graphics2D g) {
+    private void renderMaterial(Graphics2D g) {
         AffineTransform originalCoordinates = g.getTransform();
         for(int x = 0;x<Constants.AIRSHIP_WIDTH_TILES;x++){
             for(int y = 0; y<Constants.AIRSHIP_HEIGHT_TILES;y++){
@@ -485,6 +491,9 @@ public class Airship extends GameObject implements Renderable{
     }
 
     
+    /**
+     * Calculates the speed of the Airship according to its weight
+     */
     public double getSpeed() {
         double speed = (((Constants.AIRSHIP_MIN_SPEED-Constants.AIRSHIP_MAX_SPEED)/Constants.AIRSHIP_MAX_WEIGHT)*getWeight())+Constants.AIRSHIP_MAX_SPEED;
         speed = (speed < Constants.AIRSHIP_MIN_SPEED ? Constants.AIRSHIP_MIN_SPEED : speed); 
@@ -495,12 +504,18 @@ public class Airship extends GameObject implements Renderable{
         return isEmpty;
     }
 
+    /**
+     * Reverts the rotation, if any. After calling this, the airship will have it's original orientation
+     */
     public void resetRotation() {
         if(isRotated){
             rotate();
         }
     }
 
+    /**
+     * Checks all parts of the Airship for damage. If the damage is severe enough (durability is 0 or lower) the ShipPart is removed 
+     */
     public void checkDamage() {
         for(int x = 0;x<Constants.AIRSHIP_WIDTH_TILES;x++){
             for(int y = 0;y<Constants.AIRSHIP_HEIGHT_TILES;y++){
@@ -519,7 +534,10 @@ public class Airship extends GameObject implements Renderable{
         removeEntity(x, y);
     }
     
-    public int getCurrentDurability()
+    /**
+     * Calculates the total durability of the airship
+     */
+    private int calculateDurability()
     {
         int currentDurability = 0;
         for(int x = 0;x<Constants.AIRSHIP_WIDTH_TILES;x++){
@@ -534,13 +552,16 @@ public class Airship extends GameObject implements Renderable{
     }
     
     
-    public double getDamageInPercent()
+    /**
+     * Calculates the damage using the durability
+     */
+    public double calculateDamageInPercent()
     {        
         if(getTotalDurability() == 0){
-            setTotalDurability(getCurrentDurability());
+            setTotalDurability(calculateDurability());
         }
         
-        return (getTotalDurability()-getCurrentDurability())*1.0/(getCurrentDurability()*1.0)*100;
+        return (getTotalDurability()-calculateDurability())*1.0/(calculateDurability()*1.0)*100;
     }
     
     public void setTotalDurability(int totalDurability) {
@@ -552,6 +573,9 @@ public class Airship extends GameObject implements Renderable{
         return this.totalDurability;
     }
     
+    /**
+     * @return all Weapons placed on the Airship
+     */
     public ArrayList<Weapon> getWeapons() {
         ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 

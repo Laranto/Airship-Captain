@@ -9,8 +9,7 @@ package model.factory;
 import model.gameobject.ShipPart;
 
 /**
- *
- * @author Hesyar Uzuner <info@hesyar.com>
+ *  Abstract shippart factory to support polymorphism
  */
 public abstract class ShippartFactory<E extends ShipPart> {
     

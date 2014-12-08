@@ -10,6 +10,9 @@ import model.economy.Money;
 
 import common.Constants;
 
+/**
+ *  A Representation of a captain of an airship. 
+ */
 public class Captain  implements Renderable, Serializable {
     private static final long serialVersionUID = 1L;
     
@@ -24,6 +27,7 @@ public class Captain  implements Renderable, Serializable {
     
     @Override
     public void render(Graphics2D g) {
+        //TODO Create a visual representation of the captain
     }
 
     public Money getMoney() {
@@ -46,7 +50,11 @@ public class Captain  implements Renderable, Serializable {
         this.currentPosition = currentPosition;
     }
 
+    /**
+     * Changes the position of the captain according to the KeyEvent
+     */
     public void move(KeyEvent e) {
+        //TODO Extract the method to a strategy
         switch(e.getKeyCode()){
         case Constants.MOVE_UP:
             if(isMovedAllowed((int)currentPosition.getX(), (int)(currentPosition.getY()+Constants.CAPTAIN_MOVE_SPEED))){                

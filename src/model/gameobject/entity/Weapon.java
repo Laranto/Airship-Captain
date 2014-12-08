@@ -21,6 +21,11 @@ public class Weapon extends Entity {
         this.damage = damage;
     }
 
+    /**
+     * Creates an aim for the weapon towards the given point.
+     * Point in pixels
+     * @return an Aim object with root on the nozzle of the weapon and endpoint on the given coordinates
+     */
     public Aim aim(int x, int y){
         aim = new Aim(
                 new Point(
@@ -29,6 +34,10 @@ public class Weapon extends Entity {
                 new Point(x,y));
         return aim;
     };
+    
+    /**
+     * Fires the weapon and creates by that a cannonball.
+     */
     public Cannonball fire(){
         Cannonball firedCannonball = null;
         if(aim!=null){

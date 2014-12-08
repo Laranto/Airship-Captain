@@ -2,11 +2,11 @@ package model.gameobject;
 
 import java.io.Serializable;
 
+/**
+ *  An abstract representation of an object in the game.
+ */
 public abstract class GameObject implements Serializable {
     
-    /**
-     * 
-     */
     private static final long serialVersionUID = 1L;
     
     private String name;

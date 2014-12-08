@@ -8,6 +8,9 @@ import java.io.IOException;
 import common.FileUtils;
 
 
+/**
+ *  An abstract representation of a part of an airship.
+ */
 public abstract class ShipPart extends GameObject implements Renderable {
     private static final long serialVersionUID = 1L;
     /**
@@ -69,6 +72,9 @@ public abstract class ShipPart extends GameObject implements Renderable {
         }
     }
     
+    /**
+     * Tries to load the image using the imagePath if it has not been loaded.
+     */
     public BufferedImage getImage()
     {
         if(image==null){

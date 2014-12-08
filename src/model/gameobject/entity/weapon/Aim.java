@@ -35,6 +35,9 @@ public class Aim implements Renderable{
         this.to = to;
     }
     
+    /**
+     * Translates (Matrix Translation) the position by the given vector  
+     */
     public void shiftFrom(Vector2d shift){
         from.x=(int) (from.x+shift.getX());
         from.y=(int) (from.y+shift.getY());

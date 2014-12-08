@@ -129,7 +129,7 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
     
     private void handleBattleSituation()
     {        
-        if(scenario.getEnemy().getDamageInPercent() > Constants.BATTLE_FINISH_RATIO){
+        if(scenario.getEnemy().calculateDamageInPercent() > Constants.BATTLE_FINISH_RATIO){
             int profit = (scenario.getEnemy().getTotalDurability())/Constants.BATTLE_PROFIT_RATIO;
             scenario.getEnemy().setTotalDurability(0);
             GameState.getInstance().getAirship().getCaptain().getMoney().addAmount(profit);
@@ -138,7 +138,7 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
             handleAction(MenuItemEnum.EXIT_FIGHT);
         }
         
-        if(GameState.getInstance().getAirship().getDamageInPercent() > Constants.BATTLE_FINISH_RATIO){
+        if(GameState.getInstance().getAirship().calculateDamageInPercent() > Constants.BATTLE_FINISH_RATIO){
             int loss = (GameState.getInstance().getAirship().getTotalDurability())/Constants.BATTLE_PROFIT_RATIO;
             GameState.getInstance().getAirship().setTotalDurability(0);
             GameState.getInstance().getAirship().getCaptain().getMoney().removeAmount(loss);

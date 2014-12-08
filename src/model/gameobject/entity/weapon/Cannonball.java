@@ -26,6 +26,9 @@ public class Cannonball implements Renderable {
     
     
     
+    /**
+     * @param aim aim of the weapon having an start position and an to as an directional guide  
+     */
     public Cannonball(Aim aim , int damage) {
         radius=Constants.CANNONBALL_SIZE/2;
         
@@ -61,11 +64,19 @@ public class Cannonball implements Renderable {
     }
 
 
+    /**
+     * Checks if the cannonball is still in the bounds of the frame
+     * @returns false when the cannonball is outside of the frame.
+     */
     public boolean isOutOfBounds() {
         return currentPosition.getX() < 0 || currentPosition.getX() > Constants.WINDOW_WIDTH || 
                 currentPosition.getY() < 0 || currentPosition.getY() > Constants.WINDOW_HEIGHT;
     }
 
+    /**
+     * Calulates the collision between the cannonball and a shippart, reducing durability of the shippart and damage of the cannon.
+     * @param hitShipPart shippart that has been hit by the cannonball
+     */
     public void calculateCollision(ShipPart hitShipPart) {
         if(hitShipPart!=null){
             if (damage > hitShipPart.getDurability()) {
@@ -82,6 +93,10 @@ public class Cannonball implements Renderable {
         return damage;
     }
 
+    /**
+     * Moves the cannonball across the possible area. Calculates what tiles have been hit by the cannonball and what damage was dealt.
+     * @param airships 2 airships
+     */
     public void move(Airship... airships) {
         // TODO detect all tiles between current and next current position
 //        updateVelocity();
