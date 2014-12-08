@@ -125,6 +125,7 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
         handleArtificialFiring();
     }
     
+    
     private void handleBattleSituation()
     {        
         if(scenario.getEnemy().getDamageInPercent() > Constants.BATTLE_FINISH_RATIO){
@@ -132,6 +133,7 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
             scenario.getEnemy().setTotalDurability(0);
             GameState.getInstance().getAirship().getCaptain().getMoney().addAmount(profit);
             WindowController.showMessage("Kampf vorbei", "Dein Gegner ist geflohen. Du hast $ "+profit+" gewonnen. ");
+            System.out.println(cannonballs.size());
             handleAction(MenuItemEnum.EXIT_FIGHT);
         }
         
@@ -140,6 +142,7 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
             GameState.getInstance().getAirship().setTotalDurability(0);
             GameState.getInstance().getAirship().getCaptain().getMoney().removeAmount(loss);
             WindowController.showMessage("Kampf vorbei", "Du hast $ "+loss+" verloren.. :( ");
+            System.out.println(cannonballs.size());
             handleAction(MenuItemEnum.EXIT_FIGHT);
         }
     }

@@ -48,7 +48,7 @@ public class ShipExportController implements ActionListener {
                     GameState.getInstance().setAirship(readShip);
                 }catch(ArithmeticException arithmeticException)
                 {
-                    WindowController.showError("Not enough money", "You need "+Math.abs(valueDifference)+" but only have "+captain.getMoney().getAmount());
+                    WindowController.showError("Nicht genug Geld vorhanden", "Du brauchst "+Math.abs(valueDifference)+" hast aber $ "+captain.getMoney().getAmount());
                 }
             }
         }
