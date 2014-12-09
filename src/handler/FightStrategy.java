@@ -154,15 +154,16 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
     {
         Random random = new Random();
         ArrayList<Weapon> weapons = scenario.getEnemy().getWeapons();
-
-        int aimX = random.nextInt(Constants.AIRSHIP_WIDTH_TILES*Constants.TILE_SIZE);
-        int aimY = random.nextInt(Constants.AIRSHIP_HEIGHT_TILES*Constants.TILE_SIZE);
-        
-        if(GameState.getInstance().getAirship().getShipPartByPosition(aimX/Constants.TILE_SIZE, aimY/Constants.TILE_SIZE) != null)
-        {
-            int weaponNumber = random.nextInt(weapons.size());
-            weapons.get(weaponNumber).aim(aimX, aimY).shiftFrom(new Vector2d(Constants.AIRSHIP_WIDTH_TILES*Constants.TILE_SIZE, 0));
-            cannonballs.add(weapons.get(weaponNumber).fire());
+        if(!weapons.isEmpty()){
+            int aimX = random.nextInt(Constants.AIRSHIP_WIDTH_TILES*Constants.TILE_SIZE);
+            int aimY = random.nextInt(Constants.AIRSHIP_HEIGHT_TILES*Constants.TILE_SIZE);
+            
+            if(GameState.getInstance().getAirship().getShipPartByPosition(aimX/Constants.TILE_SIZE, aimY/Constants.TILE_SIZE) != null)
+            {
+                int weaponNumber = random.nextInt(weapons.size());
+                weapons.get(weaponNumber).aim(aimX, aimY).shiftFrom(new Vector2d(Constants.AIRSHIP_WIDTH_TILES*Constants.TILE_SIZE, 0));
+                cannonballs.add(weapons.get(weaponNumber).fire());
+            }
         }
     }
 
