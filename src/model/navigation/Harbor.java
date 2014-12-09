@@ -41,6 +41,13 @@ public class Harbor implements Renderable, Serializable{
         this.nextDestination = nextDestination;
     }
 
+    /**
+     * Draws a harbor
+     * 
+     * HARBOR_CIRCLE_BACKGROUND_ACTIVE: current Harbor
+     * HARBOR_CIRCLE_BACKGROUND_NEXT_DESTINATION: next Destination
+     * HARBOR_CIRCLE_BACKGROUND: a Harbor
+     */
     @Override
     public void render(Graphics2D g) {
         Color tmpColor = g.getColor();

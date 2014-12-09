@@ -4,14 +4,16 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.sun.org.apache.bcel.internal.generic.SIPUSH;
-
 import model.gameobject.Airship;
 import model.gameobject.Captain;
+
 import common.Constants;
 import common.FileUtils;
-import common.Utils;
 
+/**
+ * A scenario can occur on a Route from one harbor to an other.
+ * 
+ */
 
 public abstract class Scenario {
 
@@ -28,7 +30,15 @@ public abstract class Scenario {
         return description;
     }
     
+    /**
+     * display the current scenario
+     */
     public abstract void show();
+    
+    /**
+     * picks a random saved airship from the defined folder as an enemy for the player.
+     * @return enemy Airship
+     */
     public Airship getEnemy() {
         ArrayList<File> fileList = FileUtils.getFileList(Constants.FOLDER_ENEMY_AIRSHIPS);
         String shipName = fileList.get(new Random().nextInt(fileList.size())).getName();

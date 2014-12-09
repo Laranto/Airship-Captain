@@ -20,9 +20,6 @@ import org.jdom2.input.SAXBuilder;
 
 import common.Constants;
 
-/**
- *
- */
 public class EntityFactory extends ShippartFactory<Entity> {
     private static final String TYPE_WEAPON = "weapon";
     private static final String DOM_NODE_OBJECT = "object";

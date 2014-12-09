@@ -19,11 +19,6 @@ import org.jdom2.input.SAXBuilder;
 
 import common.Constants;
 
-/**
- *
- * @author Hesyar Uzuner <info@hesyar.com>
- * @author Laranto
- */
 public class MaterialFactory extends ShippartFactory<Material> {
     private static final String TYPE_FLOOR = "floor";
     private static final String TYPE_WALL = "wall";
