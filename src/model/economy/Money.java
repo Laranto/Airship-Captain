@@ -59,8 +59,15 @@ public class Money implements Serializable {
     public double getAmount() {
         return amount;
     }
+    
+    public void setAmount(double amount)
+    {
+        this.amount = amount;
+    }
 
     private void formatAmount() {
         this.amount = (Math.round(this.amount * 100.0)) / 100.0;
     }
+    
+    
 }

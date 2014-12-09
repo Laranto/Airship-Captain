@@ -130,16 +130,21 @@ public class FightStrategy extends HandlerStrategy implements Tickable{
             scenario.getEnemy().setTotalDurability(0);
             GameState.getInstance().getAirship().getCaptain().getMoney().addAmount(profit);
             WindowController.showMessage("Kampf vorbei", "Dein Gegner ist geflohen. Du hast $ "+profit+" gewonnen. ");
-            System.out.println(cannonballs.size());
             handleAction(MenuItemEnum.EXIT_FIGHT);
         }
         
         if(GameState.getInstance().getAirship().calculateDamageInPercent() > Constants.BATTLE_FINISH_RATIO){
-            int loss = (GameState.getInstance().getAirship().getTotalDurability())/Constants.BATTLE_PROFIT_RATIO;
+            double loss = (GameState.getInstance().getAirship().getTotalDurability())/Constants.BATTLE_PROFIT_RATIO;
             GameState.getInstance().getAirship().setTotalDurability(0);
-            GameState.getInstance().getAirship().getCaptain().getMoney().removeAmount(loss);
+            double currentAmount = GameState.getInstance().getAirship().getCaptain().getMoney().getAmount();
+            
+            try{
+                GameState.getInstance().getAirship().getCaptain().getMoney().removeAmount(loss);
+            }catch(ArithmeticException e){
+                loss = currentAmount;
+                GameState.getInstance().getAirship().getCaptain().getMoney().setAmount(0);
+            }
             WindowController.showMessage("Kampf vorbei", "Du hast $ "+loss+" verloren.. :( ");
-            System.out.println(cannonballs.size());
             handleAction(MenuItemEnum.EXIT_FIGHT);
         }
     }
