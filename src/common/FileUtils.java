@@ -49,9 +49,10 @@ public class FileUtils {
      * @throws IOException when the file couldn't be load
      */
     public static BufferedImage loadImage(File imgFile) throws IOException {
+        File fixed =  new File(imgFile.getAbsolutePath().replace("\\","/"));
         BufferedImage img = null;
         try {
-            img = ImageIO.read(imgFile);
+            img = ImageIO.read(fixed);
         } catch (IOException e) {
             throw new IOException("Tried reading file " + imgFile.getAbsolutePath(),e);
             
